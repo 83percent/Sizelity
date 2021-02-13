@@ -1,0 +1,293 @@
+section.View-Compare {
+    width: 100%;
+}
+/*      header      */
+section.View-Compare > header > .title-wrapper {
+    padding: 1rem 0 0 1.5rem;
+}
+section.View-Compare > header > .title-wrapper > .sname {
+    font-size: 1.1rem;
+    font-weight: 400;
+    position: relative;
+    top: 0.5rem;
+    left: 0.2rem;
+}
+section.View-Compare > header > .title-wrapper > .pname {
+    font-size: 2.4rem;
+    font-weight: 500;
+    width: 100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+section.View-Compare > header > .title-wrapper > div {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    margin-left: 0.2rem;
+}
+section.View-Compare > header > .title-wrapper > div > a.praw {
+    font-size: 0.9rem;
+    color: #555555;
+    font-weight: 300;
+}
+section.View-Compare > header > .size-wrapper {
+    width: 100%;
+    overflow: auto;
+}
+section.View-Compare > header > .size-wrapper > ul {
+    display: flex;
+    flex-wrap: nowrap;
+}
+section.View-Compare > header > .size-wrapper .size-element {
+    margin-left: 1rem;
+    opacity: 0.3;
+    transition-duration: 0.2s;
+}
+section.View-Compare > header > .size-wrapper .size-element.on {
+    opacity: 1;
+}
+section.View-Compare > header > .size-wrapper .size-element p {
+    font-size: 6.0rem;
+    font-weight: 400;
+    font-family: Montserrat;
+}
+section.View-Compare > header > .size-wrapper .size-element input {
+    display: none;
+}
+
+
+/*      article      */
+section.View-Compare > article {
+    height: auto;
+    min-height: 100%;
+    background: #ffffff;
+    border-top: 1px solid #dbdbdb;
+    padding-bottom: 8rem;
+}
+section.View-Compare > article > div.standard-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+section.View-Compare > article > div.standard-wrapper > .standard-frame {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+section.View-Compare > article > div.standard-wrapper > .standard-frame > .standard-colorBar {
+    padding: 0.15rem 1.8rem;
+    border-radius: 1rem;
+    background: #000000;
+}
+section.View-Compare > article > div.standard-wrapper > .standard-frame > p {
+    font-size: 1.0rem;
+    margin-right: 0.5rem;
+    font-weight: 400;
+}
+section.View-Compare > article > div.standard-wrapper > button {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+section.View-Compare > article > div.standard-wrapper > button > i {
+    font-size: 2.0rem;
+    opacity: 0.3;
+}
+section.View-Compare > article > div.standard-wrapper > button > i.active {
+    opacity: 1.0
+}
+
+/*      Compare Wrapper     */
+section.View-Compare > article .compare-element {
+    border-bottom: 1px solid #dbdbdb;
+    padding: 0.5rem 1rem;
+}
+section.View-Compare > article .compare-element .compare-title-frame {
+    display: flex;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+section.View-Compare > article .compare-element .compare-title-frame > h1 {
+    margin-left: 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+section.View-Compare > article .compare-element .compare-title-frame > i {
+    font-size: 1.2rem;
+    margin-top: 3px;
+    padding-left: 0.3rem;
+    padding-right: 0.4rem;
+    color: #00000060;
+}
+section.View-Compare > article .compare-element .compare-title-frame > p {
+    color: #ff1616;
+}
+
+section.View-Compare > article .compare-element > .graph-analyze {
+    display: flex;
+    margin-top: 0.3rem;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result {
+    min-width: 20%;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result.none {
+    display: none;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result.blank {
+    visibility: hidden;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result > p.rate {
+    font-size: 1.3rem;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result > p.minus {
+    color: #ff1616;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result > p.plus {
+    color: #00966B;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result > .result-span {
+    display: flex;
+    align-items: center;
+}
+section.View-Compare > article .compare-element > .graph-analyze > .compare-result > .result-span > .bold {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+/*      Compare Graph   */
+.Compare-graph {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8rem;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 0;
+}
+.Compare-graph > .line {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    background: #88888870;
+    height: 1px;
+}
+.Compare-graph > .line:first-child, .Compare-graph > .line:last-child {
+    flex-grow: 0.5;
+}
+.Compare-graph > .line > i {
+    position: absolute;
+}
+.Compare-graph > .mark {
+    position: relative;
+}
+.Compare-graph > .point {
+    position: relative;
+    height: 35%;
+    width: 1px;
+    background-color: #88888870;
+}
+.Compare-graph > .point > p, .Compare-graph > .mark > p {
+    min-width: 4rem;
+    text-align: center;
+    box-sizing: border-box;
+    left: -1.9rem;
+    color: #88888870;
+}
+.Compare-graph > .point > .point-sn {
+    font-size: 1.2rem;
+    position: absolute;
+    top: -80%;
+}
+.Compare-graph > .point > .point-sr {
+    font-size: 0.9rem;
+    position: absolute;
+    top: 100%;
+}
+/*      Rate Point      */
+.Compare-graph > .point.active {
+    background: #000000;
+    color: #000000;
+    width: 2px;
+    border-radius: 1rem;
+}
+.Compare-graph > .point.active > p {
+    color: inherit;
+    font-weight: 500;
+}
+.Compare-graph > .point.active > p.point-sr {
+    font-size: 1.2rem;
+}
+.Compare-graph > .point.active.plus {
+    background: #00966B;
+    color: #00966B;
+}
+.Compare-graph > .point.active.minus {
+    background-color: #ff1616;
+    color: #ff1616;
+}
+/*      Marking     */
+.Compare-graph > .point.myProduct {
+    background: #000000;
+    color: #000000;
+    width: 2px;
+}
+.Compare-graph > .point.myProduct > p.point-sr {
+    color: inherit;
+    font-weight: 500;
+    font-size: 1.2rem;
+
+}
+.Compare-graph > .mark.myProduct {
+    height: 50%;
+    background: #000000;
+    color: #000000;
+    border-radius: 2rem;
+    width: 3px;
+}
+.Compare-graph > .mark.myProduct.plus {
+    background: #00966B;
+    color: #00966B;
+}
+.Compare-graph > .mark.myProduct.minus {
+    background: #00966B;
+    color: #00966B;
+}
+.Compare-graph > .mark.myProduct > p.mark-sr {
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: absolute;
+    top: 110%;
+    color: inherit;
+}
+/*      line active     */
+.Compare-graph > .line.minus {
+    background-color: #ff1616;
+    color: #ff1616;
+    height: 2px;
+}
+.Compare-graph > .line.plus {
+    background-color: #00966B;
+    color: #00966B;
+    height: 2px;
+}
+.Compare-graph > .line.minus > .left {
+    color: inherit;
+    left: -0.7rem;
+}
+.Compare-graph > .line.plus > .right {
+    color: inherit;
+    right: -0.7rem;
+}

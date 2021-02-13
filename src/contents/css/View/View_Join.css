@@ -1,0 +1,150 @@
+section.View-Join {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+/*      header      */
+section.View-Join > header {
+    width: 90%;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+}
+section.View-Join > header > a {
+    color: #000000;
+    font-size: 2.0rem;
+    font-weight: 700;
+    position: relative;
+    bottom: -0.2rem;
+}
+section.View-Join > header > h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #888888;
+}
+
+/*      article      */
+section.View-Join > article.bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 80%;
+    background: #ffffff;
+    border-radius: 2.5rem 2.5rem 0 0;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    padding: 1.5rem 1.5rem 2rem 1.5rem;
+}
+section.View-Join > article.bottom ul {
+    margin-bottom: 0.9rem;
+}
+section.View-Join > article.bottom .title-wrapper {
+    margin-bottom: 0.5rem;
+}
+section.View-Join > article.bottom .title-wrapper > h1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+section.View-Join > article.bottom .input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.7rem;
+}
+
+section.View-Join > article.bottom .input-wrapper > input {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    outline: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.3rem;
+    padding: 0.4rem 0.6rem;
+    width: 100%;
+    background: #ffffff;
+}
+section.View-Join > article.bottom .input-wrapper > input#input-first {
+    margin-right: 0.7rem;
+}
+
+section.View-Join > article.bottom .input-wrapper input[type="radio"] {
+    display: none;
+}
+section.View-Join > article.bottom .input-wrapper > label {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+
+    border: 1px solid #dbdbdb;
+    padding: 0.4rem 0.6rem;
+    font-size: 1.1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    color: #000000;
+}
+section.View-Join > article.bottom .input-wrapper > label:hover, section.View-Join > article.bottom .input-wrapper > label.on {
+    color: #00966B;
+    border-color: #00966B;
+}
+section.View-Join > article.bottom .input-wrapper > label:nth-child(2) {
+    margin: 0 0.7rem;
+}
+section.View-Join > article.bottom .input-wrapper > label > p {
+    flex-grow: 1;
+}
+section.View-Join > article.bottom .input-wrapper > label.on > p {
+    color: #00966B;
+}
+section.View-Join > article.bottom .input-wrapper > label > div.dot {
+    padding: 0.25rem;
+    background: #88888890;
+    transition-duration: 0.2s;
+}
+section.View-Join > article.bottom .input-wrapper > label.on > div.dot {
+    background: #00966B;
+}
+section.View-Join > article.bottom .privacy-wrapper {
+    display: flex;
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.3rem;
+    margin-bottom: 0.7rem;
+}
+section.View-Join > article.bottom .privacy-wrapper > label {
+    flex-grow: 10;
+    height: 100%;
+    border-right: 1px solid #dbdbdb;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+}
+section.View-Join > article.bottom .privacy-wrapper > label > p {
+    font-size: 1rem;
+}
+section.View-Join > article.bottom .privacy-wrapper > label > input {
+    display: none;
+}
+section.View-Join > article.bottom .privacy-wrapper > button {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+}
+
+
+section.View-Join > article.bottom .submit-wrapper {
+    width: 100%;
+}
+section.View-Join > article.bottom .submit-wrapper > button {
+    background: #00966B;
+    color: #ffffff;
+    width: 100%;
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    outline: none;
+}

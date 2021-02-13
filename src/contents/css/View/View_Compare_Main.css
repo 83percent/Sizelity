@@ -1,0 +1,128 @@
+#View {
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5;
+    position: relative;
+}
+
+/*      Top     */
+#View > nav#Compare-nav {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+#View > nav#Compare-nav > div#Compare-top {
+    display: flex;
+    justify-content: flex-end;
+    z-index: 991;
+}
+#View > nav#Compare-nav > div#Compare-top > div.nav-element {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+#View > nav#Compare-nav > div#Compare-top > div.nav-element > i {
+    font-size: 2.5rem;
+}
+#View > nav#Compare-nav > div#Compare-top > div#search-frame {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 3.5rem;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    padding: 0 0.5rem;
+    transition-duration: 0.5s;
+}
+#View > nav#Compare-nav > div#Compare-top > div#search-frame.active {
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    background: #ffffff;
+}
+#View > nav#Compare-nav > div#Compare-top > div#search-frame > input {
+    width: 100%;
+    display: none;
+    padding-left: 0.5rem;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1.2rem;
+    transition-delay: 0.6s;
+}
+#View > nav#Compare-nav > div#Compare-top > div#search-frame.active > input {
+    display: block;
+}
+
+#View > nav#Compare-nav > div.Compare-result-wrapper {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 990;
+    
+    background: #00000020;
+}
+#View > nav#Compare-nav > div.Compare-result-wrapper.active {
+    display: flex;
+}
+#View > nav#Compare-nav > div.Compare-result-wrapper > .Compare-searchResult-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    height: 10rem;
+    overflow-x: hidden;
+    margin-top: 4.5rem;
+    padding: 0 1rem;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    z-index: 991;
+}
+#View > nav#Compare-nav .Compare-searchResult-frame > p, #View > nav#Compare-nav .Compare-searchResult-frame > h1, #View > nav#Compare-nav .Compare-searchResult-frame > a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/*      Bottom      */
+#View > nav#myProduct-nav {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 0;
+    z-index: 900;
+    display: flex;
+}
+#View > nav#myProduct-nav > #myProduct-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    position: relative;
+    bottom: 5rem;
+    margin: 0 2rem;
+}
+#View > nav#myProduct-nav #myProduct-frame {
+    right: 1rem;
+    background: #00966B;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 5rem;
+    transition-duration: 0.5s;
+
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+}
+#View > nav#myProduct-nav #myProduct-frame.active {
+    width: 100%;
+    height: 4rem;
+    
+}

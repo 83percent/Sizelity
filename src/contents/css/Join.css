@@ -1,0 +1,234 @@
+section#Join {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+section#Join > #welcome-frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition-duration: 0.6s;
+}
+section#Join > #welcome-frame.on {
+    opacity: 1;
+}
+section#Join > #welcome-frame > p {
+    font-size: 5.0rem;
+    color: #fff;
+    padding-bottom: 3rem;
+}
+
+/*      inner-frame     */
+section#Join > #inner-wrapper {
+    position: fixed;
+    bottom: -80%;
+    left: 75;
+    width: 40%;
+    min-width: 36rem;
+    height: 75vh;
+    background-color: #F9F2EC;
+    border-radius: 1.5rem 1.5rem 0 0;
+    box-shadow: 0 2rem 4rem #00000080;
+    padding: 2rem;
+    transition-duration: 0.6s;
+}
+section#Join > #inner-wrapper.on {
+    bottom: 0%;
+}
+section#Join > #inner-wrapper > i {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+section#Join > #inner-wrapper > a {
+    display: none;
+}
+section#Join > #inner-wrapper > form {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+section#Join > #inner-wrapper .inner-frame {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+}
+section#Join .inner-frame label, section#Join .inner-frame h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+section#Join .inner-frame label, section#Join .inner-frame .label {
+    display: flex;
+    align-items: center;
+}
+section#Join .inner-frame label > p, section#Join .inner-frame .label > p {
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
+}
+section#Join .inner-frame .self-input {
+    width: 100%;
+    background: #ffffff90;
+    font-size: 1.3rem;
+    box-shadow: 0 10px 18px 5px #88888820;
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1.5rem;
+}
+section#Join .inner-frame .option-frame {
+    display: flex;
+}
+section#Join .inner-frame .option-frame > label {
+    display: flex;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    background: #ffffff90;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 18px 5px #88888820;
+    cursor: pointer;
+    color: #00000050;
+    transition-duration: 0.1s;
+}
+section#Join .inner-frame .option-frame > label:hover {
+    color: #000000;
+}
+section#Join .inner-frame .option-frame > label.on {
+    background: #00966B;
+    color: #ffffff;
+}
+section#Join .inner-frame .option-frame > .gender-option {
+    flex-grow: 1;
+}
+section#Join .inner-frame .option-frame > .gender-option:nth-of-type(2) {
+    margin: 0 1rem;    
+}
+section#Join .inner-frame .option-frame p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+section#Join .inner-frame .option-frame input {
+    display: none;
+}
+
+/*      Privacy     */
+section#Join #privacy-wrapper {
+    width: 100%;
+    padding: 0.5rem;
+}
+section#Join #privacy-wrapper > h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+section#Join #privacy-frame .privacy-element {
+    display: flex;
+    border-radius: 0.5rem;
+    background: #ffffff90;
+    box-shadow: 0 10px 18px 5px #88888820;
+    margin-bottom: 0.5rem;
+}
+section#Join #privacy-frame label {
+    flex-grow: 1;
+    display: flex;
+    padding: 0.5rem 1rem;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+section#Join #privacy-frame h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+section#Join #privacy-frame h3.s {
+    color: #00966B;
+    margin-left: 0.4rem;
+}
+section#Join #privacy-frame p {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin-left: 0.5rem;
+}
+section#Join #privacy-frame label > input {
+    display: none;
+}
+section#Join #privacy-frame label .dot-frame {
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+}
+section#Join #privacy-frame label .dot {
+    position: relative;
+    transition-duration: 0.2s;
+}
+section#Join #privacy-frame .privacy-element > button {
+    width: 6.7rem;
+    background: none;
+    font-size: 1.0rem;
+    font-weight: 300;
+    border: none;
+    border-left: 1px solid #88888880;
+    outline: none;
+    cursor: pointer;
+}
+/*      Privacy Transition  */
+section#Join #privacy-all:hover {
+    background: #00966B;
+    border-radius: 0.5rem;
+}
+section#Join #privacy-all:hover > h3 {
+    color: #ffffff;
+}
+section#Join #privacy-all.on {
+    background: #00966B;
+    border-radius: 0.5rem;
+}
+section#Join #privacy-all.on > h3 {
+    color: #ffffff;
+}
+section#Join #privacy-frame label.on, section#Join #privacy-frame label.off:hover {
+    opacity: 1.0;
+}
+section#Join #privacy-frame label.on .dot {
+    padding: 0.7rem;
+    background: #00966B;
+}
+
+section#Join #privacy-frame label.off {
+    opacity: 0.3;
+}
+section#Join #privacy-frame label.off .dot {
+    padding: 0.2rem;
+    background: #FA0525;
+}
+
+
+/*      submit      */
+section#Join #submit-frame {
+    width: 100%;
+    margin-top: 0.3rem;
+}
+section#Join #submit-frame > input {
+    width: 100%;
+    padding: 1rem 0;
+    color: #ffffff;
+    background: #00966B;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+    cursor: pointer;
+}

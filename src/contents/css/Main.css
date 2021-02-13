@@ -1,0 +1,73 @@
+section#Main {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section#Main > .Main-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+section#Main .Main-title {
+    font-size: 3.3rem;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+section#Main .Main-title:first-child {
+    margin-right: 1rem;
+}
+section#Main > #Main-sub-title {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+section#Main > #Main-sub-title > p {
+    font-size: 1.0rem;
+    font-weight: 200;
+    word-spacing: 2px;
+    margin-bottom: 2px;
+}
+section#Main > article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section#Main > article > #Main-OpenBtn {
+    background : #00966B;
+    border: none;
+    outline: none;
+    border-radius: 0.8rem;
+    width: 20rem;
+    padding: 1rem 0;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0.5rem 0;
+}
+section#Main > article > #Main-Link-Box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+#Main-Link-Box > a {
+    color: inherit;
+    margin-top: 0.4rem;
+    font-weight: 200;
+}
+#Main-Link-Box > .line {
+    width: 100%;
+    border-bottom: 0.1rem solid #e3e8ee;
+    margin-top : 0.8rem;
+    margin-bottom: 0.4rem;
+}   

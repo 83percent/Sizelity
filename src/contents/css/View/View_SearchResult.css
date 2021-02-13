@@ -1,0 +1,146 @@
+#View > section#Main #search-result-frame.on {
+    width: 100%;
+    background: #fff;
+    height: 8rem;
+    margin-top: 0.5rem;
+
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    position: relative;
+
+    transition-duration: 0.5s;
+}
+#View > section#Main #search-result-frame.off {
+    height: 0rem;
+    transition-duration: 0.5s;
+}
+#View > section#Main #search-result-frame > div#loader-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.3s;
+    opacity: 0;
+}
+/*      검색프레임 비활성화 : loader 도 비활성화    */
+#View > section#Main #search-result-frame.off > div#loader-frame {
+    display: none;
+}
+/*      검색프레임 활성화 : loader on off 준비 (default off)    */
+#View > section#Main #search-result-frame.on > div#loader-frame.on {
+    opacity: 1;
+    z-index: 999;
+}
+#View > section#Main #search-result-frame.on > div#loader-frame.off {
+    opacity: 0;
+    z-index: -999;
+}
+#View > section#Main #search-result-frame div.loader {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0.4rem solid #00966B90; /* Light grey */
+    border-top: 0.4rem solid #00966B00; /* Blue */
+}
+#View > section#Main #search-result-frame #search-result {
+    position: absolute;  /* 불안함  */
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+
+    opacity: 0;
+}
+#View > section#Main #search-result-frame.on #search-result.on {
+    opacity: 1;
+}
+#View > section#Main #search-result-frame #search-result.off {
+    opacity: 0;
+    display: none;
+}
+
+/*      Result View     */
+#View > section#Main #search-result {
+    width: 100%;    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#View > section#Main #search-result > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;    
+    height: 100%;
+    padding: 1rem 1.5rem;
+    color: #000000;
+}
+#View > section#Main #search-result .ptitle {
+    display: flex;
+    flex-direction: column;
+}
+#View > section#Main #search-result .ptitle > .sname {
+    position: relative;
+    top: 0.15rem;
+    margin-left: 0.1rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+#View > section#Main #search-result .ptitle > h1 {
+    font-size: 1.5rem;
+    width: 100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    
+}
+#View > section#Main #search-result .pinfo {
+    display: flex;
+    align-items: center;
+    color: #00000080;
+    font-size: 0.9rem;
+}
+#View > section#Main #search-result .pinfo > .line {
+    font-size: 1.5rem;
+    margin: 0 0.4rem;
+    border: 1px solid #00000030;
+    height: 1.2rem
+}
+
+/*      Result Notice -> No Data or Error or non apply url      */
+
+#View > section#Main #search-result .ntitle {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#View > section#Main #search-result .ntitle > h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+#View > section#Main #search-result .ntitle > .size-add {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    background: #00966B;
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    margin-top: 0.5rem;
+}
+#View > section#Main #search-result .ntitle > .size-add > p {
+    color: inherit;
+    margin-right: 0.2rem;
+    font-weight: 300;
+    padding-left: 0.5rem;
+}
+#View > section#Main #search-result .ntitle > .size-add > i {
+    position: relative;
+    bottom: -0.1rem;
+    font-size: 1.4rem;
+    color: inherit;
+}
