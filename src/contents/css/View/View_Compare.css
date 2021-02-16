@@ -255,7 +255,7 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     background: #000000;
     color: #000000;
     border-radius: 2rem;
-    width: 3px;
+    width: 2px;
 }
 .Compare-graph > .mark.myProduct.plus {
     background: #00966B;
@@ -272,6 +272,43 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     top: 110%;
     color: inherit;
 }
+.Compare-graph > div > i.myProduct-mark {
+    position: absolute;
+    min-width: 4rem;
+    text-align: center;
+    left: -1.85rem;
+    font-size: 1.7rem;
+}
+.Compare-graph > .mark.myProduct > i.myProduct-mark {
+    top: -55%;
+}
+.Compare-graph > .point.myProduct > i.myProduct-mark {
+    top: -75%;
+    left: -1.9rem;
+}
+.Compare-graph > .point.myProduct.active > div {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    min-width: 4rem;
+    text-align: center;
+    top: -75%;
+    left: -1.9rem;
+}
+.Compare-graph > .point.myProduct.active > div > p {
+    top: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.Compare-graph > .point.myProduct.active > div > b {
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin: 0 0.3rem;
+}
+.Compare-graph > .point.myProduct.active > div > i {
+    font-size: 1.4rem;
+}
+
 /*      line active     */
 .Compare-graph > .line.minus {
     background-color: #ff1616;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Proptype from 'prop-types';
 
 // CSS
@@ -7,12 +7,10 @@ import '../../contents/css/View/View_Compare.css';
 // Component
 import CompareGraphList from "./View_Compare_List";
 
-const Compare = ({productData}) => {
+const Compare = ({productData, myProduct}) => {
     // data에 온전하지 못한 정보가 담겨 올 것을 대비해 데이터 검증.js 를 만들어 
     // 검증 후 지금의 Component를 화면에 출력 / 그렇지 못한 경우 데이터가 없다는 페이지로 이동
     const [activeSize, setActiveSize] = useState(null);
-    const [data, setData] = useState(productData); // 어떠한 데이터가 들어왔는지에 대한 State
-    const [myProduct, setMyProduct] = useState(MyProduct); // 임시적용 : 사용자의 상품 데이터
 
     const viewTypeEvent = (e) => {
         // 그래프만 보기
@@ -45,15 +43,15 @@ const Compare = ({productData}) => {
         <section className="View-Compare">
             <header>
                 <div className="title-wrapper">
-                    <p className="sname">{data.info.sname}</p>
-                    <h1 className="pname">{data.info.pname}</h1>
+                    <p className="sname">{productData.info.sname}</p>
+                    <h1 className="pname">{productData.info.pname}</h1>
                     <div>
-                        <a className="praw" href={`http://${data.praw.full}`}>{data.praw.full}</a>
+                        <a className="praw" href={`http://${productData.praw.full}`}>{productData.praw.full}</a>
                     </div>
                 </div>
                 <div className="size-wrapper">
                     <HeaderSizeList 
-                        sizeData={data.info.size}
+                        sizeData={productData.info.size}
                         activeSize={activeSize}
                         selectSize={setActiveSize}/>
                 </div>
@@ -72,7 +70,7 @@ const Compare = ({productData}) => {
                     <CompareGraphList
                         activeSize={activeSize}
                         myProductData={myProduct.size}
-                        productSizeData={data.info.size} />
+                        productSizeData={productData.info.size} />
                 </div>
             </article>
         </section>
@@ -80,7 +78,8 @@ const Compare = ({productData}) => {
 }
 
 Compare.proptype = {
-    data : Proptype.object.isRequired
+    productData : Proptype.object.isRequired,
+    myProduct : Proptype.object
 }
 
 export default React.memo(Compare);
@@ -144,29 +143,4 @@ HeaderSizeList.proptype = {
     sizeData : Proptype.array.isRequired,
     activeSize : Proptype.string.isRequired,
     selectSize : Proptype.func.isRequired // 어떤 사이즈를 선택했는지를 부모 컴포넌트에 리턴함
-}
-
-/* My Product Sample Data */
-const MyProduct = {
-    praw : {
-        type : "product",
-        code : "39573",
-        full : "mr-s.co.kr/product/%EB%8D%94%ED%8B%B0-%EC%99%80%EC%9D%B4%EB%93%9C-%EB%8D%B0%EB%8B%98-%ED%8C%AC%EC%B8%A0/39573"
-    },
-    info : {
-        sname : "미스터 스트릿",
-        pname : "더티 와이드 데님 팬츠",
-        ptype : "하의",
-        subtype : "긴바지",
-        nick : "어두운 와이드 청바지"
-    },
-    size : {
-        name: "L",
-        T_length : 102,
-        waist : 41,
-        crotch : 34,
-        thigh : 34,
-        hem : 24
-    }
-    
 }

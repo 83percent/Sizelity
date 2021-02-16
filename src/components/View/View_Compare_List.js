@@ -9,6 +9,9 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     console.log("Product Size Array", productSizeData);
 
     const analyzeData = (productSizeData) => {
+
+
+
         if(productSizeData.constructor !== Array) return false;
         
         const analyzeResult = {
@@ -47,8 +50,9 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
         }
     }// __analyze()
     const sizeData = useMemo( () => analyzeData(productSizeData), [productSizeData]);
-    const priority = [ "shoulder","chest","sleeve","arm","waist","crotch","hips","thigh","hem","calve","length"];
+    const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length"];
     const transition = new Transition("KOR");
+
     return (
         <ul className="compare-frame">
             {
@@ -85,13 +89,14 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
         </ul>
     );
 }
+
 CompareGraphList.proptype = {
     activeSize : Proptype.string.isRequired,
     myProductData : Proptype.object.isRequired,
     productSizeData : Proptype.object.isRequired
 }
 
-const DrawGraphResult = ({ activeSize, myProductData, productSizeData, productSizeName}) => {
+const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData, productSizeName}) => {
     const graphFrame = useRef(null);
     let activeRate = null;
 
@@ -208,7 +213,11 @@ const DrawGraphResult = ({ activeSize, myProductData, productSizeData, productSi
                             case 0 : {
                                 return (
                                     <div key={index} className="point myProduct active">
-                                        <p className="point-sn">{productSizeName[((index+1)/4)-1]}</p>
+                                        <div>
+                                            <p className="point-sn">{productSizeName[((index+1)/4)-1]}</p>
+                                            <b>/</b>
+                                            <i className="material-icons myProduct-mark">account_circle</i>
+                                        </div>
                                         <p className="point-sr">{productSizeData[((index+1)/4)-1]}</p>
                                         <input type="hidden" name="Compare-size" value={productSizeName[((index+1)/4)-1]}/>
                                         <input type="hidden" name="Compare-rate" value={productSizeData[((index+1)/4)-1]}/>
@@ -219,6 +228,7 @@ const DrawGraphResult = ({ activeSize, myProductData, productSizeData, productSi
                                 // Marking.myProduct
                                 return (
                                     <div key={index} className="mark myProduct">
+                                        <i className="material-icons myProduct-mark">account_circle</i>
                                         <p className="mark-sr">{myProductData}</p>
                                     </div>
                                 )
@@ -227,7 +237,7 @@ const DrawGraphResult = ({ activeSize, myProductData, productSizeData, productSi
                                 // point.myProduct
                                 return (
                                     <div key={index} className="point myProduct">
-                                        <p className="point-sn">{productSizeName[((index+1)/4)-1]}</p>
+                                        <i className="material-icons myProduct-mark">account_circle</i>
                                         <p className="point-sr">{productSizeData[((index+1)/4)-1]}</p>
                                         <input type="hidden" name="Compare-size" value={productSizeName[((index+1)/4)-1]}/>
                                         <input type="hidden" name="Compare-rate" value={productSizeData[((index+1)/4)-1]}/>
@@ -267,7 +277,7 @@ const DrawGraphResult = ({ activeSize, myProductData, productSizeData, productSi
                 myRate={myProductData} />
         </div>
     );
-} //DrawGraphResult : Component
+}); //DrawGraphResult : Component
 DrawGraphResult.Proptype = {
     activeSize : Proptype.string,
     myProductData : Proptype.number,
@@ -276,7 +286,7 @@ DrawGraphResult.Proptype = {
 }
 
 
-const CompareResult = ({activeRate, myRate}) => {
+const CompareResult = React.memo(({activeRate, myRate}) => {
     if(activeRate && myRate) {
         const value = activeRate - myRate;
         const status = value > 0 ? 1 : value === 0 ? 0 : -1;
@@ -307,7 +317,7 @@ const CompareResult = ({activeRate, myRate}) => {
     } else {
         return (<div className="compare-result blank"></div>);
     }
-}
+});
 
 CompareResult.proptype = {
     activeRate : Proptype.number,
@@ -315,6 +325,6 @@ CompareResult.proptype = {
 }
 
 
-export default CompareGraphList;
+export default React.memo(CompareGraphList);
 
 

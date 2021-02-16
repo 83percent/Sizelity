@@ -1,6 +1,8 @@
 class Product {
-    constructor() {
+    constructor(number = 2) {
         this.data = obj;
+
+        this.sampleNumber = number;
     }
     get(raw = null) {
         if(raw === null) return new Error("want to get data raw is null");
@@ -8,7 +10,8 @@ class Product {
         try {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    resolve(obj[2]);
+                    console.log("Find Data!!! After return JSON Object Data!!");
+                    resolve(obj[this.sampleNumber]);
                 },1500);
             });
         } catch(error) {
@@ -35,7 +38,7 @@ const obj = [
         info : {
             sname : "조군샵",
             pname : "데이런온 레직기 트임 데님",
-            ptype : "하의",
+            ptype : "bottom",
             subtype : "긴바지",
             size : [
                 {
@@ -92,7 +95,7 @@ const obj = [
         info : {
             sname : "조군샵",
             pname : "탄탄한 앤디 텍스쳐 라운드 긴팔티",
-            ptype : "상의",
+            ptype : "top",
             subtype : "긴팔",
             size : [
                 {
@@ -149,7 +152,7 @@ const obj = [
         info : {
             sname : "미스터스트릿",
             pname : "로인 메종 브이넥 니트",
-            ptype : "상의",
+            ptype : "top",
             subtype : "긴팔",
             size : [
                 {
@@ -174,7 +177,7 @@ const obj = [
         info : {
             sname : "미스터스트릿",
             pname : "로인 메종 브이넥 니트",
-            ptype : "세트",
+            ptype : "set",
             subtype : "세트",
             size : [
                 {
@@ -195,5 +198,8 @@ const obj = [
     },
     {
         status : 404
+    },
+    {
+        status : 300
     }
 ];

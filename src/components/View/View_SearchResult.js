@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Proptype from 'prop-types';
 
 import ProductData from '../../contents/js/ProductData';
@@ -10,33 +10,51 @@ import ProductData from '../../contents/js/ProductData';
 let productData = null;
 const SearchResult = ({praw, setData}) => {
     const [responseData, setResponseData] = useState(null);
+    const onLoader = useRef(true);
+
+
+    const resultClick = (e) => {
+        e.stopPropagation();
+        if(responseData.status === 200) setData(responseData);
+    }
+
     const fetchData = useCallback( async (praw) => {
         try {
-            if(!productData) productData = new ProductData();
+            if(!productData) productData = new ProductData(3);
             const __responseData = await productData.get(praw);
 
             // 데이터 검증과정 추가해야함.
+            
+            onLoader.current = false;
             setResponseData(__responseData);
-        } catch(error) {setResponseData(null);}
+        } catch(error) {
+            setResponseData(null);
+            console.log("error", error)
+        }
     }, [praw]);
-
     useEffect(() => {
+        onLoader.current = true;
+    });
+    useEffect(() => { 
         if(praw !== null) fetchData(praw);
     }, [praw]);
-    console.log("검색결과 데이터 : ", responseData);
+
+
+    // 검색하려는 검색어(praw) 변화 감지 -> loader 활성화
+    
+
+    //if(false) {
     if(responseData) {
         switch(responseData.status) {
             case 200 : {
                 return (
-                    <div className="Compare-searchResult-frame on">
+                    <div className="Compare-searchResult-frame on" onClick={(e) => resultClick(e)}>
                         <p>{responseData.info.sname}</p>
                         <h1>{responseData.info.pname}</h1>
-                        <a href={`http://${responseData.praw.full}`}>{`http://${responseData.praw.full}`}</a>
                         <div>
                             <p>{responseData.info.ptype}</p>
                             <p>/</p>
                             <p>{responseData.info.subtype}</p>
-
                         </div>
                     </div>
                 )
@@ -53,8 +71,8 @@ const SearchResult = ({praw, setData}) => {
     } else {
         // 오류
         return (
-            <div className="Compare-searchResult-frame off">
-                오류다
+            <div className="Compare-searchResult-frame loaderFrame">
+                <div className="loader"></div>
             </div>
         )
     }
@@ -65,4 +83,5 @@ SearchResult.proptype = {
     setData : Proptype.func.isRequired // 상위 컴포넌트의 data를 변경하는 state 함수
 }
 
+//export default SearchResult;
 export default React.memo(SearchResult);
