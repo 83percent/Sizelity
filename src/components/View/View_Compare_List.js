@@ -9,9 +9,6 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     console.log("Product Size Array", productSizeData);
 
     const analyzeData = (productSizeData) => {
-
-
-
         if(productSizeData.constructor !== Array) return false;
         
         const analyzeResult = {
@@ -61,7 +58,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                     return (
                         <li key={index} className="compare-element">
                             {
-                                myProductData[sn] 
+                                myProductData && myProductData[sn]
                                 ? 
                                 <div className="compare-title-frame">
                                     <h1>{transition.get(sn)}</h1>
@@ -77,7 +74,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                             
                             <DrawGraphResult
                                 activeSize={activeSize}
-                                myProductData={myProductData[sn]}
+                                myProductData={myProductData ? myProductData[sn]: null}
                                 productSizeData={sizeData[sn]}
                                 productSizeName={sizeData.size}
                                 />
@@ -92,7 +89,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
 
 CompareGraphList.proptype = {
     activeSize : Proptype.string.isRequired,
-    myProductData : Proptype.object.isRequired,
+    myProductData : Proptype.object,
     productSizeData : Proptype.object.isRequired
 }
 

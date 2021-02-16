@@ -69,7 +69,7 @@ const Compare = ({productData, myProduct}) => {
                 <div className="compare-wrapper">
                     <CompareGraphList
                         activeSize={activeSize}
-                        myProductData={myProduct.size}
+                        myProductData={myProduct ? myProduct.size : null}
                         productSizeData={productData.info.size} />
                 </div>
             </article>

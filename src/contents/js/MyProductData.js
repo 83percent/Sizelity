@@ -67,7 +67,7 @@ const _list = [
         info : {
             sname : "MENS CASTLE",
             pname : "엔슬로우 무스탕",
-            ptype : "outter",
+            ptype : "outer",
             subtype : "무스탕",
             nick : "검은색 무스탕"
         },
@@ -144,17 +144,134 @@ const _list = [
         size : {
  
         }
+    },
+    { // 1 바지 / 슬랙스
+        status: 200,
+        praw : {
+            domain : "www.zardins.com",
+            type : "product_no",
+            code : "5226",
+            full : "www.zardins.com/product/detail.html?product_no=5226"
+        },
+        info : {
+            sname : "자뎅",
+            pname : "test1",
+            ptype : "bottom",
+            subtype : "슬랙스",
+            nick : "갈색 기장 긴 슬랙스"
+        },
+        size : {
+            name : "L",
+            waist : 44,
+            crotch : 29,
+            thigh : 33,
+            hem : 23,
+            B_length : 106
+        }
+    },
+    { // 1 바지 / 슬랙스
+        status: 200,
+        praw : {
+            domain : "www.zardins.com",
+            type : "product_no",
+            code : "5226",
+            full : "www.zardins.com/product/detail.html?product_no=5226"
+        },
+        info : {
+            sname : "자뎅",
+            pname : "test2",
+            ptype : "bottom",
+            subtype : "슬랙스",
+            nick : "갈색 기장 긴 슬랙스"
+        },
+        size : {
+            name : "L",
+            waist : 44,
+            crotch : 29,
+            thigh : 33,
+            hem : 23,
+            B_length : 106
+        }
+    },{ // 1 바지 / 슬랙스
+        status: 200,
+        praw : {
+            domain : "www.zardins.com",
+            type : "product_no",
+            code : "5226",
+            full : "www.zardins.com/product/detail.html?product_no=5226"
+        },
+        info : {
+            sname : "자뎅",
+            pname : "테스트3",
+            ptype : "bottom",
+            subtype : "슬랙스",
+            nick : "갈색 기장 긴 슬랙스"
+        },
+        size : {
+            name : "L",
+            waist : 44,
+            crotch : 29,
+            thigh : 33,
+            hem : 23,
+            B_length : 106
+        }
+    },
+    { // 1 바지 / 슬랙스
+        status: 200,
+        praw : {
+            domain : "www.zardins.com",
+            type : "product_no",
+            code : "5226",
+            full : "www.zardins.com/product/detail.html?product_no=5226"
+        },
+        info : {
+            sname : "자뎅",
+            pname : "테스트 : 긴상품 명을 표기합니다. 의미없는 텍스트 입력하기",
+            ptype : "bottom",
+            subtype : "슬랙스",
+            nick : "갈색 기장 긴 슬랙스"
+        },
+        size : {
+            name : "L",
+            waist : 44,
+            crotch : 29,
+            thigh : 33,
+            hem : 23,
+            B_length : 106
+        }
+    },{ // 1 바지 / 슬랙스
+        status: 200,
+        praw : {
+            domain : "www.zardins.com",
+            type : "product_no",
+            code : "5226",
+            full : "www.zardins.com/product/detail.html?product_no=5226"
+        },
+        info : {
+            sname : "자뎅",
+            pname : "mnasdf",
+            ptype : "bottom",
+            subtype : "슬랙스",
+            nick : "갈색 기장 긴 슬랙스"
+        },
+        size : {
+            name : "L",
+            waist : 44,
+            crotch : 29,
+            thigh : 33,
+            hem : 23,
+            B_length : 106
+        }
     }
 ];
 
 class MyProductData {
     constructor() {
         if(this.instance) return this.instance;
-        
 
         this.cname = "my_recently";
         this.exdays = 600;
-        this.MyProduct = _list[3];
+        this.MyProduct = null;
 
         this.instance = this;
         console.log("MyProductData Access");
@@ -163,20 +280,33 @@ class MyProductData {
         try {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    console.log("Find Data!!! After return JSON Object Data!!");
-                    console.log(_list);
-                    resolve(this.__analyzeListData(_list));
+                    resolve(this.__analyzeListObject(_list));
                 },1500);
             });
         } catch(error) {
             return null;
         }
     }
+    getListArray() {
+        try {
+            return new Promise((resolve, reject) => {
+                (async () => {
+                    const __responseObj = await this.getList();
+                    resolve(this.__analyzeListArray(__responseObj));
+                })();
+            });
+        } catch(error) {return null;}
+    }
     get() { 
         if(this.MyProduct !== null && this.MyProduct.status === 200) return this.MyProduct;
         else {
+            console.log("acascascascascascasca");
+            console.log(this.__getCookieData());
             return this.__getCookieData();
         }
+    }
+    getPriority() {
+        this.priority = ["set","outer","top","bottom"]
     }
     /*
         @param data : 
@@ -205,11 +335,12 @@ class MyProductData {
 
     // Private Method
     __setCookieData(data, _expires) {
+        console.log("\t\t Cookie !! - set Data -> ",data);
         if(typeof data !== "object" || data.status !== 200) {
             console.log("MyProductData Class of set(data) Method parameter is invaild data");
-            return null;
+            return false;
         }
-
+        
         let expires = 0;
         if(_expires === undefined) {
             const d = new Date();
@@ -218,26 +349,35 @@ class MyProductData {
         } else {
             expires = _expires;
         }
-        document.cookie = this.cname + "=" + data + ";" + expires + ";path=/";
+        console.log(expires);
+        document.cookie = this.cname + "=" + JSON.stringify(data) + ";" + expires + ";path=/";
+        return true;
     }
     __getCookieData() {
-        try {
+        /* try {
+            const value = document.cookie.match('(^|;) ?' + this.cname + '=([^;]*)(;|$)');
+            return value ? value[2] : null; 
+        } catch(error) {return null}; */
+         try {
             const name = this.cname + "=";
             const decodedCookie = decodeURIComponent(document.cookie);
             const ca = decodedCookie.split(';');
             for(let c of ca) {
                 while (c.charAt(0) === ' ') { c = c.substring(1); }
-                if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
+                if (c.indexOf(name) === 0) {
+                    const cookie = c.substring(name.length, c.length);
+                    return JSON.parse(cookie);
+                }
             }
         } catch(error) {
             return null;
         }
-        return null;
+        
     }
     __removeCookieData() {
         this.__setCookieData(" ",-1)
     }
-    __analyzeListData(listData) {
+    __analyzeListObject(listData) {
         const returnObj = {};
         for(const data of listData) {
             if(data.status !== 200) {}
@@ -249,6 +389,36 @@ class MyProductData {
             }
         }
         return returnObj;
+    }
+    __analyzeListArray(listData) {
+        const returnArr = [
+            {set : []},
+            {outer : []},
+            {top : []},
+            {bottom : []}
+        ];
+        let i = 0;
+        for(const [key, arr] of Object.entries(listData)) {
+            switch(key) {
+                case "set" : {
+                    returnArr[0]["set"] = arr;
+                    break;
+                }
+                case "outer" : {
+                    returnArr[1]["outer"] = arr;
+                    break;
+                }
+                case "top" : {
+                    returnArr[2]["top"] = arr;
+                    break;
+                }
+                case "bottom" : {
+                    returnArr[3]["bottom"] = arr;
+                    break;
+                }
+            }
+        }
+        return returnArr;
     }
 }
 export default new MyProductData();

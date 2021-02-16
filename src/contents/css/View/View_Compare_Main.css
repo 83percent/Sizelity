@@ -152,7 +152,7 @@
     z-index: 993;
 }
 
-#View > nav#myProduct-nav.active > #myProduct-frame.active {
+#View > nav#myProduct-nav.active > #myProduct-frame {
     width: 100%;
     height: 10%;
     right: 0;
@@ -165,10 +165,12 @@
     opacity: 0;
     display: flex;
 }
-#View > nav#myProduct-nav.active #myProduct-frame.active > #myProduct-infoFrame {
-    transition-delay: 0.7s;
+#View > nav#myProduct-nav.active #myProduct-frame > #myProduct-infoFrame {
     opacity: 1;
     height: 100%;
+}
+#View > nav#myProduct-nav.active #myProduct-frame > #myProduct-infoFrame.off {
+    opacity: 0;
 }
 #View > nav#myProduct-nav .myProduct-sizeInfoFrame {
     border-right: 1px solid #ffffff;
@@ -198,6 +200,9 @@
 }
 #View > nav#myProduct-nav .myProduct-productInfoFrame > h1 {
     font-size: 1.9rem;;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 #View > nav#myProduct-nav .myProduct-productInfoFrame > div {
     display: flex;
@@ -219,7 +224,32 @@
     width: 100%;
     height: 100%;
 
-    display: flex;
+    display: none;
     flex-direction: column;
     z-index: 994;
+}
+#View > nav#myProduct-nav > #myProduct-list-wrapper.active {
+    display: flex;
+}
+#View > nav#myProduct-nav #myProduct-emptyFrame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition-duration: 0.5s;
+    height: 100%;
+
+    opacity: 0;
+}
+#View > nav#myProduct-nav #myProduct-emptyFrame > i {
+    color: inherit;
+}
+#View > nav#myProduct-nav #myProduct-emptyFrame > p {
+    font-size: 1.2rem;
+    color: inherit;
+    position: relative;
+    top: -0.1rem;
+}
+#View > nav#myProduct-nav.active #myProduct-emptyFrame {
+    opacity: 1;
 }

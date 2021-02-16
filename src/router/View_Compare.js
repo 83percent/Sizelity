@@ -19,7 +19,9 @@ const ViewCompare = (props) => {
     const [searchPraw, setSearchPraw] = useState(null);
 
     // ========== My Product ===========
-    
+    if(myData === null) {
+        console.log("============================== NULLLLLLLLLLLLLLLLLLLLLLLLLL");
+    }
     console.log("State : myData = ", myData);
 
     // =================================
@@ -105,7 +107,7 @@ const ViewCompare = (props) => {
                         setData={changeStateData} />
                 </div>
             </nav>
-            <NavMyProduct 
+            <NavMyProduct
                 myProductData={myData}
                 setMyProductData={setMyData}/>
             <Compare
