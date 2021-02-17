@@ -135,13 +135,15 @@
 #View > nav#myProduct-nav > #myProduct-frame {
     position: fixed;
     right: 1.5rem;
-    bottom: 2.5rem;
+    bottom: 1.5rem;
     background: #00966B;
     height: 3rem;
     width: 3rem;
     transition-duration: 0.5s;
     border-radius: 50%;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    margin-bottom: 5rem;
+
 }
 #View > nav#myProduct-nav > #myProduct-wrapper {
     width: 100%;
@@ -164,6 +166,7 @@
     transition-duration: 0.5s;
     opacity: 0;
     display: flex;
+    
 }
 #View > nav#myProduct-nav.active #myProduct-frame > #myProduct-infoFrame {
     opacity: 1;
@@ -226,6 +229,7 @@
     display: none;
     flex-direction: column;
     z-index: 994;
+    padding-bottom: 5rem;
 }
 #View > nav#myProduct-nav > #myProduct-list-wrapper.active {
     display: flex;

@@ -277,10 +277,10 @@ class MyProductData {
     getList() {
         try {
             return new Promise((resolve, reject) => {
-                console.log("%c Send request : My Product List...","color: red");
+                console.log("%c Send request : My Product List...","color: #fff; background: red;");
                 setTimeout(() => {
                     const listData = this.__analyzeListObject(_list);
-                    console.log("%c Get Response : ","color: red", listData);
+                    console.log("%c Get Response : ","color: #fff; background: red;", listData);
                     resolve(listData);
                 },1500);
             });
@@ -393,7 +393,6 @@ class MyProductData {
             {top : []},
             {bottom : []}
         ];
-        let i = 0;
         for(const [key, arr] of Object.entries(listData)) {
             switch(key) {
                 case "set" : {

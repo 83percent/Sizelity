@@ -1,0 +1,29 @@
+section#Menu {
+    position: fixed;
+    display: none;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    padding-bottom: 5rem;
+    background-color: #ffffff;
+}
+section#Menu.active {
+    display: block;
+}
+
+section#Menu > .Menu-wrapper {
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+section#Menu > .Menu-wrapper > .Menu-loginFrame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+section#Menu > .Menu-wrapper > .Menu-loginFrame > i {
+    font-size: 2.3rem;
+}

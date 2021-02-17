@@ -50,6 +50,16 @@ input:-webkit-autofill,
     -webkit-transition: background-color 9999s ease-out;
     -webkit-text-fill-color: #000 !important;
 }
+
+#ad {
+    position: fixed;
+    border: 1px solid salmon;
+    height: 5rem;
+    width: 100%;
+    bottom: 0;
+    background: #ffffff80;
+    z-index: 999;
+}
 /*
 ##Device = Desktops
 ##Screen = 1281px to higher resolution desktops

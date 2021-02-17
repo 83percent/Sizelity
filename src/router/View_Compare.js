@@ -8,10 +8,13 @@ import Compare from '../components/View/View_Compare';
 import SearchResult from '../components/View/View_SearchResult';
 import MyProduct from '../contents/js/MyProductData';
 import NavMyProduct from '../components/View/View_Nav_MyProduct';
+import Menu from '../components/View/View_Menu';
+
 
 const ViewCompare = (props) => {
     const searchInput = useRef(null);
     const searchResultWrapper = useRef(null);
+    const menuFrame = useRef(null);
 
     const [data, setData] = useState(props.location.state.data);
     const [myData, setMyData] = useState(MyProduct.get());
@@ -46,7 +49,15 @@ const ViewCompare = (props) => {
             frame.classList.toggle("active", toggle);
         }
     }
-
+    const toggleMenuFrame = (e,toggle) => {
+        if(e) e.stopPropagation();
+        if(!menuFrame) return;
+        if(toggle === undefined) {
+            menuFrame.current.classList.toggle("active");
+        } else {
+            menuFrame.current.classList.toggle("active", toggle);
+        }
+    }
     const searchFrameClick = () => {
         const input = searchInput.current;
         const frame  = input.parentElement;
@@ -75,7 +86,7 @@ const ViewCompare = (props) => {
                         <input type="text" autoComplete="off" placeholder="상품의 주소를 입력해주세요" ref={searchInput} />
                         <i className="material-icons" onClick={() => {searchFrameClick()}} >search</i>
                     </div>
-                    <div  className="nav-element">
+                    <div className="nav-element" onClick={() => menuFrame.current.classList.add("active")}>
                         <i className="material-icons">menu</i>
                     </div>
                 </div>
@@ -85,14 +96,19 @@ const ViewCompare = (props) => {
                         setData={changeStateData} />
                 </div>
             </nav>
+            <section id="Menu" onClick={(e) => {toggleMenuFrame(e,false)}} ref={menuFrame}>
+                <Menu />
+            </section>
+            
             <NavMyProduct
                 myProductData={myData}
                 setMyProductData={setMyData}/>
             <Compare
                 productData={data} 
                 myProduct={myData}/>    
-            <div id="ad"></div>
         </div>
+        
+
     );
 }
 export default ViewCompare;

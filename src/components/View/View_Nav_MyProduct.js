@@ -1,6 +1,7 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import Proptype from 'prop-types';
 import MyProductData from '../../contents/js/MyProductData';
+import { MediaContext } from '../../App';
 
 //Component
 import MyProductComponent from './View_MyProduct';
@@ -8,8 +9,13 @@ import MyProductComponent from './View_MyProduct';
     @param myProductData : 현재 나의 옷 정보가 담긴 Object (in Cookie "my_recently")
     @param setMyProductData : 현재 나의 옷 정보가 담긴 Object state 를 변경하는 함수
 */
+let productListData = null;
 const NavMyProduct = ({myProductData, setMyProductData}) => {
-    let isOpenFrame = false;
+    const media = useContext(MediaContext);
+    console.log("Media Device Informaion Context : ", media);
+
+    let isOpenFrame = true;
+    const [myProductListData, setMyProductListData] = useState(undefined);
 
     const nav = useRef(null);
     const listWrapper = useRef(null);
@@ -17,19 +23,26 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
     
     const navCloseEvent = (e) => {
         e.stopPropagation();
+        console.log("frame close");
         toggleWrapper(false);
         isOpenFrame = false;
     }
     const frameClick = (e) => {
-        e.stopPropagation();
+        if(e) e.stopPropagation();
+        console.log(isOpenFrame);
         if(isOpenFrame) {
-            toggleListWrapper();
+            if(nav.current.classList.contains("active")) {
+                toggleListWrapper();
+            } else {
+                isOpenFrame = false;
+                frameClick();
+            }
         } else {
             toggleWrapper(true);
             isOpenFrame = true;
         }
     }
-    //Override setMyProductData func
+    // Override setMyProductData func
     const __setMyProductData = useCallback((myProductData) => {
         if(infoFrame) {
             infoFrame.current.classList.add("off");
@@ -38,11 +51,18 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
                MyProductData.set(myProductData);
                console.log("%c\t  Cookie set : ", "color: #fff; background: red;", myProductData);
             },300);
-            setTimeout(() => {
-                infoFrame.current.classList.remove("off");
-             },400);
+            setTimeout(() => {infoFrame.current.classList.remove("off");},400);
         }
     }, [setMyProductData]);
+    const __fetchMyProductData = (async() => {
+        try {
+            if(!productListData) productListData = MyProductData;
+            const __responseData = await productListData.getListArray();
+            setMyProductListData(__responseData);
+        } catch(error) {setMyProductListData(null);}
+    });
+
+    
     const toggleListWrapper = (toggle) => {
         if(!listWrapper) return;
         const cl = listWrapper.current.classList;
@@ -59,16 +79,26 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
         else cl.toggle("active",toggle); 
     }
     useEffect(() => {
-        setTimeout(() => { toggleWrapper(true);  }, 300)
+        setTimeout(() => { toggleWrapper(true); }, 300)
     }, [myProductData]);
+    useEffect(() => {
+        // 사전 로드 부분
+        __fetchMyProductData();
+    }, []);
     return (
         <nav id="myProduct-nav" className="" ref={nav}>
-            <div id="myProduct-wrapper" onClick={(e) => navCloseEvent(e)}></div>
+            {
+                media === "Phone" ?
+                <div id="myProduct-wrapper"  onTouchStart={(e) => navCloseEvent(e)}></div> : 
+                <div id="myProduct-wrapper"  onClick={(e) => navCloseEvent(e)}></div> 
+            }
             <div id="myProduct-list-wrapper" ref={listWrapper}>
                 <MyProductComponent
                     nowType={myProductData ? myProductData.info.ptype : null}
+                    myProductListData={myProductListData}
                     sectionCloseFunc={toggleListWrapper}
-                    setMyProductData={__setMyProductData}/>
+                    setMyProductData={__setMyProductData}
+                    refreshEvent={__fetchMyProductData}/>
             </div>
             <div id="myProduct-frame" onClick={(e) => frameClick(e)}>
             {
