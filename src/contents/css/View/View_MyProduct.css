@@ -18,7 +18,7 @@ section#myProduct > ._blank {
 section#myProduct > nav.myProduct-nav {
     width: 100%;
     height: auto;
-    background: #ffffff;
+    background: #f0f2f5;
     padding: 3rem 1rem 1rem 1rem;
     border-bottom: 1px solid #888888;
 }
@@ -143,4 +143,29 @@ section#myProduct .myProduct-cate-productInfoFrame > div  > b  {
     -ms-text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div {
+    text-align: center;
+}
+section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > p {
+    font-size: 0.9rem;
+}
+section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > div {
+    display: flex;
+    align-items: center;
+}
+section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > div > i {
+
+}
+section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > div > p {
+    font-size: 1.2rem;
+    position: relative;
+    top: -0.15rem;
+    font-weight: 500;
 }

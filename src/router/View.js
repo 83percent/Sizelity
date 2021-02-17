@@ -8,7 +8,6 @@ import Main from '../components/View/View_Main';
 import Login from '../components/View/View_Login';
 import Join from '../components/View/View_Join';
 import AcountHelp from '../components/View/View_AccountHelp';
-import Compare from '../components/View/View_Compare';
 
 const acceptLogo = [
     "/view",

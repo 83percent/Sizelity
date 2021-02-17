@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Proptype from 'prop-types';
 
 // CSS
@@ -14,7 +14,6 @@ const Compare = ({productData, myProduct}) => {
 
     const viewTypeEvent = (e) => {
         // 그래프만 보기
-        console.log("click");
         const status = e.target.classList.contains("active");
         if(status) {
             // 활성화 상태 : 그래프만 보임
@@ -115,6 +114,7 @@ export default React.memo(Compare);
 
 /*      header - Size list       */
 const HeaderSizeList = ({ sizeData, selectSize }) => {
+    const sizeElementList = useRef(null);
     const elementChangeEvent = (e) => {
         if(e === null) return;
         const parent = e.target.parentElement.parentElement;
@@ -124,15 +124,30 @@ const HeaderSizeList = ({ sizeData, selectSize }) => {
             selectSize(e.target.value);
         }
     }
+    const sizeElementClickEvent = (e,size) => {
+        e.stopPropagation();
+        let target = e.target;
+        if(target.classList.contains("size-element")) target = target.querySelector("p");
+
+        const tl = target.classList;
+        if(tl.contains("active")) {
+            tl.remove("active");
+            selectSize(null);
+        } else {
+            if(sizeElementList.current.querySelector(".active")) {
+                sizeElementList.current.querySelector(".active").classList.remove("active");
+            }
+            tl.add("active");
+            selectSize(size);
+        }
+    }
     return (
-        <ul>
+        <ul ref={sizeElementList}>
             {
                 sizeData.map((size, index) => (
-                    <li className="size-element" key={index}>
-                        <label>
-                            <p>{size.name}</p>
-                            <input type="radio" name="select-size" value={size.name} onChange={(e) => elementChangeEvent(e)}/>
-                        </label>
+                    <li className="size-element" key={index} onClick={(e) => {sizeElementClickEvent(e, size.name)}}>
+                        <p>{size.name}</p>
+                        <input type="radio" name="select-size" value={size.name} onChange={(e) => elementChangeEvent(e)}/>
                     </li>
                 ))
             }

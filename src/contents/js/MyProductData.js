@@ -416,6 +416,7 @@ class MyProductData {
                     returnArr[3]["bottom"] = arr;
                     break;
                 }
+                default : {break;}
             }
         }
         return returnArr;

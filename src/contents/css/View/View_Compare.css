@@ -42,16 +42,17 @@ section.View-Compare > header > .size-wrapper > ul {
 }
 section.View-Compare > header > .size-wrapper .size-element {
     margin-left: 1rem;
-    opacity: 0.3;
-    transition-duration: 0.2s;
-}
-section.View-Compare > header > .size-wrapper .size-element.on {
-    opacity: 1;
 }
 section.View-Compare > header > .size-wrapper .size-element p {
     font-size: 6.0rem;
     font-weight: 400;
     font-family: Montserrat;
+    transition-duration: 0.2s;
+    opacity: 0.3;
+
+}
+section.View-Compare > header > .size-wrapper .size-element p.active {
+    opacity: 1;
 }
 section.View-Compare > header > .size-wrapper .size-element input {
     display: none;
@@ -289,24 +290,16 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
 .Compare-graph > .point.myProduct.active > div {
     display: flex;
     align-items: center;
+    justify-content: center;
     position: absolute;
     min-width: 4rem;
     text-align: center;
     top: -75%;
     left: -1.9rem;
-}
-.Compare-graph > .point.myProduct.active > div > p {
-    top: 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-}
-.Compare-graph > .point.myProduct.active > div > b {
-    font-weight: 900;
-    font-size: 1.2rem;
-    margin: 0 0.3rem;
+    
 }
 .Compare-graph > .point.myProduct.active > div > i {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
 }
 
 /*      line active     */

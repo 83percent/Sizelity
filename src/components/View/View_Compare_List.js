@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import Proptype from 'prop-types';
 import Transition from '../../contents/js/TransitionSizeName';
 
@@ -8,7 +8,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     console.log("My Product Data", myProductData);
     console.log("Product Size Array", productSizeData);
 
-    const analyzeData = (productSizeData) => {
+    const analyzeData = useCallback((productSizeData) => {
         if(productSizeData.constructor !== Array) return false;
         
         const analyzeResult = {
@@ -41,11 +41,12 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
             }
 
             console.log("\t +Analyze Data : ", analyzeResult);
+            console.log("\t +myProduct Data", myProductData);
             return analyzeResult;
         } catch(e) {
             return null;
         }
-    }// __analyze()
+    },[myProductData,productSizeData]);// __analyze()
     const sizeData = useMemo( () => analyzeData(productSizeData), [productSizeData]);
     const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length"];
     const transition = new Transition("KOR");
@@ -211,8 +212,6 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
                                 return (
                                     <div key={index} className="point myProduct active">
                                         <div>
-                                            <p className="point-sn">{productSizeName[((index+1)/4)-1]}</p>
-                                            <b>/</b>
                                             <i className="material-icons myProduct-mark">account_circle</i>
                                         </div>
                                         <p className="point-sr">{productSizeData[((index+1)/4)-1]}</p>

@@ -2,9 +2,7 @@ import React, { useCallback } from 'react';
 import Proptype from 'prop-types';
 
 const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
-    console.log("myProductListData : ", myProductListData);
     const cateClickEvent = (e) => {
-        console.log("click");
         if(e.target) {
             let target = e.target;
             let cl = target.classList;
@@ -49,7 +47,7 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
     } else {
         return (
             myProductListData.map((element, index) => {
-//                console.log("\t\t MyProductList Props myProductListData is : ", myProductListData);
+                //console.log("\t\t MyProductList Props myProductListData is : ", myProductListData);
                 const matchCate = toggleNowType(Object.keys(element)[0]);
                 return (
                     <div key={index}>
@@ -59,12 +57,13 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
                         </div>
                         <ul className={`myProduct-cate-list-frame ${matchCate ? "active" : ""}`}>
                             {
+                                element[Object.keys(element)[0]].length > 0 ? (
                                 element[Object.keys(element)[0]].map((element,index) => {
                                     return (
                                         <li key={index} className="myProduct-cate-infoFrame" onClick={() => setMyProductData(element)}>
                                             <div className="myProduct-cate-sizeInfoFrame">
                                                 <p>{element.size.name}</p>
-                                            </div>
+                                            </div>  
                                             <div className="myProduct-cate-productInfoFrame">
                                                 <p>{element.info.sname}</p>
                                                 <h1>{element.info.pname}</h1>
@@ -76,7 +75,17 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
                                             </div>
                                         </li>
                                     )
-                                })
+                                })) : (
+                                    <li className="myProduct-cate-infoFrame myProduct-cate-emptyFrame">
+                                        <div>
+                                            <p>비어있어요</p>
+                                            <div>
+                                                <i className="material-icons">add</i>
+                                                <p>내 옷 등록하기.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                )
                             }
                         </ul>
                     </div>
