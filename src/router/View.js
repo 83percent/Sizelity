@@ -25,8 +25,6 @@ const View = (props) => {
             break;
         }
     }
-
-
     return (
         <div id="View">
             <nav id="View-Main-Nav">
@@ -34,6 +32,7 @@ const View = (props) => {
                 <div id="nav-menu">
                     <NavLink to="/view/login" id="View-loginBtn">
                         <p>Login.</p>
+                        
                     </NavLink>
                 </div>
             </nav>

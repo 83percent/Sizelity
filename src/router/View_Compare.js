@@ -15,17 +15,7 @@ const ViewCompare = (props) => {
 
     const [data, setData] = useState(props.location.state.data);
     const [myData, setMyData] = useState(MyProduct.get());
-    MyProduct.getList();
     const [searchPraw, setSearchPraw] = useState(null);
-
-    // ========== My Product ===========
-    if(myData === null) {
-        console.log("============================== NULLLLLLLLLLLLLLLLLLLLLLLLLL");
-    }
-    console.log("State : myData = ", myData);
-
-    // =================================
-
     // send component function
     const changeStateData = useCallback((productData) => {
         if(productData.constructor === Object && productData.status === 200) {
@@ -38,19 +28,11 @@ const ViewCompare = (props) => {
     }, []);
     // Result frame function
     const toggleSearchResult = (toggle) => {
-        const frame  = searchResultWrapper.current;
-        console.log("Click Search Result", frame);
-        
-        if(toggle === undefined) {
-            // 선언 안되어 있을 경우는 반대효과를 적용
-                frame.classList.contains("active") ? toggleSearchResult(false) : toggleSearchResult(true);
-        } else {
+        if(!searchResultWrapper.current) return;
+        if(toggle === undefined) searchResultWrapper.current.classList.toggle("active");
+        else {
             if(toggle.constructor !== Boolean) throw new Error("'toggleSearchResult' function parameter must Boolean dataformat.");
-            if(toggle) {
-                frame.classList.add("active");
-            } else {
-                frame.classList.remove("active");
-            }
+            searchResultWrapper.current.classList.toggle("active", toggle);
         }
     }
     // input frame function
@@ -58,14 +40,10 @@ const ViewCompare = (props) => {
         const frame  = searchInput.current.parentElement;
         if(toggle === undefined) {
             // 선언 안되어 있을 경우는 반대효과를 적용
-                frame.classList.contains("active") ? toggleSearchFrame(false) : toggleSearchFrame(true);
+                frame.classList.toggle("active");
         } else {
             if(toggle.constructor !== Boolean) throw new Error("'toggleSearchFrame' function parameter must Boolean dataformat.");
-            if(toggle) {
-                frame.classList.add("active");
-            } else {
-                frame.classList.remove("active");
-            }
+            frame.classList.toggle("active", toggle);
         }
     }
 

@@ -9,13 +9,19 @@ import '../../contents/css/View/View_MyProduct.css';
 // Component
 import MyProductList from './View_MyProduct_List';
 
+
+/*
+    @param nowType : 현재 비교하려는 상품의 ptype (string)
+    @param active : 새로고침 활성화 toggle (boolean)
+    @param sectionCloseFunc : section 
+    @param setMyProductData : 비교하려는 나의 옷 데이터를 변경하는 함수
+*/
 let productListData = null;
-const MyProduct = ({nowType, active, sectionCloseFunc, setMyProductData}) => {
-    const [refresh, setRefresh] = useState(active);
+const MyProduct = ({nowType, sectionCloseFunc, setMyProductData}) => {
     const [myProductListData, setMyProductListData] = useState(undefined);
-    const refreshEvent = () => {setRefresh(!refresh);}
     const fetchMyProductData = (async() => {
         try {
+            console.log("try");
             if(!productListData) productListData = MyProductData;
             const __responseData = await productListData.getListArray();
             setMyProductListData(__responseData);
@@ -27,7 +33,7 @@ const MyProduct = ({nowType, active, sectionCloseFunc, setMyProductData}) => {
     
     useEffect(() => {
         fetchMyProductData();
-    }, [refresh]);
+    }, []);
     return (
         <section id="myProduct">
             <nav className="myProduct-nav">
@@ -45,7 +51,7 @@ const MyProduct = ({nowType, active, sectionCloseFunc, setMyProductData}) => {
                         <i className="material-icons">add</i>
                     </button>
                     <button>
-                        <i className="material-icons" onClick={() => refreshEvent()}>refresh</i>
+                        <i className="material-icons" onClick={() => fetchMyProductData()}>refresh</i>
                     </button>
                 </div>
             </nav>
@@ -61,7 +67,6 @@ const MyProduct = ({nowType, active, sectionCloseFunc, setMyProductData}) => {
 }
 MyProduct.proptype = {
     nowType : Proptype.string,
-    active : Proptype.bool.isRequired,
     sectionCloseFunc : Proptype.func,
     setMyProductData : Proptype.func.isRequired
 }

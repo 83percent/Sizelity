@@ -1,20 +1,22 @@
-import React, { useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import Proptype from 'prop-types';
-import MyProductData from '../../contents/js/MyProductData'
+import MyProductData from '../../contents/js/MyProductData';
 
 //Component
 import MyProductComponent from './View_MyProduct';
+/*
+    @param myProductData : 현재 나의 옷 정보가 담긴 Object (in Cookie "my_recently")
+    @param setMyProductData : 현재 나의 옷 정보가 담긴 Object state 를 변경하는 함수
+*/
 const NavMyProduct = ({myProductData, setMyProductData}) => {
     let isOpenFrame = false;
 
-    const frame = useRef(null);
     const nav = useRef(null);
     const listWrapper = useRef(null);
     const infoFrame = useRef(null);
     
     const navCloseEvent = (e) => {
         e.stopPropagation();
-        toggleFrame(false);
         toggleWrapper(false);
         isOpenFrame = false;
     }
@@ -27,36 +29,27 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
             isOpenFrame = true;
         }
     }
-    const __setMyProductData = ((myProductData) => {
+    //Override setMyProductData func
+    const __setMyProductData = useCallback((myProductData) => {
         if(infoFrame) {
             infoFrame.current.classList.add("off");
             setTimeout(() => {
                setMyProductData(myProductData);
-               console.log(MyProductData.set(myProductData));
+               MyProductData.set(myProductData);
+               console.log("%c\t  Cookie set : ", "color: #fff; background: red;", myProductData);
             },300);
             setTimeout(() => {
                 infoFrame.current.classList.remove("off");
              },400);
         }
-    });
-    const toggleListWrapper = useCallback((toggle) => {
+    }, [setMyProductData]);
+    const toggleListWrapper = (toggle) => {
         if(!listWrapper) return;
         const cl = listWrapper.current.classList;
         if(toggle === undefined) cl.toggle("active"); 
         else cl.toggle("active",toggle);
-        
-    },[listWrapper]);
-    const toggleFrame = useCallback((toggle) => {
-        if(frame === null || frame.current.id !== "myProduct-frame") {
-            console.error("NavMyProduct frame ref is null or not 'myProduct-frame'");
-            return;
-        }
-        const cl = frame.current.classList;
-        if(toggle === undefined) cl.toggle("active"); 
-        else cl.toggle("active",toggle); 
-        
-    }, [frame]);
-    const toggleWrapper = useCallback((toggle) => {
+    }
+    const toggleWrapper = (toggle) => {
         if(nav === null || nav.current.id !== "myProduct-nav") {
             console.error("NavMyProduct nav ref is null or not 'myProduct-nav'");
             return;
@@ -64,11 +57,9 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
         const cl = nav.current.classList;
         if(toggle === undefined) cl.toggle("active"); 
         else cl.toggle("active",toggle); 
-    }, [nav]);
+    }
     useEffect(() => {
-        setTimeout(() => {
-            toggleWrapper(true);  
-        }, 700)
+        setTimeout(() => { toggleWrapper(true);  }, 300)
     }, [myProductData]);
     return (
         <nav id="myProduct-nav" className="" ref={nav}>
@@ -76,14 +67,12 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
             <div id="myProduct-list-wrapper" ref={listWrapper}>
                 <MyProductComponent
                     nowType={myProductData ? myProductData.info.ptype : null}
-                    active={true}
                     sectionCloseFunc={toggleListWrapper}
                     setMyProductData={__setMyProductData}/>
             </div>
-            <div id="myProduct-frame" ref={frame} onClick={(e) => frameClick(e)}>
+            <div id="myProduct-frame" onClick={(e) => frameClick(e)}>
             {
                 myProductData ? (
-                    
                         <div id="myProduct-infoFrame" ref={infoFrame}>
                             <div className="myProduct-sizeInfoFrame">
                                 <p>{myProductData.size.name}</p>
@@ -98,7 +87,6 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
                                 </div>
                             </div>
                         </div>
-                    
                 ) : (
                     <div id="myProduct-emptyFrame" ref={infoFrame}>
                         <i className="material-icons">add</i>

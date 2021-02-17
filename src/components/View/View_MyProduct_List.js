@@ -1,6 +1,12 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import Proptype from 'prop-types';
 
+
+/*
+    @param nowType : 현재 비교하려는 상품의 ptype
+    @param myProductListData : map을 통해 리스트를 만들어 줄 수 있는 Object로 이루어진 Array
+    @param setMyProductData : 비교하려는 나의 옷 데이터를 변경하는 함수
+*/
 const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
     const cateClickEvent = (e) => {
         if(e.target) {
@@ -25,12 +31,12 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
             }
         }
     }
-    const toggleNowType = useCallback((type) => {
+    const toggleNowType = (type) => {
         try {
             if(!nowType) return false;
             return nowType === type;
         } catch(error) {return false;}
-    },[nowType]);
+    }
     const toggleInfoFrame = (target) => {
         const tl = target.classList;
         tl.contains("active") ? tl.remove("active") : tl.add("active");
@@ -58,8 +64,7 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
                         <ul className={`myProduct-cate-list-frame ${matchCate ? "active" : ""}`}>
                             {
                                 element[Object.keys(element)[0]].length > 0 ? (
-                                element[Object.keys(element)[0]].map((element,index) => {
-                                    return (
+                                    element[Object.keys(element)[0]].map((element,index) => (
                                         <li key={index} className="myProduct-cate-infoFrame" onClick={() => setMyProductData(element)}>
                                             <div className="myProduct-cate-sizeInfoFrame">
                                                 <p>{element.size.name}</p>
@@ -74,8 +79,8 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
                                                 </div>
                                             </div>
                                         </li>
-                                    )
-                                })) : (
+                                    ))
+                                ) : (
                                     <li className="myProduct-cate-infoFrame myProduct-cate-emptyFrame">
                                         <div>
                                             <p>비어있어요</p>
@@ -97,9 +102,9 @@ const MyProductList = ({nowType, myProductListData, setMyProductData}) => {
 }
 
 MyProductList.proptype = {
-    nowType : Proptype.string,
-    myProductListData : Proptype.object.isRequired,
-    setMyProductData : Proptype.func.isRequired
+    nowType: Proptype.string,
+    myProductListData: Proptype.object.isRequired,
+    setMyProductData: Proptype.func.isRequired
 }
 
-export default MyProductList;
+export default React.memo(MyProductList);

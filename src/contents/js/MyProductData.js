@@ -271,21 +271,20 @@ class MyProductData {
 
         this.cname = "my_recently";
         this.exdays = 600;
-        this.MyProduct = null;
-
+        this.myProduct = null;
         this.instance = this;
-        console.log("MyProductData Access");
     }
     getList() {
         try {
             return new Promise((resolve, reject) => {
+                console.log("%c Send request : My Product List...","color: red");
                 setTimeout(() => {
-                    resolve(this.__analyzeListObject(_list));
+                    const listData = this.__analyzeListObject(_list);
+                    console.log("%c Get Response : ","color: red", listData);
+                    resolve(listData);
                 },1500);
             });
-        } catch(error) {
-            return null;
-        }
+        } catch(error) {return null;}
     }
     getListArray() {
         try {
@@ -298,16 +297,13 @@ class MyProductData {
         } catch(error) {return null;}
     }
     get() { 
-        if(this.MyProduct !== null && this.MyProduct.status === 200) return this.MyProduct;
+        if(this.myProduct !== null && this.myProduct.status === 200) return this.myProduct;
         else {
-            console.log("acascascascascascasca");
             console.log(this.__getCookieData());
             return this.__getCookieData();
         }
     }
-    getPriority() {
-        this.priority = ["set","outer","top","bottom"]
-    }
+    getPriority() {this.priority = ["set","outer","top","bottom"]}
     /*
         @param data : 
         @return : cookie 에 저장한 data
@@ -315,7 +311,7 @@ class MyProductData {
     set(data) {
         if(data === undefined) {
             // param 비어있는 형태로 메소드 요청 = 현재 클래스에서 지정되어있는( 최근에 불러왔던 ) 데이터를 사용하겠다는 의미
-            if(this.MyProduct.status === 200) {
+            if(this.myProduct.status === 200) {
                 return this.__setCookieData(data);
             } else {
                 // Error 아무것도 선택이 안된 상태에서 저장 요청을 보냄
