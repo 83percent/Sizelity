@@ -33,14 +33,13 @@ section#myProduct > nav.myProduct-nav > div > button {
     position: absolute;
     right: 0;
     padding-right: 1rem;
-    
 }
 section#myProduct > nav.myProduct-nav > div > h1 {
     font-size: 2.3rem;
     font-weight: 400;
     padding-left: 0.5rem;
     padding-top: 1rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 section#myProduct > nav.myProduct-nav > ul {
     display: flex;
@@ -75,7 +74,7 @@ section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame > p {
 section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame > p > b {
     font-size: 1.3rem;
 }
-section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button {
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame a {
     all: unset;
     cursor: pointer;
     display: flex;
@@ -85,17 +84,11 @@ section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button {
     width: 100%;
     margin-top: 0.5rem;
 }
-section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button.myProduct-nav-login {
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame a.myProduct-nav-login {
     background: #00966B;
     color: #ffffff;
     padding: 0.8rem 0;
     font-size: 1.1rem;
-
-}
-section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button.myProduct-nav-join {
-    border: 1px solid #00966B;
-    padding: 0.3rem 0;
-
 }
 /*      List       */
 section#myProduct .myProduct-cate {
@@ -218,9 +211,6 @@ section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > p 
 section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > div {
     display: flex;
     align-items: center;
-}
-section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > div > i {
-
 }
 section#myProduct .myProduct-cate-infoFrame.myProduct-cate-emptyFrame > div > div > p {
     font-size: 1.2rem;

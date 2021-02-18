@@ -4,7 +4,12 @@ section.View-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;   
+    align-items: center;
+}
+section.View-login > .Login-backFrame {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
 }
 section.View-login > article {
     width: 100%;
@@ -95,38 +100,6 @@ section.View-login > article > .login-option-wrapper > a > h2 {
     font-weight: 400;
     margin-left: 0.5rem;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 section.View-login footer {
     background: #ffffff;
 }

@@ -25,7 +25,7 @@ const _list = [
         },
         size : {
             name: "L",
-            T_length : 102,
+            length : 102,
             waist : 41,
             crotch : 34,
             thigh : 34,
@@ -53,7 +53,7 @@ const _list = [
             crotch : 29,
             thigh : 33,
             hem : 23,
-            B_length : 106
+            length : 106
         }
     },
     { // 2 아우터 / 무스탕
@@ -76,7 +76,7 @@ const _list = [
             shoulder : 57,
             chest : 64,
             sleeve : 61,
-            T_length : 71
+            length : 71
         }
     },
     { // 3 하의 / 청바지
@@ -100,7 +100,7 @@ const _list = [
             crotch : 31,
             thigh: 32,
             hem: 20,
-            B_length: 99
+            length: 99
         }
     },
     { // 4 하의 / 청바지
@@ -123,7 +123,7 @@ const _list = [
             shoulder: 70,
             chest: 72,
             sleeve: 55,
-            T_length: 67
+            length: 67
         }
     },
     { // 5 하의 / 청바지
@@ -166,7 +166,7 @@ const _list = [
             crotch : 29,
             thigh : 33,
             hem : 23,
-            B_length : 106
+            length : 106
         }
     },
     { // 1 바지 / 슬랙스
@@ -190,7 +190,7 @@ const _list = [
             crotch : 29,
             thigh : 33,
             hem : 23,
-            B_length : 106
+            length : 106
         }
     },{ // 1 바지 / 슬랙스
         status: 200,
@@ -213,7 +213,7 @@ const _list = [
             crotch : 29,
             thigh : 33,
             hem : 23,
-            B_length : 106
+            length : 106
         }
     },
     { // 1 바지 / 슬랙스
@@ -237,7 +237,7 @@ const _list = [
             crotch : 29,
             thigh : 33,
             hem : 23,
-            B_length : 106
+            length : 106
         }
     },{ // 1 바지 / 슬랙스
         status: 200,
@@ -260,7 +260,7 @@ const _list = [
             crotch : 29,
             thigh : 33,
             hem : 23,
-            B_length : 106
+            length : 106
         }
     }
 ];

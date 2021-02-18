@@ -7,7 +7,7 @@ import Login from '../../contents/js/Login';
 // CSS
 import '../../contents/css/View/View_Login.css';
 
-const ViewLogin = (props) => {
+const ViewLogin = ({history}) => {
     useEffect(() => {
         if(!form.input.class) form.input.class = document.querySelectorAll("input.user-input");
         if(!form.submit.frame) form.submit.button = document.getElementById("submit-btn");
@@ -17,6 +17,9 @@ const ViewLogin = (props) => {
     });
     return (
         <section className="View-login">
+            <div className="Login-backFrame" onClick={() => history.goBack()}>
+                <i className="material-icons">arrow_back</i>
+            </div>
             <article>
                 <form id="loginForm">
                     <div className="input-wrapper">

@@ -48,7 +48,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
         }
     },[myProductData,productSizeData]);// __analyze()
     const sizeData = useMemo( () => analyzeData(productSizeData), [productSizeData]);
-    const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length"];
+    const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length","length"];
     const transition = new Transition("KOR");
 
     return (

@@ -1,87 +1,56 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Proptype from 'prop-types';
-
+import React, { useEffect, useState } from "react";
 import ProductData from '../../contents/js/ProductData';
 
-/*
-    @params praw : 검색하려는 주소 - 서버에 요청을 보내려는 주소
-    @params setData : 상위 컴포넌트의 data state 의 setter
-*/
 let productData = null;
-const SearchResult = ({praw, setData}) => {
-    const [responseData, setResponseData] = useState(null);
-    const onLoader = useRef(true);
-
-
-    const resultClick = (e) => {
-        e.stopPropagation();
-        if(responseData.status === 200) setData(responseData);
-    }
-
-    const fetchData = useCallback( async (praw) => {
+const SearchResult = ({praw}) => {
+    const [response, setResponse] = useState(null);
+    const [onLoader, setOnLoader] = useState(false);
+    console.log("%c call","background:red")
+    const __fetchSearchData = async () => {
+        if(!productData) productData = new ProductData();
         try {
-            if(!productData) productData = new ProductData(3);
-            const __responseData = await productData.get(praw);
+            setOnLoader(true);
+            console.log("%c call","background:blue")
 
-            // 데이터 검증과정 추가해야함.
-            
-            onLoader.current = false;
-            setResponseData(__responseData);
+            const __response = await productData.get(praw);
+            setResponse(__response);
+            setOnLoader(false);
         } catch(error) {
-            setResponseData(null);
-            console.log("error", error)
+            console.error(error);
         }
-    }, [praw]);
+    }
     useEffect(() => {
-        onLoader.current = true;
-    });
-    useEffect(() => { 
-        if(praw !== null) fetchData(praw);
+        if(praw !== null) __fetchSearchData();
     }, [praw]);
-
-
-    // 검색하려는 검색어(praw) 변화 감지 -> loader 활성화
-    
-
-    //if(false) {
-    if(responseData) {
-        switch(responseData.status) {
-            case 200 : {
-                return (
-                    <div className="Compare-searchResult-frame on" onClick={(e) => resultClick(e)}>
-                        <p>{responseData.info.sname}</p>
-                        <h1>{responseData.info.pname}</h1>
-                        <div>
-                            <p>{responseData.info.ptype}</p>
-                            <p>/</p>
-                            <p>{responseData.info.subtype}</p>
-                        </div>
-                    </div>
-                )
-            }
-            case 400 : {
-                return (
-                    <div className="Compare-searchResult-frame off">
-                        정보없음
-                    </div>
-                )
+    console.log("반응 값", response);
+    if(onLoader) {
+        return (
+            <div>loader</div>
+        )
+    } else {
+        if(response === null) {
+            return (
+                <h1 className="logo">Sizelity.</h1>
+            )
+        } else {
+            switch(response.status) {
+                case 200 : {
+                    return (
+                        <div>있음</div>
+                    )
+                }
+                case 400 : {
+                    return (
+                        <div>없음</div>
+                    )
+                }
+                default : {
+                    return (
+                        <div>오류</div>
+                    )
+                }
             }
         }
-        
-    } else {
-        // 오류
-        return (
-            <div className="Compare-searchResult-frame loaderFrame">
-                <div className="loader"></div>
-            </div>
-        )
     }
 }
-
-SearchResult.proptype = {
-    praw : Proptype.string,
-    setData : Proptype.func.isRequired // 상위 컴포넌트의 data를 변경하는 state 함수
-}
-
-//export default SearchResult;
 export default React.memo(SearchResult);

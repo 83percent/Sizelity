@@ -18,105 +18,15 @@
     justify-content: flex-end;
     z-index: 991;
 }
-#View > nav#Compare-nav > div#Compare-top > div.nav-element {
+#View > nav#Compare-nav > div#Compare-top > .nav-element {
     display: flex;
     align-items: center;
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
 }
-#View > nav#Compare-nav > div#Compare-top > div.nav-element > i {
+#View > nav#Compare-nav > div#Compare-top > .nav-element > i {
     font-size: 2.5rem;
-}
-#View > nav#Compare-nav > div#Compare-top > div#search-frame {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 3.5rem;
-    box-sizing: border-box;
-    border-radius: 2rem;
-    padding: 0 0.5rem;
-    transition-duration: 0.5s;
-}
-#View > nav#Compare-nav > div#Compare-top > div#search-frame.active {
-    width: 100%;
-    border: 1px solid #dbdbdb;
-    background: #ffffff;
-}
-#View > nav#Compare-nav > div#Compare-top > div#search-frame > input {
-    width: 100%;
-    display: none;
-    padding-left: 0.5rem;
-    background: none;
-    outline: none;
-    border: none;
-    font-size: 1.2rem;
-    transition-delay: 0.6s;
-}
-#View > nav#Compare-nav > div#Compare-top > div#search-frame.active > input {
-    display: block;
-}
-
-#View > nav#Compare-nav > div.Compare-result-wrapper {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 990;
-    background: #00000020;
-}
-#View > nav#Compare-nav > div.Compare-result-wrapper.active {
-    display: flex;
-}
-#View > nav#Compare-nav > div.Compare-result-wrapper > .Compare-searchResult-frame {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    width: 100%;
-    height: 10rem;
-    overflow-x: hidden;
-    margin-top: 4.5rem;
-    padding: 0 1rem;
-    background: #ffffff;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    z-index: 991;
-}
-#View > nav#Compare-nav > div.Compare-result-wrapper > .Compare-searchResult-frame.loaderFrame {
-    align-items: center;
-}
-#View > nav#Compare-nav > div.Compare-result-wrapper > .Compare-searchResult-frame.loaderFrame > .loader {
-    padding: 1rem;
-    border: 3px solid black;
-    border-top-color: #ffffff;
-}
-#View > nav#Compare-nav .Compare-searchResult-frame > p, #View > nav#Compare-nav .Compare-searchResult-frame > h1, #View > nav#Compare-nav .Compare-searchResult-frame > a {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-#View > nav#Compare-nav .Compare-searchResult-frame > p {
     color: #000000;
-    font-size: 0.9rem;
-    position: relative;
-    top: 0.15rem;
-    margin-left: 0.1rem;
-    font-weight: 300;
 }
-#View > nav#Compare-nav .Compare-searchResult-frame > h1 {
-    color: #000000;
-    font-size: 1.9rem;
-    font-weight: 500;
-}
-
-#View > nav#Compare-nav .Compare-searchResult-frame > div {
-    display: flex;
-    align-items: center;
-    color: #00000080;
-    margin-left: 0.1rem;
-}
-
 
 /*      Bottom - MyProduct     */
 #View > nav#myProduct-nav {

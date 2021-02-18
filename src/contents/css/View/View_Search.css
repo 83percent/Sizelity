@@ -1,0 +1,38 @@
+section#Search {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5;
+    padding-bottom: 5rem;
+}
+#Search > .Search-inputWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #dbdbdb;
+}
+#Search > .Search-inputWrapper > input {
+    all: unset;
+    flex-grow: 1;
+    font-size: 1.3rem;
+    padding: 1rem 0;
+}
+#Search > .Search-inputWrapper > i {
+    padding: 1rem 0.5rem;
+    color: #000;
+}
+#Search > .Search-inputResult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.3s;
+}
+#Search > .Search-inputResult > h1.logo {
+    padding: 2rem 0;
+    font-weight: 600;
+    font-size: 1.7rem;
+    opacity: 0.2;
+}

@@ -134,7 +134,7 @@ const productJSON = () => {
             size : [
                 {
                     name: "S",
-                    B_length : 103.5,
+                    length : 103.5,
                     waist : 39,
                     crotch : 31,
                     hips : 51,
@@ -144,7 +144,7 @@ const productJSON = () => {
                 },
                 {
                     name: "M",
-                    B_length : 104.5,
+                    length : 104.5,
                     waist : 41,
                     crotch : 32,
                     hips : 52.5,
@@ -154,7 +154,7 @@ const productJSON = () => {
                 },
                 {
                     name: "L",
-                    B_length : 105.5,
+                    length : 105.5,
                     waist : 43,
                     crotch : 33,
                     hips : 54,
@@ -164,7 +164,7 @@ const productJSON = () => {
                 },
                 {
                     name: "XL",
-                    B_length : 106.5,
+                    length : 106.5,
                     waist : 45,
                     crotch : 34,
                     hips : 55.5,

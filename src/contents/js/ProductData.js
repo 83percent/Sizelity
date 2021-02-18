@@ -43,7 +43,7 @@ const obj = [
             size : [
                 {
                     name: "S",
-                    B_length : 103.5,
+                    length : 103.5,
                     waist : 39,
                     crotch : 31,
                     hips : 51,
@@ -53,7 +53,7 @@ const obj = [
                 },
                 {
                     name: "M",
-                    B_length : 104.5,
+                    length : 104.5,
                     waist : 41,
                     crotch : 32,
                     hips : 52.5,
@@ -63,7 +63,7 @@ const obj = [
                 },
                 {
                     name: "L",
-                    B_length : 105.5,
+                    length : 105.5,
                     waist : 43,
                     crotch : 33,
                     hips : 54,
@@ -73,7 +73,7 @@ const obj = [
                 },
                 {
                     name: "XL",
-                    B_length : 106.5,
+                    length : 106.5,
                     waist : 45,
                     crotch : 34,
                     hips : 55.5,
@@ -104,7 +104,7 @@ const obj = [
                     chest : 54,
                     arm: 24,
                     sleeve: 59,
-                    T_length: 68.5
+                    length: 68.5
                 },
                 {
                     name: "L",
@@ -112,7 +112,7 @@ const obj = [
                     chest : 56,
                     arm: 25,
                     sleeve: 60,
-                    T_length: 70.5
+                    length: 70.5
                 },
                 {
                     name: "XL",
@@ -120,7 +120,7 @@ const obj = [
                     chest : 58,
                     arm: 26,
                     sleeve: 61,
-                    T_length: 72.5
+                    length: 72.5
                 },
                 {
                     name: "2XL",
@@ -128,7 +128,7 @@ const obj = [
                     chest : 60,
                     arm: 27,
                     sleeve: 62,
-                    T_length: 74.5
+                    length: 74.5
                 },
                 {
                     name: "3XL",
@@ -136,7 +136,7 @@ const obj = [
                     chest : 62,
                     arm: 28,
                     sleeve: 63,
-                    T_length: 76.5
+                    length: 76.5
                 }
             ]
         }
@@ -161,7 +161,7 @@ const obj = [
                     chest : 73,
                     arm: 24,
                     sleeve: 52,
-                    T_length: 73
+                    length: 73
                 }
             ]
         }

@@ -5,8 +5,6 @@ import '../contents/css/View/View.css';
 
 //Component
 import Main from '../components/View/View_Main';
-import Login from '../components/View/View_Login';
-import Join from '../components/View/View_Join';
 import AcountHelp from '../components/View/View_AccountHelp';
 
 const acceptLogo = [
@@ -38,8 +36,6 @@ const View = (props) => {
             </nav>
             <Switch>
                 <Route exact path="/view" component={Main}/>
-                <Route exact path="/view/login" component={Login} />
-                <Route exact path="/view/join" component={Join} />
                 <Route exact path="/view/accounthelp" component={AcountHelp} />
                 <Route path="/view" component={Main} />
             </Switch>

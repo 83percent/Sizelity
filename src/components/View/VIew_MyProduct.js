@@ -10,6 +10,7 @@ import MyProductList from './View_MyProduct_List';
 
 // Context 
 import {LoginContext} from '../../App';
+import { Link } from 'react-router-dom';
 
 
 /*
@@ -70,8 +71,7 @@ const MyProduct = ({nowType, myProductListData,sectionCloseFunc, setMyProductDat
                                 <p><b>로그인</b>이 필요해요.</p>
                                 <p>나의 계정에 나의 상품을 저장하여</p>
                                 <p>언제, 어디서든 꺼내보세요.</p>
-                                <button className="myProduct-nav-login">로그인</button>
-                                <button className="myProduct-nav-join">회원가입</button>
+                                <Link to="/view/login" className="myProduct-nav-login">로그인</Link>
                             </div>
                         </div>
                     </nav>

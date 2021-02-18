@@ -15,7 +15,6 @@ import { MediaContext } from '../../App';
 let productListData = null;
 const NavMyProduct = ({myProductData, setMyProductData}) => {
     const media = useContext(MediaContext);
-    console.log("Media Device Informaion Context : ", media);
 
     let isOpenFrame = true;
     const [myProductListData, setMyProductListData] = useState(undefined);
@@ -65,7 +64,7 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
         } catch(error) {setMyProductListData(null);}
     });
 
-    
+
     const toggleListWrapper = (toggle) => {
         if(!listWrapper) return;
         const cl = listWrapper.current.classList;
@@ -84,6 +83,7 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
     useEffect(() => {
         setTimeout(() => { toggleWrapper(true); }, 300)
     }, [myProductData]);
+    
     useEffect(() => {
         // 사전 로드 부분
         __fetchMyProductData();

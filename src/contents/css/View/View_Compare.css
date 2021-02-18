@@ -57,8 +57,18 @@ section.View-Compare > header > .size-wrapper .size-element p.active {
 section.View-Compare > header > .size-wrapper .size-element input {
     display: none;
 }
-
-
+section.View-Compare > header > .addBtn-wrapper {
+    display: flex;
+    background: #ffffff;
+}
+section.View-Compare > header > .addBtn-wrapper > button {
+    all: unset;
+    text-align: center;
+    max-width: 50%;
+    flex-grow: 1;
+    border-top: 1px solid #dbdbdb;
+    padding: 0.5rem 0;
+}
 /*      article      */
 section.View-Compare > article {
     height: auto;
@@ -320,4 +330,76 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
 .Compare-graph > .line.plus > .right {
     color: inherit;
     right: -0.7rem;
+}
+
+/*      Fav     */
+#View > section#fav-select-wrapper {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    padding-bottom: 5rem;
+    top: 0;
+}
+#View > section#fav-select-wrapper.active {
+    display: flex;
+}
+#View > section#fav-select-wrapper > article {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-bottom: 1px solid #dbdbdb;
+    position: absolute;
+    transition-duration: 0.3s;
+    top: -15rem;    
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    padding-top: 2rem;
+}
+#View > section#fav-select-wrapper.active > article.active {
+    top: 0;
+}
+#View > section#fav-select-wrapper i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+#View > section#fav-select-wrapper h1 {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+}
+#View > section#fav-select-wrapper .fav-select-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+#View > section#fav-select-wrapper .fav-select-btn > button {
+    all: unset;
+    width: 50%;
+    text-align: center;
+    padding: 0.8rem 0;
+    border-top: 1px solid #dbdbdb;
+}
+#View > section#fav-select-wrapper > ._blank {
+    flex-grow: 1;
+}
+#View > section#fav-select-wrapper .fav-select-login {
+    display: flex;
+    width: 100%;
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+}
+#View > section#fav-select-wrapper .fav-select-login > a {
+    all: unset;
+    text-align: center;
+    flex-grow: 1;
+    padding: 0.8rem 0;
+    border-radius: 0.5rem;
+    background: #00966B;
+    color: #ffffff;
+    font-size: 1.1rem;
 }

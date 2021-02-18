@@ -54,6 +54,7 @@ const Compare = ({productData, myProduct}) => {
                         activeSize={activeSize}
                         selectSize={setActiveSize}/>
                 </div>
+                    
             </header>
             <article>
                 <div className="standard-wrapper">
@@ -115,15 +116,7 @@ export default React.memo(Compare);
 /*      header - Size list       */
 const HeaderSizeList = ({ sizeData, selectSize }) => {
     const sizeElementList = useRef(null);
-    const elementChangeEvent = (e) => {
-        if(e === null) return;
-        const parent = e.target.parentElement.parentElement;
-        if(!parent.classList.contains("on")) {
-            if(document.querySelector("li.size-element.on") !== null) document.querySelector("li.size-element.on").classList.remove("on");
-            parent.classList.add("on");
-            selectSize(e.target.value);
-        }
-    }
+
     const sizeElementClickEvent = (e,size) => {
         e.stopPropagation();
         let target = e.target;
@@ -137,6 +130,7 @@ const HeaderSizeList = ({ sizeData, selectSize }) => {
             if(sizeElementList.current.querySelector(".active")) {
                 sizeElementList.current.querySelector(".active").classList.remove("active");
             }
+            e.target.nextElementSibling.checked = true;
             tl.add("active");
             selectSize(size);
         }
@@ -145,9 +139,9 @@ const HeaderSizeList = ({ sizeData, selectSize }) => {
         <ul ref={sizeElementList}>
             {
                 sizeData.map((size, index) => (
-                    <li className="size-element" key={index} onClick={(e) => {sizeElementClickEvent(e, size.name)}}>
-                        <p>{size.name}</p>
-                        <input type="radio" name="select-size" value={size.name} onChange={(e) => elementChangeEvent(e)}/>
+                    <li className="size-element" key={index} >
+                        <p onClick={(e) => {sizeElementClickEvent(e, size.name)}}>{size.name}</p>
+                        <input type="radio" name="select-size" value={size.name}/>
                     </li>
                 ))
             }

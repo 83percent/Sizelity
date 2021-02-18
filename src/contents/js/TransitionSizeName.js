@@ -52,6 +52,10 @@ class TransitionSizeName {
             B_length : {
                 KOR : "총 길이 (하의)",
                 JPN : "そたけ"
+            },
+            length : {
+                KOR : "총 길이",
+                JPN : "そたけ"
             }
 
         }
