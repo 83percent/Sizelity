@@ -5,7 +5,7 @@ import Proptype from 'prop-types';
 import '../../contents/css/View/View_Menu.css';
 
 // Context 
-import LoginContext from '../../App';
+import {LoginContext}from '../../App';
 
 
 const Menu = () => {

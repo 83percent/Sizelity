@@ -19,6 +19,7 @@ const ViewCompare = (props) => {
     const [data, setData] = useState(props.location.state.data);
     const [myData, setMyData] = useState(MyProduct.get());
     const [searchPraw, setSearchPraw] = useState(null);
+    
     // send component function
     const changeStateData = useCallback((productData) => {
         if(productData.constructor === Object && productData.status === 200) {

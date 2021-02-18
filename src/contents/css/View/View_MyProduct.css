@@ -18,27 +18,86 @@ section#myProduct > ._blank {
 section#myProduct > nav.myProduct-nav {
     width: 100%;
     height: auto;
-    background: #f0f2f5;
-    padding: 3rem 1rem 1rem 1rem;
+    background: #ffffff;
+    padding: 2rem 1rem 1rem 1rem;
     border-bottom: 1px solid #888888;
 }
 section#myProduct > nav.myProduct-nav > div {
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-start;
 }
-section#myProduct > nav.myProduct-nav button {
+section#myProduct > nav.myProduct-nav > div > button {
+    all: unset;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    padding-right: 1rem;
+    
+}
+section#myProduct > nav.myProduct-nav > div > h1 {
+    font-size: 2.3rem;
+    font-weight: 400;
+    padding-left: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+section#myProduct > nav.myProduct-nav > ul {
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+section#myProduct > nav.myProduct-nav > ul > li {
+    width: 50%;
+    flex-grow: 1;
+    text-align: center;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0;
+}
+section#myProduct > nav.myProduct-nav > ul > li > i {
+    font-size: 1.7rem;
+}
+
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame > i {
+    font-size: 3.0rem;
+}
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame > p {
+    font-size: 1.1rem;
+}
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame > p > b {
+    font-size: 1.3rem;
+}
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button {
     all: unset;
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 0.4rem 0.2rem;
+    justify-content: center;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin-top: 0.5rem;
 }
-section#myProduct > nav.myProduct-nav button > p {
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button.myProduct-nav-login {
+    background: #00966B;
+    color: #ffffff;
+    padding: 0.8rem 0;
     font-size: 1.1rem;
-    position: relative;
-    bottom: 0.1rem;
+
 }
+section#myProduct > nav.myProduct-nav .myProduct-nav-unloginFrame button.myProduct-nav-join {
+    border: 1px solid #00966B;
+    padding: 0.3rem 0;
+
+}
+/*      List       */
 section#myProduct .myProduct-cate {
     width: 100%;
     padding: 1rem;

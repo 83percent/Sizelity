@@ -1,10 +1,13 @@
 import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
 import Proptype from 'prop-types';
 import MyProductData from '../../contents/js/MyProductData';
-import { MediaContext } from '../../App';
 
 //Component
 import MyProductComponent from './View_MyProduct';
+
+// Context
+import { MediaContext } from '../../App';
+
 /*
     @param myProductData : 현재 나의 옷 정보가 담긴 Object (in Cookie "my_recently")
     @param setMyProductData : 현재 나의 옷 정보가 담긴 Object state 를 변경하는 함수

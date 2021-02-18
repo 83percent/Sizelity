@@ -13,15 +13,17 @@ import View from './router/View';
 import Compare from './router/View_Compare';
 import NotFound from './router/NotFound';
 
-const loginInfo = {
-  code : "UA0001",
-  name : "string",
-  id : "hoonni2709@naver.com"
-}
+
 
 export const MediaContext = React.createContext("Phone");
 export const LoginContext = React.createContext(null);
 function App() {
+  /* const loginInfo = {
+    code : "UA0001",
+    name : "string",
+    id : "hoonni2709@naver.com"
+  } */
+  const loginInfo = null;
   const user = (() => {
       return window.screen.width > 1024 ? "Desktops" : "Phone";
   })();

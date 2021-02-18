@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import Proptype from 'prop-types';
 
 
@@ -7,6 +7,9 @@ import '../../contents/css/View/View_MyProduct.css';
 
 // Component
 import MyProductList from './View_MyProduct_List';
+
+// Context 
+import {LoginContext} from '../../App';
 
 
 /*
@@ -17,42 +20,64 @@ import MyProductList from './View_MyProduct_List';
     @param refreshEvent : 새로고침 버튼에 들어갈 function 
 */
 const MyProduct = ({nowType, myProductListData,sectionCloseFunc, setMyProductData, refreshEvent}) => {
+    const userInfo = useContext(LoginContext);
+    console.log("userInfo : ",userInfo)
     const refreshBtn = useRef(null);
     const __refreshEvent  = (e) => {
         if(e) e.stopPropagation();
         if(!refreshBtn) return;
-        console.log(refreshBtn);
 
-        refreshBtn.current.disabled = true;
+        refreshEvent();
     }
     console.log("change");
     return (
         <section id="myProduct">
-            <nav className="myProduct-nav">
-                <div>
-                    <button onClick={() => sectionCloseFunc(false)}>
-                        <i className="material-icons">close</i>
-                        <p>닫기</p>
-                    </button>
-                </div>
-                <div>
-                    <button>
-                        <i className="material-icons">search</i>
-                    </button>
-                    <button>
-                        <i className="material-icons">add</i>
-                    </button>
-                    <button ref={refreshBtn} onClick={(e) => __refreshEvent(e)}>
-                        <i className="material-icons" >refresh</i>
-                    </button>
-                </div>
-            </nav>
-            <article>
-                <MyProductList 
-                    nowType={nowType}
-                    myProductListData={myProductListData}
-                    setMyProductData={setMyProductData} />
-            </article>
+            {
+                userInfo ? (
+                    <>
+                        <nav className="myProduct-nav">
+                            <div>
+                                <button onClick={() => sectionCloseFunc(false)}>
+                                    <i className="material-icons">close</i>
+                                </button>
+                                <h1>나의 상품</h1>
+                            </div>
+                            <ul>
+                                <li style={{marginRight: "0.5rem"}}>    
+                                    <i className="material-icons">add</i>
+                                </li>
+                                <li ref={refreshBtn} onClick={(e) => __refreshEvent(e)}>
+                                    <i className="material-icons" >refresh</i>
+                                </li>
+                            </ul>
+                        </nav>
+                        <article>
+                            <MyProductList 
+                                nowType={nowType}
+                                myProductListData={myProductListData}
+                                setMyProductData={setMyProductData} />
+                        </article>
+                    </>
+                ) : (
+                    <nav className="myProduct-nav">
+                        <div>
+                            <button onClick={() => sectionCloseFunc(false)}>
+                                <i className="material-icons">close</i>
+                            </button>
+                            <h1>나의 상품</h1>
+                            <div className="myProduct-nav-unloginFrame">
+                                <i className="material-icons">lock</i>
+                                <p><b>로그인</b>이 필요해요.</p>
+                                <p>나의 계정에 나의 상품을 저장하여</p>
+                                <p>언제, 어디서든 꺼내보세요.</p>
+                                <button className="myProduct-nav-login">로그인</button>
+                                <button className="myProduct-nav-join">회원가입</button>
+                            </div>
+                        </div>
+                    </nav>
+                )
+            }
+            
             <div className="_blank" onClick={() => sectionCloseFunc(false)}></div>
         </section>
     )
