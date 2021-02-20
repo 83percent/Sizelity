@@ -7,6 +7,7 @@
 
 
 /* My Product Sample Data */
+
 const _list = [
     {// 0
         status: 200,
@@ -365,7 +366,7 @@ class MyProductData {
             const value = document.cookie.match('(^|;) ?' + this.cname + '=([^;]*)(;|$)');
             return value ? value[2] : null; 
         } catch(error) {return null}; */
-         try {
+        try {
             const name = this.cname + "=";
             const decodedCookie = decodeURIComponent(document.cookie);
             const ca = decodedCookie.split(';');
@@ -379,7 +380,6 @@ class MyProductData {
         } catch(error) {
             return null;
         }
-        
     }
     __removeCookieData() {
         this.__setCookieData(" ",-1)

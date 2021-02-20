@@ -50,7 +50,7 @@ const Compare = ({productData, myProduct}) => {
                 </div>
                 <div className="size-wrapper">
                     <HeaderSizeList 
-                        sizeData={productData.info.size}
+                        sizeData={productData.size}
                         activeSize={activeSize}
                         selectSize={setActiveSize}/>
                 </div>
@@ -70,7 +70,7 @@ const Compare = ({productData, myProduct}) => {
                     <CompareGraphList
                         activeSize={activeSize}
                         myProductData={myProduct ? myProduct.size : null}
-                        productSizeData={productData.info.size} />
+                        productSizeData={productData.size} />
                 </div>
             </article>
         </section>

@@ -1,4 +1,5 @@
 import { useCallback, useContext, useRef, useState } from 'react';
+import ProductSearch from '../contents/js/ProductSearch';
 
 // CSS
 import '../contents/css/View/View_Compare_Main.css';
@@ -25,7 +26,11 @@ const ViewCompare = (props) => {
 
     const [myData, setMyData] = useState(MyProduct.get());
     const [data, setData] = useState(props.location.state.data);
-    if(!data) {
+    if(data) {
+        console.log("%cCompare Shop Product : ","background:#00966B;color:#ffffff;",data);
+        const productSearch = new ProductSearch();
+        productSearch.setCurrent(data);
+    } else {
         // data state null = wrong access.
     }
 
@@ -55,9 +60,6 @@ const ViewCompare = (props) => {
         } else {
             menuFrame.current.classList.toggle("active", toggle);
         }
-    }
-    const searchFrameClick = () => {
-        console.log("ada");
     }
     const toggleFavWrapper = (force) => {
         if(!favWrapper) return;
@@ -108,7 +110,7 @@ const ViewCompare = (props) => {
             <nav id="Compare-nav">
                 <div id="Compare-top">
                     <Link to="/view/search" id="search-frame" className="nav-element" >
-                        <i className="material-icons" onClick={() => {searchFrameClick()}} >search</i>
+                        <i className="material-icons">search</i>
                     </Link>
                     <div className="nav-element">
                         <i className="material-icons" onClick={() => toggleFavWrapper(true)}>star_border</i>

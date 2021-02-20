@@ -40,9 +40,12 @@ const SearchResult = ({praw}) => {
         } else {
             switch(response.status) {
                 case 200 : {
-                    
                     return (
-                        <div className="Search-success">
+                        <Link to={{
+                            pathname: "/view/compare",
+                            search: `?shop=${response.info.sname}&no=${response.praw.code}`,
+                            state: { data : response }
+                        }} className="Search-success">
                             <p>{response.info.sname}</p>
                             <h1>{response.info.pname}</h1>
                             <div>
@@ -50,7 +53,7 @@ const SearchResult = ({praw}) => {
                                 <b>/</b>
                                 <p>{response.info.subtype}</p>
                             </div>
-                        </div>
+                        </Link>
                     )
                 }
                 case 300 : {

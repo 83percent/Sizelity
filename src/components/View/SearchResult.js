@@ -121,6 +121,7 @@ export default SearchResult;
 const productJSON = () => {
     const returnobj = {
         status : 200,
+        pcode : "PA000001",
         praw : {
             type : "branduid",
             code : "27123",
@@ -130,50 +131,50 @@ const productJSON = () => {
             sname : "조군샵",
             pname : "데이런온 레직기 트임 데님",
             ptype : "하의",
-            subtype : "긴바지",
-            size : [
-                {
-                    name: "S",
-                    length : 103.5,
-                    waist : 39,
-                    crotch : 31,
-                    hips : 51,
-                    thigh : 29.5,
-                    hem : 20
-                    
-                },
-                {
-                    name: "M",
-                    length : 104.5,
-                    waist : 41,
-                    crotch : 32,
-                    hips : 52.5,
-                    thigh : 31.5,
-                    hem : 21
-                    
-                },
-                {
-                    name: "L",
-                    length : 105.5,
-                    waist : 43,
-                    crotch : 33,
-                    hips : 54,
-                    thigh : 33.5,
-                    hem : 22
-                    
-                },
-                {
-                    name: "XL",
-                    length : 106.5,
-                    waist : 45,
-                    crotch : 34,
-                    hips : 55.5,
-                    thigh : 35.5,
-                    hem : 23
-                    
-                }
-            ]
-        }
+            subtype : "긴바지"
+        },
+        size : [
+            {
+                name: "S",
+                length : 103.5,
+                waist : 39,
+                crotch : 31,
+                hips : 51,
+                thigh : 29.5,
+                hem : 20
+                
+            },
+            {
+                name: "M",
+                length : 104.5,
+                waist : 41,
+                crotch : 32,
+                hips : 52.5,
+                thigh : 31.5,
+                hem : 21
+                
+            },
+            {
+                name: "L",
+                length : 105.5,
+                waist : 43,
+                crotch : 33,
+                hips : 54,
+                thigh : 33.5,
+                hem : 22
+                
+            },
+            {
+                name: "XL",
+                length : 106.5,
+                waist : 45,
+                crotch : 34,
+                hips : 55.5,
+                thigh : 35.5,
+                hem : 23
+                
+            }
+        ]
     }
     // 서버사이드에서 넘어오는 것과 비슷한 환경 조성
     return new Promise((resolve, reject) => {

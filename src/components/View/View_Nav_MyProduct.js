@@ -25,7 +25,6 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
     
     const navCloseEvent = (e) => {
         e.stopPropagation();
-        console.log("frame close");
         toggleWrapper(false);
         isOpenFrame = false;
     }

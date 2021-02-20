@@ -1,16 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-
+import ProductSearch from "../../contents/js/ProductSearch"
 // CSS
 import '../../contents/css/View/View_Search.css';
 
 // Component
 import SearchResult from './View_SearchResult';
 const Search = ({history}) => {
+
+    const productSearch =  new ProductSearch();
     const [praw, setPraw] = useState(null);
     const [deleteOption, setDeleteOption] = useState(false);
 
     const searchInput = useRef(null);
-    const currentSearchData = sampleData;
+    const currentSearchData = productSearch.getCurrent();
     const searchClickEvent = (e) => {
         e.stopPropagation();
         setPraw(searchInput.current.value);
@@ -24,11 +26,32 @@ const Search = ({history}) => {
             target = target.parentElement;
             i++;
         }
-        target.classList.add("remove");
-        setTimeout(() => target.remove(),360);
+        if(i === 4 && !target.classList.contains("Search-currentElement")) return false;
+        else {
+            currentSearchData[index] = null;
+            target.classList.add("remove");
+            setTimeout(() => target.remove(),360);
+
+            console.log(currentSearchData);
+        }
+    }
+    // Current Data Click 
+    const moveComapre = async (element) => {
+        const data = await productSearch.search(element[0]);
+        console.log(data);
+        /* history.push({
+            pathName: "/view/compare",
+            search: `?shop=${data.info.sname}&no=${data.praw.code}`,
+            state: { data : data }
+        }); */
     }
     useEffect(() => {
-        // Clean up 할때 최근 본 상품 목록 변경 점 있는지 확인 후 쿠키 정리, 저장 해야함
+        
+        // Cleanup 최근 본 상품 목록의 변동이 있을 경우 작동
+        return function cleanup() {
+            console.log("Clean Up commit..")
+            productSearch.fetchCurrent(currentSearchData);
+        };
     });
     return (
         <section id="Search">
@@ -49,19 +72,19 @@ const Search = ({history}) => {
                 <ul>
                     {
                         currentSearchData ? (
-                            sampleData.map((element, index) => (
+                            currentSearchData.map((element, index) => (
                                 <li key={index} className="Search-currentElement">
-                                    <div className="Search-currentInfoFrame">
+                                    <div onClick={() => moveComapre(element)} className="Search-currentInfoFrame">
                                         <div className="Search-currentName">
                                             <p>{element[1]}</p>
                                             <h1>{element[2]}</h1>
                                         </div>
                                         <div>
-                                            <p style={{textAlign:"right"}}>{element[4]}</p>
+                                            <p style={{textAlign:"right"}}>{element[3]}</p>
                                         </div>
                                         
                                     </div>
-                                    <a href={`http://${element[5]}`} className="Search-currentBtnFrame">
+                                    <a href={`http://${element[4]}`} className="Search-currentBtnFrame">
                                         <i className="material-icons">open_in_new</i>
                                     </a>
                                     <button onClick={(e)=>removeClick(e, index)}className={deleteOption ? "active" : ""}>
@@ -80,30 +103,5 @@ const Search = ({history}) => {
         </section>
     )
 }
-/*
-    Array index info
-    {
-        pcode: "PA000001", 
-        sname: "string", 
-        pname:"string", 
-        ptype: "string", 
-        subtype:"string",
-        praw : "string"
-    }
-*/
-const sampleData = [
-    ["PA000020","자댕","Test Product Name","top","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 0
-    ["PA000021","자댕","Test Product Name","bottom","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 1
-    ["PA000022","조군샵","Test Product Name","top","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 2
-    ["PA000023","무신사","Test Product Name","top","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 3
-    ["PA000024","mr-street","Test Product Name","set","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 4
-    ["PA000025","mr-street","Test Product Name","set","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 5
-    ["PA000026","조군샵","Test Product Name","bottom","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 6
-    ["PA000027","스나이퍼샵","Test Product Name","bottom","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 7
-    ["PA000028","로인","Test Product Name","bottom","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 8
-    ["PA000029","로인","Test Product Name","outer","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 9
-    ["PA000030","키작남","Test Product Name","top","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 10
-    ["PA000031","스나이퍼샵","Test Product Name","outer","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"], // 11
-    ["PA000032","키작남","Test Product Name","outer","string","www.example.com/product/%21%2%12%76%90%1/branduid=1325232"]  // 12
-]
+
 export default Search;

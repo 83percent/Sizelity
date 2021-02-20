@@ -56,6 +56,7 @@ section#Search {
     margin-left: 0.1rem;
     font-size: 0.9rem;
     font-weight: 300;
+    color: #000;
 }
 #Search > .Search-inputResult > .Search-success > h1 {
     font-size: 1.8rem;
@@ -66,6 +67,7 @@ section#Search {
     white-space: nowrap;
     width: 100%;
     font-weight: 400;
+    color: #000;
 }
 #Search > .Search-inputResult > .Search-success > div {
     display: flex;
