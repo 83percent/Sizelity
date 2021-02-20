@@ -10,6 +10,7 @@
 const _list = [
     {// 0
         status: 200,
+        pcode : "PA000006",
         praw : {
             domain : "www.mr-s.co.kr",
             type : "product",
@@ -34,6 +35,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
+        pcode : "PA000007",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -58,6 +60,7 @@ const _list = [
     },
     { // 2 아우터 / 무스탕
         status: 200,
+        pcode : "PA000008",
         praw : {
             domain : "www.mens-castle.co.kr",
             type : "product_no",
@@ -81,6 +84,7 @@ const _list = [
     },
     { // 3 하의 / 청바지
         status: 200,
+        pcode : "PA000009",
         praw : {
             domain : "thesext.co.kr",
             type : "product",
@@ -105,6 +109,7 @@ const _list = [
     },
     { // 4 하의 / 청바지
         status: 200,
+        pcode : "PA000010",
         praw : {
             domain : "thesext.co.kr",
             type : "product",
@@ -128,6 +133,7 @@ const _list = [
     },
     { // 5 하의 / 청바지
         status: 401,
+        pcode : "PA000011",
         praw : {
             domain : "www.lookpine.com",
             type : "product",
@@ -147,6 +153,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
+        pcode : "PA000012",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -171,6 +178,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
+        pcode : "PA000013",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -194,6 +202,7 @@ const _list = [
         }
     },{ // 1 바지 / 슬랙스
         status: 200,
+        pcode : "PA000014",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -218,6 +227,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
+        pcode : "PA000015",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -241,6 +251,7 @@ const _list = [
         }
     },{ // 1 바지 / 슬랙스
         status: 200,
+        pcode : "PA000016",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",

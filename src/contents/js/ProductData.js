@@ -6,11 +6,12 @@ class Product {
     }
     get(raw = null) {
         if(raw === null) return new Error("want to get data raw is null");
-        console.log("\t\t\t\tServer find Data...");
+        console.log('%c \t\tSearch Product... : ',"background:red;color:#fff;",raw);
         try {
             return new Promise((resolve, reject) => {
+                
                 setTimeout(() => {
-                    console.log("Find Data!!! After return JSON Object Data!!");
+                    console.log('%c \t\tFinish Search Product!!! : ',"background:red;color:#fff;",obj[this.sampleNumber]);
                     resolve(obj[this.sampleNumber]);
                 },1500);
             });
@@ -27,8 +28,9 @@ export default Product;
     SAMPLE DATA POOL
 */
 const obj = [
-    {
+    { // 0
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
+        pcode : "PA000001",
         praw : {
             domain : "www.jogunshop.com",
             type : "branduid",
@@ -84,8 +86,9 @@ const obj = [
             ]
         }
     },
-    {
+    { // 1
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
+        pcode : "PA000002",
         praw : {
             domain : "www.jogunshop.com",
             type : "branduid",
@@ -141,8 +144,9 @@ const obj = [
             ]
         }
     },
-    {
+    { // 2
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
+        pcode : "PA000003",
         praw : {
             domain : "www.mr-s.co.kr",
             type : "product",
@@ -166,8 +170,9 @@ const obj = [
             ]
         }
     },
-    {
+    { // 3
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
+        pcode : "PA000004",
         praw : {
             domain : "www.mr-s.co.kr",
             type : "product",
@@ -196,10 +201,10 @@ const obj = [
             ]
         }
     },
-    {
+    { // 4
         status : 404
     },
-    {
+    { // 5
         status : 300
     }
 ];
