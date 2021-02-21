@@ -13,28 +13,28 @@
     align-items: center;
     padding-bottom: 3rem;
 }
-#View > section#Main #title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 #View > section#Main h1 {
     font-size: 2.0rem;
     font-weight: 500;
 }
 #View > section#Main #search-input-wrapper {
     width: 100%;
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
+    padding: 0 1rem;
     margin-top: 2rem;
 }
 #View > section#Main #search-input-wrapper > #search-input-frame {
     width: 100%;
     height: auto;
     display: flex;
-    align-content: stretch;
+    border: 1px solid #dbdbdb;
+    padding: 0.5rem 1rem;
+    background: #ffffff;
+}
+#View > section#Main #search-input-wrapper > #search-input-frame > p {
+    font-size: 1.2rem;
+    color: #00000070;
 }
 #View > section#Main #search-input-wrapper > #search-input-frame > input {
     flex-grow: 1;

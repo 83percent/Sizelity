@@ -1,4 +1,4 @@
-import { NavLink ,Link, Route, Switch } from 'react-router-dom';
+import {Link, Route, Switch} from 'react-router-dom';
 
 // CSS
 import '../contents/css/View/View.css';
@@ -6,39 +6,47 @@ import '../contents/css/View/View.css';
 //Component
 import Main from '../components/View/View_Main';
 import AcountHelp from '../components/View/View_AccountHelp';
+import { useEffect, useRef } from 'react';
 
-const acceptLogo = [
-    "/view",
-    "/view/login",
-    //"/view/compare"
-];
 const View = (props) => {
-    
-    setThemeColor();
-
-    let logoToggle = false;
-    for(const path of acceptLogo) {
-        if(props.location.pathname === path) {
-            logoToggle = true;
-            break;
+    const loginWrapper = useRef(null)
+    const toggleLoginWrapper = (force) => {
+        if(force === undefined) loginWrapper.current.classList.toggle("active");
+        else {
+            if(loginWrapper.current) {
+                loginWrapper.current.classList.toggle("active",force);
+                if(force) {
+                    setTimeout(() => {toggleLoginWrapper(false);},3000);
+                }
+            }
         }
     }
+    useEffect(() => {
+        if(loginWrapper.current) toggleLoginWrapper(true);
+    });
+    useEffect(() => {
+        setThemeColor();
+    },[]);
+
     return (
         <div id="View">
-            <nav id="View-Main-Nav">
-                <Link to="/view" className={logoToggle ? "on" : "off"}>Sizelity.</Link>
-                <div id="nav-menu">
-                    <NavLink to="/view/login" id="View-loginBtn">
-                        <p>Login.</p>
-                        
-                    </NavLink>
+            <header>
+                <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>lock</i>
+                <div className="login-wrapper" ref={loginWrapper}>
+                    <i className="material-icons">lock</i>
+                    <p><b>자신의 계정</b>에 옷을 저장하고</p>
+                    <p>언제, 어디서든 꺼내어 비교하세요.</p>
+                    <Link to="/view/login">로그인</Link>
                 </div>
-            </nav>
+            </header>
             <Switch>
                 <Route exact path="/view" component={Main}/>
                 <Route exact path="/view/accounthelp" component={AcountHelp} />
                 <Route path="/view" component={Main} />
             </Switch>
+            <div className="logoWrapper">
+                <Link to="/view">Sizelity.</Link>
+            </div>
         </div>
     );
 }

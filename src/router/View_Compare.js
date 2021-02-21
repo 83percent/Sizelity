@@ -17,17 +17,22 @@ import { Link } from 'react-router-dom';
 
 
 const ViewCompare = (props) => {
+    // Context 
     const media = useContext(MediaContext);
     const userInfo = useContext(LoginContext);
 
+    // Ref
     const searchResultWrapper = useRef(null);
     const menuFrame = useRef(null);
     const favWrapper = useRef(null);
 
+    // State
     const [myData, setMyData] = useState(MyProduct.get());
     const [data, setData] = useState(props.location.state.data);
+
     if(data) {
         console.log("%cCompare Shop Product : ","background:#00966B;color:#ffffff;",data);
+        
         const productSearch = new ProductSearch();
         productSearch.setCurrent(data);
     } else {

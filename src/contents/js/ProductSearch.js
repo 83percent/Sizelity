@@ -1,5 +1,3 @@
-import { fireEvent } from '@testing-library/react';
-import { sample } from 'lodash-es';
 import Cookie from './Cookie';
 import Product from './ProductData'; // 서버와 연결되기 전까지 임시 로 사용하는 샘플데이터가 담긴 장소
 
@@ -12,8 +10,7 @@ class ProductSearch {
         this.cnameCurrent = "currentSearchData";
     }
     getCurrent() {
-        if(!this.current) this.refreshCurrent();
-        return this.current; //:array
+        return this.refreshCurrent(); //:array
     }
 /*
     @params data :  최근본 상품에 추가할 데이터
@@ -58,8 +55,11 @@ class ProductSearch {
                 _current = [];
                 
             }
-            console.log(createElement(data));
+            if(_current.length > 20) {_current.pop();}
             _current.unshift(createElement(data));
+
+            console.log("%c_current : ", "background:orange; color: #fff;",_current);
+
             this.cookie.set(this.cnameCurrent,_current);
             return _current;
         } else {
@@ -68,11 +68,12 @@ class ProductSearch {
     }
     refreshCurrent() { // refresh
         this.current = this.cookie.get("currentSearchData");
+        return this.current;
     }
     
     fetchCurrent(changeCurrent) {
         if(!this.current) return null; 
-
+        console.log(changeCurrent);
         let isChange = false;
         const afterCurrent = [];
         changeCurrent.forEach(element => {

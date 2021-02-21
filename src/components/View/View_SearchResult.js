@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductData from '../../contents/js/ProductData';
+import ProductSearch from '../../contents/js/ProductSearch';
 
 let productData = null;
+let productSearch = null;
+
 const SearchResult = ({praw}) => {
     const [response, setResponse] = useState(null);
     const [onLoader, setOnLoader] = useState(false);

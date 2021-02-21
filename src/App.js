@@ -45,7 +45,6 @@ function App() {
             <Route exact path="/view/join" component={Join} />
             <Route path="/" component={NotFound}/>
           </Switch>
-          <div id="ad"></div>
         </BrowserRouter>
       </MediaContext.Provider>
     </LoginContext.Provider>
