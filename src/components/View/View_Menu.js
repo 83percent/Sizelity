@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Proptype from 'prop-types';
 
 // CSS
 import '../../contents/css/View/View_Menu.css';
@@ -10,6 +9,11 @@ import {LoginContext}from '../../App';
 
 const Menu = () => {
     const userInfo = useContext(LoginContext);
+    if(userInfo) {
+
+    } else {
+        
+    }
     return (
         <>
             <div className="Menu-wrapper">

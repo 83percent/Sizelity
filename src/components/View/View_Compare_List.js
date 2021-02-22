@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, {useMemo, useRef} from "react";
 import Proptype from 'prop-types';
 import Transition from '../../contents/js/TransitionSizeName';
 
 
 const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
-    console.log("Active : ", activeSize);
-    console.log("My Product Data", myProductData);
-    console.log("Product Size Array", productSizeData);
+    console.log("%c \t <Component>\t Active Size : ","background:#00966B;color:#ffffff;", activeSize);
+    console.log("%c \t <Component>\t My Product Data","background:#00966B;color:#ffffff;", myProductData);
+    console.log("%c \t <Component>\t Product Size Array","background:#00966B;color:#ffffff;", productSizeData);
 
-    const analyzeData = useCallback((productSizeData) => {
+    const analyzeData = (productSizeData) => {
         if(productSizeData.constructor !== Array) return false;
         
         const analyzeResult = {
@@ -40,13 +40,12 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                 if(analyzeResult[key].length !== __length) throw new Error(`Analyze size data not complete data. plz change data.`);
             }
 
-            console.log("\t +Analyze Data : ", analyzeResult);
-            console.log("\t +myProduct Data", myProductData);
+            console.log("%c\t\t\t -> Analyze Data : ", "background:#00966B;color:#ffffff;",analyzeResult);
             return analyzeResult;
         } catch(e) {
             return null;
         }
-    },[myProductData,productSizeData]);// __analyze()
+    }
     const sizeData = useMemo( () => analyzeData(productSizeData), [productSizeData]);
     const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length","length"];
     const transition = new Transition("KOR");

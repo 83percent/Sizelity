@@ -27,7 +27,15 @@
     font-size: 2.5rem;
     color: #000000;
 }
-
+#View > nav#Compare-nav > div#Compare-top > .nav-element#logo {
+    flex-grow: 1;
+}
+#View > nav#Compare-nav > div#Compare-top > .nav-element#logo > a {
+    all: unset;
+    color: #000000;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
 /*      Bottom - MyProduct     */
 #View > nav#myProduct-nav {
     position: fixed;

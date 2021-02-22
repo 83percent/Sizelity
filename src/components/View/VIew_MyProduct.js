@@ -22,7 +22,6 @@ import { Link } from 'react-router-dom';
 */
 const MyProduct = ({nowType, myProductListData,sectionCloseFunc, setMyProductData, refreshEvent}) => {
     const userInfo = useContext(LoginContext);
-    console.log("userInfo : ",userInfo)
     const refreshBtn = useRef(null);
     const __refreshEvent  = (e) => {
         if(e) e.stopPropagation();
@@ -30,7 +29,6 @@ const MyProduct = ({nowType, myProductListData,sectionCloseFunc, setMyProductDat
 
         refreshEvent();
     }
-    console.log("change");
     return (
         <section id="myProduct">
             {
@@ -88,6 +86,5 @@ MyProduct.proptype = {
     sectionCloseFunc : Proptype.func.isRequired,
     setMyProductData : Proptype.func.isRequired,
     refreshEvent : Proptype.func.isRequired
-    
 }
 export default React.memo(MyProduct);

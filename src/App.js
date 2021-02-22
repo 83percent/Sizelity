@@ -12,33 +12,34 @@ import Home from './router/Home';
 import View from './router/View';
 import Compare from './router/View_Compare';
 import NotFound from './router/NotFound';
+import Wrong from './router/Wrong';
 import Login from './components/View/View_Login';
 import Join from './components/View/View_Join';
 import Search from './components/View/View_Search';
 
 
 
-
 export const MediaContext = React.createContext("Phone");
 export const LoginContext = React.createContext(null);
 function App() {
-  const loginInfo1 = {
+  const loginInfo = {
     code : "UA0001",
-    name : "string",
+    name : "이재훈",
     id : "hoonni2709@naver.com"
   }
-  const loginInfo2 = null;
+  //const loginInfo = null;
   const user = (() => {
       return window.screen.width > 1024 ? "Desktops" : "Phone";
   })();
   return (
-    <LoginContext.Provider value={loginInfo2}>
+    <LoginContext.Provider value={loginInfo}>
       <MediaContext.Provider value={user}>
         <BrowserRouter>
           <Switch>
             <Route exact path={"/"} component={Home}/>
             <Route path={"/home"} component={Home}/>
             <Route exact path={"/view"} component={View}/>
+            <Route exact path="/wrong" component={Wrong} />
             <Route path="/view/compare" component={Compare} />
             <Route exact path="/view/search" component={Search} />
             <Route exact path="/view/login" component={Login} />

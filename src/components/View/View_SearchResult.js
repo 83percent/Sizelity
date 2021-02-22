@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductData from '../../contents/js/ProductData';
-import ProductSearch from '../../contents/js/ProductSearch';
 
 let productData = null;
-let productSearch = null;
 
 const SearchResult = ({praw}) => {
     const [response, setResponse] = useState(null);
     const [onLoader, setOnLoader] = useState(false);
-    const __fetchSearchData = async () => {
+    const __fetchSearchData = async (praw) => {
         if(!productData) productData = new ProductData();
         try {
             setOnLoader(true);
@@ -22,7 +20,7 @@ const SearchResult = ({praw}) => {
         }
     }
     useEffect(() => {
-        if(praw !== null) __fetchSearchData();
+        if(praw !== null) __fetchSearchData(praw);
     }, [praw]);
     if(onLoader) {
         return (

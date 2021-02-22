@@ -308,13 +308,13 @@ class MyProductData {
             });
         } catch(error) {return null;}
     }
-    get() { 
+    get() { // 쿠키에 저장된 나의 상품을 가져오는 Method
         if(this.myProduct !== null && this.myProduct.status === 200) return this.myProduct;
         else {
-            console.log(this.__getCookieData());
+            console.log("%c\t <Cookie> \t\t My Product Data get = ", "background:#00966B;color:#ffffff;",this.__getCookieData());
             return this.__getCookieData();
         }
-    }
+    } // get()
     getPriority() {this.priority = ["set","outer","top","bottom"]}
     /*
         @param data : 

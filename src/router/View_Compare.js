@@ -1,5 +1,6 @@
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import ProductSearch from '../contents/js/ProductSearch';
+import { Link } from 'react-router-dom';
 
 // CSS
 import '../contents/css/View/View_Compare_Main.css';
@@ -13,77 +14,79 @@ import Menu from '../components/View/View_Menu';
 // Context
 import { MediaContext } from '../App';
 import {LoginContext} from '../App';
-import { Link } from 'react-router-dom';
 
+/*
+    - Param
+    @param props.location.state.data : 구매예정 상품의 데이터 정보
 
+    - State
+    @state myData : 나의 상품정보를 저장하는 state
+*/
 const ViewCompare = (props) => {
+    console.log("%c======= Start Route 'Compare.js' =======\n \t <Component> \t Props = ", "background:#00966B;color:#ffffff;",props);
     // Context 
     const media = useContext(MediaContext);
     const userInfo = useContext(LoginContext);
 
     // Ref
-    const searchResultWrapper = useRef(null);
     const menuFrame = useRef(null);
     const favWrapper = useRef(null);
 
     // State
     const [myData, setMyData] = useState(MyProduct.get());
-    const [data, setData] = useState(props.location.state.data);
+    //let data = props.location.state;
+
+    const data = (() => {
+        const propsState = props.location.state;
+        if(propsState && propsState.data) {
+            // 절차 필요.
+            return propsState.data;
+        } else {
+            return null;
+        }
+    })();
 
     if(data) {
-        console.log("%cCompare Shop Product : ","background:#00966B;color:#ffffff;",data);
+        console.log("%c \t <Component> \t Compare Shop Product = ","background:#00966B;color:#ffffff;",data);
         
         const productSearch = new ProductSearch();
         productSearch.setCurrent(data);
+        
     } else {
-        // data state null = wrong access.
+        props.history.replace("/wrong");
+        return null;
     }
 
-    // send component function
-    const changeStateData = useCallback((productData) => {
-        if(productData.constructor === Object && productData.status === 200) {
-            console.log("View_Compare : 데이터를 설정합니다.", productData);
-            toggleSearchResult(false);
-            setData(productData);
-        }
-    }, []);
-    // Result frame function
-    const toggleSearchResult = (toggle) => {
-        if(!searchResultWrapper.current) return;
-        if(toggle === undefined) searchResultWrapper.current.classList.toggle("active");
-        else {
-            if(toggle.constructor !== Boolean) throw new Error("'toggleSearchResult' function parameter must Boolean dataformat.");
-            searchResultWrapper.current.classList.toggle("active", toggle);
+    const wrapperToggle = {
+        menu : function(force, e) {
+            this.__toogle(menuFrame.current, force, e);
+        },
+        __toogle : (wrapper, force, e) => {
+            if(!wrapper) return;
+            if(e) e.stopPropagation();
+            if(force === undefined) wrapper.classList.toggle("active");
+            else wrapper.classList.toggle("active", force);
+        },
+        favorite : (force, e) => {
+            if(!favWrapper.current) return;
+            if(e) e.stopPropagation();
+            if(force === undefined) {
+                favWrapper.current.classList.toggle("active");
+                setTimeout(() => {favWrapper.current.querySelector("article").classList.toggle("active");},50);
+            } else {
+                if(force) {
+                    favWrapper.current.classList.add("active");
+                    setTimeout(() => {favWrapper.current.querySelector("article").classList.add("active");},50);
+                } else {
+                    favWrapper.current.querySelector("article").classList.remove("active");
+                    favWrapper.current.classList.remove("active");
+                }
+            }
         }
     }
     
-    const toggleMenuFrame = (e,toggle) => {
-        if(e) e.stopPropagation();
-        if(!menuFrame) return;
-        if(toggle === undefined) {
-            menuFrame.current.classList.toggle("active");
-        } else {
-            menuFrame.current.classList.toggle("active", toggle);
-        }
-    }
-    const toggleFavWrapper = (force) => {
-        if(!favWrapper) return;
-        if(force === undefined) {
-            favWrapper.current.classList.toggle("active");
-            setTimeout(() => {favWrapper.current.querySelector("article").classList.toggle("active");},50);
 
-        } else {
-            if(force) {
-                favWrapper.current.classList.add("active");
-                setTimeout(() => {favWrapper.current.querySelector("article").classList.add("active");},50);
-            } else {
-                
-                favWrapper.current.querySelector("article").classList.remove("active");
-                favWrapper.current.classList.remove("active");
-            }
-            
-        }
-    }
+    // ref={favWrapper} wrapper 에서의  handler object
     const fav = {
         myWardrobe: function() {
             const activeSize = document.querySelector("input[type='radio'][name='select-size']:checked");
@@ -93,39 +96,24 @@ const ViewCompare = (props) => {
                 // 사이즈 선택안됨
             }
             console.log(activeSize);
-        },
-        afterProduct: function() {
-
-        },
-        getAccept : function() {
-
-        },
-        getLoader : function() {
-
-        },
-        getError : function() {
-
-        },
-        closeWrapper : function() {
-
         }
     }
     return (
         <div id="View">
             <nav id="Compare-nav">
                 <div id="Compare-top">
-                    <Link to="/view/search" id="search-frame" className="nav-element" >
+                    <div  id="logo" className="nav-element" >
+                        <Link to="/view">Sizelity.</Link>
+                    </div>
+                    <Link to="/view/search" className="nav-element" >
                         <i className="material-icons">search</i>
                     </Link>
-                    <div className="nav-element">
-                        <i className="material-icons" onClick={() => toggleFavWrapper(true)}>star_border</i>
+                    <div className="nav-element" onClick={() => wrapperToggle.favorite(true)}>
+                        <i className="material-icons">star_border</i>
                     </div>
                     <div className="nav-element" onClick={() => menuFrame.current.classList.add("active")}>
                         <i className="material-icons">menu</i>
                     </div>
-                </div>
-                <div className="Compare-result-wrapper" ref={searchResultWrapper} onClick={() => {toggleSearchResult()}} >
-                    
                 </div>
             </nav>
             <section id="fav-select-wrapper" ref={favWrapper}>
@@ -153,15 +141,14 @@ const ViewCompare = (props) => {
                             </>
                         )
                     }
-                    
                 </article>
                 {
                     (media === "Phone") ?  
-                    (<div className="_blank" onTouchStart={() => toggleFavWrapper(false)}></div>) :
-                    (<div className="_blank" onClick={() => toggleFavWrapper(false)}></div>)
+                    (<div className="_blank" onTouchStart={() => wrapperToggle.favorite(false)}></div>) :
+                    (<div className="_blank" onClick={() => wrapperToggle.favorite(false)}></div>)
                 }
             </section>
-            <section id="Menu" onClick={(e) => {toggleMenuFrame(e,false)}} ref={menuFrame}>
+            <section id="Menu" onClick={(e) => {wrapperToggle.menu(false,e)}} ref={menuFrame}>
                 <Menu />
             </section>
             <NavMyProduct
