@@ -1,5 +1,8 @@
 import {Link, Route, Switch} from 'react-router-dom';
 import { useContext, useEffect, useRef } from 'react';
+// Only Use Sample Login Init setting
+import LoginModule from '../contents/js/Login';
+
 
 // CSS
 import '../contents/css/View/View.css';
@@ -12,9 +15,9 @@ import AcountHelp from '../components/View/View_AccountHelp';
 import {LoginContext} from '../App';
 
 
-const View = (props) => {
+const View = () => {
     const loginWrapper = useRef(null);
-    const userInfo = useContext(LoginContext);
+    const {userInfo, setUserInfo} = useContext(LoginContext);
 
     const toggleLoginWrapper = (force) => {
         if(force === undefined) loginWrapper.current.classList.toggle("active");
@@ -26,6 +29,12 @@ const View = (props) => {
                 }
             }
         }
+    }
+    const SampleUser = () => {
+        const login = new LoginModule();
+        const _changeInfo = login.__sample();
+        if(userInfo !== _changeInfo) setUserInfo(_changeInfo);
+        
     }
     useEffect(() => {
         if(loginWrapper.current && !userInfo) toggleLoginWrapper(true);
@@ -40,11 +49,15 @@ const View = (props) => {
                 userInfo ? (
                     <header>
                         <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>account_circle</i>
-                        <div className="login-wrapper" ref={loginWrapper}>
-                            <i className="material-icons">account_circle</i>
-                            <p><b>{userInfo.name}</b></p>
-                            <p>언제, 어디서든 꺼내어 비교하세요.</p>
-                            <Link to="/view/login">로그인</Link>
+                        <div className="user-wrapper"ref={loginWrapper}>
+                            <div className="user-title">
+                                <p>{userInfo.name}</p>
+                                <Link to="/view/user"><i className="material-icons">settings</i></Link>
+                            </div>
+                            <div className="user-btn-frame">
+                                <Link to="/closet" style={{borderRight: "1px solid #dbdbdb"}}>나의 옷장</Link>
+                                <Link to="/after">나중에 볼 상품</Link>
+                            </div>
                         </div>
                     </header>
                 ) : (
@@ -54,6 +67,7 @@ const View = (props) => {
                             <i className="material-icons">lock</i>
                             <p><b>자신의 계정</b>에 옷을 저장하고</p>
                             <p>언제, 어디서든 꺼내어 비교하세요.</p>
+                            <button onClick={() => SampleUser()}>샘플로그인</button>
                             <Link to="/view/login">로그인</Link>
                         </div>
                     </header>

@@ -295,7 +295,7 @@ const CompareResult = React.memo(({activeRate, myRate}) => {
             return (
                 <div className="compare-result">
                     <div className="result-span">
-                        <p className="bold">0</p>
+                        <p className="bold">0cm</p>
                     </div>
                 </div>
             );

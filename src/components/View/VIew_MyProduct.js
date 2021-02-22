@@ -1,7 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import Proptype from 'prop-types';
 
-
 //CSS
 import '../../contents/css/View/View_MyProduct.css';
 
@@ -20,8 +19,8 @@ import { Link } from 'react-router-dom';
     @param setMyProductData : 비교하려는 나의 옷 데이터를 변경하는 함수
     @param refreshEvent : 새로고침 버튼에 들어갈 function 
 */
-const MyProduct = ({nowType, myProductListData,sectionCloseFunc, setMyProductData, refreshEvent}) => {
-    const userInfo = useContext(LoginContext);
+const MyProduct = ({nowType, myProductListData, sectionCloseFunc, setMyProductData, refreshEvent}) => {
+    const { userInfo } = useContext(LoginContext);
     const refreshBtn = useRef(null);
     const __refreshEvent  = (e) => {
         if(e) e.stopPropagation();
@@ -54,7 +53,7 @@ const MyProduct = ({nowType, myProductListData,sectionCloseFunc, setMyProductDat
                             <MyProductList 
                                 nowType={nowType}
                                 myProductListData={myProductListData}
-                                setMyProductData={setMyProductData} />
+                                setMyProductData={setMyProductData} />  
                         </article>
                     </>
                 ) : (

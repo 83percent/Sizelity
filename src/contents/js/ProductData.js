@@ -1,7 +1,6 @@
 class Product {
     constructor(number = 2) {
         this.data = obj;
-
         this.sampleNumber = number;
     }
     get(raw = null) {
@@ -30,7 +29,7 @@ export default Product;
 const obj = [
     { // 0
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PA000001",
+        pcode : "PAAA0001",
         praw : {
             domain : "www.jogunshop.com",
             type : "branduid",
@@ -88,7 +87,7 @@ const obj = [
     },
     { // 1
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PA000002",
+        pcode : "PAAA0002",
         praw : {
             domain : "www.jogunshop.com",
             type : "branduid",
@@ -146,7 +145,7 @@ const obj = [
     },
     { // 2
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PA000003",
+        pcode : "PAAA0003",
         praw : {
             domain : "www.mr-s.co.kr",
             type : "product",
@@ -172,7 +171,7 @@ const obj = [
     },
     { // 3
         status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PA000004",
+        pcode : "PAAA0004",
         praw : {
             domain : "www.mr-s.co.kr",
             type : "product",

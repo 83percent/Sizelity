@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 import ProductSearch from '../contents/js/ProductSearch';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const ViewCompare = (props) => {
     console.log("%c======= Start Route 'Compare.js' =======\n \t <Component> \t Props = ", "background:#00966B;color:#ffffff;",props);
     // Context 
     const media = useContext(MediaContext);
-    const userInfo = useContext(LoginContext);
+    const {userInfo} = useContext(LoginContext);
 
     // Ref
     const menuFrame = useRef(null);
@@ -34,27 +34,41 @@ const ViewCompare = (props) => {
 
     // State
     const [myData, setMyData] = useState(MyProduct.get());
-    //let data = props.location.state;
-
-    const data = (() => {
-        const propsState = props.location.state;
-        if(propsState && propsState.data) {
-            // 절차 필요.
-            return propsState.data;
-        } else {
-            return null;
-        }
-    })();
-
-    if(data) {
-        console.log("%c \t <Component> \t Compare Shop Product = ","background:#00966B;color:#ffffff;",data);
+    const [productData, setProductData] = useState(props.location.state ? props.location.state.data : null);
+    
+    /*
+        1. 데이터가 안넘어 온 경우 - URL Query Check
+        2. 데이터가 잘 넘어 온 경우 - 쿼리 체크 할 필요 없음.
+    */
+    const productSearch = new ProductSearch();
+    if(!productData) {
+        /*
+            1. 데이터그 안넘어 온 경우
+            1-1. URL Query check
+            - 쿼리도 존재하지 않는 경우 => 메인으로
+            - 쿼리가 존재하는 경우
+                - 서버에 데이터가 존재하지 않는 경우 : 메인으로 (none 데이터를 포함하고 넘어가 메인에 없다는 표시 띄움)
+                - 서버에 데이터가 존재하는 경우 : 정상 작동
+        */
         
-        const productSearch = new ProductSearch();
-        productSearch.setCurrent(data);
-        
+        (async () => {
+            try {
+                const data = await productSearch.searchQuery(props.location.search);
+                console.log("%c ProductData is not coming. search use query","background:red;color: #fff;", props.location.search);
+                if(data) {
+                    productSearch.setCurrent(data);
+                    setProductData(data);
+                } else {
+                    props.history.replace("/wrong");
+                    return null;    
+                }
+            } catch(error) {
+                props.history.replace("/wrong");
+                return null;
+            }
+        })();
     } else {
-        props.history.replace("/wrong");
-        return null;
+        productSearch.setCurrent(productData);
     }
 
     const wrapperToggle = {
@@ -100,66 +114,75 @@ const ViewCompare = (props) => {
     }
     return (
         <div id="View">
-            <nav id="Compare-nav">
-                <div id="Compare-top">
-                    <div  id="logo" className="nav-element" >
-                        <Link to="/view">Sizelity.</Link>
-                    </div>
-                    <Link to="/view/search" className="nav-element" >
-                        <i className="material-icons">search</i>
-                    </Link>
-                    <div className="nav-element" onClick={() => wrapperToggle.favorite(true)}>
-                        <i className="material-icons">star_border</i>
-                    </div>
-                    <div className="nav-element" onClick={() => menuFrame.current.classList.add("active")}>
-                        <i className="material-icons">menu</i>
-                    </div>
-                </div>
-            </nav>
-            <section id="fav-select-wrapper" ref={favWrapper}>
-                <article>
-                    {
-                        userInfo ? (
-                            <>
-                                <h1>
-                                    <b>어디</b>에 추가할까요?
-                                </h1>
-                                <div className="fav-select-btn">
-                                    <button style={{borderRight:"1px solid #dbdbdb"}} onClick={() => fav.myWardrobe()}>나의 옷장</button>
-                                    <button>나중에 볼 상품</button>
+            {
+                productData ? (
+                    <>
+                        <nav id="Compare-nav">
+                            <div id="Compare-top">
+                                <div  id="logo" className="nav-element" >
+                                    <Link to="/view">Sizelity.</Link>
                                 </div>
-                            </>
-                        ) : (
-                            <>
-                                <i className="material-icons">lock</i>
-                                <h1>
-                                    <b>로그인</b>이 필요해요.
-                                </h1>
-                                <div className="fav-select-login">
-                                    <Link to="/view/login">로그인</Link>
+                                <Link to="/view/search" className="nav-element" >
+                                    <i className="material-icons">search</i>
+                                </Link>
+                                <div className="nav-element" onClick={() => wrapperToggle.favorite(true)}>
+                                    <i className="material-icons">star_border</i>
                                 </div>
-                            </>
-                        )
-                    }
-                </article>
-                {
-                    (media === "Phone") ?  
-                    (<div className="_blank" onTouchStart={() => wrapperToggle.favorite(false)}></div>) :
-                    (<div className="_blank" onClick={() => wrapperToggle.favorite(false)}></div>)
-                }
-            </section>
-            <section id="Menu" onClick={(e) => {wrapperToggle.menu(false,e)}} ref={menuFrame}>
-                <Menu />
-            </section>
-            <NavMyProduct
-                myProductData={myData}
-                setMyProductData={setMyData}/>
-            <Compare
-                productData={data} 
-                myProduct={myData}/>    
-        </div>
-        
-
+                                <div className="nav-element" onClick={() => menuFrame.current.classList.add("active")}>
+                                    <i className="material-icons">menu</i>
+                                </div>
+                            </div>
+                        </nav>
+                        <section id="fav-select-wrapper" ref={favWrapper}>
+                            <article>
+                                {
+                                    userInfo ? (
+                                        <>
+                                            <h1>
+                                                <b>어디</b>에 추가할까요?
+                                            </h1>
+                                            <div className="fav-select-btn">
+                                                <button style={{borderRight:"1px solid #dbdbdb"}} onClick={() => fav.myWardrobe()}>나의 옷장</button>
+                                                <button>나중에 볼 상품</button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <i className="material-icons">lock</i>
+                                            <h1>
+                                                <b>로그인</b>이 필요해요.
+                                            </h1>
+                                            <div className="fav-select-login">
+                                                <Link to="/view/login">로그인</Link>
+                                            </div>
+                                        </>
+                                    )
+                                }
+                            </article>
+                            {
+                                (media === "Phone") ?  
+                                (<div className="_blank" onTouchStart={() => wrapperToggle.favorite(false)}></div>) :
+                                (<div className="_blank" onClick={() => wrapperToggle.favorite(false)}></div>)
+                            }
+                        </section>
+                        <section id="Menu" onClick={(e) => {wrapperToggle.menu(false,e)}} ref={menuFrame}>
+                            <Menu />
+                        </section>
+                        <NavMyProduct
+                            myProductData={myData}
+                            setMyProductData={setMyData}/>
+                        <Compare
+                            productData={productData} 
+                            myProduct={myData}/>    
+                    
+                    </>
+                ) : (
+                    <div className="loaderFrame">
+                        <div className="loader"></div>
+                    </div>
+                )
+            }
+           </div> 
     );
 }
 export default ViewCompare;

@@ -4,6 +4,7 @@ import ProductSearch from "../../contents/js/ProductSearch"
 
 let productSearch = null;
 const SearchCurrent = ({history}) => {
+    
     const [deleteOption, setDeleteOption] = useState(false);
     
     if(!productSearch) productSearch = new ProductSearch();
@@ -15,6 +16,7 @@ const SearchCurrent = ({history}) => {
         },
         moveCompare: async(element) => {
             const data = await productSearch.search(element[0]);
+            console.log(data);
             history.push({
                 pathname: "/view/compare",
                 search: `?shop=${data.info.sname}&no=${data.praw.code}`,
@@ -47,7 +49,6 @@ const SearchCurrent = ({history}) => {
         };
     });
     
-
     return (
         <>
             <div className="Search-currentNav">
@@ -56,7 +57,7 @@ const SearchCurrent = ({history}) => {
             </div>
             <ul>
                 {
-                    currentSearchData[0] ? (
+                    (currentSearchData && currentSearchData[0]) ? (
                         currentSearchData.map((element, index) => (
                             <li key={index} className="Search-currentElement">
                                 <div onClick={() => event.moveCompare(element)} className="Search-currentInfoFrame">

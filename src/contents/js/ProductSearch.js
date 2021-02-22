@@ -7,7 +7,7 @@ class ProductSearch {
         this.current = undefined; // :array
         this.cookie = new Cookie();
 
-        this.cnameCurrent = "currentSearchData";
+        this.cnameCurrent = "sizelity_currentSearchData";
     }
     getCurrent() {
         return this.refreshCurrent(); //:array
@@ -16,13 +16,14 @@ class ProductSearch {
     @params data :  최근본 상품에 추가할 데이터
     Array index info
     {
-        pcode: "PA000001", -- 0
+        pcode: "PAAA0001", -- 0
         sname: "string", -- 1
         pname:"string", -- 2
         subtype:"string", -- 3
         praw : "string" -- 4
     }
 */
+
     setCurrent(data) {
         if(data && data.status === 200 && data.pcode !== undefined) {
             let _current = this.getCurrent();
@@ -33,7 +34,7 @@ class ProductSearch {
                         data.pcode,
                         data.info.sname,
                         data.info.pname,
-                        data.info.subtype,
+                        data.info.subtype,  
                         data.praw.full
                     ]
                 );
@@ -67,14 +68,14 @@ class ProductSearch {
         }
     }
     refreshCurrent() { // refresh
-        this.current = this.cookie.get("currentSearchData");
+        this.current = this.cookie.get(this.cnameCurrent);
         return this.current;
     }
     
     fetchCurrent(changeCurrent) {
         if(!this.current) return null; 
         console.log(changeCurrent);
-        let isChange = false;
+        let isChange = false;   
         const afterCurrent = [];
         changeCurrent.forEach(element => {
             if(element) {
@@ -91,6 +92,9 @@ class ProductSearch {
         const sample = new Product();
         return new Promise((resolve, reject) => {
             setTimeout(() => {
+                console.log(sample.data);
+                console.log(pcode);
+
                 for(const index in sample.data) {
                     if(sample.data[index]["pcode"] === pcode) {
                         resolve(sample.data[index]);
@@ -100,6 +104,27 @@ class ProductSearch {
                 resolve(null);
             },500);
         });
+    }
+    searchQuery(query) {
+        // location.search
+        const params = new URLSearchParams(query); // {'key' => 'value', ...}
+        if(params.has("shop") && params.has("no")) {
+            const sname = params.get("shop");
+            const code = params.get("no");
+            // Test Case
+            const sample = new Product();
+            return new Promise((resolve, reject) => {
+                for(const index in sample.data) {
+                    if(sample.data[index]["praw"]["code"] === code && sample.data[index]["info"]["sname"] === sname) {
+                        resolve(sample.data[index]);
+                        break;
+                    }
+                }
+            });
+        } else {
+            // 쿼리가 없음
+            throw new Error("...");
+        }
     }
 }
 export default ProductSearch;

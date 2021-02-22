@@ -1,0 +1,112 @@
+section#After {
+    background: #f0f2f5;
+    min-height: 100%;
+}
+section#After > .back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.5rem;
+}
+section#After > header {
+    padding: 3rem 2rem 0.5rem 2rem;
+}
+section#After > header > h1 {
+    font-size: 2.1rem;
+    font-weight: 500;
+}
+section#After > header > p {
+    font-size: 0.9rem;
+    color: #888888;
+}
+/*      article     */
+section#After > article {
+    margin-top: 2rem;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
+}
+section#After > article > .loaderFrame, section#After > article > .After-none {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+section#After > article > .loaderFrame > .loader  {
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 2px solid #000000;
+    border-top: 2px solid #00000000;
+}
+section#After > article > .func-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #dbdbdb;
+}
+section#After > article > .func-btn-wrapper > button {
+    all: unset;
+    text-decoration: underline;
+    color: #00000080;
+}
+section#After > article > ul > li {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #dbdbdb;
+    padding-left: 1rem;
+    transition-duration: 0.4s;
+    position: relative;
+    left: 0;
+}
+section#After > article > ul > li:first-child {
+    border: none;
+}
+section#After > article > ul > li.remove {
+    left: -100%;
+}
+section#After > article > ul > li > .After-elementInfoFrame {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 0.8rem 0;
+}
+section#After > article > ul > li > .After-elementInfoFrame p {
+    font-size: 0.9rem;
+    color: #00000080;
+    overflow: hidden;
+    white-space: nowrap;
+}
+section#After > article > ul > li > .After-elementInfoFrame h1 {
+    font-size: 1.2rem;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+section#After > article > ul > li > .After-elementInfoFrame > .After-elementInfo {
+    flex-grow: 1;
+    overflow: hidden;
+    min-width: 3.5rem;
+}
+section#After > article > ul > li > a > i {
+    font-size: 1.35rem;
+    color: #000000;
+    padding: 1rem;
+}
+section#After > article > ul > li > button {
+    all: unset;
+    width: 0;
+    overflow: hidden;
+    transition-duration: 0.3s;
+    text-align: center;
+}
+section#After > article > ul > li > button.active {
+    width: 3rem;
+    padding: 0.5rem 0;
+}
+section#After > article > ul > li > button > i {
+    color: #dd1818;
+}

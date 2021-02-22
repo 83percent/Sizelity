@@ -1,4 +1,4 @@
-
+import Cookie from './Cookie';
 /*
     status : 
     200 - 완성
@@ -11,7 +11,7 @@
 const _list = [
     {// 0
         status: 200,
-        pcode : "PA000006",
+        pcode : "PAAA0006",
         praw : {
             domain : "www.mr-s.co.kr",
             type : "product",
@@ -36,7 +36,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
-        pcode : "PA000007",
+        pcode : "PAAA0007",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -61,7 +61,7 @@ const _list = [
     },
     { // 2 아우터 / 무스탕
         status: 200,
-        pcode : "PA000008",
+        pcode : "PAAA0008",
         praw : {
             domain : "www.mens-castle.co.kr",
             type : "product_no",
@@ -85,7 +85,7 @@ const _list = [
     },
     { // 3 하의 / 청바지
         status: 200,
-        pcode : "PA000009",
+        pcode : "PAAA0009",
         praw : {
             domain : "thesext.co.kr",
             type : "product",
@@ -110,7 +110,7 @@ const _list = [
     },
     { // 4 하의 / 청바지
         status: 200,
-        pcode : "PA000010",
+        pcode : "PAAA0010",
         praw : {
             domain : "thesext.co.kr",
             type : "product",
@@ -134,7 +134,7 @@ const _list = [
     },
     { // 5 하의 / 청바지
         status: 401,
-        pcode : "PA000011",
+        pcode : "PAAA0011",
         praw : {
             domain : "www.lookpine.com",
             type : "product",
@@ -154,7 +154,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
-        pcode : "PA000012",
+        pcode : "PAAA0012",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -179,7 +179,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
-        pcode : "PA000013",
+        pcode : "PAAA0013",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -203,7 +203,7 @@ const _list = [
         }
     },{ // 1 바지 / 슬랙스
         status: 200,
-        pcode : "PA000014",
+        pcode : "PAAA0014",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -228,7 +228,7 @@ const _list = [
     },
     { // 1 바지 / 슬랙스
         status: 200,
-        pcode : "PA000015",
+        pcode : "PAAA0015",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -252,7 +252,7 @@ const _list = [
         }
     },{ // 1 바지 / 슬랙스
         status: 200,
-        pcode : "PA000016",
+        pcode : "PAAA0016",
         praw : {
             domain : "www.zardins.com",
             type : "product_no",
@@ -276,15 +276,15 @@ const _list = [
         }
     }
 ];
-
+let instance = null;
 class MyProductData {
     constructor() {
-        if(this.instance) return this.instance;
+        if(instance) return instance;
 
-        this.cname = "my_recently";
-        this.exdays = 600;
+        this.cookie = new Cookie();
+        this.cname = "sizelity_myRecently";
         this.myProduct = null;
-        this.instance = this;
+        instance = this;
     }
     getList() {
         try {
@@ -342,48 +342,9 @@ class MyProductData {
     }
 
     // Private Method
-    __setCookieData(data, _expires) {
-        console.log("\t\t Cookie !! - set Data -> ",data);
-        if(typeof data !== "object" || data.status !== 200) {
-            console.log("MyProductData Class of set(data) Method parameter is invaild data");
-            return false;
-        }
-        
-        let expires = 0;
-        if(_expires === undefined) {
-            const d = new Date();
-            d.setTime(d.getTime() + (this.exdays * 24 * 60 * 60 * 1000));
-            expires = "expires="+ d.toUTCString();
-        } else {
-            expires = _expires;
-        }
-        console.log(expires);
-        document.cookie = this.cname + "=" + JSON.stringify(data) + ";" + expires + ";path=/";
-        return true;
-    }
-    __getCookieData() {
-        /* try {
-            const value = document.cookie.match('(^|;) ?' + this.cname + '=([^;]*)(;|$)');
-            return value ? value[2] : null; 
-        } catch(error) {return null}; */
-        try {
-            const name = this.cname + "=";
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const ca = decodedCookie.split(';');
-            for(let c of ca) {
-                while (c.charAt(0) === ' ') { c = c.substring(1); }
-                if (c.indexOf(name) === 0) {
-                    const cookie = c.substring(name.length, c.length);
-                    return JSON.parse(cookie);
-                }
-            }
-        } catch(error) {
-            return null;
-        }
-    }
-    __removeCookieData() {
-        this.__setCookieData(" ",-1)
-    }
+    __setCookieData(data, _expires) {return this.cookie.set(this.cname, data);}
+    __getCookieData() {return this.cookie.get(this.cname);}
+    __removeCookieData() {return this.cookie.remove(this.cname);}
     __analyzeListObject(listData) {
         const returnObj = {};
         for(const data of listData) {

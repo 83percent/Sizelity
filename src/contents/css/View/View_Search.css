@@ -141,7 +141,7 @@ section#Search {
     align-items: center;
     flex-grow: 1;
     overflow: hidden;
-    padding: 0.3rem 0;
+    padding: 0.8rem 0;
 }
 #Search .Search-currentElement > .Search-currentInfoFrame > .Search-currentName {
     flex-grow: 1;
