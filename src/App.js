@@ -20,7 +20,7 @@ import Join from './components/View/View_Join';
 import Search from './components/View/View_Search';
 import UserMenu from './components/View/View_User_Menu';
 
-
+import Test from './router/Test';
 
 export const MediaContext = React.createContext("Phone");
 export const LoginContext = React.createContext(null);
@@ -38,6 +38,7 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path={"/"} component={Home}/>
+            <Route exact path={"/test"} component={Test}/>
             <Route path={"/home"} component={Home}/>
             <Route exact path={"/view"} component={View}/>
             <Route exact path="/wrong" component={Wrong} />

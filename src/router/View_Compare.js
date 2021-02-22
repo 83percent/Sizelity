@@ -1,4 +1,4 @@
-import { useContext, useMemo, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import ProductSearch from '../contents/js/ProductSearch';
 import { Link } from 'react-router-dom';
 
