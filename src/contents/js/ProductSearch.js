@@ -92,9 +92,6 @@ class ProductSearch {
         const sample = new Product();
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                console.log(sample.data);
-                console.log(pcode);
-
                 for(const index in sample.data) {
                     if(sample.data[index]["pcode"] === pcode) {
                         resolve(sample.data[index]);

@@ -1,10 +1,10 @@
 class SizelityURL {
-    constructor() {
+    /* constructor() {
         
-    }
+    } */
     /*
         www.sizelity.com?shop=&no=[code]
-        www.?branduid=[code]
+        www.?branduid=[code]    
         www.?product_no=[code]
         www./product/.../[code]
         www./products/[code]
