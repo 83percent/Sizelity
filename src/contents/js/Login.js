@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Cookie from './Cookie';
 
 export default class Login {
@@ -29,7 +30,20 @@ export default class Login {
     */
     set(data) {this.cookie.set(this.cookieName, data);}
     // Test Case
-    __sample() {return this.cookie.userInit();}
+    __sample() {
+        //return this.cookie.userInit();
+        try {
+            return new Promise((resolve, reject) => {
+                (async () => {
+                    const data = await axios.get('http://localhost:3001/product/get');
+                    console.log(data);
+                    resolve(data.data);
+                })();
+            });
+        } catch(error) {
+            console.error(error);
+        }
+    }
     logout() {this.cookie.remove(this.cookieName);}
     setInfo() {
         this.info = {};

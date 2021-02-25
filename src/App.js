@@ -28,7 +28,9 @@ export const LoginContext = React.createContext(null);
 let login = null;
 function App() {
   if(!login) login = new LoginModule();
-  const [userInfo, setUserInfo] = useState(login.get());
+  //const [userInfo, setUserInfo] = useState(login.get());
+  // Axios 테스트 코드
+  const [userInfo, setUserInfo] = useState(null);
   const media = (() => {
       return window.screen.width > 1024 ? "Desktops" : "Phone";
   })();

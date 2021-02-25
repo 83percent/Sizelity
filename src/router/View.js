@@ -30,11 +30,12 @@ const View = () => {
             }
         }
     }
-    const SampleUser = () => {
+    const SampleUser = async () => {
         const login = new LoginModule();
-        const _changeInfo = login.__sample();
-        if(userInfo !== _changeInfo) setUserInfo(_changeInfo);
-        
+        //const _changeInfo = login.__sample();
+        const _changeInfo = await login.__sample();
+        //if(userInfo !== _changeInfo) setUserInfo(_changeInfo);
+        if(_changeInfo) setUserInfo(_changeInfo);
     }
     useEffect(() => {
         if(loginWrapper.current && !userInfo) toggleLoginWrapper(true);
