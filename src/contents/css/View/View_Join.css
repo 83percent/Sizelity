@@ -1,35 +1,33 @@
-section.View-Join {
+section#View-Join {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 /*      header      */
-section.View-Join > header {
+section#View-Join > header {
     width: 100%;
     padding: 2rem 0rem 1.5rem 2rem;
     background: #f0f2f5;
 }
-section.View-Join > header > a {
+section#View-Join > header > a {
     color: #000000;
     font-size: 2.0rem;
     font-weight: 700;
-    position: relative;
-    bottom: -0.2rem;
 }
-section.View-Join > header > h2 {
+section#View-Join > header > h2 {
     font-size: 1.1rem;
     font-weight: 500;
     color: #888888;
 }
-section.View-Join > header >.Login-backFrame {
+section#View-Join > header >.Login-backFrame {
     padding-right: 1rem;
     margin-right: 1rem;
     display: flex;
     justify-content: flex-end;
 }
 /*      article      */ 
-section.View-Join > article.bottom {
+section#View-Join > article.bottom {
     flex-grow: 1;
     display: flex;
     flex-direction: column; 
@@ -40,45 +38,46 @@ section.View-Join > article.bottom {
     box-shadow: 0 -2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
     padding-top: 1.5rem;
 }
-section.View-Join > article.bottom > form {
+section#View-Join > article.bottom > form {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
-section.View-Join > article.bottom ul {
+section#View-Join > article.bottom ul {
     margin-bottom: 0.9rem;
     padding: 0 1.5rem;
 }
-section.View-Join > article.bottom .title-wrapper {
+section#View-Join > article.bottom .title-wrapper {
     margin-bottom: 0.5rem;
 }
-section.View-Join > article.bottom .title-wrapper > h1 {
+section#View-Join > article.bottom .title-wrapper > h1 {
     font-size: 1.2rem;
     font-weight: 500;
 }
-section.View-Join > article.bottom .input-wrapper {
+section#View-Join > article.bottom .input-wrapper {
     display: flex;
     align-items: center;
     margin-bottom: 0.7rem;
 }
-section.View-Join > article.bottom .input-wrapper > input {
+section#View-Join > article.bottom .input-wrapper > input {
     flex-grow: 1;
     font-size: 1.1rem;
     outline: none;
     border: 1px solid #dbdbdb;
+    color: #000000;
     border-radius: 0.3rem;
     padding: 0.4rem 0.6rem;
     width: 100%;
     background: #ffffff;
 }
-section.View-Join > article.bottom .input-wrapper > input#input-first {
-    margin-right: 0.7rem;
+section#View-Join > article.bottom .input-wrapper > input.wrong {
+    border: 1px solid #ff0000;
 }
 
-section.View-Join > article.bottom .input-wrapper input[type="radio"] {
+section#View-Join > article.bottom .input-wrapper input[type="radio"] {
     display: none;
 }
-section.View-Join > article.bottom .input-wrapper > label {
+section#View-Join > article.bottom .input-wrapper > label {
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -91,48 +90,58 @@ section.View-Join > article.bottom .input-wrapper > label {
     cursor: pointer;
     color: #000000;
 }
-section.View-Join > article.bottom .input-wrapper > label:hover, section.View-Join > article.bottom .input-wrapper > label.on {
-    color: #00966B;
-    border-color: #00966B;
+section#View-Join > article.bottom .input-wrapper > label:hover, section#View-Join > article.bottom .input-wrapper > label.on {
+    color: #ffffff;
+    background: #00966B;
+    border-color: #00000000;
 }
-section.View-Join > article.bottom .input-wrapper > label:nth-child(2) {
+section#View-Join > article.bottom .input-wrapper > label:nth-child(2) {
     margin: 0 0.7rem;
 }
-section.View-Join > article.bottom .input-wrapper > label > p {
+section#View-Join > article.bottom .input-wrapper > label > p {
     flex-grow: 1;
 }
-section.View-Join > article.bottom .input-wrapper > label.on > p {
-    color: #00966B;
+section#View-Join > article.bottom .input-wrapper > label.on > p {
+    color: #ffffff;
 }
-section.View-Join > article.bottom .input-wrapper > label > div.dot {
+section#View-Join > article.bottom .input-wrapper > label > div.dot {
     padding: 0.25rem;
     background: #88888890;
     transition-duration: 0.2s;
 }
-section.View-Join > article.bottom .input-wrapper > label.on > div.dot {
-    background: #00966B;
+section#View-Join > article.bottom .input-wrapper > label.on > div.dot {
+    background: #ffffff;
 }
-section.View-Join > article.bottom .privacy-wrapper {
+section#View-Join > article.bottom .privacy-wrapper {
     display: flex;
+    align-items: center;
     width: 100%;
     border: 1px solid #dbdbdb;
     border-radius: 0.3rem;
     margin-bottom: 0.7rem;
 }
-section.View-Join > article.bottom .privacy-wrapper > label {
+section#View-Join > article.bottom .privacy-wrapper > label {
     flex-grow: 10;
-    height: 100%;
+    height: 100%;   
     border-right: 1px solid #dbdbdb;
-    padding: 0.4rem 0.6rem;
+    padding: 0.6rem;
     cursor: pointer;
+    border-radius: 0.3rem 0 0 0.3rem;
 }
-section.View-Join > article.bottom .privacy-wrapper > label > p {
+section#View-Join > article.bottom .privacy-wrapper > label.on {
+    background-color: #00966B;
+    color: #ffffff;
+}
+section#View-Join > article.bottom .privacy-wrapper > label > p {
     font-size: 1rem;
 }
-section.View-Join > article.bottom .privacy-wrapper > label > input {
+section#View-Join > article.bottom .privacy-wrapper > label > input {
     display: none;
 }
-section.View-Join > article.bottom .privacy-wrapper > button {
+section#View-Join > article.bottom .privacy-wrapper > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-grow: 1;
     background: none;
     border: none;
@@ -140,11 +149,14 @@ section.View-Join > article.bottom .privacy-wrapper > button {
     padding: 0.4rem 0.6rem;
     cursor: pointer;
 }
-section.View-Join > article.bottom .submit-wrapper {
+section#View-Join > article.bottom .privacy-wrapper > button > i {
+    font-size: 1.8rem;
+}
+section#View-Join > article.bottom .submit-wrapper {
     width: 100%;
     padding-bottom: 5rem;
 }
-section.View-Join > article.bottom .submit-wrapper > button {
+section#View-Join > article.bottom .submit-wrapper > button {
     background: #00966B;
     color: #ffffff;
     width: 100%;
@@ -154,4 +166,51 @@ section.View-Join > article.bottom .submit-wrapper > button {
     border: none;
     cursor: pointer;
     outline: none;
+}
+
+/*      loader      */
+#View-Join > .result-wrapper {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+#View-Join > .result-wrapper.on {
+    display: flex;
+}
+#View-Join > .result-wrapper.on > .loader-frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #00000030;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#View-Join > .result-wrapper.on > .loader-frame > .loader{
+    border: 5px solid #00966B;
+    border-top: 5px solid #00000000;
+    width: 3.2rem;
+    height: 3.2rem;
+}
+#View-Join > .result-wrapper.on > .result-frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: #f0f2f5;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    bottom: -100%;
+    transition-duration: 0.5s;
+}
+#View-Join > .result-wrapper.on > .result-frame.on {
+    bottom: 0%;
+}
+#View-Join > .result-wrapper.on > .result-frame > h1 {
+    font-size: 3.0rem;
+    font-weight: 400;
 }

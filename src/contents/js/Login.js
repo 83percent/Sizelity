@@ -1,20 +1,34 @@
 import axios from 'axios';
 import Cookie from './Cookie';
 
+//const URL = "http://localhost:3001/user/signin";
+const URL = "http://172.30.1.31:3001/user/signin";
+
+
 export default class Login {
     constructor() {
         this.cookie = new Cookie();
         this.cookieName = "sizelity_user";
     }
     isLogin() { // Login 여부 확인
-        return Boolean;
+        return !!(this.cookie.get(this.cookieName));
     }
     asyncGet() {
 
     }
-    get() {
+    async get() {
         const data = this.cookie.get(this.cookieName);
-        return data;
+        if(!data) return null;
+        const result = await axios({
+            method : 'post',
+            url : URL,
+            data : {
+                _id : data.id,
+                upwd : data.sili_p
+            }
+        });
+
+        return (result.data.name === data.name) ? data : null;
         /* if(!data && this.__valid(data)) return null;
         try {
             const response = await this.__getServerLoginInfo(data.id, data.password);
@@ -56,8 +70,25 @@ export default class Login {
             // 유효한 아이디, 비밀번호 아님. -> 서버로 전송 안할거임.
             return null;
         }
-        const userJson = await this.__getServerLoginInfo(id, password);
-        try {
+        const {data} = await this.__getServerLoginInfo(id, password);
+        console.log("%c==== Try Login Result : ","background: #000, color: #fff", data);
+
+        if(data.status) {
+            // 로그인 실패.
+            return data.status;
+        } else if(data.name) {
+            const __cookie = {
+                id : data._id,
+                name : data.name,
+                sili_p : data.upwd
+            }
+            this.set(__cookie);
+            return __cookie;
+        } else {
+            return {status : 404};
+        }
+        
+        /* try {
             let userObj = JSON.parse(userJson);
             console.log("User Object : ", userObj);
             if(this.__value(userObj)) {
@@ -68,17 +99,22 @@ export default class Login {
             }
         } catch(e) {
             return null;
-        }
+        } */
     }
     
     __getServerLoginInfo(id, password) {
         // 로그인 로직을 돌려서 로그인 결과를 저장하고 리턴함
         // 로그인할 시 서버에서의 결과를 가져오는 과정을 표현하기 위해 setTimeout 을 통해 지연시킨뒤 리턴
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let sampleUserJSON = JSON.stringify(sample);
-                resolve(sampleUserJSON);
-            },2000);
+            const result = axios({
+                method : 'post',
+                url : URL,
+                data : {
+                    uid : id,
+                    upwd : password
+                }
+            });
+            resolve(result);
         });
     }
     __checkID() {
@@ -136,4 +172,10 @@ const sample = {
     password : "0SADF91820183%1&13%231FQ!@3qFEAFSFD!23AFasdf!asdf41Adsfa11111111",
     name : "이재훈",
     reg_date : "2021-02-04 18:42:00"
+}
+
+const sample1 = {
+    "name" : "이재훈",
+    "uid" : "hoonni2709@naver.com",
+    "upwd" : "12341234",
 }

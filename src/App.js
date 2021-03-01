@@ -1,5 +1,5 @@
 // Module
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import LoginModule from './contents/js/Login';
 
@@ -27,10 +27,16 @@ export const LoginContext = React.createContext(null);
 
 let login = null;
 function App() {
-  if(!login) login = new LoginModule();
-  //const [userInfo, setUserInfo] = useState(login.get());
-  // Axios 테스트 코드
+  
   const [userInfo, setUserInfo] = useState(null);
+  
+  useEffect(() => {
+    (async() => {
+      if(!login) login = new LoginModule();
+      const loginData = await login.get();
+      if(loginData !== null) setUserInfo(loginData);
+    })();
+  },[])
   const media = (() => {
       return window.screen.width > 1024 ? "Desktops" : "Phone";
   })();
