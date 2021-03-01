@@ -11,12 +11,14 @@ class SizelityURL {
     */
     get(_url) {
         let isFind = false;
-        const result = {shop:undefined, code:undefined, type:undefined};
+        const result = {domain:undefined, code:undefined, type:undefined};
         const _pris = ["blog","smartstore"];
         const _codeParams = ['branduid', 'product_no', 'logNo'];
         const _pathParams = ['products','product'];
         try {
-            
+            if(_url.indexOf("http") === -1) {
+                _url = "http://"+_url;
+            }
             const url = new URL(_url);
             const params = new URLSearchParams(url.search);
             for(const codeParam of _codeParams) {
@@ -26,8 +28,8 @@ class SizelityURL {
                     
                     result.code = params.get(codeParam);
                     result.type = codeParam;
-                    if(codeParam === _codeParams[2]) result.shop = params.get("blogId");
-                    else result.shop = this.sliceWWW(url.hostname);
+                    if(codeParam === _codeParams[2]) result.domain = params.get("blogId");
+                    else result.domain = this.sliceWWW(url.hostname);
                     
                     break;
                 }
@@ -40,7 +42,7 @@ class SizelityURL {
             for(const pathParam of _pathParams) {
                 if(pathArr[1] === pathParam) {
                     isFind = true;
-                    result.shop = hostName;
+                    result.domain = hostName;
                     result.type = pathParam;
                     switch(pathParam) {
                         case "products" : {
@@ -66,7 +68,7 @@ class SizelityURL {
                 // !! category 나뉘어지면서 arr index 1에 code가 안오는 경우가 있음
                 // 해결책 : code가 전부 숫자로 이루어져있기에 숫자인지 확인
                 // or 티스토리는 제일 마지막에 code가 붙는 것같음 맨뒤에 있는 index 를 code로 사용하면 될수도...
-                result.shop = hostNameArr[0];
+                result.domain = hostNameArr[0];
                 result.code = pathArr[1];
                 result.type = "tistory";
                 return result;
@@ -82,7 +84,7 @@ class SizelityURL {
                                 // blog.[  ???  ].com/[shop]/[key]
                                 for(const blog of _blogs) {
                                     if(hostNameArr[1] === blog) {
-                                        result.shop = pathArr[1];
+                                        result.domain = pathArr[1];
                                         result.code = pathArr[2];
                                         result.type = `blog.${blog}`;
                                         isFind = true;
@@ -93,9 +95,9 @@ class SizelityURL {
                             }
                             case "smartstore" : {
                                 if(hostNameArr[1] === "naver") {
-                                    result.shop = pathArr[1];
+                                    result.domain = pathArr[1];
                                     result.code = pathArr[3];
-                                    result.type = `pri`;
+                                    result.type = `pri`;    
                                     isFind = true;
                                 }
                                 break;
@@ -110,16 +112,19 @@ class SizelityURL {
             else return null;
             
         } catch(error) {
+            console.error(error);
             return null;
         }
     }
     sliceWWW(hostname) {
         let i = hostname.indexOf("www");
-        return i === -1 ? hostname : hostname.slice(i+4, hostname.length);
+        let result = i === -1 ? hostname : hostname.slice(i+4, hostname.length);
+        // m. slice
+        let m = result.indexOf("m.");
+        return m === 0 ? result.slice(2,result.length) : result;
     }
     test(url) {
         this.___analyze(url);
-        
     }
 }
 export default SizelityURL;

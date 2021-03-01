@@ -63,18 +63,6 @@ class Cookie {
         ];
         return !(_valid.indexOf(cname) === -1);
     }
-
-    // sample - setting init data
-    userInit() {
-        const user = {
-            ucode : "UAA00001",
-            id : "hoonni2709@naver.com",
-            password : "0SADF91820183%1&13%231FQ!@3qFEAFSFD!23AFasdf!asdf41Adsfa",
-            name : "이재훈",
-            reg_date : "2021-02-22"
-        }
-        return this.set("sizelity_user",user)
-    }
 }
 
 export default Cookie;

@@ -12,7 +12,13 @@ const Search = ({history}) => {
     const searchInput = useRef(null);
     const searchClickEvent = (e) => {
         e.stopPropagation();
-        setPraw(searchInput.current.value);
+        let url = searchInput.current.value;
+        url = url.indexOf("http") === 0 ? url : "http://"+url;
+        const isURL = ((value) => {
+            return (/^(file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/).test(url);
+        })(url);
+        if(isURL) setPraw(url);
+        else alert("잘못된 주소입니다.");
     }
     
     return (
@@ -24,7 +30,8 @@ const Search = ({history}) => {
             </div>
             <div className="Search-inputResult">
                 <SearchResult 
-                    praw={praw}/>
+                    praw={praw}
+                    history={history}/>
             </div>
             <div className="Search-currentWrapper">
                 <SearchCurrent 

@@ -1,6 +1,9 @@
+import axios from 'axios';
 import Cookie from './Cookie';
-import Product from './ProductData'; // 서버와 연결되기 전까지 임시 로 사용하는 샘플데이터가 담긴 장소
+import URLModule from './URL';
 
+//const URL = "http://localhost:3001/product/get";
+const URL = "http://172.30.1.31:3001/product/get";
 
 class ProductSearch {
     constructor() {
@@ -8,6 +11,7 @@ class ProductSearch {
         this.cookie = new Cookie();
 
         this.cnameCurrent = "sizelity_currentSearchData";
+        this.URL = ""
     }
     getCurrent() {
         return this.refreshCurrent(); //:array
@@ -25,13 +29,14 @@ class ProductSearch {
 */
 
     setCurrent(data) {
-        if(data && data.status === 200 && data.pcode !== undefined) {
+        console.log("Current Set Cookie ", data);
+        if(data && data.status === 200 && data.info.pname !== undefined) {
+            console.log("%c Inner","background: darkorchid; color: #ffffff");
             let _current = this.getCurrent();
 
             const createElement = (data) => {
                 return (
                     [
-                        data.pcode,
                         data.info.sname,
                         data.info.pname,
                         data.info.subtype,  
@@ -42,10 +47,10 @@ class ProductSearch {
 
             if(_current && _current.constructor === Array) {
                 // 중복확인
-                const pcode = data.pcode;
+                const pname = data.info.pname;
                 let _isOver = false;
                 for(const index in _current) {
-                    if(_current[index][0] === pcode) {
+                    if(_current[index][1] === pname) {
                         
                         _isOver = true;
                         break;
@@ -73,8 +78,6 @@ class ProductSearch {
     }
     
     fetchCurrent(changeCurrent) {
-        if(!this.current) return null; 
-        console.log(changeCurrent);
         let isChange = false;   
         const afterCurrent = [];
         changeCurrent.forEach(element => {
@@ -88,19 +91,27 @@ class ProductSearch {
             return true;
         } else return false;
     }
-    search(pcode) {
-        const sample = new Product();
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                for(const index in sample.data) {
-                    if(sample.data[index]["pcode"] === pcode) {
-                        resolve(sample.data[index]);
-                        break;
-                    }
+    async search(url) {
+        const urlModule = new URLModule();
+        try {
+            const data = urlModule.get(url);
+            console.log(data);
+            if(data === null) return {status : -404};
+            if(data) {
+                const response = await axios({
+                    method : 'post',
+                    url : URL,
+                    data : data
+                });
+                console.log("%c Product Search Result : ", "background: red; color: #fff;",response.data);
+                if(response.data._id) {
+                    response.data.status = 200;
                 }
-                resolve(null);
-            },500);
-        });
+                return response.data
+            }
+        } catch {
+            return null;
+        }
     }
     searchQuery(query) {
         // location.search
@@ -109,15 +120,7 @@ class ProductSearch {
             const sname = params.get("shop");
             const code = params.get("no");
             // Test Case
-            const sample = new Product();
-            return new Promise((resolve, reject) => {
-                for(const index in sample.data) {
-                    if(sample.data[index]["praw"]["code"] === code && sample.data[index]["info"]["sname"] === sname) {
-                        resolve(sample.data[index]);
-                        break;
-                    }
-                }
-            });
+            
         } else {
             // 쿼리가 없음
             throw new Error("...");

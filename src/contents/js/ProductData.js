@@ -86,117 +86,111 @@ const obj = [
         ]
     },
     { // 1
-        status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PAAA0002",
-        praw : {
-            domain : "www.jogunshop.com",
-            type : "branduid",
-            code : "26598",
-            full : "www.jogunshop.com/shop/shopdetail.html?branduid=26598"
+        "praw" : {
+            "domain" : "jogunshop",
+            "type" : "branduid",
+            "code" : "26598",
+            "full" : "www.jogunshop.com/shop/shopdetail.html?branduid=26598"
         },
-        info : {
-            sname : "조군샵",
-            pname : "탄탄한 앤디 텍스쳐 라운드 긴팔티",
-            ptype : "top",
-            subtype : "긴팔"
+        "info" : {
+            "sname" : "조군샵",
+            "pname" : "탄탄한 앤디 텍스쳐 라운드 긴팔티",
+            "ptype" : "top",
+            "subtype" : "긴팔"
         },
-        size : [
+        "size" : [
             {
-                name: "M",
-                shoulder : 48,
-                chest : 54,
-                arm: 24,
-                sleeve: 59,
-                length: 68.5
+                "name": "M",
+                "shoulder" : 48,
+                "chest" : 54,
+                "arm": 24,
+                "sleeve": 59,
+                "length": 68.5
             },
             {
-                name: "L",
-                shoulder : 50,
-                chest : 56,
-                arm: 25,
-                sleeve: 60,
-                length: 70.5
+                "name": "L",
+                "shoulder" : 50,
+                "chest" : 56,
+                "arm": 25,
+                "sleeve": 60,
+                "length": 70.5
             },
             {
-                name: "XL",
-                shoulder : 52,
-                chest : 58,
-                arm: 26,
-                sleeve: 61,
-                length: 72.5
+                "name": "XL",
+                "shoulder" : 52,
+                "chest" : 58,
+                "arm": 26,
+                "sleeve": 61,
+                "length": 72.5
             },
             {
-                name: "2XL",
-                shoulder : 54,
-                chest : 60,
-                arm: 27,
-                sleeve: 62,
-                length: 74.5
+                "name": "2XL",
+                "shoulder" : 54,
+                "chest" : 60,
+                "arm": 27,
+                "sleeve": 62,
+                "length": 74.5
             },
             {
-                name: "3XL",
-                shoulder : 56,
-                chest : 62,
-                arm: 28,
-                sleeve: 63,
-                length: 76.5
+                "name": "3XL",
+                "shoulder" : 56,
+                "chest" : 62,
+                "arm": 28,
+                "sleeve": 63,
+                "length": 76.5
             }
         ]
     },
-    { // 2
-        status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PAAA0003",
-        praw : {
-            domain : "www.mr-s.co.kr",
-            type : "product",
-            code : "39581",
-            full : "mr-s.co.kr/product/%EB%A1%9C%EC%9D%B8-%EB%A9%94%EC%A2%85-%EB%B8%8C%EC%9D%B4%EB%84%A5-%EB%8B%88%ED%8A%B8/39581"
+    {
+        "praw" : {
+            "domain" : "www.mr-s.co.kr",
+            "type" : "product",
+            "code" : "39581",
+            "full" : "mr-s.co.kr/product/%EB%A1%9C%EC%9D%B8-%EB%A9%94%EC%A2%85-%EB%B8%8C%EC%9D%B4%EB%84%A5-%EB%8B%88%ED%8A%B8/39581"
         },
-        info : {
-            sname : "미스터스트릿",
-            pname : "로인 메종 브이넥 니트",
-            ptype : "top",
-            subtype : "긴팔"
+        "info" : {
+            "sname" : "미스터스트릿",
+            "pname" : "로인 메종 브이넥 니트",
+            "ptype" : "top",
+            "subtype" : "긴팔"
         },
-        size : [
+        "size" : [
             {
-                name: "Free",
-                shoulder : 78,
-                chest : 73,
-                arm: 24,
-                sleeve: 52,
-                length: 73
+                "name": "Free",
+                "shoulder" : 78,
+                "chest" : 73,
+                "arm": 24,
+                "sleeve": 52,
+                "length": 73
             }
         ]
     },
-    { // 3
-        status : 200, // 실제 서버에 들어갈때는 없애도됨.
-        pcode : "PAAA0004",
-        praw : {
-            domain : "www.mr-s.co.kr",
-            type : "product",
-            code : "39581",
-            full : "mr-s.co.kr/product/%EB%A1%9C%EC%9D%B8-%EB%A9%94%EC%A2%85-%EB%B8%8C%EC%9D%B4%EB%84%A5-%EB%8B%88%ED%8A%B8/39581"
+    {
+        "praw" : {
+            "domain" : "www.mr-s.co.kr",
+            "type" : "product",
+            "code" : "39581",
+            "full" : "mr-s.co.kr/product/%EB%A1%9C%EC%9D%B8-%EB%A9%94%EC%A2%85-%EB%B8%8C%EC%9D%B4%EB%84%A5-%EB%8B%88%ED%8A%B8/39581"
         },
-        info : {
-            sname : "미스터스트릿",
-            pname : "로인 메종 브이넥 니트",
-            ptype : "set",
-            subtype : "세트"
+        "info" : {
+            "sname" : "미스터스트릿",
+            "pname" : "로인 메종 브이넥 니트",
+            "ptype" : "set",
+            "subtype" : "세트"
         },
-        size : [
+        "size" : [
             {
-                name: "Free",
-                shoulder : 59,
-                chest : 60,
-                sleeve: 57,
-                T_length: 69,
+                "name": "Free",
+                "shoulder" : 59,
+                "chest" : 60,
+                "sleeve": 57,
+                "T_length": 69,
 
-                waist: 32,
-                crotch: 30.5,
-                thigh: 30.5,
-                hem : 13,
-                B_length: 92.5
+                "waist": 32,
+                "crotch": 30.5,
+                "thigh": 30.5,
+                "hem" : 13,
+                "B_length": 92.5
             }
         ]
     },

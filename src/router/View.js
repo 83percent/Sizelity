@@ -30,13 +30,6 @@ const View = () => {
             }
         }
     }
-    const SampleUser = async () => {
-        const login = new LoginModule();
-        //const _changeInfo = login.__sample();
-        const _changeInfo = await login.__sample();
-        //if(userInfo !== _changeInfo) setUserInfo(_changeInfo);
-        if(_changeInfo) setUserInfo(_changeInfo);
-    }
     useEffect(() => {
         if(loginWrapper.current && !userInfo) toggleLoginWrapper(true);
     });
@@ -68,7 +61,6 @@ const View = () => {
                             <i className="material-icons">lock</i>
                             <p><b>자신의 계정</b>에 옷을 저장하고</p>
                             <p>언제, 어디서든 꺼내어 비교하세요.</p>
-                            <button onClick={() => SampleUser()}>샘플로그인</button>
                             <Link to="/view/login">로그인</Link>
                         </div>
                     </header>

@@ -67,9 +67,8 @@ const ViewCompare = (props) => {
                 return null;
             }
         })();
-    } else {
-        productSearch.setCurrent(productData);
     }
+    
 
     const wrapperToggle = {
         menu : function(force, e) {

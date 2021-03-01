@@ -8,7 +8,7 @@ const SearchCurrent = ({history}) => {
     const [deleteOption, setDeleteOption] = useState(false);
     
     if(!productSearch) productSearch = new ProductSearch();
-    const currentSearchData = productSearch.getCurrent();
+    let currentSearchData = productSearch.getCurrent();
     const event = {
         toggleNavBtn(toggle) {
             if(!toggle) productSearch.fetchCurrent(currentSearchData);
@@ -16,10 +16,9 @@ const SearchCurrent = ({history}) => {
         },
         moveCompare: async(element) => {
             const data = await productSearch.search(element[0]);
-            console.log(data);
             history.push({
                 pathname: "/view/compare",
-                search: `?shop=${data.info.sname}&no=${data.praw.code}`,
+                search: `?shop=${data.praw.domain}&no=${data.praw.code}`,
                 state: { data : data }
             });
         },
@@ -36,8 +35,6 @@ const SearchCurrent = ({history}) => {
                 currentSearchData[index] = null;
                 target.classList.add("remove");
                 setTimeout(() => target.remove(),360);
-
-                console.log(currentSearchData);
             }
         }
     }
@@ -62,15 +59,15 @@ const SearchCurrent = ({history}) => {
                             <li key={index} className="Search-currentElement">
                                 <div onClick={() => event.moveCompare(element)} className="Search-currentInfoFrame">
                                     <div className="Search-currentName">
-                                        <p>{element[1]}</p>
-                                        <h1>{element[2]}</h1>
+                                        <p>{element[0]}</p>
+                                        <h1>{element[1]}</h1>
                                     </div>
                                     <div>
-                                        <p style={{textAlign:"right"}}>{element[3]}</p>
+                                        <p style={{textAlign:"right"}}>{element[2]}</p>
                                     </div>
                                     
                                 </div>
-                                <a href={`http://${element[4]}`} className="Search-currentBtnFrame">
+                                <a href={`http://${element[3]}`} className="Search-currentBtnFrame">
                                     <i className="material-icons">open_in_new</i>
                                 </a>
                                 <button onClick={(e) => event.remove(e, index)} className={deleteOption ? "active" : ""}>
