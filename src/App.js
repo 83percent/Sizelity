@@ -15,6 +15,7 @@ import View from './router/View';
 import Compare from './router/View_Compare';
 import NotFound from './router/NotFound';
 import AfterProduct from './router/AfterProduct';
+import UserProduct from './router/UserProduct';
 import Wrong from './router/Wrong';
 import Login from './components/View/View_Login';
 import Join from './components/View/View_Join';
@@ -67,6 +68,7 @@ const App = () => {
                             <Route exact path={"/view"} component={View}/>
                             <Route exact path="/wrong" component={Wrong} />
                             <Route path="/view/compare" component={Compare} />
+                            <Route path="/view/myproduct" component={UserProduct} />
                             
                             <Route exact path="/after" component={AfterProduct} />
                             <Route exact path="/view/search" component={Search} />

@@ -32,7 +32,7 @@ export default class Login {
             // 2. _id & sili_p : auto login
             try {
                 const {data} = await this.__connect(loginObject);
-                console.log("%c==== Try Login Result : ","background: red; color: #fff", data);
+                console.log("%cResponse Login Result Data : ","background: orange; color: #fff;", data);
                 if(data.status) {
                     // 로그인 실패.
                     return data;
@@ -69,6 +69,7 @@ export default class Login {
                 url : URL,
                 data : loginObject
             });
+            
             resolve(result);
         });
     } // __connect()

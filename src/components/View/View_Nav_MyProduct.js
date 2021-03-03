@@ -7,6 +7,7 @@ import MyProductComponent from './View_MyProduct';
 
 // Context
 import { MediaContext } from '../../App';
+import { Link } from 'react-router-dom';
 
 /*
     @param myProductData : 현재 나의 옷 정보가 담긴 Object (in Cookie "my_recently")
@@ -16,31 +17,27 @@ let productListData = null;
 const NavMyProduct = ({myProductData, setMyProductData}) => {
     const media = useContext(MediaContext);
 
-    let isOpenFrame = true;
     const [myProductListData, setMyProductListData] = useState(undefined);
+    const [openList, setOpenList] = useState(false);
 
     const nav = useRef(null);
     const listWrapper = useRef(null);
     const infoFrame = useRef(null);
+    const listToggleButton = useRef(null);
     
-    const navCloseEvent = (e) => {
-        e.stopPropagation();
-        toggleWrapper(false);
-        isOpenFrame = false;
-    }
-    const frameClick = (e) => {
-        if(e) e.stopPropagation();
-        console.log(isOpenFrame);
-        if(isOpenFrame) {
-            if(nav.current.classList.contains("active")) {
-                toggleListWrapper();
-            } else {
-                isOpenFrame = false;
-                frameClick();
+    const event = {
+        toggleListWrapper : function(force) {
+            if(listWrapper.current) {
+                if(force === undefined) force = !(listWrapper.current.classList.contains("active"));
+                listWrapper.current.classList.toggle("active", force);
+                setOpenList(force);
             }
-        } else {
-            toggleWrapper(true);
-            isOpenFrame = true;
+        },
+        toggleNav : function(force) {
+            if(nav.current) {
+                if(force === undefined) force = !(nav.current.classList.contains("active"));
+                nav.current.classList.toggle("active", force);
+            }
         }
     }
     // Override setMyProductData func
@@ -63,24 +60,8 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
         } catch(error) {setMyProductListData(null);}
     });
 
-
-    const toggleListWrapper = (toggle) => {
-        if(!listWrapper) return;
-        const cl = listWrapper.current.classList;
-        if(toggle === undefined) cl.toggle("active"); 
-        else cl.toggle("active",toggle);
-    }
-    const toggleWrapper = (toggle) => {
-        if(nav === null || nav.current.id !== "myProduct-nav") {
-            console.error("NavMyProduct nav ref is null or not 'myProduct-nav'");
-            return;
-        }
-        const cl = nav.current.classList;
-        if(toggle === undefined) cl.toggle("active"); 
-        else cl.toggle("active",toggle); 
-    }
     useEffect(() => {
-        setTimeout(() => { toggleWrapper(true); }, 300)
+        setTimeout(() => { event.toggleNav(true); }, 300)
     }, [myProductData]);
     
     useEffect(() => {
@@ -91,21 +72,21 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
         <nav id="myProduct-nav" className="" ref={nav}>
             {
                 media === "Phone" ?
-                <div id="myProduct-wrapper"  onTouchStart={(e) => navCloseEvent(e)}></div> : 
-                <div id="myProduct-wrapper"  onClick={(e) => navCloseEvent(e)}></div> 
+                <div id="myProduct-wrapper"  onTouchStart={() => event.toggleNav()}></div> : 
+                <div id="myProduct-wrapper"  onClick={() => event.toggleNav()}></div> 
             }
             <div id="myProduct-list-wrapper" ref={listWrapper}>
                 <MyProductComponent
                     nowType={myProductData ? myProductData.info.ptype : null}
                     myProductListData={myProductListData}
-                    sectionCloseFunc={toggleListWrapper}
+                    sectionCloseFunc={event.toggleListWrapper}
                     setMyProductData={__setMyProductData}
                     refreshEvent={__fetchMyProductData}/>
             </div>
-            <div id="myProduct-frame" onClick={(e) => frameClick(e)}>
+            <div id="myProduct-frame" >
             {
                 myProductData ? (
-                        <div id="myProduct-infoFrame" ref={infoFrame}>
+                        <div id="myProduct-infoFrame" ref={infoFrame} onClick={(e) => event.toggleNav(true)}>
                             <div className="myProduct-sizeInfoFrame">
                                 <p>{myProductData.size.name}</p>
                             </div>
@@ -118,12 +99,15 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
                                     <p>{myProductData.info.subtype}</p>
                                 </div>
                             </div>
+                            <div className="myProduct-productListToggle" onClick={() => event.toggleListWrapper()} ref={listToggleButton}>
+                                <i className={`material-icons ${openList ? "on" : ""}`}>{openList ? 'close' : 'swap_horiz'}</i>
+                            </div>
                         </div>
                 ) : (
-                    <div id="myProduct-emptyFrame" ref={infoFrame}>
+                    <Link to="/view/myproduct" id="myProduct-emptyFrame" ref={infoFrame}>
                         <i className="material-icons">add</i>
                         <p>나의 옷을 골라주세요.</p>
-                    </div>
+                    </Link>
                 )
             }
             </div>

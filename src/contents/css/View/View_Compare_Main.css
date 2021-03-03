@@ -105,6 +105,8 @@
     color: #ffffff;
 }
 #View > nav#myProduct-nav .myProduct-productInfoFrame {
+    overflow: hidden;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -136,6 +138,25 @@
 }
 #View > nav#myProduct-nav .myProduct-productInfoFrame > div > p {
     font-size: 0.9rem;
+}
+#View > nav#myProduct-nav .myProduct-productListToggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#View > nav#myProduct-nav .myProduct-productListToggle {
+    padding: 0 1rem;
+}
+#View > nav#myProduct-nav .myProduct-productListToggle > i{
+    padding: 0.2rem;
+    transition-duration: 0.3s;
+    border-radius: 50%;
+    color: #ffffff;
+}
+#View > nav#myProduct-nav .myProduct-productListToggle .on {
+    background: #ffffff;
+    color: #00966B;
+    border-radius: 50%;
 }
 
 #View > nav#myProduct-nav > #myProduct-list-wrapper {

@@ -75,7 +75,7 @@ const MyProduct = ({nowType, myProductListData, sectionCloseFunc, setMyProductDa
                 )
             }
             
-            <div className="_blank" onClick={() => sectionCloseFunc(false)}></div>
+            <div className="_blank"></div>
         </section>
     )
 }

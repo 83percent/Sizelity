@@ -148,10 +148,41 @@ const ViewCompare = (props) => {
             const activeSize = document.querySelector("input[type='radio'][name='select-size']:checked");
             if(activeSize) {
                 // 사이즈 선택됨
+                if(window.confirm(`'${activeSize.value}'로 저장 하시겠습니까?`)) {
+                    const saveData = {
+                        _id : userInfo._id,
+                        upwd: userInfo.sili_p,
+                        product : {
+                            status : 200,
+                            info : productData.info,
+                            praw : productData.praw,
+                            size : null
+                        }
+                    }
+                    for(const element of productData.size) {
+                        if(element.name === activeSize.value) {
+                            saveData.size = element;
+                            break;
+                        }
+                    }
+                    if(saveData.size) {
+                        console.log(saveData);
+                        (async () => {
+                            const response = await axios({
+                                
+                                method: 'post',
+                                url : "http://localhost:3001/user/setproduct",
+                                data : saveData
+                            })
+                        })();
+                    } else {
+                        // 사이즈 선택안됨 : 코드 문제.
+                    }
+                }
             } else {
                 // 사이즈 선택안됨
+                alert("사이즈를 선택해주세요.");
             }
-            console.log(activeSize);
         }
     }
     useEffect(() => {
