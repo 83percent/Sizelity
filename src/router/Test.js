@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import SizelityURL from '../contents/js/URL';
 
 const Test = ({history}) => {
@@ -30,6 +32,13 @@ const Test = ({history}) => {
         "https://sanglae.tistory.com/m/209",
         "https://www.loveparis.net/product/new20000%EC%9B%90%ED%95%A0%EC%9D%B8-223%ED%99%94%EB%B6%80%ED%84%B0-%EC%A0%95%EC%83%81%EA%B0%80169000%EC%9B%90%EC%9B%A8%EC%9D%B4%EB%B8%8C-%EB%B2%84%ED%8A%BC-%EB%A0%88%EB%8D%94%EC%9E%90%EC%BC%93/16011/category/1/display/3&cafe_mkt=nms_c02?NaPm=ct%3Dklgww3h4%7Cci%3Dd5d8ff715a1d19ced2a05baddbacda62b6bf0f96%7Ctr%3Dwsp%7Csn%3D19686%7Chk%3D4e2e2db88bb98ca6a327ae7ccaca813e7da6174a"
     ];
+    const [{test},setCookies] = useCookies([]);
+    
+    useEffect(() => {setCookies("test",{test:"테스트"},{path:"/"})},[]);
+    const cookieTest = () => {
+        setCookies("test",{test:"5678"},{path:"/"});
+    }
+    console.log(test.test);
     const url = new SizelityURL();
     for(const element of sampleCase) {
         console.log(url.get(element));
@@ -37,7 +46,8 @@ const Test = ({history}) => {
     return (
         <>
             <button onClick={() => history.goBack()}>뒤로가기</button>
-            <div></div>
+            <button onClick={() => cookieTest()}>Cookie Test</button>
+            <div>{test.test}</div>
         </>
     )
 }

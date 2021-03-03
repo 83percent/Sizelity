@@ -115,8 +115,19 @@ section#Search {
 }
 #Search .Search-currentNav > button {
     all: unset;
-    text-decoration: underline;
-    color: #00000080;
+    color: #ffffff;
+    margin: 0.3rem 0;
+    padding: 0.5rem 1.3rem;
+    transition-duration: 0.3s;
+}
+#Search .Search-currentNav > button.save {
+    border-radius: 2rem;
+    background: #00966B;
+    color: #ffffff;
+}
+#Search .Search-currentNav > button.delete {
+    border-radius: 2rem;
+    background: #ff000060;
 }
 #Search .Search-currentNone {
     display: flex;
@@ -135,6 +146,8 @@ section#Search {
 }
 #Search .Search-currentElement.remove {
     left: -100%;
+    transition-duration: 0;
+
 }
 #Search .Search-currentElement > .Search-currentInfoFrame {
     display: flex;
@@ -178,7 +191,7 @@ section#Search {
 }
 #Search .Search-currentElement > button.active {
     width: 3rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.3rem;
 }
 #Search .Search-currentElement > button > i {
     color: #dd1818;

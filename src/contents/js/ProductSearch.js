@@ -2,8 +2,9 @@ import axios from 'axios';
 import Cookie from './Cookie';
 import URLModule from './URL';
 
-//const URL = "http://localhost:3001/product/get";
-const URL = "http://172.30.1.31:3001/product/get";
+
+const URL = "http://localhost:3001/product/get";
+//const URL = "http://172.30.1.31:3001/product/get";
 
 class ProductSearch {
     constructor() {
@@ -20,12 +21,12 @@ class ProductSearch {
     @params data :  최근본 상품에 추가할 데이터
     Array index info
     {
-        pcode: "PAAA0001", -- 0
-        sname: "string", -- 1
-        pname:"string", -- 2
-        subtype:"string", -- 3
-        praw : "string" -- 4
+        sname: "string", -- 0
+        pname:"string", -- 1
+        subtype:"string", -- 2
+        praw : "string" -- 3
     }
+    ex) [["조군샵","탄탄한 앤디 텍스쳐 라운드 긴팔티","긴팔","www.jogunshop.com/shop/shopdetail.html?branduid=26598"]]
 */
 
     setCurrent(data) {

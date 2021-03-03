@@ -1,8 +1,5 @@
 import {Link, Route, Switch} from 'react-router-dom';
 import { useContext, useEffect, useRef } from 'react';
-// Only Use Sample Login Init setting
-import LoginModule from '../contents/js/Login';
-
 
 // CSS
 import '../contents/css/View/View.css';
@@ -17,7 +14,7 @@ import {LoginContext} from '../App';
 
 const View = () => {
     const loginWrapper = useRef(null);
-    const {userInfo, setUserInfo} = useContext(LoginContext);
+    const { userInfo } = useContext(LoginContext);
 
     const toggleLoginWrapper = (force) => {
         if(force === undefined) loginWrapper.current.classList.toggle("active");

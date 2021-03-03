@@ -1,5 +1,4 @@
-import { useContext, useRef, useState } from 'react';
-import ProductSearch from '../contents/js/ProductSearch';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // CSS
@@ -14,6 +13,8 @@ import Menu from '../components/View/View_Menu';
 // Context
 import { MediaContext } from '../App';
 import {LoginContext} from '../App';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 /*
     - Param
@@ -24,6 +25,9 @@ import {LoginContext} from '../App';
 */
 const ViewCompare = (props) => {
     console.log("%c======= Start Route 'Compare.js' =======\n \t <Component> \t Props = ", "background:#00966B;color:#ffffff;",props);
+
+    const [cookies, setCookies] = useCookies([]);
+
     // Context 
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
@@ -34,41 +38,80 @@ const ViewCompare = (props) => {
 
     // State
     const [myData, setMyData] = useState(MyProduct.get());
-    const [productData, setProductData] = useState(props.location.state ? props.location.state.data : null);
+    const [productData, setProductData] = useState(props.location.state ? props.location.state.data : undefined);
+    const __queryConnect = useCallback(async () => {
+        // 'history.state.data' 로 데이터가 안넘어옴.
+        if(productData === undefined) {
+            console.log("%c No Data -- Try get Product data use query.", 'background:red; color:#fff;');
+            // prop.location.state 를 못받아옴
+            
+            const params = new URLSearchParams(props.location.search);
+            if(params.has('shop') && params.has('no')) {
+                // Query가 일치
+                console.log("Here");
+                const response = await axios({
+                    method:'get',
+                    url : `http://localhost:3001/product/get${props.location.search}`,
+                    timeout: 3000
+                }).catch(() => {
+                    return {data : {status : -200}};
+                });
+                console.log("Server get data use $Query : ",response);
+                if(response.data.status) {
+                    // 데이터 불러오기 실패
+                    switch(response.data.status) {
+                        case -200 : {
+                            console.log("Server network error...");
+                            break;
+                        }
+                        case 404 : {
+                            // No data
+                            break;
+                        }
+                        default : {
+                            console.log("NO RESPONSE");
+                        }
+                    }
+                } else if(response.data._id) {
+                    // Cookie 저장
+                    try {
+                        const sname = response.data.info.sname;
+                        const pname = response.data.info.pname;
+                        let isSame = false;
     
+                        let current = cookies.sizelity_currentSearchData;
+                        if(current) {
+                            for(const element of current) {
+                                if(element[0] === sname && element[1] === pname) {
+                                    isSame = true;
+                                    break;
+                                }
+                            }
+                        } else {
+                            current = new Array([]);
+                        }
+                        if(!isSame) {
+                            current.unshift([ response.data.info.sname, response.data.info.pname, response.data.info.subtype, response.data.praw.full]);
+                            setCookies("sizelity_currentSearchData",current,{path:"/", maxAge:(500 * 24 * 60 * 60)});
+                        }
+                    } catch{} finally {
+                        setProductData(response.data);
+                    }
+                } else {
+                    // Error 아무데이터도 수신 받지 못함
+                    throw new Error("Server get empty data");
+                }
+                
+            } else {
+                // Query가 맞지 않음.
+            }
+        }
+    }, [productData]);
+    // in history.state.data or ?shop=[domain]&no=[code]
     /*
         1. 데이터가 안넘어 온 경우 - URL Query Check
         2. 데이터가 잘 넘어 온 경우 - 쿼리 체크 할 필요 없음.
     */
-    const productSearch = new ProductSearch();
-    if(!productData) {
-        /*
-            1. 데이터그 안넘어 온 경우
-            1-1. URL Query check
-            - 쿼리도 존재하지 않는 경우 => 메인으로
-            - 쿼리가 존재하는 경우
-                - 서버에 데이터가 존재하지 않는 경우 : 메인으로 (none 데이터를 포함하고 넘어가 메인에 없다는 표시 띄움)
-                - 서버에 데이터가 존재하는 경우 : 정상 작동
-        */
-        
-        (async () => {
-            try {
-                const data = await productSearch.searchQuery(props.location.search);
-                console.log("%c ProductData is not coming. search use query","background:red;color: #fff;", props.location.search);
-                if(data) {
-                    productSearch.setCurrent(data);
-                    setProductData(data);
-                } else {
-                    props.history.replace("/wrong");
-                    return null;    
-                }
-            } catch(error) {
-                props.history.replace("/wrong");
-                return null;
-            }
-        })();
-    }
-    
 
     const wrapperToggle = {
         menu : function(force, e) {
@@ -111,6 +154,9 @@ const ViewCompare = (props) => {
             console.log(activeSize);
         }
     }
+    useEffect(() => {
+        __queryConnect();
+    })
     return (
         <div id="View">
             {
