@@ -2,7 +2,7 @@
 Internet Shopping mall product compare size service.
 Only use in service 'Product URL' 
 ## How can use service.
-#### Copy&Paste
+### Copy&Paste
 Copy : 'Product URL' in Shopping Mall
 Paste : Search box in 'Sizelity Service'
 
