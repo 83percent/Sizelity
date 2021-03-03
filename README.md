@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Sizelity Web Service
+Internet Shopping mall product compare size service.
+Only use in service 'Product URL' 
+## How can use service.
+### Copy&Paste
+Copy : 'Product URL' in Shopping Mall
+Paste : Search box in 'Sizelity Service'
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Direct Access
+Setting Icon : link of 'Sizelity WebService Page' in Shpping Mall.
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+Author : JAEHOON LEE (83percent)
+Copyright : JAEHOON LEE (83percent)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Code Stack
+### FrontEnd
+- React.js
+- HTML5
+- CSS3
+- ES6
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### BackEnd
+- Express.js
 
-### `npm run build`
+### DataBase
+- MongoDB
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### npm
+- 'react-cookies'
+- 'react-router-dom'
+- 'prop-types'
+- 'cors'
+- 'axios'
+- 'pm2'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Proejct Update
+### 2021-03-03
+- Connect Server and end login test.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Product search for use query complete (when access 'direct service' or 'current search date') 
 
-### `npm run eject`
+- Current Search Date store in Cookie logic.
+* But, after change Cookie logic make api lib.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- "My Product Nav Bottom Bar" insert 'Open My Product List' button.
