@@ -19,6 +19,7 @@ const UsreProduct = ({history}) => {
     const [productData, setProductData] = useState(null);
 
     useEffect(() => {
+        console.log("%c Request My Fav Product Data !!", "background: black; color: #fff;");
         if(productData === null) {
             (async () => {
                 if(userInfo._id && userInfo.sili_p) {
@@ -32,6 +33,7 @@ const UsreProduct = ({history}) => {
                     });
                     console.log("SERVER GET USER PRODUCT DATA : ", response.data);
                 } else {
+                    console.log("%c Request fail", "background: black; color: #fff;");
                     return null;
                 }
             })();

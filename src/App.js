@@ -24,6 +24,7 @@ import UserMenu from './components/View/View_User_Menu';
 
 import Test from './router/Test';
 
+// Context
 export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
 const App = () => {
@@ -34,7 +35,6 @@ const App = () => {
     // autoLogin
     useEffect(() => {
         if(sizelity_user && sizelity_user._id) {
-            console.log("App.js auto login logic : ",sizelity_user);
             const login = new LoginModule();
             ( async () => {
                 const a_l = await login.send({_id : sizelity_user._id, upwd : sizelity_user.sili_p});

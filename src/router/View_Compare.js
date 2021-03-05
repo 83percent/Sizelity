@@ -48,7 +48,6 @@ const ViewCompare = (props) => {
             const params = new URLSearchParams(props.location.search);
             if(params.has('shop') && params.has('no')) {
                 // Query가 일치
-                console.log("Here");
                 const response = await axios({
                     method:'get',
                     url : `http://localhost:3001/product/get${props.location.search}`,
@@ -155,17 +154,17 @@ const ViewCompare = (props) => {
                         product : {
                             status : 200,
                             info : productData.info,
-                            praw : productData.praw,
+                            _url : productData.praw,
                             size : null
                         }
                     }
                     for(const element of productData.size) {
                         if(element.name === activeSize.value) {
-                            saveData.size = element;
+                            saveData.product.size = element;
                             break;
                         }
                     }
-                    if(saveData.size) {
+                    if(saveData.product.size) {
                         console.log(saveData);
                         (async () => {
                             const response = await axios({
@@ -173,7 +172,8 @@ const ViewCompare = (props) => {
                                 method: 'post',
                                 url : "http://localhost:3001/user/setproduct",
                                 data : saveData
-                            })
+                            });
+                            console.log(response);
                         })();
                     } else {
                         // 사이즈 선택안됨 : 코드 문제.

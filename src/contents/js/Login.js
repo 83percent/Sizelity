@@ -67,7 +67,8 @@ export default class Login {
             const result = axios({
                 method : 'post',
                 url : URL,
-                data : loginObject
+                data : loginObject,
+                timeout: 3000
             });
             
             resolve(result);
