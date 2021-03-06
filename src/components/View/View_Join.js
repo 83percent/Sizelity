@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../../contents/css/View/View_Join.css';
-
 const URL = "http://localhost:3001/user/signup"; // Local
 //const URL = "http://172.30.1.31:3001/user/signup"; // Cafe
 //const URL = "http://192.168.11.2:3001/user/signup"; // Home
