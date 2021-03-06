@@ -3,20 +3,25 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../../contents/css/View/View_Join.css';
 
-const URL = "http://localhost:3001/user/signup";
-//const URL = "http://172.30.1.31:3001/user/signup";
+const URL = "http://localhost:3001/user/signup"; // Local
+//const URL = "http://172.30.1.31:3001/user/signup"; // Cafe
+//const URL = "http://192.168.11.2:3001/user/signup"; // Home
 
 
 const Join = ({history}) => {
-    const resultWrapper = useRef(null);
+    // Ref
+    const resultWrapper = useRef(null); // "환영합니다."
+    const alertWrapper = useRef(null);  // 상단 알림
 
     const email = useRef(null);
     const pwd = useRef(null);
     const rePwd = useRef(null);
     const name = useRef(null);
+
     let gender = null;
     let genderSelect = 'not';
     let privacy = null;
+
     const event = {
         submitEvent : () => {
             if(!checkRule()) return false;
@@ -32,34 +37,53 @@ const Join = ({history}) => {
             
             // SUBMIT
             ( async () => {
-                resultWrapper.current.classList.add("on");
-                const result = await axios({
-                    method : 'post',
-                    url : URL,
-                    data : account
-                });
-                console.log("%c Create account result : ","background: green, color: #fff",result.data);
                 try {
+                    resultWrapper.current.classList.add("on");
+                    const result = await axios({
+                        method : 'post',
+                        url : URL,
+                        data : account,
+                        timeout : 3000
+                    });
+                    console.log("응답 결과 : ", result.data);
                     switch(result.data.status) {
                         case 200 : {
+                            // Success
                             resultWrapper.current.querySelector('.result-frame').classList.add("on");
                             setTimeout(() => {
                                 history.replace('/view/login');
                             }, 1500);
+                            break;   
+                        }
+                        case 0 : {
+                            // already Email
+                            event.alertToggle(true, "이미 가입된 이메일 입니다.");
+                            resultWrapper.current.classList.remove("on");
+                            break;
+                        }
+                        case -404 : {
+                            // invalid Data
+                            event.alertToggle(true, "시스템 오류가 발생하였습니다.");
+                            resultWrapper.current.classList.remove("on");
+                            break;
+                        }
+                        case -200 : {
+                            event.alertToggle(true, "시스템 오류가 발생하였습니다.\n 잠시뒤 다시 시도해주세요.");
+                            resultWrapper.current.classList.remove("on");
                             break;
                         }
                         default : {
+                            event.alertToggle(true, "시스템 오류가 발생하였습니다.");
                             resultWrapper.current.classList.remove("on");
                         }
                     }
                 } catch {
-                    alert("오류가 발생했어요. 잠시뒤 다시 시도해주세요.")
+                    event.alertToggle(true, "네트워크 연결을 확인해주세요.");
                     resultWrapper.current.classList.remove("on");
                 }
-                
             })();
 
-        },
+        }, // submitEvent()
         genderChange : () => {
             if(gender) {
                 for(const element of gender) {
@@ -71,12 +95,20 @@ const Join = ({history}) => {
                     }
                 }
             }
-        },
+        }, // genderChange
+
         privacyEvent : (e) => {
             const target = e.target;
             if(target.checked) target.parentElement.classList.add("on");
             else target.parentElement.classList.remove("on");
-        }
+        }, // Privacy Event
+
+        alertToggle : (force, msg) => {
+            if(!alertWrapper.current) return;
+            if(force === undefined) force = !alertWrapper.current.classList.contain('on');
+            if(msg) alertWrapper.current.querySelector("p").innerHTML = msg;
+            alertWrapper.current.classList.toggle("on",force);
+        } // alertToggle
     }
     const checkRule = () => {
         // Check
@@ -136,6 +168,10 @@ const Join = ({history}) => {
                 <div className="result-frame">
                     <h1>환영합니다</h1>
                 </div>
+            </div>
+            <div className="alert-wrapper" ref={alertWrapper}>
+                <div className="alert-frame"><p></p></div>
+                <div className="blank" onTouchStart={() => event.alertToggle(false)}></div>
             </div>
             <header>
                 <div className="Login-backFrame" onClick={() => history.goBack()}>

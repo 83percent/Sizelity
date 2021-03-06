@@ -31,7 +31,7 @@ const ViewLogin = ({history}) => {
         NetWorkError : "네트워크 오류",
         WrongError : "이메일 또는 비밀번호를 확인해주세요.",
         ServerError : "잠시 후 시도해주세요."
-    }
+    }   
 
     const login = {
         loginEvent : async (e) => {
