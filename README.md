@@ -47,3 +47,6 @@ Copyright : JAEHOON LEE (83percent)
 * But, after change Cookie logic make api lib.
 
 - "My Product Nav Bottom Bar" insert 'Open My Product List' button.
+
+### 2021-03-06
+- Insert Alert top slide bar in User Sign in/up Page. (with controller : event.alertToggle(force, msg);
