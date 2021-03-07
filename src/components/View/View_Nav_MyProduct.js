@@ -7,14 +7,13 @@ import MyProductComponent from './View_MyProduct';
 
 // Context
 import { MediaContext } from '../../App';
-import { Link } from 'react-router-dom';
 
 /*
     @param myProductData : 현재 나의 옷 정보가 담긴 Object (in Cookie "my_recently")
     @param setMyProductData : 현재 나의 옷 정보가 담긴 Object state 를 변경하는 함수
 */
 let productListData = null;
-const NavMyProduct = ({myProductData, setMyProductData}) => {
+const NavMyProduct = ({myProductData, setMyProductData, history}) => {
     const media = useContext(MediaContext);
 
     const [myProductListData, setMyProductListData] = useState(undefined);
@@ -38,8 +37,14 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
                 if(force === undefined) force = !(nav.current.classList.contains("active"));
                 nav.current.classList.toggle("active", force);
             }
+        },
+        noneItemsClick : function() {
+            if(nav.current.classList.contains("active")) {
+                history.push("/closet");
+            }
         }
-    }
+    } // event
+
     // Override setMyProductData func
     const __setMyProductData = useCallback((myProductData) => {
         if(infoFrame) {
@@ -86,28 +91,32 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
             <div id="myProduct-frame" >
             {
                 myProductData ? (
-                        <div id="myProduct-infoFrame" ref={infoFrame} onClick={(e) => event.toggleNav(true)}>
-                            <div className="myProduct-sizeInfoFrame">
-                                <p>{myProductData.size.name}</p>
-                            </div>
-                            <div className="myProduct-productInfoFrame">
-                                <p>{myProductData.info.sname}</p>
-                                <h1>{myProductData.info.pname}</h1>
-                                <div>
-                                    <p>{myProductData.info.ptype}</p>
-                                    <b>/</b>
-                                    <p>{myProductData.info.subtype}</p>
-                                </div>
-                            </div>
-                            <div className="myProduct-productListToggle" onClick={() => event.toggleListWrapper()} ref={listToggleButton}>
-                                <i className={`material-icons ${openList ? "on" : ""}`}>{openList ? 'close' : 'swap_horiz'}</i>
+                    <div id="myProduct-infoFrame" ref={infoFrame} onClick={(e) => event.toggleNav(true)}>
+                        <div className="myProduct-sizeInfoFrame">
+                            <p>{myProductData.size.name}</p>
+                        </div>
+                        <div className="myProduct-productInfoFrame">
+                            <p>{myProductData.info.sname}</p>
+                            <h1>{myProductData.info.pname}</h1>
+                            <div>
+                                <p>{myProductData.info.ptype}</p>
+                                <b>/</b>
+                                <p>{myProductData.info.subtype}</p>
                             </div>
                         </div>
+                        <div className="myProduct-productListToggle" onClick={() => event.toggleListWrapper()} ref={listToggleButton}>
+                            <i className={`material-icons ${openList ? "on" : ""}`}>{openList ? 'close' : 'swap_horiz'}</i>
+                        </div>
+                    </div>
                 ) : (
-                    <Link to="/view/myproduct" id="myProduct-emptyFrame" ref={infoFrame}>
-                        <i className="material-icons">add</i>
-                        <p>나의 옷을 골라주세요.</p>
-                    </Link>
+                    <div id="myProduct-infoFrame" ref={infoFrame} onClick={(e) => event.toggleNav(true)}>
+                        <button onClick={() => event.noneItemsClick()}>
+                            <i className="material-icons">add</i>
+                            <p>나의 옷을 골라주세요.</p>
+                        </button>
+                        
+                    </div>
+                    
                 )
             }
             </div>
@@ -117,7 +126,8 @@ const NavMyProduct = ({myProductData, setMyProductData}) => {
 
 NavMyProduct.proptype = {
     myProductData : Proptype.object,
-    setMyProductData : Proptype.func.isRequired // 상위 Component의 my product state 를 변경하는 함수
+    setMyProductData : Proptype.func.isRequired, // 상위 Component의 my product state 를 변경하는 함수
+    history : Proptype.object.isRequired
 }
 
 export default React.memo(NavMyProduct);

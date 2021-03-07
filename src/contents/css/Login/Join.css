@@ -10,15 +10,10 @@ section#View-Join > header {
     padding: 2rem 0rem 1.5rem 2rem;
     background: #f0f2f5;
 }
-section#View-Join > header > a {
-    color: #000000;
-    font-size: 2.0rem;
-    font-weight: 700;
-}
 section#View-Join > header > h2 {
-    font-size: 1.1rem;
+    font-size: 2.2rem;
     font-weight: 500;
-    color: #888888;
+    color: #000000;
 }
 section#View-Join > header >.Login-backFrame {
     padding-right: 1rem;

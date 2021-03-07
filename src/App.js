@@ -10,17 +10,18 @@ import './contents/fonts/Montserrat_use.css';
 import './contents/fonts/NotoSans.css';
 
 // Component
-import Home from './router/Home';
 import View from './router/View';
 import Compare from './router/View_Compare';
-import NotFound from './router/NotFound';
 import AfterProduct from './router/AfterProduct';
 import UserProduct from './router/UserProduct';
-import Wrong from './router/Wrong';
-import Login from './components/View/View_Login';
-import Join from './components/View/View_Join';
+import Wrong from './router/WrongRouter';
+
+import LoginRouter from './router/LoginRouter';
+import SettingRouter from './router/SettingRouter';
+import NotFound from './router/NotFoundRouter';
+
+
 import Search from './components/View/View_Search';
-import UserMenu from './components/View/View_User_Menu';
 
 import Test from './router/Test';
 
@@ -62,19 +63,21 @@ const App = () => {
                 <MediaContext.Provider value={media}>
                     <BrowserRouter>
                         <Switch>
-                            <Route exact path={"/"} component={Home}/>
-                            <Route exact path={"/test"} component={Test}/>
-                            <Route path={"/home"} component={Home}/>
-                            <Route exact path={"/view"} component={View}/>
-                            <Route exact path="/wrong" component={Wrong} />
-                            <Route path="/view/compare" component={Compare} />
-                            <Route path="/view/myproduct" component={UserProduct} />
-                            
+                            <Route exact path="/" component={View} />
+                            <Route exact path="/view/wrong" component={Wrong} />
+                            <Route exact path="/compare" component={Compare} />
+                            <Route exact path="/view/compare" component={Compare} />
+                            <Route exact path="/closet" component={UserProduct} />
+                            <Route exact path="/search" component={Search} />
                             <Route exact path="/after" component={AfterProduct} />
-                            <Route exact path="/view/search" component={Search} />
-                            <Route exact path="/view/login" component={Login} />
-                            <Route exact path="/view/join" component={Join} />
-                            <Route exact path="/view/user" component={UserMenu} />
+
+                            <Route path="/login" component={LoginRouter} />
+                            <Route path="/setting" component={SettingRouter} />
+                            
+                            <Route exact path={"/test"} component={Test}/>
+                            
+                            
+                            <Route exact path="/error" component={Wrong} />
                             <Route path="/" component={NotFound}/>
                         </Switch>
                     </BrowserRouter>

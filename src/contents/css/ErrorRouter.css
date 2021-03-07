@@ -1,0 +1,29 @@
+section#Error {
+    width: 100%;
+    height: 100%;
+    
+}
+section#Error > .title-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+section#Error > .title-frame > h1 {
+    font-size: 4.0rem;
+    font-weight: 400;
+}
+section#Error > .trigger-frame {
+    text-align: center;
+}
+section#Error > .trigger-frame a {
+    padding: 1rem;
+}
+section#Error > .trigger-frame i {
+    background: #00966B;
+    color: #ffffff;
+    border-radius: 50%;
+    padding: 0.7rem;
+    cursor: pointer;
+}

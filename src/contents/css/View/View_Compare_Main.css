@@ -172,25 +172,15 @@
 #View > nav#myProduct-nav > #myProduct-list-wrapper.active {
     display: flex;
 }
-#View > nav#myProduct-nav #myProduct-emptyFrame {
+#View > nav#myProduct-nav  {
+    width: 100%;
+}
+#View > nav#myProduct-nav #myProduct-infoFrame > button {
+    all: unset;
+    width: 100%;
+    background: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    transition-duration: 0.5s;
-    height: 100%;
-
-    opacity: 0;
-}
-#View > nav#myProduct-nav #myProduct-emptyFrame > i {
-    color: inherit;
-}
-#View > nav#myProduct-nav #myProduct-emptyFrame > p {
-    font-size: 1.2rem;
-    color: inherit;
-    position: relative;
-    top: -0.1rem;
-}
-#View > nav#myProduct-nav.active #myProduct-emptyFrame {
-    opacity: 1;
+    color: #fff;
 }

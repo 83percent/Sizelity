@@ -5,7 +5,7 @@ import { useContext, useEffect, useRef } from 'react';
 import LoginModule from '../../contents/js/Login';
 
 // CSS
-import '../../contents/css/View/View_Login.css';
+import '../../contents/css/Login/Login.css';
 
 // Context
 import {LoginContext} from '../../App';
@@ -154,14 +154,14 @@ const ViewLogin = ({history}) => {
                     <button id="submit-btn" onClick={(e) => login.loginEvent(e)}>로그인</button>
                 </div>
                 <div className="login-option-wrapper">
-                    <Link id="join-btn" to="/view/join">
+                    <Link id="join-btn" to="/login/join">
                         <h4>계정이 없으신가요?</h4>
-                        <h2>가입하기</h2>
+                        <h2>회원가입</h2>
                     </Link>
                 </div>
                 <div className="line"><div></div></div>
                 <div className="login-option-wrapper">
-                    <Link to="/view/accounthelp">
+                    <Link to="/login/accounthelp">
                         <h4>비밀번호를 잊으셨나요?</h4>
                     </Link>
                 </div>

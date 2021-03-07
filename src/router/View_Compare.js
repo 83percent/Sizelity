@@ -196,9 +196,9 @@ const ViewCompare = (props) => {
                         <nav id="Compare-nav">
                             <div id="Compare-top">
                                 <div  id="logo" className="nav-element" >
-                                    <Link to="/view">Sizelity.</Link>
+                                    <Link to="/">Sizelity.</Link>
                                 </div>
-                                <Link to="/view/search" className="nav-element" >
+                                <Link to="/search" className="nav-element" >
                                     <i className="material-icons">search</i>
                                 </Link>
                                 <div className="nav-element" onClick={() => wrapperToggle.favorite(true)}>
@@ -246,7 +246,8 @@ const ViewCompare = (props) => {
                         </section>
                         <NavMyProduct
                             myProductData={myData}
-                            setMyProductData={setMyData}/>
+                            setMyProductData={setMyData}
+                            history={props.history}/>
                         <Compare
                             productData={productData} 
                             myProduct={myData}/>    

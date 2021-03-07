@@ -1,12 +1,8 @@
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { useContext, useEffect, useRef } from 'react';
 
 // CSS
 import '../contents/css/View/View.css';
-
-//Component
-import Main from '../components/View/View_Main';
-import AcountHelp from '../components/View/View_AccountHelp';
 
 // Context
 import {LoginContext} from '../App';
@@ -43,7 +39,7 @@ const View = () => {
                         <div className="user-wrapper"ref={loginWrapper}>
                             <div className="user-title">
                                 <p>{userInfo.name}</p>
-                                <Link to="/view/user"><i className="material-icons">settings</i></Link>
+                                <Link to="/setting"><i className="material-icons">settings</i></Link>
                             </div>
                             <div className="user-btn-frame">
                                 <Link to="/closet" style={{borderRight: "1px solid #dbdbdb"}}>나의 옷장</Link>
@@ -58,19 +54,24 @@ const View = () => {
                             <i className="material-icons">lock</i>
                             <p><b>자신의 계정</b>에 옷을 저장하고</p>
                             <p>언제, 어디서든 꺼내어 비교하세요.</p>
-                            <Link to="/view/login">로그인</Link>
+                            <Link to="/login">로그인</Link>
                         </div>
                     </header>
                 )
             }
             
-            <Switch>
-                <Route exact path="/view" component={Main}/>
-                <Route exact path="/view/accounthelp" component={AcountHelp} />
-                <Route path="/view" component={Main} />
-            </Switch>
+            <section id="Main">
+                <div id="search-wrapper">
+                    <h1 id="title">상품의 주소를 입력해주세요</h1>
+                    <Link to="/search" id="search-input-wrapper">
+                        <div id="search-input-frame">
+                            <p>상품의 주소를 입력해주세요.</p>
+                        </div>
+                    </Link>
+                </div>
+            </section>
             <div className="logoWrapper">
-                <Link to="/view">Sizelity.</Link>
+                <Link to="/">Sizelity.</Link>
             </div>
         </div>
     );
