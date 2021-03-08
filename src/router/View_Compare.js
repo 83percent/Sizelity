@@ -185,6 +185,79 @@ const ViewCompare = (props) => {
             }
         }
     }
+    const after = {
+        set : function() {
+            /*
+            {
+                _id : String,
+                upwd : String,
+                product : {
+                    praw : {
+                        domain : String,
+                        code : String,
+                        full : String
+                    },
+                    info : {
+                        sname : String,
+                        pname : String,
+                        subType : String
+                    }
+                }
+            }
+            */
+            const {_id, sili_p} = userInfo;
+            if(!_id && !sili_p) {
+                //  로그인 안된 상태
+                alert("로그인 안됨");
+                return;
+            }
+            
+            try {
+                const sendData = {
+                    _id : _id,
+                    upwd : sili_p,
+                    product : {
+                        praw : {
+                            domain : productData.praw.domain,
+                            code : productData.praw.code,
+                            full : productData.praw.full
+                        },
+                        info : {
+                            sname : productData.info.sname,
+                            pname : productData.info.pname,
+                            subtype : productData.info.subtype
+                        }
+                    }
+    
+                }
+                console.log("sendData Product Data", productData);
+                console.log("sendData data", sendData);
+                ( async () => { 
+                    const result = await axios({
+                        method: 'post',
+                        url : 'http://localhost:3001/user/setafter',
+                        data : sendData
+                    });
+                    if(result.data) {
+                        console.log("추가 결과 : ",result.data);
+                        switch(result.data.status) {
+                            case 200 : {
+                                wrapperToggle.favorite(false);
+                                break;
+                            }
+                            default : {
+                                wrapperToggle.favorite(false);
+                                break;
+                            }
+                        }
+                    }
+                })();
+            } catch(error) {
+                console.error(error);
+                return false;
+            }
+        }
+    }
     useEffect(() => {
         __queryConnect();
     })
@@ -219,7 +292,7 @@ const ViewCompare = (props) => {
                                             </h1>
                                             <div className="fav-select-btn">
                                                 <button style={{borderRight:"1px solid #dbdbdb"}} onClick={() => fav.myWardrobe()}>나의 옷장</button>
-                                                <button>나중에 볼 상품</button>
+                                                <button onClick={() => after.set()}>나중에 볼 상품</button>
                                             </div>
                                         </>
                                     ) : (

@@ -110,3 +110,46 @@ section#After > article > ul > li > button.active {
 section#After > article > ul > li > button > i {
     color: #dd1818;
 }
+section#After > .remove-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 8rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dbdbdb;
+    z-index: 999;
+
+    top: -9rem;
+    transition-duration: 0.4s;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section#After > .remove-wrapper.on {
+    top: 0rem;
+}
+section#After > .remove-wrapper > .msg {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+section#After > .remove-wrapper > .msg > h1 {
+    font-size: 1.4rem;
+    font-weight: 300;
+}
+section#After > .remove-wrapper > .confirm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+section#After > .remove-wrapper > .confirm > div {
+    flex-grow: 1;
+    text-align: center;
+    padding: 0.5rem 0;
+    border-top: 1px solid #dbdbdb;
+    font-size: 1.2rem;
+}
