@@ -50,3 +50,7 @@ Copyright : JAEHOON LEE (83percent)
 
 ### 2021-03-06
 - Insert Alert top slide bar in User Sign in/up Page. (with controller : event.alertToggle(force, msg);
+
+### 2021-03-09
+- Home (path : / ) change the View Component
+- Router , src folder splite
