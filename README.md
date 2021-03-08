@@ -54,3 +54,7 @@ Copyright : JAEHOON LEE (83percent)
 ### 2021-03-08
 - Home (path : / ) change the View Component
 - Router , src folder splite
+
+### 2021-03-09
+- User after compare product complete test with server.
+- Will Update, Component receive result of connect server response alert model.
