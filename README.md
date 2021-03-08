@@ -24,7 +24,7 @@ Copyright : JAEHOON LEE (83percent)
 - ES6
 
 ### BackEnd
-- Express.js
+- Express.js (https://github.com/83percent/Sizelity-backend)
 
 ### DataBase
 - MongoDB
@@ -50,3 +50,7 @@ Copyright : JAEHOON LEE (83percent)
 
 ### 2021-03-06
 - Insert Alert top slide bar in User Sign in/up Page. (with controller : event.alertToggle(force, msg);
+
+### 2021-03-08
+- Home (path : / ) change the View Component
+- Router , src folder splite
