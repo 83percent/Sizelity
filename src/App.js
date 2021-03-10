@@ -1,5 +1,5 @@
 // Module
-import {createContext, useEffect, useState } from 'react';
+import {createContext, useEffect, useMemo, useState } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import LoginModule from './contents/js/Login';
 import { CookiesProvider, useCookies } from 'react-cookie';
@@ -15,38 +15,46 @@ import Compare from './router/View_Compare';
 import AfterProduct from './router/AfterProduct';
 import UserProduct from './router/UserProduct';
 import Wrong from './router/WrongRouter';
+import Search from './router/Search';
+
 
 import LoginRouter from './router/LoginRouter';
 import SettingRouter from './router/SettingRouter';
 import NotFound from './router/NotFoundRouter';
 
 
-import Search from './components/View/View_Search';
 
 import Test from './router/Test';
 
 // Context
 export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
+
+
+let login = null;
 const App = () => {
     const [media, setMedia] = useState("Phone");
     const [{sizelity_user}, setCookie, removeCookie] = useCookies("sizelity_user");
     const [userInfo, setUserInfo] = useState(sizelity_user ? sizelity_user._id ? sizelity_user : null : null);
 
+    //const __userInfo = useMemo(() => {}, [sizelity_user._id]);
     // autoLogin
     useEffect(() => {
         if(sizelity_user && sizelity_user._id) {
-            const login = new LoginModule();
+            
+            console.log("%c Auto login check...", "background: red; color:#fff;")
+
+            if(!login) login = new LoginModule();
             ( async () => {
                 const a_l = await login.send({_id : sizelity_user._id, upwd : sizelity_user.sili_p});
                 if(a_l === true) {
                     setUserInfo(sizelity_user);
                 } else {
                     // 잘못된 정보의 Cookie 를 갖고 있기에 삭제
+                    console.log("Delete User Auto Login Information")
                     removeCookie("sizelity_user");
                 }
             })();
-            
         }
     }, []);
     useEffect(() => {

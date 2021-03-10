@@ -1,33 +1,24 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 // CSS
 import '../contents/css/View/View_Compare_Main.css';
 
 // Component
 import Compare from '../components/View/View_Compare';
-import MyProduct from '../contents/js/MyProductData';
 import NavMyProduct from '../components/View/View_Nav_MyProduct';
 import Menu from '../components/View/View_Menu';
 
 // Context
 import { MediaContext } from '../App';
-import {LoginContext} from '../App';
-import axios from 'axios';
+import { LoginContext } from '../App';
 import { useCookies } from 'react-cookie';
 
-/*
-    - Param
-    @param props.location.state.data : 구매예정 상품의 데이터 정보
-
-    - State
-    @state myData : 나의 상품정보를 저장하는 state
-*/
 const ViewCompare = (props) => {
     console.log("%c======= Start Route 'Compare.js' =======\n \t <Component> \t Props = ", "background:#00966B;color:#ffffff;",props);
 
     const [cookies, setCookies] = useCookies([]);
-
     // Context 
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
@@ -35,10 +26,16 @@ const ViewCompare = (props) => {
     // Ref
     const menuFrame = useRef(null);
     const favWrapper = useRef(null);
+    const afterAlert = useRef(null);
 
     // State
-    const [myData, setMyData] = useState(MyProduct.get());
     const [productData, setProductData] = useState(props.location.state ? props.location.state.data : undefined);
+
+    // Field
+    let isAfterRequest = false;
+    let isMyProductRequest = false;
+    let activeSize = null;
+
     const __queryConnect = useCallback(async () => {
         // 'history.state.data' 로 데이터가 안넘어옴.
         if(productData === undefined) {
@@ -51,7 +48,7 @@ const ViewCompare = (props) => {
                 const response = await axios({
                     method:'get',
                     url : `http://localhost:3001/product/get${props.location.search}`,
-                    timeout: 3000
+                    timeout: 4000
                 }).catch(() => {
                     return {data : {status : -200}};
                 });
@@ -106,11 +103,6 @@ const ViewCompare = (props) => {
             }
         }
     }, [productData]);
-    // in history.state.data or ?shop=[domain]&no=[code]
-    /*
-        1. 데이터가 안넘어 온 경우 - URL Query Check
-        2. 데이터가 잘 넘어 온 경우 - 쿼리 체크 할 필요 없음.
-    */
 
     const wrapperToggle = {
         menu : function(force, e) {
@@ -139,12 +131,40 @@ const ViewCompare = (props) => {
             }
         }
     }
-    
+    const alert = {
+        // type : error || normal || clear
+        alertToggle : (force, msg, type) => {
+            if(!afterAlert.current) return;
+            const cl = afterAlert.current.classList;
+            if(force === undefined) force = !cl.contains("on");
+            if(force === true) {
+                if(msg !== undefined) {
+                    if(type === "error" || type === "normal" || type === "clear") {
+                        const title = afterAlert.current.querySelector("p.title");
+                        if(title) {
+                            title.innerHTML = msg;
+                            title.classList.remove("error", "normal", "clear");
+                            title.classList.add(type);
+                        }
+                    }
+                }
+                cl.add("on");
+            } else {
+                cl.remove("on");
+            }
+        }
+    }
 
     // ref={favWrapper} wrapper 에서의  handler object
     const fav = {
         myWardrobe: function() {
-            const activeSize = document.querySelector("input[type='radio'][name='select-size']:checked");
+            if(isMyProductRequest) {
+                // 해당 상품 추가기록 존재
+                wrapperToggle.favorite(false);
+                alert.alertToggle(true, "이미 추가된 상품입니다.", "normal");
+                return;
+            }
+            activeSize = document.querySelector("input[type='radio'][name='select-size']:checked");
             if(activeSize) {
                 // 사이즈 선택됨
                 if(window.confirm(`'${activeSize.value}'로 저장 하시겠습니까?`)) {
@@ -154,7 +174,7 @@ const ViewCompare = (props) => {
                         product : {
                             status : 200,
                             info : productData.info,
-                            _url : productData.praw,
+                            praw : productData.praw,
                             size : null
                         }
                     }
@@ -164,29 +184,70 @@ const ViewCompare = (props) => {
                             break;
                         }
                     }
-                    if(saveData.product.size) {
-                        console.log(saveData);
-                        (async () => {
-                            const response = await axios({
-                                
-                                method: 'post',
-                                url : "http://localhost:3001/user/setproduct",
-                                data : saveData
-                            });
-                            console.log(response);
-                        })();
-                    } else {
-                        // 사이즈 선택안됨 : 코드 문제.
+                    try {
+                        if(saveData.product.size) {
+                            (async () => {
+                                const response = await axios({
+                                    method: 'post',
+                                    url : "http://localhost:3001/user/setproduct",
+                                    data : saveData,
+                                    timeout : 4000
+                                }).catch(() => {
+                                    return {data : {status : -200}};
+                                });;
+                                wrapperToggle.favorite(false);
+                                if(response.data && response.data.status !== undefined) {
+                                    switch(response.data.status) {
+                                        case 200 : {
+                                            isMyProductRequest = true;
+                                            alert.alertToggle(true, "나의 상품에 추가하였습니다.", "clear");
+                                            break;
+                                        }
+                                        case 0 : {
+                                            isMyProductRequest = true;
+                                            alert.alertToggle(true, "이미 추가된 상품입니다.", "normal");
+                                            break;
+                                        }
+                                        case -1 : {
+                                            alert.alertToggle(true, "로그인 후 이용가능합니다.", "error");
+                                            break;
+                                        }
+                                        default : {
+                                            alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");        
+                                        }
+                                    }
+                                } else {
+                                    // 서버로 부터 넘어오는 데이터의 문제발생 : 서버 확인 요망
+                                    alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
+                                }
+                            })();
+                        } else {
+                            // 사이즈 선택안됨 : 코드 문제.
+                            wrapperToggle.favorite(false);
+                            alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
+                        }
+                    } catch(error) {
+                        console.log(error);
+                        wrapperToggle.favorite(false);
+                        alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
                     }
+                    
                 }
             } else {
                 // 사이즈 선택안됨
-                alert("사이즈를 선택해주세요.");
+                wrapperToggle.favorite(false);
+                alert.alertToggle(true, "나의 상품으로 등록할 <b>사이즈를 선택</b>해주세요.", "error");
             }
         }
     }
     const after = {
         set : function() {
+            if(isAfterRequest) {
+                // 해당 페이지에서 한번 요청한적 있음.
+                wrapperToggle.favorite(false);
+                alert.alertToggle(true, "이미 추가된 상품입니다.", "normal");
+                return;
+            }
             /*
             {
                 _id : String,
@@ -200,7 +261,7 @@ const ViewCompare = (props) => {
                     info : {
                         sname : String,
                         pname : String,
-                        subType : String
+                        subtype : String
                     }
                 }
             }
@@ -208,10 +269,9 @@ const ViewCompare = (props) => {
             const {_id, sili_p} = userInfo;
             if(!_id && !sili_p) {
                 //  로그인 안된 상태
-                alert("로그인 안됨");
+                alert.alertToggle(true, "로그인 후 이용가능 합니다.", "error");
                 return;
             }
-            
             try {
                 const sendData = {
                     _id : _id,
@@ -228,32 +288,45 @@ const ViewCompare = (props) => {
                             subtype : productData.info.subtype
                         }
                     }
-    
-                }
-                console.log("sendData Product Data", productData);
-                console.log("sendData data", sendData);
+                };
                 ( async () => { 
                     const result = await axios({
                         method: 'post',
                         url : 'http://localhost:3001/user/setafter',
-                        data : sendData
-                    });
+                        data : sendData,
+                        setTimeout: 4000
+                    }).catch(() => {
+                        return {data : {status : -200}};
+                    });;
+                    console.log(result.data);
                     if(result.data) {
-                        console.log("추가 결과 : ",result.data);
+                        wrapperToggle.favorite(false);
                         switch(result.data.status) {
                             case 200 : {
-                                wrapperToggle.favorite(false);
+                                isAfterRequest = true;
+                                alert.alertToggle(true, "나중에 볼 상품에 추가하였습니다.", "clear");
+                                break;
+                            }
+                            case 0 : {
+                                isAfterRequest = true;
+                                alert.alertToggle(true, "이미 추가된 상품입니다.", "normal");
+                                break;
+                            }
+                            case -1 : {
+                                alert.alertToggle(true, "로그인 후 이용가능합니다.", "error");
                                 break;
                             }
                             default : {
-                                wrapperToggle.favorite(false);
+                                alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
                                 break;
                             }
                         }
                     }
                 })();
             } catch(error) {
-                console.error(error);
+                console.log(error);
+                wrapperToggle.favorite(false);
+                alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
                 return false;
             }
         }
@@ -266,6 +339,16 @@ const ViewCompare = (props) => {
             {
                 productData ? (
                     <>
+                        <div className="alertWrapper" ref={afterAlert}>
+                            <div className="alertFrame">
+                                <p className="title">Test Message</p>
+                            </div>
+                            {
+                                media === "Desktops" ?
+                                <div className="alertClose" onClick={() => alert.alertToggle(false)}></div> :
+                                <div className="alertClose" onTouchStart={() => alert.alertToggle(false)}></div>
+                            }
+                        </div>
                         <nav id="Compare-nav">
                             <div id="Compare-top">
                                 <div  id="logo" className="nav-element" >
@@ -318,12 +401,11 @@ const ViewCompare = (props) => {
                             <Menu />
                         </section>
                         <NavMyProduct
-                            myProductData={myData}
-                            setMyProductData={setMyData}
+                            myProductData={cookies.sizelity_myRecently}
                             history={props.history}/>
                         <Compare
                             productData={productData} 
-                            myProduct={myData}/>    
+                            myProduct={cookies.sizelity_myRecently}/>    
                     
                     </>
                 ) : (

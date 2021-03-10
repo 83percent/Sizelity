@@ -26,7 +26,7 @@ export default class Login {
     }
     logout() {this.cookie.remove(this.cookieName);}
     async send(loginObject) {
-        console.log(loginObject);
+        console.log("Login Module 요청할 데이터 : ", loginObject);
         if((loginObject.uid || loginObject._id) && (loginObject.upwd || loginObject.sili_p)) {
             // 1. uid & sili_p : 신규로그인
             // 2. _id & sili_p : auto login
@@ -70,7 +70,6 @@ export default class Login {
                 data : loginObject,
                 timeout: 3000
             });
-            
             resolve(result);
         });
     } // __connect()

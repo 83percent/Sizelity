@@ -140,7 +140,7 @@ const AfterProduct = ({history}) => {
             </header>
             <article>
                 <div className="func-btn-wrapper">
-                    <button onClick={() => event.removeToggle()}>{deleteOption ? "저장" : "삭제"}</button>
+                    <button className={deleteOption ? "on" : ""} onClick={() => event.removeToggle()}>{deleteOption ? "저장" : "삭제"}</button>
                 </div>
                     {
                         loader ? (

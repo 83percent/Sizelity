@@ -11,15 +11,7 @@ let login = null;
 const UserMenu = ({history}) => {
     const {userInfo ,setUserInfo} = useContext(LoginContext);
     if(!login) login = new LoginModule();
-    let authUser = false;
-    if(userInfo) {
-        // userCode 유효성 검사 후 진행
-        authUser = true;
-    } else {
-        // 로그인 정보 없음 -> 잘못되 접근
-        authUser = false;   
-    }
-    if(!authUser)  {
+    if(!userInfo)  {
         history.replace("/wrong");
         return null;
     }
@@ -29,8 +21,8 @@ const UserMenu = ({history}) => {
             if(window.confirm("로그아웃 하시겠습니까?")) {
                 login.logout();
                 setUserInfo(null);
+                history.replace("/");
             }
-            history.replace("/view");
             return null;
         },
     }

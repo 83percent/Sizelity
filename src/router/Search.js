@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 // CSS
-import '../../contents/css/View/View_Search.css';
+import '../contents/css/Search/Search.css';
 
 // Component
-import SearchResult from './View_SearchResult';
-import SearchCurrent from './View_SearchCurrent';
+import SearchResult from '../components/Search/SearchResult';
+import SearchCurrent from '../components/Search/SearchCurrent';
+
 
 const Search = ({history}) => {
     const [praw, setPraw] = useState(null);
@@ -23,17 +26,23 @@ const Search = ({history}) => {
     
     return (
         <section id="Search">
-            <div className="Search-inputWrapper">
+            <div className="inputWrapper">
                 <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
                 <input ref={searchInput} type="text" autoComplete="off" placeholder="상품 주소를 입력해주세요."/>
                 <i className="material-icons" onClick={(e) => searchClickEvent(e)}>search</i>
             </div>
-            <div className="Search-inputResult">
+            <div className="inputResult">
                 <SearchResult 
                     praw={praw}
                     history={history}/>
             </div>
-            <div className="Search-currentWrapper">
+            <div className="hn">
+                <Link to="/after">
+                    <p>나중에 볼 상품</p>
+                    <i className="material-icons">	keyboard_arrow_right</i>
+                </Link>
+            </div>
+            <div className="currentWrapper">
                 <SearchCurrent 
                     history={history}/>
             </div>

@@ -57,11 +57,24 @@ class TransitionSizeName {
                 KOR : "총 길이",
                 JPN : "そたけ"
             }
-
+        }
+        this.cateObj = {
+            outer : {
+                KOR : "아우터"
+            },
+            top : {
+                KOR : "상의"
+            },
+            bottom : {
+                KOR : "하의"
+            },
+            set : {
+                KOR : "세트"
+            }
         }
         this.lang = lang; // KO
     }
     get(sizeName) {return this.sizeObj[sizeName][this.lang];}
-    
+    getCate(cateName) {return this.cateObj[cateName][this.lang];}
 }
 export default TransitionSizeName;

@@ -22,6 +22,7 @@
     display: flex;
     align-items: center;
     margin-right: 0.8rem;
+    position: relative;
 }
 #View > nav#Compare-nav > div#Compare-top > .nav-element > i {
     font-size: 2.5rem;
@@ -36,8 +37,9 @@
     font-size: 1.4rem;
     font-weight: 500;
 }
+
 /*      Bottom - MyProduct     */
-#View > nav#myProduct-nav {
+#View > div#myProduct-nav-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -46,141 +48,49 @@
     z-index: 992;
     display: flex;
     flex-direction: column;
+    height: auto;
 }
-#View > nav#myProduct-nav.active {
+#View > div#myProduct-nav-wrapper.active {
     height: 100%;
 }
-#View > nav#myProduct-nav > #myProduct-frame {
-    position: fixed;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    background: #00966B;
-    height: 3rem;
+#View > div#myProduct-nav-wrapper > .navCloser {
+    flex-grow: 0;
+}
+#View > div#myProduct-nav-wrapper.active > .navCloser {
+    flex-grow: 1;
+}
+#View > div#myProduct-nav-wrapper > .myProductNav {
     width: 3rem;
-    transition-duration: 0.5s;
+    height: 3rem;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    /* margin-bottom: 5rem; */
+    bottom: 1.5rem;
+    right: 1.5rem;
 }
-#View > nav#myProduct-nav > #myProduct-wrapper {
+#View > div#myProduct-nav-wrapper.active > .myProductNav {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    z-index: 993;
-}
-
-#View > nav#myProduct-nav.active > #myProduct-frame {
-    width: 100%;
-    height: 10%;
-    right: 0;
-    bottom: 0;
     border-radius: 0;
-    z-index: 999;
+    height: 5.8rem;
+    bottom: 0;
+    right: 0;
 }
-#View > nav#myProduct-nav #myProduct-frame > #myProduct-infoFrame {
-    transition-duration: 0.5s;
+#View > div#myProduct-nav-wrapper > .myProductNav > * {
+    transition-duration: 0.6s;
     opacity: 0;
-    display: flex;
-    
 }
-#View > nav#myProduct-nav.active #myProduct-frame > #myProduct-infoFrame {
+#View > div#myProduct-nav-wrapper.active > .myProductNav > * {
     opacity: 1;
-    height: 100%;
 }
-#View > nav#myProduct-nav.active #myProduct-frame > #myProduct-infoFrame.off {
-    opacity: 0;
-}
-#View > nav#myProduct-nav .myProduct-sizeInfoFrame {
-    border-right: 1px solid #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 1rem;
-}
-#View > nav#myProduct-nav .myProduct-sizeInfoFrame > p {
-    font-size: 2.8rem;
-    font-weight: 500;
-    color: #ffffff;
-}
-#View > nav#myProduct-nav .myProduct-productInfoFrame {
-    overflow: hidden;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 1rem;
-    color: #ffffff;
-}
-#View > nav#myProduct-nav .myProduct-productInfoFrame > p {
-    font-size: 0.9rem;
-    color: inherit;
-    position: relative;
-    top: 0.3rem;
-    left: 0.1rem;
-}
-#View > nav#myProduct-nav .myProduct-productInfoFrame > h1 {
-    font-size: 1.9rem;;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-#View > nav#myProduct-nav .myProduct-productInfoFrame > div {
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: -0.3rem;
-    left: 0.1rem;
-}
-#View > nav#myProduct-nav .myProduct-productInfoFrame > div > b {
-    margin: 0 0.4rem;
-    font-size: 0.9rem;
-}
-#View > nav#myProduct-nav .myProduct-productInfoFrame > div > p {
-    font-size: 0.9rem;
-}
-#View > nav#myProduct-nav .myProduct-productListToggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#View > nav#myProduct-nav .myProduct-productListToggle {
-    padding: 0 1rem;
-}
-#View > nav#myProduct-nav .myProduct-productListToggle > i{
-    padding: 0.2rem;
-    transition-duration: 0.3s;
-    border-radius: 50%;
-    color: #ffffff;
-}
-#View > nav#myProduct-nav .myProduct-productListToggle .on {
-    background: #ffffff;
-    color: #00966B;
-    border-radius: 50%;
-}
-
-#View > nav#myProduct-nav > #myProduct-list-wrapper {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-
-    display: none;
-    flex-direction: column;
-    z-index: 994;
-    padding-bottom: 5rem;
-}
-#View > nav#myProduct-nav > #myProduct-list-wrapper.active {
-    display: flex;
-}
-#View > nav#myProduct-nav  {
-    width: 100%;
-}
-#View > nav#myProduct-nav #myProduct-infoFrame > button {
+#View > div#myProduct-nav-wrapper > nav.myProductNav > button {
     all: unset;
     width: 100%;
     background: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
     color: #fff;
+    transition-duration: 0.6s;
+}
+#View > div#myProduct-nav-wrapper.active > nav.myProductNav > button {
+    opacity: 1;
 }

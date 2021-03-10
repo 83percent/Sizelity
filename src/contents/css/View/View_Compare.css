@@ -403,3 +403,54 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     color: #ffffff;
     font-size: 1.1rem;
 }
+/*      Alert       */
+#View > .alertWrapper{
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    z-index: 999;
+}
+#View > .alertWrapper.on {
+    height: 100%;
+}
+#View > .alertWrapper > .alertFrame {
+    position: absolute;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    border-bottom: 1px solid #dbdbdb;
+    background-color: #fff;
+
+    width: 100%;
+
+    top: -7rem;
+    left: 0;
+    transition-duration: 0.3s;
+}
+#View > .alertWrapper.on > .alertFrame {
+    top: 0;
+
+}
+#View > .alertWrapper > .alertClose {
+    flex-grow: 0;
+}
+#View > .alertWrapper.on > .alertClose {
+    flex-grow: 1;
+}
+#View > .alertWrapper p.title {
+    padding: 2rem 0;
+    font-size: 1.2rem;
+    text-align: center;
+    
+}
+#View > .alertWrapper p.title.error {
+    color: tomato;
+}
+#View > .alertWrapper p.title.clear {
+    color: #00966B;
+}
+#View > .alertWrapper p.title.normal {
+    color: #000;
+}
