@@ -136,9 +136,11 @@ section#UserProduct > article .list-frame > .cate-nav > p {
     flex-grow: 1;
 }
 section#UserProduct > article .list-frame > .cate-nav > i {
+    opacity: 0.3;
     transition-duration: 0.3s;
 }
 section#UserProduct > article .list-frame.on > .cate-nav > i {
+    opacity: 1;
     -ms-transform: rotate(18deg);
     transform: rotate(180deg);
 

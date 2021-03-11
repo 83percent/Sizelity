@@ -24,6 +24,9 @@ import NotFound from './router/NotFoundRouter';
 
 
 
+
+import CompareTest from './router/Compare';
+import CompareTest2 from './router/CompareTest2';
 import Test from './router/Test';
 
 // Context
@@ -78,6 +81,8 @@ const App = () => {
                             <Route exact path="/closet" component={UserProduct} />
                             <Route exact path="/search" component={Search} />
                             <Route exact path="/after" component={AfterProduct} />
+                            <Route exact path="/comparetest" component={CompareTest} />
+                            <Route exact path="/comparetest2" component={CompareTest2} />
 
                             <Route path="/login" component={LoginRouter} />
                             <Route path="/setting" component={SettingRouter} />

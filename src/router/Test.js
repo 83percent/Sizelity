@@ -38,7 +38,6 @@ const Test = ({history}) => {
     const cookieTest = () => {
         setCookies("test",{test:"5678"},{path:"/"});
     }
-    console.log(test.test);
     const url = new SizelityURL();
     for(const element of sampleCase) {
         console.log(url.get(element));
@@ -47,7 +46,6 @@ const Test = ({history}) => {
         <>
             <button onClick={() => history.goBack()}>뒤로가기</button>
             <button onClick={() => cookieTest()}>Cookie Test</button>
-            <div>{test.test}</div>
         </>
     )
 }

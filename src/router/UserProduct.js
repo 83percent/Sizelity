@@ -14,6 +14,9 @@ import { LoginContext } from '../App';
 let transition = null;
 const URL = "http://localhost:3001/user/getproduct";
 const UserProduct = ({history}) => {
+    const backIsCompare = history.location.state ? history.location.state.isCompare : false;
+    const comparePtype = history.location.state ? history.location.state.ptype : null;
+
     // Cookie
     const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
     const cookie = sizelity_myRecently;
@@ -379,14 +382,19 @@ const UserProduct = ({history}) => {
                                 <p>{cookie.size.name}</p>
                             </div>
                             <div className="info">
-                                <p>{cookie.info.sname}</p>
-                                <h1>{cookie.info.pname}</h1>
+                                <p>{cookie.info.sname ? cookie.info.sname : null}</p>
+                                <h1>{cookie.info.nick ? cookie.info.nick : cookie.info.pname ? cookie.info.pname : null}</h1>
                                 <div>
                                     <p>{transition.getCate(cookie.info.ptype)}</p>
                                     <b>/</b>
-                                    <p>{cookie.info.subtype}</p>
+                                    <p>{cookie.info.subtype ? cookie.info.subtype : null}</p>
                                 </div>
                             </div>
+                            {
+                                backIsCompare ? <div className="changeBtn active" onClick={() => history.goBack()}>
+                                    <i className="material-icons">close</i>
+                                </div> : null
+                            }
                         </>
                     ) : (
                         <div className="empty">

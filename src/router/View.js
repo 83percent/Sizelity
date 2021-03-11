@@ -32,6 +32,7 @@ const View = () => {
 
     return (
         <div id="View">
+            <Link to="/comparetest">이동</Link>
             {
                 userInfo ? (
                     <header>

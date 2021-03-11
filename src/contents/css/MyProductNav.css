@@ -36,7 +36,7 @@ nav.myProductNav > .info > h1 {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-}   
+}
 nav.myProductNav > .info > div {
     position: relative;
     bottom: 3px;
@@ -65,4 +65,10 @@ nav.myProductNav > .empty > p {
 }
 nav.myProductNav > .changeBtn {
     padding: 1rem 1rem 1rem 0.5rem;
+}
+nav.myProductNav > .changeBtn.active > i {
+    border-radius: 50%;
+    padding: 0.1rem;
+    background-color: #fff;
+    color: #00966B;
 }

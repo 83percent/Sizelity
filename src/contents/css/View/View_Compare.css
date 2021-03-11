@@ -126,6 +126,8 @@ section.View-Compare > article .compare-element .compare-title-frame > h1 {
     margin-left: 0.3rem;
     font-size: 1.2rem;
     font-weight: 500;
+    overflow-x: hidden;
+    white-space: nowrap;
 }
 section.View-Compare > article .compare-element .compare-title-frame > i {
     font-size: 1.2rem;
@@ -136,6 +138,9 @@ section.View-Compare > article .compare-element .compare-title-frame > i {
 }
 section.View-Compare > article .compare-element .compare-title-frame > p {
     color: #ff1616;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 section.View-Compare > article .compare-element > .graph-analyze {

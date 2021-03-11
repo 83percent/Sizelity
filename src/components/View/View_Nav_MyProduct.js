@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useRef} from 'react';
 import Proptype from 'prop-types';
+import Transition from '../../contents/js/TransitionSizeName';
 
 // CSS
 import '../../contents/css/MyProductNav.css';
@@ -11,6 +12,7 @@ import { MediaContext } from '../../App';
     @param myProductData : 현재 나의 옷 정보가 담긴 Object (in Cookie "my_recently")
     @param setMyProductData : 현재 나의 옷 정보가 담긴 Object state 를 변경하는 함수
 */
+let transition = null;
 const NavMyProduct = ({myProductData, history}) => {
     // Context
     const media = useContext(MediaContext);
@@ -18,6 +20,8 @@ const NavMyProduct = ({myProductData, history}) => {
     // ref
     const nav = useRef(null);
     
+    if(!transition) transition = new Transition("KOR");
+
     const event = {
         navToggle : function(force) {
             if(nav.current) {
@@ -27,7 +31,12 @@ const NavMyProduct = ({myProductData, history}) => {
         },
         moveCloset : function() {
             if(nav.current.classList.contains("active")) {
-                history.push("/closet");
+                history.push({
+                    pathname : "/closet",
+                    state : {
+                        isCompare : true
+                    }
+                });
             }
         }
     } // event
@@ -50,12 +59,12 @@ const NavMyProduct = ({myProductData, history}) => {
                             <p>{myProductData.size.name}</p>
                         </div>
                         <div className="info">
-                            <p>{myProductData.info.sname}</p>
-                            <h1>{myProductData.info.pname}</h1>
+                            <p>{myProductData.info.sname ? myProductData.info.sname : null}</p>
+                            <h1>{myProductData.info.nick ? myProductData.info.nick : myProductData.info.pname ? myProductData.info.pname : null}</h1>
                             <div>
-                                <p>{myProductData.info.ptype}</p>
+                                <p>{transition.getCate(myProductData.info.ptype)}</p>
                                 <b>/</b>
-                                <p>{myProductData.info.subtype}</p>
+                                <p>{myProductData.info.subtype ? myProductData.info.subtype : null}</p>
                             </div>
                         </div>
                         <div className="changeBtn">
@@ -68,8 +77,6 @@ const NavMyProduct = ({myProductData, history}) => {
                             <i className="material-icons">add</i>
                             <p>나의 옷을 골라주세요.</p>
                         </button>
-                    
-                    
                 )
             }
             </nav>
