@@ -58,3 +58,7 @@ Copyright : JAEHOON LEE (83percent)
 ### 2021-03-09
 - User after compare product complete test with server.
 - Will Update, Component receive result of connect server response alert model.
+
+### 2021-03-13
+- "Compare Router" splite.
+- My Product Control page make and test complete.
