@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import '../../contents/css/Login/Join.css';
 const URL = "http://localhost:3001/user/signup"; // Local
 //const URL = "http://172.30.1.31:3001/user/signup"; // Cafe
@@ -113,7 +112,7 @@ const Join = ({history}) => {
         // Check
         const toggleWrong = (target, force) => target.current.classList.toggle("wrong",force);
         const isEmail = ((value) => {
-            return (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
+            return (/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
         })(email.current.value);
         if(isEmail) toggleWrong(email,false);
         else {

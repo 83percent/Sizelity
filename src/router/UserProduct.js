@@ -15,7 +15,7 @@ let transition = null;
 const URL = "http://localhost:3001/user/getproduct";
 const UserProduct = ({history}) => {
     const backIsCompare = history.location.state ? history.location.state.isCompare : false;
-    const comparePtype = history.location.state ? history.location.state.ptype : null;
+    //const comparePtype = history.location.state ? history.location.state.ptype : null; -> 
 
     // Cookie
     const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
@@ -52,7 +52,7 @@ const UserProduct = ({history}) => {
             const result = {};
             for(const element of data) {
                 if(element.info.ptype) {
-                    if(!result[element.info.ptype]) result[element.info.ptype] = new Array();
+                    if(!result[element.info.ptype]) result[element.info.ptype] = [];
                     result[element.info.ptype].push(element);
                 }
             }
@@ -103,6 +103,7 @@ const UserProduct = ({history}) => {
                     alert.confirmToggle(true, data, "error");
                     break;
                 }
+                default : {}
             }
         },
         deleteMode : (e) => {
@@ -144,7 +145,7 @@ const UserProduct = ({history}) => {
                         upwd : userInfo.sili_p,
                         product : {
                             _id : removeData.product._id
-                        }   
+                        }
                     },
                     timeout: 3500
                 }).catch(() => {
@@ -258,7 +259,7 @@ const UserProduct = ({history}) => {
                 alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
             }
         }
-    }, [productData]);
+    }, [productData, userInfo]);
     return (
         <section id="UserProduct">
             <div className="alertWrapper" ref={alertWrapper}>

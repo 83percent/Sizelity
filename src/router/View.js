@@ -32,7 +32,6 @@ const View = () => {
 
     return (
         <div id="View">
-            <Link to="/comparetest">이동</Link>
             {
                 userInfo ? (
                     <header>
@@ -78,8 +77,6 @@ const View = () => {
     );
 }
 export default View;
-
-
 
 const setThemeColor = () => {
     const themeColor = "#f0f2f5";

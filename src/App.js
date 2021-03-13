@@ -1,38 +1,32 @@
 // Module
-import {createContext, useEffect, useMemo, useState } from 'react';
+import {createContext, useEffect, useState } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import LoginModule from './contents/js/Login';
 import { CookiesProvider, useCookies } from 'react-cookie';
 
-// Style
-import './contents/css/App.css';
+// Font
 import './contents/fonts/Montserrat_use.css';
 import './contents/fonts/NotoSans.css';
 
 // Component
 import View from './router/View';
-import Compare from './router/View_Compare';
+
+import Compare from './router/Compare';
 import AfterProduct from './router/AfterProduct';
 import UserProduct from './router/UserProduct';
 import Wrong from './router/WrongRouter';
 import Search from './router/Search';
-
-
 import LoginRouter from './router/LoginRouter';
 import SettingRouter from './router/SettingRouter';
 import NotFound from './router/NotFoundRouter';
 
 
-
-
-import CompareTest from './router/Compare';
-import CompareTest2 from './router/CompareTest2';
 import Test from './router/Test';
+
 
 // Context
 export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
-
 
 let login = null;
 const App = () => {
@@ -75,14 +69,11 @@ const App = () => {
                     <BrowserRouter>
                         <Switch>
                             <Route exact path="/" component={View} />
-                            <Route exact path="/view/wrong" component={Wrong} />
                             <Route exact path="/compare" component={Compare} />
                             <Route exact path="/view/compare" component={Compare} />
                             <Route exact path="/closet" component={UserProduct} />
                             <Route exact path="/search" component={Search} />
                             <Route exact path="/after" component={AfterProduct} />
-                            <Route exact path="/comparetest" component={CompareTest} />
-                            <Route exact path="/comparetest2" component={CompareTest2} />
 
                             <Route path="/login" component={LoginRouter} />
                             <Route path="/setting" component={SettingRouter} />
@@ -90,6 +81,7 @@ const App = () => {
                             <Route exact path={"/test"} component={Test}/>
                             
                             
+                            <Route exact path="/notlogin" component={Wrong} />
                             <Route exact path="/error" component={Wrong} />
                             <Route path="/" component={NotFound}/>
                         </Switch>

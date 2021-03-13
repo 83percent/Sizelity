@@ -38,7 +38,7 @@ const ViewLogin = ({history}) => {
             const __id = email.current.value;
             const toggleWrong = (target, force) => target.current.classList.toggle("wrong",force);
             const isEmail = ((value) => {
-                return (/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
+                return (/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
             })(__id);
             if(isEmail) toggleWrong(email,false);
             else {

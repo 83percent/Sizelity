@@ -1,108 +1,37 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import {useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 // CSS
-import '../contents/css/View/View_Compare_Main.css';
+import '../../contents/css/Compare/Compare_Main.css';
 
 // Component
-import Compare from '../components/View/View_Compare';
-import NavMyProduct from '../components/View/View_Nav_MyProduct';
-import Menu from '../components/View/View_Menu';
+import Compare from './Compare_Article';
+import NavMyProduct from './Compare_Nav_MyProduct';
+import Menu from './Compare_Menu';
 
 // Context
-import { MediaContext } from '../App';
-import { LoginContext } from '../App';
+import { MediaContext } from '../../App';
+import { LoginContext } from '../../App';
 import { useCookies } from 'react-cookie';
 
-const ViewCompare = (props) => {
-    console.log("%c======= Start Route 'Compare.js' =======\n \t <Component> \t Props = ", "background:#00966B;color:#ffffff;",props);
-
-    const [cookies, setCookies] = useCookies([]);
+const ViewCompare = ({history, productData}) => {
+    const [{sizelity_myRecently}] = useCookies([]);
     // Context 
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
-
+    
     // Ref
     const menuFrame = useRef(null);
     const favWrapper = useRef(null);
     const afterAlert = useRef(null);
 
-    // State
-    const [productData, setProductData] = useState(props.location.state ? props.location.state.data : undefined);
 
     // Field
     let isAfterRequest = false;
     let isMyProductRequest = false;
     let activeSize = null;
 
-    const __queryConnect = useCallback(async () => {
-        // 'history.state.data' 로 데이터가 안넘어옴.
-        if(productData === undefined) {
-            console.log("%c No Data -- Try get Product data use query.", 'background:red; color:#fff;');
-            // prop.location.state 를 못받아옴
-            
-            const params = new URLSearchParams(props.location.search);
-            if(params.has('shop') && params.has('no')) {
-                // Query가 일치
-                const response = await axios({
-                    method:'get',
-                    url : `http://localhost:3001/product/get${props.location.search}`,
-                    timeout: 4000
-                }).catch(() => {
-                    return {data : {status : -200}};
-                });
-                console.log("Server get data use $Query : ",response);
-                if(response.data.status) {
-                    // 데이터 불러오기 실패
-                    switch(response.data.status) {
-                        case -200 : {
-                            console.log("Server network error...");
-                            break;
-                        }
-                        case 404 : {
-                            // No data
-                            break;
-                        }
-                        default : {
-                            console.log("NO RESPONSE");
-                        }
-                    }
-                } else if(response.data._id) {
-                    // Cookie 저장
-                    try {
-                        const sname = response.data.info.sname;
-                        const pname = response.data.info.pname;
-                        let isSame = false;
-    
-                        let current = cookies.sizelity_currentSearchData;
-                        if(current) {
-                            for(const element of current) {
-                                if(element[0] === sname && element[1] === pname) {
-                                    isSame = true;
-                                    break;
-                                }
-                            }
-                        } else {
-                            current = new Array([]);
-                        }
-                        if(!isSame) {
-                            current.unshift([ response.data.info.sname, response.data.info.pname, response.data.info.subtype, response.data.praw.full]);
-                            setCookies("sizelity_currentSearchData",current,{path:"/", maxAge:(500 * 24 * 60 * 60)});
-                        }
-                    } catch{} finally {
-                        setProductData(response.data);
-                    }
-                } else {
-                    // Error 아무데이터도 수신 받지 못함
-                    throw new Error("Server get empty data");
-                }
-                
-            } else {
-                // Query가 맞지 않음.
-            }
-        }
-    }, [productData]);
 
     const wrapperToggle = {
         menu : function(force, e) {
@@ -331,9 +260,6 @@ const ViewCompare = (props) => {
             }
         }
     }
-    useEffect(() => {
-        __queryConnect();
-    })
     return (
         <div id="View">
             {
@@ -385,7 +311,7 @@ const ViewCompare = (props) => {
                                                 <b>로그인</b>이 필요해요.
                                             </h1>
                                             <div className="fav-select-login">
-                                                <Link to="/view/login">로그인</Link>
+                                                <Link to="/login">로그인</Link>
                                             </div>
                                         </>
                                     )
@@ -401,11 +327,11 @@ const ViewCompare = (props) => {
                             <Menu />
                         </section>
                         <NavMyProduct
-                            myProductData={cookies.sizelity_myRecently}
-                            history={props.history}/>
+                            myProductData={sizelity_myRecently}
+                            history={history}/>
                         <Compare
                             productData={productData} 
-                            myProduct={cookies.sizelity_myRecently}/>    
+                            myProduct={sizelity_myRecently}/>    
                     
                     </>
                 ) : (

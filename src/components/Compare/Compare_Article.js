@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import Proptype from 'prop-types';
 
 // CSS
-import '../../contents/css/View/View_Compare.css';
+import '../../contents/css/Compare/Compare_Article.css';
 
 // Component
-import CompareGraphList from "./View_Compare_List";
+import CompareGraphList from "./Compare_Graph";
 
 const Compare = ({productData, myProduct}) => {
     // data에 온전하지 못한 정보가 담겨 올 것을 대비해 데이터 검증.js 를 만들어 
@@ -150,6 +150,5 @@ const HeaderSizeList = ({ sizeData, selectSize }) => {
 }
 HeaderSizeList.proptype = {
     sizeData : Proptype.array.isRequired,
-    activeSize : Proptype.string.isRequired,
     selectSize : Proptype.func.isRequired // 어떤 사이즈를 선택했는지를 부모 컴포넌트에 리턴함
 }

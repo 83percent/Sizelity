@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 // CSS
-import '../../contents/css/View/View_Menu.css';
+import '../../contents/css/Compare/Compare_Menu.css';
 
 // Context 
 import {LoginContext}from '../../App';

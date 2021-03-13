@@ -118,8 +118,8 @@ class ProductSearch {
         // location.search
         const params = new URLSearchParams(query); // {'key' => 'value', ...}
         if(params.has("shop") && params.has("no")) {
-            const sname = params.get("shop");
-            const code = params.get("no");
+            //const sname = params.get("shop");
+            //const code = params.get("no");
             // Test Case
             
         } else {
