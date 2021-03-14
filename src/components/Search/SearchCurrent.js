@@ -38,7 +38,7 @@ const SearchCurrent = ({history}) => {
 
             if(data) {
                 history.push({
-                    pathname: "/view/compare",
+                    pathname: "/compare",
                     search: `?shop=${data.domain}&no=${data.code}`,
                 });
             }

@@ -1,0 +1,33 @@
+section#Compare {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #f0f2f5;
+
+}
+section#Compare > div.title {
+    padding-bottom: 4rem;
+}
+section#Compare > div.title > p {
+    font-size: 0.9rem;
+    color: #888;
+}
+section#Compare > div > i {
+    padding-left: 0.2rem;
+    font-size: 5.0rem;
+    color: #555;
+}
+section#Compare > footer { 
+    position: fixed;
+    bottom: 0.7rem;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+section#Compare > footer  > a { 
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #000;
+}

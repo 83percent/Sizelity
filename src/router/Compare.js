@@ -3,10 +3,11 @@ import React, {createContext, useMemo, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import URLModule from '../contents/js/URL';
 
-
-
+// CSS
+import '../contents/css/Compare/Compare_Router.css';
 // Component
 import Main from '../components/Compare/Compare_Main';
+import { Link } from 'react-router-dom';
 
 // Context
 export const ProductContext = createContext(null);
@@ -32,6 +33,8 @@ const Compare = ({history, location}) => {
         u ? referrer : history.location.state ? history.location.state.data.praw.full : null
     );
     const [data, setData] = useState(history.location.state ? history.location.state.data : null);
+    const [status, setStatus] = useState(0);
+
 
     // location.search 데이터 : sizelity?shop=...&no=... 로 전달될 수 있음.
     const isLocation = useMemo(() => {
@@ -48,7 +51,7 @@ const Compare = ({history, location}) => {
             try {
                 const response = await axios({
                     method: "get",
-                    url : `http://localhost:3001/product/get${query}`,
+                    url : `http://192.168.11.2:3001/product/get${query}`,
                     timeout : 6000
                 }).catch(() => {
                     console.log("TIMEOUT");
@@ -84,33 +87,29 @@ const Compare = ({history, location}) => {
                     }
                     
                 } else {
-                    switch(response.data) {
-                        default : {
-                            console.log("상품데이터를 가져오지 못했습니다. status code : ", response.data.status);
-                        }
-                    }    
+                    if(response.data.status) setStatus(response.data.status);
                 }
             } catch(error) {
                 console.error(error);
-            }
+            }   
+            setLoader(false);
         }
         if((data === null && productURL !== null) || isLocation) {
             const query = isLocation ? location.search : `shop=${u.domain}&no=${u.code}`;
             getProduct(query);
         }
-        setLoader(false);
     }, [productURL]);
 
     return (
         loader ? (
-            <div>
+            <section id="Compare">
                 <div className="loader" style={{
-                    border: "2px solid red",
-                    borderTop:"2px solid #fff",
+                    border: "2px solid #888888",
+                    borderTop:"2px solid #00000000",
                     width:"2rem",
                     height:"2rem"
                 }}></div>
-            </div>
+            </section>
         ) : (
             data ? (
                 <ProductContext.Provider value={data}>
@@ -120,7 +119,32 @@ const Compare = ({history, location}) => {
                     />
                 </ProductContext.Provider>
             ) : (
-                <div></div>
+                <section id="Compare">
+                    {
+                        status === -404 ? (
+                            <div className="title">
+                                <i className="material-icons">sentiment_very_dissatisfied</i>
+                                <h1>죄송합니다.</h1>
+                                <h1>상품 정보가 없습니다.</h1>
+                                <p>입력하신 상품의 사이즈 정보는</p>
+                                <p>영업일 기준 2일이내에 자동으로 입력됩니다.</p>
+                            </div>
+                        ) : status === -200 ? (
+                            <div className="title">
+                                <i className="material-icons">sentiment_very_dissatisfied</i>
+                                <h1>죄송합니다.</h1>
+                                <h1>서버와의 연결에 실패했습니다.</h1>
+                            </div>
+                        ) : (
+                            <div>
+                                기타
+                            </div>
+                        )
+                    }
+                    <footer>
+                        <Link to="/">Sizelity</Link>
+                    </footer>
+                </section>
             )
         )
     )

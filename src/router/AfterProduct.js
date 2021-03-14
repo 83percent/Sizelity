@@ -1,9 +1,12 @@
-import '../contents/css/Router/AfterProduct.css';
 import { useContext, useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+
+// Css
+import '../contents/css/Router/AfterProduct.css';
 
 // Context 
 import {LoginContext}from '../App';
-import axios from 'axios';
+
 
 const AfterProduct = ({history}) => {
     // Context
@@ -27,7 +30,7 @@ const AfterProduct = ({history}) => {
             if(!userInfo || !userInfo._id || !userInfo.sili_p) return;
             const result = await axios({
                 method: 'post',
-                url : 'http://localhost:3001/user/getafter',
+                url : 'http://192.168.11.2:3001/user/getafter',
                 data : {
                     _id : userInfo._id,
                     upwd : userInfo.sili_p

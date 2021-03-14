@@ -12,7 +12,8 @@ import { MediaContext } from '../App';
 import { LoginContext } from '../App';
 
 let transition = null;
-const URL = "http://localhost:3001/user/getproduct";
+const URL = "http://192.168.11.2:3001/user/getproduct";
+//const URL = "http://localhost:3001/user/getproduct";
 const UserProduct = ({history}) => {
     const backIsCompare = history.location.state ? history.location.state.isCompare : false;
     //const comparePtype = history.location.state ? history.location.state.ptype : null; -> 
@@ -242,7 +243,7 @@ const UserProduct = ({history}) => {
                             },
                             timeout: 3500
                         }).catch(() => {
-                            console.log("ERROR")
+                            console.log("ERROR");
                             alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
                             return;
                         });

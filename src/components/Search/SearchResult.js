@@ -60,7 +60,7 @@ const SearchResult = ({praw, history}) => {
             console.log(error);
         } finally {
             history.push({
-                pathname: "/view/compare",
+                pathname: "/compare",
                 search: `?shop=${response.praw.domain}&no=${response.praw.code}`,
                 state : {data : response}
             });

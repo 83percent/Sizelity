@@ -205,16 +205,73 @@ section#Search > .hn {
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
 }
-section#Search > .hn > a    {
+section#Search > .hn > div    {
     all: unset;
     width: 100%;
     display: flex;
     align-items: center;
     padding: 0.8rem 1rem;
 }
-section#Search > .hn > a > p {
+section#Search > .hn > div > p {
     flex-grow: 1;
     font-size: 1.2rem;
     font-weight: 400;
     color: #000;
+}
+section#Search > .hn > div > i {
+    font-size: 1.6rem;
+}
+
+/*      Alert       */
+section#Search > .alert-wrapper {
+    position: fixed;
+    display: flex;
+    flex-direction: column;;
+    width: 100%;
+    height: auto;
+    z-index: 999;
+}
+section#Search > .alert-wrapper.on {
+    height: 100%;
+}
+section#Search > .alert-wrapper > .alert-frame {
+    position: absolute;
+    top: -13rem;
+    left: 0;
+
+    text-align: center;
+    width: 100%;
+    height: auto;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    background: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    transition-duration: 0.4s;
+}
+section#Search > .alert-wrapper > .alert-frame > i {
+    font-size: 3.0rem;
+}
+section#Search > .alert-wrapper > .alert-frame > h1 {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+}
+section#Search > .alert-wrapper > .alert-frame > button {
+    all: unset;
+    width: 90%;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    background: #00966B;
+    color: #fff;
+}
+section#Search > .alert-wrapper.on > .alert-frame {
+    top: 0;
+}
+section#Search > .alert-wrapper > .alert-closer {
+    flex-grow: 0;
+}
+section#Search > .alert-wrapper.on > .alert-closer {
+    flex-grow: 1;
+
 }
