@@ -1,29 +1,77 @@
 section#Menu {
     position: fixed;
-    display: none;
+    display: flex;
     top: 0;
-    width: 100%;
+    right: 0;
+    width: auto;
     height: 100%;
     z-index: 998;
-    padding-bottom: 5rem;
-    background-color: #ffffff;
 }
 section#Menu.active {
-    display: block;
+   width: 100%;
 }
-
-section#Menu > .Menu-wrapper {
-    padding: 1rem 1rem;
+section#Menu > .menu-closer {
+    flex-grow: 0;
+}
+section#Menu.active > .menu-closer {
+    flex-grow: 1;
+}
+section#Menu > .menu-frame {
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: -15rem;
+    width: 13rem;
+    height: 100%;
+    background-color: #fff;
+    transition-duration: 0.4s;
+    border-left: 1px solid #dbdbdb;
+    padding-left: 1rem;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
-section#Menu > .Menu-wrapper > .Menu-loginFrame {
+section#Menu.active > .menu-frame {
+    right: 0;
+}
+section#Menu > .menu-frame > div {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 1rem;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    width: 100%;
 }
-section#Menu > .Menu-wrapper > .Menu-loginFrame > i {
-    font-size: 2.3rem;
+section#Menu > .menu-frame > div > p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    position: relative;
+    top: -1px;
+}
+/*      header      */
+section#Menu > .menu-frame > footer {
+    padding-bottom: 1.5rem;
+}
+/*      article     */
+section#Menu > .menu-frame > article {
+    flex-grow: 1;
+}
+/*      footer     */
+section#Menu > .menu-frame > footer {
+    
+}
+section#Menu > .menu-frame li a {
+    color: #000000;
+    font-size: 1.8rem;
+    font-weight: 500;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+section#Menu > .menu-frame h1, section#Menu > .menu-frame h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+section#Menu > .menu-frame h2 {
+    color: #00966B;
 }

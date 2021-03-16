@@ -37,6 +37,13 @@ nav.myProductNav > .info > h1 {
     overflow: hidden;
     white-space: nowrap;
 }
+nav.myProductNav > .info > h2 {
+    font-size: 0.9rem;
+    color: #ccc;
+    position: relative;
+    top: -2px;
+    left: 2px
+}
 nav.myProductNav > .info > div {
     position: relative;
     bottom: 3px;

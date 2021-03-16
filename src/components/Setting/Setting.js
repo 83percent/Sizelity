@@ -12,7 +12,7 @@ const UserMenu = ({history}) => {
     const {userInfo ,setUserInfo} = useContext(LoginContext);
     if(!login) login = new LoginModule();
     if(!userInfo)  {
-        history.replace("/wrong");
+        history.replace("/notlogin");
         return null;
     }
 

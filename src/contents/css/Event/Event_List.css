@@ -1,0 +1,111 @@
+section#List {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #f0f2f5;
+}
+section#List > div {
+    padding: 1rem 1rem 0.5rem 1rem;
+    align-self: flex-end;
+    
+}
+section#List > div > button {
+    all: unset;
+}
+
+/*        header      */
+section#List > header {
+    padding: 1rem 0 1rem 1.5rem;
+}
+section#List > header h1 {
+    font-size: 2.3rem;
+    font-weight: 500;
+}
+section#List > header p {
+    color: #888888;
+}
+/*      Article     */
+section#List > article {
+    height: 100%;
+    border-top: 1px solid #dbdbdb;
+}
+section#List > article > .list-wrapper > .title-frame {
+    padding: 0.3rem 0.8rem;
+    background: #fff;
+}
+section#List > article > .list-wrapper > .title-frame > h1 {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+section#List > article li {
+    background: #fff;
+}
+section#List > article li:last-child {
+    border-bottom: 1px solid #dbdbdb;
+}
+section#List > article li > a {
+    color: unset;
+}
+section#List > article li > a > .list-title {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+}
+section#List > article li > a > .list-title > h1 {
+    padding-left : 1rem;
+    font-size: 1.3rem;
+    flex-grow: 1;
+    font-weight: 400;
+}
+section#List > article li > a > .list-title > .list-d {
+    display: flex;
+    align-items: flex-end;
+    padding-right: 1rem;
+}
+section#List > article li > a > .list-title > .list-d > h2 {
+    font-family: Montserrat;
+    padding: 0 0.3rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+section#List > article li > a > .list-title > .list-d > p {
+    font-size: 0.9rem;
+    position: relative;
+}
+section#List > article li > a > .list-tag-frame {
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+}
+section#List > article li > a > .list-tag-frame > p {
+    margin: 0.5rem 0.8rem 0.5rem 0;
+    padding: 0.3rem 1rem;
+    background: #88888850;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+
+section#List > article > .list-wrapper > .list-none {
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
+section#List > article > .list-wrapper > .list-none > i {
+    font-size: 3.0rem;
+}
+section#List > article > .list-wrapper > .list-none > p {
+    font-size: 1.1rem;
+}
+section#List > article > .list-wrapper > .list-none > .loader {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #888888;
+    border-top: 2px solid #00000000;
+}

@@ -1,0 +1,215 @@
+section#AddProduct {
+    background: #f0f2f5;
+    min-height: 100%;
+}
+section#AddProduct > .closer {
+    float: right;
+    padding: 1.5rem 1.5rem 0.5rem 0.5rem;
+}
+/*      Nav     */
+section#AddProduct > footer {
+    position: fixed;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    
+}
+section#AddProduct > footer > .control-wrapper {
+    background: #f0f2f5;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.4rem;
+}
+section#AddProduct > footer > .control-wrapper > button {
+    all: unset;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #888888;
+}
+section#AddProduct > footer > .control-wrapper > div {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section#AddProduct > footer > .control-wrapper > div > .dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    background-color: #989898;
+    margin: 0 0.3rem;
+    transition-duration: 0.3s;
+}
+section#AddProduct > footer > .control-wrapper > div > .dot.on {
+    width: 0.7rem;
+    height: 0.7rem;
+    background-color: #00966B;
+}
+section#AddProduct > footer > .nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    z-index: 998;
+    transition-duration: 0.4s;
+}
+section#AddProduct > footer > .nav-wrapper.c_e {
+    opacity: 0;
+}
+section#AddProduct > footer > .nav-wrapper > nav {
+    position: relative;
+    opacity: 0.6;
+    height: auto;
+}
+section#AddProduct > footer > .nav-wrapper > nav.save {
+    position: relative;
+    opacity: 1.0;
+}
+section#AddProduct > footer > .nav-wrapper > .status {
+    text-align: center;
+    padding: 0.4rem 0;
+    background: #00966B;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    opacity: 0.6;
+    transition-duration: 0.4s;
+}
+section#AddProduct > footer > .nav-wrapper > .status.save {
+    opacity: 1.0;
+}
+section#AddProduct > footer > .nav-wrapper > .status > p {
+    color: #ffffff;
+    font-weight: 300;
+}
+
+/*      confirm     */
+section#AddProduct > .confirm-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    z-index: 999;
+}
+section#AddProduct > .confirm-wrapper > .confirm-frame {
+    position: absolute;
+    top: -10rem;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    transition-duration: 0.4s;
+    border-bottom: 1px solid #dbdbdb;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
+}
+section#AddProduct > .confirm-wrapper > .confirm-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section#AddProduct > .confirm-wrapper > .confirm-frame > h1 {
+    padding: 2rem 0;
+    font-size: 1.4rem;
+}
+section#AddProduct > .confirm-wrapper > .confirm-frame > div {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid #dbdbdb;
+}
+section#AddProduct > .confirm-wrapper > .confirm-frame > div > div {
+    flex-grow: 1;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.6rem 0;
+}
+section#AddProduct > .confirm-wrapper > .confirm-frame > div > div:first-child {
+    border-right: 1px solid #dbdbdb;
+}
+section#AddProduct > .confirm-wrapper.on > .confirm-frame {
+    top: 0;
+}
+section#AddProduct > .confirm-wrapper.on {
+    height: 100%;
+}
+section#AddProduct > .confirm-wrapper > .confirm-closer {   
+    flex-grow: 1;
+}
+
+/*      Step       */
+section#AddProduct > article > .step-wrapper > header {
+    padding: 3rem 0 1rem 2rem;
+}
+section#AddProduct > article > .step-wrapper > header > h1 {
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+section#AddProduct > article > .step-wrapper > header > p {
+    color: #888;
+    font-weight: 200;
+    font-size: 0.9rem;
+    margin-left: 2px;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    margin-top: 0.8rem;
+    padding: 1rem 2rem 0.5rem 2rem;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame > input {
+    all: unset;
+    width: 100%;
+    background: #fff;
+    padding: 0.3rem 0.8rem;
+    border-bottom: 2px solid #88888880;
+    font-size: 1.2rem;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame > input.off {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame > h2 {
+    font-size: 0.9rem;
+    color: #888888;
+    width: 100%;
+    text-align: right;
+}
+section#AddProduct > article main > .input-frame > .line {
+    font-family: Montserrat;
+    padding-top: 0.8rem;
+    font-size: 1.4rem;
+    color: #888888;
+    font-weight: 400;
+    text-align: center;
+}
+section#AddProduct > article main > .input-frame > label > h1 {
+    font-size: 1.7rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    opacity: 0.3;
+    transition-duration: 0.3s;
+}
+section#AddProduct > article main > .input-frame > label > h1.on {
+    opacity: 1;
+}
+section#AddProduct > article main > .apply {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+section#AddProduct > article main > .apply > h1 {
+    margin-top: 1.5rem;
+    padding: 0.3rem 2rem 0.5rem 1rem;
+    border-top: 2px solid #88888860;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #00966B;
+}

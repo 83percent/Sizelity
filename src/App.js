@@ -19,10 +19,16 @@ import Search from './router/Search';
 import LoginRouter from './router/LoginRouter';
 import SettingRouter from './router/SettingRouter';
 import NotFound from './router/NotFoundRouter';
+import EventRouter from './router/EventRouter';
+
+import NonLogin from './router/Error/NonLogin';
 
 
 import Test from './router/Test';
 
+// CSS
+import './contents/css/Alert.css';
+import './contents/css/Error.css';
 
 // Context
 export const MediaContext = createContext("Phone");
@@ -71,17 +77,18 @@ const App = () => {
                             <Route exact path="/" component={View} />
                             <Route exact path="/compare" component={Compare} />
                             <Route exact path="/view/compare" component={Compare} />
-                            <Route exact path="/closet" component={UserProduct} />
                             <Route exact path="/search" component={Search} />
                             <Route exact path="/after" component={AfterProduct} />
+                            <Route exact path="/event" component={EventRouter} />
 
+                            <Route path="/closet" component={UserProduct} />
                             <Route path="/login" component={LoginRouter} />
                             <Route path="/setting" component={SettingRouter} />
                             
                             <Route exact path={"/test"} component={Test}/>
                             
                             
-                            <Route exact path="/notlogin" component={Wrong} />
+                            <Route exact path="/notlogin" component={NonLogin} />
                             <Route exact path="/error" component={Wrong} />
                             <Route path="/" component={NotFound}/>
                         </Switch>

@@ -34,8 +34,8 @@ const ViewCompare = ({history, productData}) => {
 
 
     const wrapperToggle = {
-        menu : function(force, e) {
-            this.__toogle(menuFrame.current, force, e);
+        menu : (force, e) => {
+            wrapperToggle.__toogle(menuFrame.current, force, e);
         },
         __toogle : (wrapper, force, e) => {
             if(!wrapper) return;
@@ -323,8 +323,9 @@ const ViewCompare = ({history, productData}) => {
                                 (<div className="_blank" onClick={() => wrapperToggle.favorite(false)}></div>)
                             }
                         </section>
-                        <section id="Menu" onClick={(e) => {wrapperToggle.menu(false,e)}} ref={menuFrame}>
-                            <Menu />
+                        <section id="Menu" ref={menuFrame}>
+                            <Menu 
+                                closerEvent={wrapperToggle.menu}/>
                         </section>
                         <NavMyProduct
                             myProductData={sizelity_myRecently}
