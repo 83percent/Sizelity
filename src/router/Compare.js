@@ -19,6 +19,9 @@ const Compare = ({history, location}) => {
         urlModule = new URLModule();
     }
 
+    const server = 'http://localhost:3001';
+    //const server = 'http://192.168.11.2:3001';
+
     // Cookie
     const [{sizelity_currentSearchData}, setCookies] = useCookies([]);
 
@@ -51,7 +54,7 @@ const Compare = ({history, location}) => {
             try {
                 const response = await axios({
                     method: "get",
-                    url : `http://192.168.11.2:3001/product/get${query}`,
+                    url : `${server}/product/get${query}`,
                     timeout : 6000
                 }).catch(() => {
                     console.log("TIMEOUT");

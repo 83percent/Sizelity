@@ -30,6 +30,10 @@ section#Menu > .menu-frame {
     padding-left: 1rem;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
+section#Menu > .menu-frame li {
+    padding-bottom: 0.5rem;
+}
+/*      article     */
 section#Menu.active > .menu-frame {
     right: 0;
 }
@@ -37,13 +41,12 @@ section#Menu > .menu-frame > div {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-top: 0.5rem;
-    padding-right: 1rem;
+    padding: 1rem;
     width: 100%;
 }
 section#Menu > .menu-frame > div > p {
     font-size: 1.1rem;
-    font-weight: 400;
+    font-weight: 500;
     position: relative;
     top: -1px;
 }

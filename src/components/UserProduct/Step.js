@@ -1,17 +1,103 @@
-import { useRef } from "react"
+import axios from "axios";
+import { useRef, useState } from "react"
+import URLModule from '../../contents/js/URL';
 
+let urlModule = null;
 const Step = ({data, setData, step, setStep}) => {
     console.log("Refresh Step Component")
     const __data = JSON.parse(JSON.stringify(data));
+    const server = 'http://localhost:3001';
+    //const server = 'http://192.168.11.2:3001';
     // Ref
-    //4
+
+    // 1
+    const [product, setProduct] = useState(null);
+    const productInput = useRef(null);
+
+    // 4
     const nickInput = useRef(null);
     const nickUnset = useRef(null);
 
     // Should be Save Checked
-    
+    console.log("상품 검색 결과 : ", product);
 
     const event = {
+        step1 : {
+            selectOptionFrame : undefined,
+            selectOption : undefined,
+            onSelect : function(e) {
+                if(e) e.stopPropagation();
+                else return;
+                if(this.selectOptionFrame) {
+                    this.selectOptionFrame.classList.remove("on");
+                }
+                this.selectOptionFrame = e.target;
+                for(let i=0; i < 3; ++i) {
+                    if(this.selectOptionFrame.classList.contains("selectOption")) {
+                        this.selectOptionFrame.classList.add("on");
+                        break;
+                    }
+                    this.selectOptionFrame = this.selectOptionFrame.parentElement;
+                }
+                this.selectOption = this.selectOptionFrame.querySelector("input[type=hidden]").value;
+
+            },
+            productSearch : async () => {
+                if(!urlModule) urlModule = new URLModule();
+                if(productInput.current.value < 10) return; 
+                let inputURL = productInput.current.value;
+                try {
+                    inputURL = ((inputURL.indexOf("http") === 0) ? inputURL : "http://" + inputURL);
+                    const isURL = ((value) => {
+                        return (/^(file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/).test(value);
+                    })(inputURL);
+                    if(isURL) {
+                        const analyze = urlModule.get(inputURL);
+                        if(analyze) {
+                            if(product && product.praw && product.praw.code === analyze.code) return; // 중복된 데이터 검색
+                            const response = await axios({
+                                method: 'get',
+                                url: `${server}/product/get?shop=${analyze.domain}&no=${analyze.code}`,
+                                timeout: 3500
+                            }).catch((err) => {
+                                console.log(err);
+                                return {data:{status:-200}}
+                            });
+                            if(response.data._id || response.data.status) setProduct(response.data);
+                            else {
+                                setProduct({status:-200});
+                            }
+                        }
+                    }
+                    console.log("값 : ",inputURL)
+                    
+                } catch(err) {
+                    console.log(err)
+                }
+            },
+            selectSize : undefined,
+            selectSizeFrame : undefined,
+            onSize : function(size, e) {
+                if(e) e.stopPropagation();
+                else return;
+                if(this.selectSize === size) {
+                    // 같은거 두번쨰 누름 -> 사이즈 선택 취소
+                    this.selectSizeFrame.classList.remove("on");
+                    this.selectSize = undefined;
+                } else {
+                    let frame = e.target;
+                    for(let i=0; i<3; ++i) {
+                        if(frame.classList.contains("size-element")) break;
+                        frame = frame.parentElement;
+                    }
+                    if(this.selectSizeFrame) this.selectSizeFrame.classList.remove("on");
+                    frame.classList.add("on");
+                    this.selectSizeFrame = frame;
+                    this.selectSize = size;
+                }
+                
+            }
+        },
         step4 : {
             unsetToggle : () => {
                 if(!nickUnset.current || !nickInput.current) return;
@@ -59,7 +145,36 @@ const Step = ({data, setData, step, setStep}) => {
                         <p>보다 쉽게 "나의 상품"을 채워보세요.</p>
                     </header>
                     <main>
-                        
+                        <div className="selectOption">
+                            <input type="hidden" value="true" />
+                            <p onClick={(e) => event.step1.onSelect(e)}>네, 알고있어요.</p>
+                            <div>
+                                <div className="select-column-wrapper">
+                                    <div className="row-input-frame">
+                                        <input type="text" ref={productInput} onKeyPress={(e) => e.key === "Enter" ? event.step1.productSearch() : null} autoComplete="off" placeholder="http://"/>
+                                        <i className="material-icons" onClick={() => event.step1.productSearch()}>search</i>
+                                    </div>
+                                    {
+                                        (product && product.size) ? (
+                                            <ul>
+                                                {product.size.map((element,index) => (
+                                                    <li key={index} className="size-element" onClick={(e) => event.step1.onSize(element.name, e)}>
+                                                        <p>{element.name}</p>
+                                                    </li>
+                                                ))}
+                                                <li>
+
+                                                </li>
+                                            </ul>
+                                        ) : null
+                                    }   
+                                </div>
+                            </div>
+                        </div>
+                        <div className="selectOption">
+                            <input type="hidden" value="false" />
+                            <p onClick={(e) => event.step1.onSelect(e)}>아니요, 모르겠어요.</p>
+                        </div>
                     </main>
                 </div>
             )

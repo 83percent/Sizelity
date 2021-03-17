@@ -7,6 +7,9 @@ import '../../contents/css/Event/Event_List.css';
 
 
 const EventList = ({history}) => {
+    const server = 'http://localhost:3001';
+    //const server = 'http://192.168.11.2:3001';
+
     // state
     const [list, setList] = useState(undefined);
     
@@ -29,12 +32,13 @@ const EventList = ({history}) => {
         const fetch = async() => {
             const response = await axios({
                 method: "post",
-                url : "http://localhost:3001/event/get",
+                url : `${server}/event/get`,
                 data : {
                     cate : "all"
                 },
                 timeout : 3500
             }).catch(err => {
+                window.alert(err);
                 console.log("Evnet Get Timeout : ", err);
                 event.cautionToggle(true);
                 return {data:{status:-200}}

@@ -9,6 +9,8 @@ import {LoginContext}from '../App';
 
 
 const AfterProduct = ({history}) => {
+    const server = 'http://localhost:3001';
+    //const server = 'http://192.168.11.2:3001';
     // Context
     const {userInfo} = useContext(LoginContext);
     // State
@@ -30,7 +32,7 @@ const AfterProduct = ({history}) => {
             if(!userInfo || !userInfo._id || !userInfo.sili_p) return;
             const result = await axios({
                 method: 'post',
-                url : 'http://192.168.11.2:3001/user/getafter',
+                url : `${server}/user/getafter`,
                 data : {
                     _id : userInfo._id,
                     upwd : userInfo.sili_p
@@ -55,7 +57,7 @@ const AfterProduct = ({history}) => {
         removeAfterList : async (data) => {
             const result = await axios({
                 method: 'post',
-                url : 'http://localhost:3001/user/removeafter',
+                url : `${server}/user/removeafter`,
                 data : data,
                 timeout : 4000
             });
