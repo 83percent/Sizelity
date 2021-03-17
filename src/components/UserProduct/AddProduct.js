@@ -5,7 +5,7 @@ import Transition from '../../contents/js/TransitionSizeName';
 import '../../contents/css/UserProduct/AddProduct.css';
 
 // Component
-import Step from './Step';
+import Step from './StepRouter';
 
 let transition = null;
 const AddProduct = ({history, location}) => {
@@ -59,8 +59,20 @@ const AddProduct = ({history, location}) => {
     // ref
     const navWrapper = useRef(null);
     const navigation = useRef(null);
+    const alertWrapper = useRef(null);
     const confirmOutWrapper = useRef(null);
     const confirmSaveWrapper = useRef(null);
+
+    const alert = {
+        toggle : (force, msg) => {
+            if(!alertWrapper.current) return;
+            if(force === undefined) force = !alertWrapper.current.classList.contains("on");
+            if(force && msg !== undefined) {
+                alertWrapper.current.querySelector("p").innerHTML = msg;
+            }
+            alertWrapper.current.classList.toggle("on",force);
+        }
+    }
     const confirm = {
         toggle : (force, target) => {
             if(!target.current || target === undefined) return;
@@ -110,12 +122,19 @@ const AddProduct = ({history, location}) => {
             <div className="closer" onClick={() => confirm.toggle(true, confirmOutWrapper)}>
                 <i className="material-icons">close</i>
             </div>
+            <div className="alert-wrapper" ref={alertWrapper}>
+                <div className="alert-frame">
+                    <p></p>
+                </div>
+                <div className="alert-closer" onClick={() => alert.toggle(false)}></div>
+            </div>
             <article>
                 <Step 
                     data={data}
                     setData={event.dataChange}
                     step={step}
                     setStep={setStep}
+                    alertToggle={alert.toggle}
                 />
             </article>
             <footer>

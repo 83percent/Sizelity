@@ -70,6 +70,15 @@ class TransitionSizeName {
             },
             set : {
                 KOR : "세트"
+            },
+            shoes : {
+                KOR : "신발"
+            },
+            onepiece : {
+                KOR : "원피스"
+            },
+            skirt : {
+                KOR : "치마"
             }
         }
         this.lang = lang; // KO

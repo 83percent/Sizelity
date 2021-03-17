@@ -1,0 +1,112 @@
+section#AddProduct > article > .step-wrapper > header {
+    padding: 3rem 0 1rem 2rem;
+}
+section#AddProduct > article > .step-wrapper > header > h1 {
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+section#AddProduct > article > .step-wrapper > header > p {
+    color: #888;
+    font-weight: 200;
+    font-size: 0.9rem;
+    margin-left: 2px;
+}
+section#AddProduct > article > .step-wrapper > main > div {
+    padding-bottom: 0.5rem;
+}
+section#AddProduct > article > .step-wrapper .input-frame {
+    background: #fff;
+}
+
+/**/
+section#AddProduct > article > .step-wrapper > main {
+    padding-bottom: 15rem;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    margin-top: 0.8rem;
+    padding: 1rem 2rem 0.5rem 2rem;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame > input {
+    all: unset;
+    width: 100%;
+    background: #fff;
+    padding: 0.3rem 0.8rem;
+    border-bottom: 2px solid #88888880;
+    font-size: 1.2rem;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame > input.off {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+section#AddProduct > article > .step-wrapper > main > .input-frame > h2 {
+    font-size: 0.9rem;
+    color: #888888;
+    width: 100%;
+    text-align: right;
+}
+section#AddProduct > article main > .input-frame > .line {
+    font-family: Montserrat;
+    padding-top: 0.8rem;
+    font-size: 1.4rem;
+    color: #888888;
+    font-weight: 400;
+    text-align: center;
+}
+section#AddProduct > article main > .input-frame > label > h1 {
+    font-size: 1.7rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    opacity: 0.3;
+    transition-duration: 0.3s;
+}
+section#AddProduct > article main > .input-frame > label > h1.on {
+    opacity: 1;
+}
+section#AddProduct > article main > .apply {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+section#AddProduct > article main > .apply > h1 {
+    margin-top: 1.5rem;
+    padding: 0.3rem 2rem 0.5rem 1rem;
+    border-top: 2px solid #88888860;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #00966B;
+    transition-duration: 0.4s;
+}
+section#AddProduct > article main > .apply > h1.off {
+    opacity: 0.4;
+}
+
+
+/*        Help        */
+section#AddProduct > article > .step-wrapper > .help-wrapper {
+    width: 100%;
+    height: auto;
+    padding-bottom: 1rem;
+}
+section#AddProduct > article > .step-wrapper > .help-wrapper > li {
+    background: #fff;
+    padding: 0.5rem 2rem;
+    border: 1px solid #dbdbdb;
+    display: flex;
+    align-items: flex-start;
+}
+section#AddProduct > article > .step-wrapper > .help-wrapper > li > i {
+    font-size: 1.5rem;
+    position: relative;
+    top: 2px;
+    color: #888;
+    padding-right: 0.4rem;
+}
