@@ -19,7 +19,8 @@ const Compare = ({history, location}) => {
         urlModule = new URLModule();
     }
 
-    const server = 'http://localhost:3001';
+    //const server = 'http://localhost:3001';
+    const server = 'http://3.36.87.114:3001';
     //const server = 'http://192.168.11.2:3001';
 
     // Cookie

@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useEffect, useRef } from 'react';
 import '../../contents/css/Login/Join.css';
-const URL = "http://localhost:3001/user/signup"; // Local
+//const URL = "http://localhost:3001/user/signup"; // Local
 //const URL = "http://172.30.1.31:3001/user/signup"; // Cafe
 //const URL = "http://192.168.11.2:3001/user/signup"; // Home
+const URL = "http://3.36.87.114:3001/user/signup"; // server
 
 
 const Join = ({history}) => {

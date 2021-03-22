@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 // CSS
 import '../../contents/css/UserProduct/Step.css';

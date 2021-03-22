@@ -14,7 +14,8 @@ import { Link } from 'react-router-dom';
 
 let transition = null;
 //const URL = "http://192.168.11.2:3001/user/getproduct";
-const URL = "http://localhost:3001/user/getproduct";
+//const URL = "http://localhost:3001/user/getproduct";
+const URL = "http://3.36.87.114:3001/user/getproduct";
 const UserProduct = ({history}) => {
     const backIsCompare = history.location.state ? history.location.state.isCompare : false;
     //const comparePtype = history.location.state ? history.location.state.ptype : null; -> 
