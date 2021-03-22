@@ -94,6 +94,7 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                     __data.info.ptype = option.current.type;
                     __data.info.subtype = option.current.subtype;
                     setData(__data);
+                    setStep(3);
                 }
             }
         }
