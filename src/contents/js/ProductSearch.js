@@ -3,8 +3,8 @@ import Cookie from './Cookie';
 import URLModule from './URL';
 
 
-//const URL = "http://localhost:3001/product/get";
-const URL = "http://3.36.87.114:3001/product/get";
+const URL = "http://localhost:3001/product/get";
+//const URL = "http://13.124.51.75:3001/product/get";
 //const URL = "http://172.30.1.31:3001/product/get";
 
 class ProductSearch {

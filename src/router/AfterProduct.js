@@ -5,15 +5,20 @@ import axios from 'axios';
 import '../contents/css/Router/AfterProduct.css';
 
 // Context 
-import {LoginContext}from '../App';
+import {LoginContext} from '../App';
+import {ServerContext} from '../App';
 
 
 const AfterProduct = ({history}) => {
     //const server = 'http://localhost:3001';
-    const server = 'http://3.36.87.114:3001';
+    //const server = 'http://3.36.87.114:3001';
     //const server = 'http://192.168.11.2:3001';
+
     // Context
     const {userInfo} = useContext(LoginContext);
+    console.log("로그인 사용자 Context : ",userInfo);
+    const server = useContext(ServerContext);
+
     // State
     const [loader, setLoader] = useState(true);
     const [deleteOption, setDeleteOption] = useState(false);
@@ -21,27 +26,18 @@ const AfterProduct = ({history}) => {
 
     // Ref
     const reomveWrapper = useRef(null);
-    console.log(userInfo);
-    if(userInfo === null) {
-        history.replace("/wrong");
-    } else if(!userInfo || !userInfo._id || !userInfo.sili_p || !userInfo.name) {
+    if(!userInfo || !userInfo._id || !userInfo.name) {
         history.replace("/wrong");
     }
-    
     const request = {
         getAfterList : async () => {
-            if(!userInfo || !userInfo._id || !userInfo.sili_p) return;
             const result = await axios({
-                method: 'post',
-                url : `${server}/user/getafter`,
-                data : {
-                    _id : userInfo._id,
-                    upwd : userInfo.sili_p
-                },
+                method: 'get',
+                url : `${server}/user/after`,
+                withCredentials: true,
                 timeout : 5000
-            });
-            console.log("요청 결과", {_id : userInfo._id, upwd: userInfo.sili_p});
-            console.log("요청 결과 정보",result.data);
+            }).catch(err => console.log(err));;
+            
             setLoader(false);
             try {
                 if(result.data) {
@@ -57,8 +53,9 @@ const AfterProduct = ({history}) => {
         },
         removeAfterList : async (data) => {
             const result = await axios({
-                method: 'post',
-                url : `${server}/user/removeafter`,
+                method: 'delete',
+                url : `${server}/user/after`,
+                withCredentials: true,
                 data : data,
                 timeout : 4000
             });

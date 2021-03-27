@@ -1,16 +1,19 @@
 import axios from 'axios';
-import React, {createContext, useMemo, useEffect, useState } from 'react';
+import React, {createContext, useMemo, useEffect, useState ,useContext} from 'react';
 import { useCookies } from 'react-cookie';
 import URLModule from '../contents/js/URL';
 
 // CSS
 import '../contents/css/Compare/Compare_Router.css';
+
 // Component
 import Main from '../components/Compare/Compare_Main';
 import { Link } from 'react-router-dom';
 
 // Context
+import {ServerContext} from '../App';
 export const ProductContext = createContext(null);
+
 
 let urlModule = null;
 const Compare = ({history, location}) => {
@@ -18,10 +21,6 @@ const Compare = ({history, location}) => {
         console.log("URL 모듈 생성");
         urlModule = new URLModule();
     }
-
-    //const server = 'http://localhost:3001';
-    const server = 'http://3.36.87.114:3001';
-    //const server = 'http://192.168.11.2:3001';
 
     // Cookie
     const [{sizelity_currentSearchData}, setCookies] = useCookies([]);
@@ -39,6 +38,8 @@ const Compare = ({history, location}) => {
     const [data, setData] = useState(history.location.state ? history.location.state.data : null);
     const [status, setStatus] = useState(0);
 
+    // Context 
+    const server = useContext(ServerContext);
 
     // location.search 데이터 : sizelity?shop=...&no=... 로 전달될 수 있음.
     const isLocation = useMemo(() => {

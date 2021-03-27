@@ -10,7 +10,6 @@ import '../../contents/css/Login/Login.css';
 // Context
 import {LoginContext} from '../../App';
 let loginModule = null;
-let loginObject = {uid:undefined, upwd:undefined};
 const ViewLogin = ({history}) => {
     const alertWrapper = useRef(null);
     const alertText = useRef(null);
@@ -20,7 +19,6 @@ const ViewLogin = ({history}) => {
     const pwd = useRef(null);
 
     const {userInfo, setUserInfo} = useContext(LoginContext);
-    console.log(userInfo);
     useEffect(() => {
         if(userInfo && userInfo._id) {
             // 로그인 되어있음.
@@ -56,12 +54,9 @@ const ViewLogin = ({history}) => {
             }
 
             if(!loginModule) loginModule = new LoginModule();
-            loginObject.uid = __id;
-            loginObject.upwd = __password;
-
-
             event.disabled(true, e.target);
-            const result = await loginModule.send(loginObject);
+            const result = await loginModule.request(__id,__password);
+            console.log(result);
             if(!email.current) return; // 페이지 벗어남.
 
             if(result.name) {

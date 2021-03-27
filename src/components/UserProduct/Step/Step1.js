@@ -1,17 +1,24 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import URLModule from '../../../contents/js/URL';
 
 // CSS
 import '../../../contents/css/UserProduct/Step1.css';
 
+// Context
+import {ServerContext} from '../../../App';
+
 let urlModule = null;
 //const server = 'http://localhost:3001';
-const server = 'http://3.36.87.114:3001';
+//const server = 'http://3.36.87.114:3001';
 //const server = 'http://192.168.11.2:3001';
+
 const Step1 = ({data, setData, setStep, alertToggle}) => {
     // state
     const [product, setProduct] = useState(null);
+
+    // Context
+    const server = useContext(ServerContext);
 
     // ref
     const productInputWrapper = useRef(null);

@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import Transition from '../../contents/js/TransitionSizeName';
+import { Link } from 'react-router-dom';
 
 // CSS
 import '../../contents/css/UserProduct/ViewProduct.css';
@@ -10,12 +11,10 @@ import '../../contents/css/MyProductNav.css';
 // Context
 import { MediaContext } from '../../App';
 import { LoginContext } from '../../App';
-import { Link } from 'react-router-dom';
+import { ServerContext } from '../../App';
+
 
 let transition = null;
-//const URL = "http://192.168.11.2:3001/user/getproduct";
-//const URL = "http://localhost:3001/user/getproduct";
-const URL = "http://3.36.87.114:3001/user/getproduct";
 const UserProduct = ({history}) => {
     const backIsCompare = history.location.state ? history.location.state.isCompare : false;
     //const comparePtype = history.location.state ? history.location.state.ptype : null; -> 
@@ -27,7 +26,7 @@ const UserProduct = ({history}) => {
     // Context
     const { userInfo } = useContext(LoginContext);
     const media = useContext(MediaContext);
-    
+    const server = useContext(ServerContext);
     
     // State
     const [productData, setProductData] = useState(null);
@@ -137,19 +136,14 @@ const UserProduct = ({history}) => {
             alert.confirmToggle(false);
             if(removeData.product) { //Confirm 오픈시 저장되는 데이터 (Field - let removeData = null;)
                 const response = await axios({
-                    method : 'post',
-                    url : "http://localhost:3001/user/removeproduct",
-                    data : {
-                        _id : userInfo._id,
-                        upwd : userInfo.sili_p,
-                        product : {
-                            _id : removeData.product._id
-                        }
-                    },
+                    method : 'delete',
+                    url : `${server}/user/product/${removeData.product._id}`,
+                    withCredentials: true,
                     timeout: 3500
                 }).catch(() => {
                     return {data : {status : -100}};
                 });
+                console.log("삭제 결과 : ", response);
                 if(!response || !response.data || !response.status) {
                     alert.alertToggle(true, "오류가 발생했습니다.", "error");
                 }
@@ -251,14 +245,11 @@ const UserProduct = ({history}) => {
         if(productData === null) {
             try {
                 (async () => {
-                    if(userInfo._id && userInfo.sili_p) {
+                    if(userInfo._id) {
                         const response = await axios({
-                            method: 'post',
-                            url: URL,
-                            data : {
-                                _id : userInfo._id,
-                                upwd : userInfo.sili_p
-                            },
+                            method: 'get',
+                            url: `${server}/user/product`,
+                            withCredentials: true,
                             timeout: 3500
                         }).catch(() => {
                             console.log("ERROR");

@@ -1,13 +1,19 @@
 import axios from 'axios';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import '../../contents/css/Login/Join.css';
 //const URL = "http://localhost:3001/user/signup"; // Local
 //const URL = "http://172.30.1.31:3001/user/signup"; // Cafe
 //const URL = "http://192.168.11.2:3001/user/signup"; // Home
-const URL = "http://3.36.87.114:3001/user/signup"; // server
+//const URL = "http://3.36.87.114:3001/user/signup"; // server
+
+// Context
+import {ServerContext} from '../../App';
 
 
 const Join = ({history}) => {
+    // Context
+    const server = useContext(ServerContext);
+
     // Ref
     const resultWrapper = useRef(null); // "환영합니다."
     const alertWrapper = useRef(null);  // 상단 알림
@@ -40,17 +46,17 @@ const Join = ({history}) => {
                     resultWrapper.current.classList.add("on");
                     const result = await axios({
                         method : 'post',
-                        url : URL,
+                        url : `${server}/user/signup`,
                         data : account,
                         timeout : 3000
-                    });
+                    }).catch(err=> console.log(err));
                     console.log("응답 결과 : ", result.data);
                     switch(result.data.status) {
                         case 200 : {
                             // Success
                             resultWrapper.current.querySelector('.result-frame').classList.add("on");
                             setTimeout(() => {
-                                history.replace('/view/login');
+                                history.replace('/login');
                             }, 1500);
                             break;   
                         }
@@ -76,7 +82,8 @@ const Join = ({history}) => {
                             resultWrapper.current.classList.remove("on");
                         }
                     }
-                } catch {
+                } catch(err) {
+                    console.log(err)
                     event.alertToggle(true, "네트워크 연결을 확인해주세요.");
                     resultWrapper.current.classList.remove("on");
                 }

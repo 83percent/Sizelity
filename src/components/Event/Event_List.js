@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { set } from 'lodash';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 // CSS
 import '../../contents/css/Event/Event_List.css';
 
+// Context
+import {ServerContext} from '../../App';
 
 const EventList = ({history}) => {
     //const server = 'http://localhost:3001';
-    const server = 'http://3.36.87.114:3001';
+    //const server = 'http://3.36.87.114:3001';
+    const server = useContext(ServerContext);
     //const server = 'http://192.168.11.2:3001';
 
     // state

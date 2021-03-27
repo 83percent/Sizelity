@@ -13,14 +13,17 @@ import Menu from './Compare_Menu';
 // Context
 import { MediaContext } from '../../App';
 import { LoginContext } from '../../App';
+import { ServerContext } from '../../App';
 import { useCookies } from 'react-cookie';
+
 
 const ViewCompare = ({history, productData}) => {
     const [{sizelity_myRecently}] = useCookies([]);
     // Context 
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
-    
+    const server = useContext(ServerContext);
+
     // Ref
     const menuFrame = useRef(null);
     const favWrapper = useRef(null);
@@ -98,8 +101,6 @@ const ViewCompare = ({history, productData}) => {
                 // 사이즈 선택됨
                 if(window.confirm(`'${activeSize.value}'로 저장 하시겠습니까?`)) {
                     const saveData = {
-                        _id : userInfo._id,
-                        upwd: userInfo.sili_p,
                         product : {
                             status : 200,
                             info : productData.info,
@@ -118,8 +119,9 @@ const ViewCompare = ({history, productData}) => {
                             (async () => {
                                 const response = await axios({
                                     method: 'post',
-                                    url : "http://localhost:3001/user/setproduct",
+                                    url : `${server}/user/product`,
                                     data : saveData,
+                                    withCredentials: true,
                                     timeout : 4000
                                 }).catch(() => {
                                     return {data : {status : -200}};
@@ -195,16 +197,13 @@ const ViewCompare = ({history, productData}) => {
                 }
             }
             */
-            const {_id, sili_p} = userInfo;
-            if(!_id && !sili_p) {
+            if(!userInfo._id) {
                 //  로그인 안된 상태
                 alert.alertToggle(true, "로그인 후 이용가능 합니다.", "error");
                 return;
             }
             try {
                 const sendData = {
-                    _id : _id,
-                    upwd : sili_p,
                     product : {
                         praw : {
                             domain : productData.praw.domain,
@@ -221,8 +220,9 @@ const ViewCompare = ({history, productData}) => {
                 ( async () => { 
                     const result = await axios({
                         method: 'post',
-                        url : 'http://localhost:3001/user/setafter',
+                        url : `${server}/user/after`,
                         data : sendData,
+                        withCredentials: true,
                         setTimeout: 4000
                     }).catch(() => {
                         return {data : {status : -200}};

@@ -9,6 +9,7 @@ import {LoginContext} from '../../App';
 
 let login = null;
 const UserMenu = ({history}) => {
+    console.log(history);
     const {userInfo ,setUserInfo} = useContext(LoginContext);
     if(!login) login = new LoginModule();
     if(!userInfo)  {
@@ -17,9 +18,10 @@ const UserMenu = ({history}) => {
     }
 
     const Event = {
-        logout : () => {
+        logout : async () => {
             if(window.confirm("로그아웃 하시겠습니까?")) {
-                login.logout();
+                console.log(history);
+                const response = await login.delete();
                 setUserInfo(null);
                 history.replace("/");
             }

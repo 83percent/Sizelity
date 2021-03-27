@@ -7,7 +7,6 @@ import '../contents/css/View/View.css';
 // Context
 import {LoginContext} from '../App';
 
-
 const View = () => {
     const loginWrapper = useRef(null);
     const { userInfo } = useContext(LoginContext);

@@ -12,7 +12,7 @@ const UserProduct = ({history}) => {
     const { userInfo } = useContext(LoginContext);
 
     // LoginCheck
-    if(!userInfo || !userInfo._id || !userInfo.sili_p || !userInfo.name) {
+    if(!userInfo || !userInfo._id || !userInfo.name) {
         history.replace("/notlogin");
     }
     return (

@@ -8,7 +8,7 @@ import SearchResult from '../components/Search/SearchResult';
 import SearchCurrent from '../components/Search/SearchCurrent';
 
 // Context
-import {LoginContext}from '../App';
+import { LoginContext }from '../App';
 import { MediaContext } from '../App';
 
 
