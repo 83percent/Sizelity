@@ -76,7 +76,7 @@ const App = () => {
                         <BrowserRouter>
                             <Switch>
                                 <Route exact path="/" component={View} />
-                                <Route exact path="/compare" component={Compare} />
+                                <Route path="/compare" component={Compare} />
                                 <Route exact path="/view/compare" component={Compare} />
                                 <Route exact path="/search" component={Search} />
                                 <Route exact path="/after" component={AfterProduct} />
@@ -86,7 +86,7 @@ const App = () => {
                                 <Route path="/login" component={LoginRouter} />
                                 <Route path="/setting" component={SettingRouter} />
                                 
-                                <Route exact path={"/test"} component={Test}/>
+                                <Route exact path="/test" component={Test}/>
                                 
                                 
                                 <Route exact path="/notlogin" component={NonLogin} />

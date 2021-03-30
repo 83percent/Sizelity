@@ -3,7 +3,7 @@ import Cookie from './Cookie';
 import URLModule from './URL';
 
 
-const URL = "http://localhost:3001/product/get";
+const URL = "http://localhost:3001/product";
 //const URL = "http://13.124.51.75:3001/product/get";
 //const URL = "http://172.30.1.31:3001/product/get";
 
@@ -101,9 +101,8 @@ class ProductSearch {
             if(data === null) return {status : -404};
             if(data) {
                 const response = await axios({
-                    method : 'post',
-                    url : URL,
-                    data : data
+                    method : 'get',
+                    url : `${URL}/${data.domain}/${data.code}`,
                 });
                 console.log("%c Product Search Result : ", "background: red; color: #fff;",response.data);
                 if(response.data._id) {

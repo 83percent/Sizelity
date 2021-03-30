@@ -20,7 +20,7 @@ const Search = ({history}) => {
     const {userInfo} = useContext(LoginContext);
     const media = useContext(MediaContext);
 
-    
+    console.log("로그인정보 : ", userInfo);
     // Ref
     const searchInput = useRef(null);
     const alertWrapper = useRef(null);

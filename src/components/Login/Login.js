@@ -56,7 +56,7 @@ const ViewLogin = ({history}) => {
             if(!loginModule) loginModule = new LoginModule();
             event.disabled(true, e.target);
             const result = await loginModule.request(__id,__password);
-            console.log(result);
+            console.log("로그인 시도 결과 : ", result);
             if(!email.current) return; // 페이지 벗어남.
 
             if(result.name) {
@@ -157,7 +157,7 @@ const ViewLogin = ({history}) => {
                 <div className="line"><div></div></div>
                 <div className="login-option-wrapper">
                     <Link to="/login/accounthelp">
-                        <h4>비밀번호를 잊으셨나요?</h4>
+                        <h4>도움이 필요한가요?</h4>
                     </Link>
                 </div>
             </article>

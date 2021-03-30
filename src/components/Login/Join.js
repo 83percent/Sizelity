@@ -144,7 +144,7 @@ const Join = ({history}) => {
         }
 
         const isName = ((value) => {
-            return (value.length > 1 && value.length < 25)
+            return (value.length > 1 && value.length < 21)
         })(name.current.value);
         if(isName) toggleWrong(name,false);
         else {

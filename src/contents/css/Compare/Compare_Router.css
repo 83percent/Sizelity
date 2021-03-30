@@ -10,9 +10,23 @@ section#Compare {
 section#Compare > div.title {
     padding-bottom: 4rem;
 }
+section#Compare > div.title > h1 {
+    font-size: 2.0;
+    color: #000;
+}
 section#Compare > div.title > p {
     font-size: 0.9rem;
     color: #888;
+}
+section#Compare > div.title > button {
+    all: unset;
+    border-radius: 3px;
+    font-size: 1.1rem;
+    background-color: #00966B;
+    color: #fff;
+    margin-top: 1rem;
+    padding: 0.7rem 2.3rem;
+    cursor: pointer;
 }
 section#Compare > div > i {
     padding-left: 0.2rem;

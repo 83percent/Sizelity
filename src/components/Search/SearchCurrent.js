@@ -35,8 +35,9 @@ const SearchCurrent = ({history}) => {
         moveCompare: async(element) => {
             const __u = new URLModule();
             const data = __u.get(element[3]); // full
-
+            
             if(data) {
+                console.log("최근 본 상품에서 이동 : ", data);
                 history.push({
                     pathname: "/compare",
                     search: `?shop=${data.domain}&no=${data.code}`,

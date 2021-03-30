@@ -18,7 +18,7 @@ const SearchResult = ({praw, history}) => {
         try {
             setOnLoader(true);
             const __response = await productSearch.search(praw);
-            console.log(__response);
+            console.log("결과", __response);
             setResponse(__response);
             setOnLoader(false);
         } catch(error) {
@@ -26,6 +26,7 @@ const SearchResult = ({praw, history}) => {
         }
     }
 
+    // LocalStorage 정책으로 변경
     const resultClickEvent = (response) => {
         console.log("Now Cookie : ",sizelity_currentSearchData);
         console.log(response);
@@ -60,9 +61,10 @@ const SearchResult = ({praw, history}) => {
             console.log(error);
         } finally {
             history.push({
-                pathname: "/compare",
+                pathname: `/compare`,
                 search: `?shop=${response.praw.domain}&no=${response.praw.code}`,
-                state : {data : response}
+                state : {data : response},
+                
             });
         }
 

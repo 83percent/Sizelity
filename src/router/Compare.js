@@ -15,40 +15,19 @@ import {ServerContext} from '../App';
 export const ProductContext = createContext(null);
 
 
-let urlModule = null;
 const Compare = ({history, location}) => {
-    if(!urlModule) {
-        console.log("URL 모듈 생성");
-        urlModule = new URLModule();
-    }
-
     // Cookie
     const [{sizelity_currentSearchData}, setCookies] = useCookies([]);
 
     const referrer = document.referrer;
-    // Test Code
-    // const referrer = "m.mr-s.co.kr/product/%EB%A1%9C%EC%9D%B8-%EB%A9%94%EC%A2%85-%EB%B8%8C%EC%9D%B4%EB%84%A5-%EB%8B%88%ED%8A%B8/39581";
-    const u = referrer ? urlModule.get(referrer) : null;
     
     // State
-    const [loader, setLoader] = useState(true);
-    const [productURL] = useState(
-        u ? referrer : history.location.state ? history.location.state.data.praw.full : null
-    );
-    const [data, setData] = useState(history.location.state ? history.location.state.data : null);
+    const [data, setData] = useState(history.location?.state?.data);
+    const [loader, setLoader] = useState(!data);
     const [status, setStatus] = useState(0);
 
     // Context 
     const server = useContext(ServerContext);
-
-    // location.search 데이터 : sizelity?shop=...&no=... 로 전달될 수 있음.
-    const isLocation = useMemo(() => {
-        if(productURL) return false;
-        try {
-            const params = new URLSearchParams(location.search);
-            return (params.has('shop') && params.has('no'));
-        } catch{return false}
-    }, [productURL, location.search]);
     
 
     useEffect(() => { 
@@ -56,14 +35,13 @@ const Compare = ({history, location}) => {
             try {
                 const response = await axios({
                     method: "get",
-                    url : `${server}/product/get${query}`,
-                    timeout : 6000
+                    url : `${server}/product/${query}`,
+                    timeout : 2500
                 }).catch(() => {
-                    console.log("TIMEOUT");
-                    return {data:{status:-200}};
+                    return {data:{status:500}};
                 });
-                console.log("검색 결과 : ", response);
-                if(response.data._id) {
+                console.log("검색 결과 : ", response.data);
+                if(response.data?._id) {
                     // 데이터 가져오기 성공.
                     try {
                         // 최근 검색 상품 쿠키에 넣기
@@ -90,20 +68,35 @@ const Compare = ({history, location}) => {
                     } catch{} finally {
                         setData(response.data);
                     }
-                    
                 } else {
                     if(response.data.status) setStatus(response.data.status);
                 }
-            } catch(error) {
-                console.error(error);
-            }   
+            } catch(error) {setStatus({status: -200})}
             setLoader(false);
         }
-        if((data === null && productURL !== null) || isLocation) {
-            const query = isLocation ? location.search : `shop=${u.domain}&no=${u.code}`;
-            getProduct(query);
+
+        if(!data) {
+            // 상품 정보 없음. -> 검색
+            let query = null;
+            if(referrer) {
+                const urlModule = new URLModule();
+                const {domain, code} = urlModule.get(referrer);
+                if(domain && code) query = `${domain}/${code}`;
+            } else if(location.search) {
+                //const {domain, code} = new URLSearchParams(location.search);
+                const params = new URLSearchParams(location.search);
+                const domain = params.get("shop");
+                const code = params.get("no");
+                if(domain && code) query = `${domain}/${code}`;
+            }
+            if(query) {
+                getProduct(query);
+            } else {
+                setData(null);
+                setLoader(false);
+            }
         }
-    }, [productURL]);
+    }, []);
 
     return (
         loader ? (
@@ -126,23 +119,33 @@ const Compare = ({history, location}) => {
             ) : (
                 <section id="Compare">
                     {
-                        status === -404 ? (
+                        status === 404 ? (
                             <div className="title">
                                 <i className="material-icons">sentiment_very_dissatisfied</i>
                                 <h1>죄송합니다.</h1>
                                 <h1>상품 정보가 없습니다.</h1>
                                 <p>입력하신 상품의 사이즈 정보는</p>
                                 <p>영업일 기준 2일이내에 자동으로 입력됩니다.</p>
+                                <button onClick={() => history.replace("/search")}>다른 상품 검색</button>
                             </div>
-                        ) : status === -200 ? (
+                        ) : status === 500 ? (
                             <div className="title">
                                 <i className="material-icons">sentiment_very_dissatisfied</i>
                                 <h1>죄송합니다.</h1>
                                 <h1>서버와의 연결에 실패했습니다.</h1>
                             </div>
+                        ) : status === -200 ? (
+                            <div className="title">
+                                <i className="material-icons">sentiment_very_dissatisfied</i>
+                                <h1>죄송합니다.</h1>
+                                <h1>잠시 후 다시 시도해주세요.</h1>
+                            </div>
                         ) : (
-                            <div>
-                                기타
+                            <div className="title">
+                                <i className="material-icons">sentiment_very_dissatisfied</i>
+                                <h1>잘못된 접근입니다.</h1>
+                                <p>상품을 검색할 수 없습니다.</p>
+                                <button onClick={() => history.replace("/search")}>다른 상품 검색</button>
                             </div>
                         )
                     }
