@@ -369,7 +369,7 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
 #View > section#fav-select-wrapper.active > article.active {
     top: 0;
 }
-#View > section#fav-select-wrapper i {
+#View > section#fav-select-wrapper > article > i {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
 }
@@ -386,8 +386,22 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     all: unset;
     width: 50%;
     text-align: center;
-    padding: 0.8rem 0;
+    padding: 1rem 0;
     border-top: 1px solid #dbdbdb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#View > section#fav-select-wrapper .fav-select-btn > button > i {
+    opacity: 0.3;
+    font-size: 1.5rem;
+    margin-right: 0.3rem;
+}
+#View > section#fav-select-wrapper .fav-select-btn > button > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.2rem;
 }
 #View > section#fav-select-wrapper > ._blank {
     flex-grow: 1;

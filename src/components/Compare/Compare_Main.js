@@ -101,21 +101,18 @@ const ViewCompare = ({history, productData}) => {
                 // 사이즈 선택됨
                 if(window.confirm(`'${activeSize.value}'로 저장 하시겠습니까?`)) {
                     const saveData = {
-                        product : {
-                            status : 200,
-                            info : productData.info,
-                            praw : productData.praw,
-                            size : null
-                        }
+                        info : productData.info,
+                        praw : productData.praw,
+                        size : null
                     }
                     for(const element of productData.size) {
                         if(element.name === activeSize.value) {
-                            saveData.product.size = element;
+                            saveData.size = element;
                             break;
                         }
                     }
                     try {
-                        if(saveData.product.size) {
+                        if(saveData.size) {
                             (async () => {
                                 const response = await axios({
                                     method: 'post',
@@ -284,7 +281,7 @@ const ViewCompare = ({history, productData}) => {
                                     <i className="material-icons">search</i>
                                 </Link>
                                 <div className="nav-element" onClick={() => wrapperToggle.favorite(true)}>
-                                    <i className="material-icons">star_border</i>
+                                    <i className="material-icons">bookmark_add</i>
                                 </div>
                                 <div className="nav-element" onClick={() => menuFrame.current.classList.add("active")}>
                                     <i className="material-icons">menu</i>
@@ -300,8 +297,14 @@ const ViewCompare = ({history, productData}) => {
                                                 <b>어디</b>에 추가할까요?
                                             </h1>
                                             <div className="fav-select-btn">
-                                                <button style={{borderRight:"1px solid #dbdbdb"}} onClick={() => fav.myWardrobe()}>나의 옷장</button>
-                                                <button onClick={() => after.set()}>나중에 볼 상품</button>
+                                                <button style={{borderRight:"1px solid #dbdbdb"}} onClick={() => fav.myWardrobe()}>
+                                                    <i className="material-icons">door_sliding</i>
+                                                    <p>나의 옷장</p>
+                                                </button>
+                                                <button onClick={() => after.set()}>
+                                                    <i className="material-icons">watch_later</i>
+                                                    <p>나중에 볼 상품</p>
+                                                </button>
                                             </div>
                                         </>
                                     ) : (

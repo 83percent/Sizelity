@@ -238,7 +238,7 @@ const Join = ({history}) => {
                                     <input type="checkbox" onClick={(e) => event.privacyEvent(e)}/>
                                 </label>
                                 <button type="button">
-                                    <i className="material-icons">assignment</i>
+                                    <i className="material-icons">find_in_page</i>
                                 </button>
                             </li>
                             <li className="privacy-wrapper">
@@ -247,7 +247,7 @@ const Join = ({history}) => {
                                     <input type="checkbox" onClick={(e) => event.privacyEvent(e)}/>
                                 </label>
                                 <button type="button">
-                                    <i className="material-icons">assignment</i>
+                                    <i className="material-icons">find_in_page</i>
                                 </button>
                             </li>
                             <li className="privacy-wrapper">
@@ -256,7 +256,7 @@ const Join = ({history}) => {
                                     <input type="checkbox" onClick={(e) => event.privacyEvent(e)}/>
                                 </label>
                                 <button type="button">
-                                    <i className="material-icons">assignment</i>
+                                    <i className="material-icons">find_in_page</i>
                                 </button>
                             </li>
                         </ul>

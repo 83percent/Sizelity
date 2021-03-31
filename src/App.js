@@ -20,6 +20,7 @@ import LoginRouter from './router/LoginRouter';
 import SettingRouter from './router/SettingRouter';
 import NotFound from './router/NotFoundRouter';
 import EventRouter from './router/EventRouter';
+import HelpRouter from './router/HelpRouter';
 
 import NonLogin from './router/Error/NonLogin';
 
@@ -81,6 +82,7 @@ const App = () => {
                                 <Route exact path="/search" component={Search} />
                                 <Route exact path="/after" component={AfterProduct} />
                                 <Route exact path="/event" component={EventRouter} />
+                                <Route exact path="/help" component={HelpRouter} />
 
                                 <Route path="/closet" component={UserProduct} />
                                 <Route path="/login" component={LoginRouter} />

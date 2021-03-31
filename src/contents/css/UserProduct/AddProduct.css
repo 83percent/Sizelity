@@ -162,7 +162,7 @@ section#AddProduct > .confirm-wrapper > .confirm-frame > div > div {
     flex-grow: 1;
     font-size: 1.2rem;
     text-align: center;
-    padding: 0.6rem 0;
+    padding: 0.8rem 0;
 }
 section#AddProduct > .confirm-wrapper > .confirm-frame > div > div:first-child {
     border-right: 1px solid #dbdbdb;

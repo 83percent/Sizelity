@@ -16,15 +16,22 @@ section.Error > div > i {
     font-size: 5.0rem;
     color: #555;
 }
-section.Error > div > h1 {
-    
-}
+
 section.Error > div > p {
     font-size: 0.9rem;
     color: #888888;
     padding-bottom: 1rem;
 }
 section.Error > div > a {
+    all: unset;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding: 0.8rem 2.5rem;
+    background: #00966B;
+    border-radius: 0.3rem;
+}
+section.Error > div > button {
     all: unset;
     color: #fff;
     font-size: 1.1rem;

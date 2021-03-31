@@ -67,7 +67,7 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                                 <p className="line">OR</p>
                                 <label>
                                     <h1>미지정</h1>
-                                    <input type="checkbox" ref={nickUnset} style={{display:"none"}} onChange={() => event.step4.unsetToggle()}/>
+                                    <input type="checkbox" ref={nickUnset} style={{display:"none"}} onChange={() => event.unsetToggle()}/>
                                 </label>
                             </>
                         ) : null

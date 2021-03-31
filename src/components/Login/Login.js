@@ -156,7 +156,7 @@ const ViewLogin = ({history}) => {
                 </div>
                 <div className="line"><div></div></div>
                 <div className="login-option-wrapper">
-                    <Link to="/login/accounthelp">
+                    <Link to="/help">
                         <h4>도움이 필요한가요?</h4>
                     </Link>
                 </div>

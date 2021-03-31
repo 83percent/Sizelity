@@ -236,7 +236,7 @@ section#Search > .alert-wrapper.on {
 }
 section#Search > .alert-wrapper > .alert-frame {
     position: absolute;
-    top: -13rem;
+    top: -15rem;
     left: 0;
 
     text-align: center;

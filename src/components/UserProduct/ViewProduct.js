@@ -60,7 +60,6 @@ const UserProduct = ({history}) => {
             return result;
         }
     })(productData);
-    console.log("분석 결과 : ", analyzeData);
     const event = {
         listToggle : (e, force) => {
             if(!e) return;
@@ -86,7 +85,10 @@ const UserProduct = ({history}) => {
                 case 0 : {
                     history.push({
                         pathname: '/closet/add',
-                        state: data
+                        state: {
+                            data,
+                            mode : "modify"
+                        }
                     })
                     break;
                 }
@@ -257,11 +259,9 @@ const UserProduct = ({history}) => {
                             return;
                         });
                         if(response && response.data) {
-                            console.log("%c SERVER GET USER PRODUCT DATA : ", "background: black; color: #fff;", response.data);
                             setProductData(response.data);
                         } else return;
                     } else {
-                        console.log("%c Request fail", "background: black; color: #fff;");
                         return null;
                     }
                 })();
@@ -349,7 +349,7 @@ const UserProduct = ({history}) => {
                                                                             <div className="type">
                                                                                 <p>{element.info.subtype}</p>
                                                                             </div>
-                                                                            {element.praw.full ? 
+                                                                            {element?.praw?.full ? 
                                                                                 <div className="link">
                                                                                     <a href={`http://${element.praw.full}`} onClick={(e) => e.stopPropagation()}>
                                                                                         <i className="material-icons">open_in_new</i>

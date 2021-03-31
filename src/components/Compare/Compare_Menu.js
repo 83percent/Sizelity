@@ -45,7 +45,7 @@ const Menu = ({closerEvent}) => {
                 <footer>
                     <ul>
                         <li>
-                            <h1>고객센터</h1>
+                            <Link to="/help">고객센터</Link>
                         </li>
                         {
                             (userInfo && userInfo._id) ? (

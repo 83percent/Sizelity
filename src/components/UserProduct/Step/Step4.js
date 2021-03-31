@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { sizeName, getSizeRate } from '../../../contents/js/ProductType';
 
 // CSS
-import '../../../contents/css/UserProduct/Step3.css';
 import '../../../contents/css/UserProduct/Step4.css';
 
 const Step4 = ({data, setData, setStep, alertToggle, save}) => {

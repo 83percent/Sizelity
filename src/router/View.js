@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import { useContext, useEffect, useRef } from 'react';
 
 // CSS
-import '../contents/css/View/View.css';
+import '../contents/css/View.css';
 
 // Context
 import {LoginContext} from '../App';
@@ -34,15 +34,30 @@ const View = () => {
             {
                 userInfo ? (
                     <header>
-                        <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>account_circle</i>
+                        <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>sentiment_satisfied_alt</i>
                         <div className="user-wrapper"ref={loginWrapper}>
                             <div className="user-title">
-                                <p>{userInfo.name}</p>
+                                <i className='material-icons'>sentiment_satisfied_alt</i>
+                                <div>
+                                    <p>환영합니다.</p>
+                                    <div>
+                                        <h1>{userInfo.name}</h1>
+                                        <p>님</p>
+                                    </div>
+                                    
+                                </div>
+                                
                                 <Link to="/setting"><i className="material-icons">settings</i></Link>
                             </div>
                             <div className="user-btn-frame">
-                                <Link to="/closet" style={{borderRight: "1px solid #dbdbdb"}}>나의 옷장</Link>
-                                <Link to="/after">나중에 볼 상품</Link>
+                                <Link to="/closet" style={{borderRight: "1px solid #dbdbdb"}}>
+                                    <i className="material-icons">door_sliding</i>
+                                    <p>나의 옷장</p>
+                                </Link>
+                                <Link to="/after">
+                                    <i className="material-icons">watch_later</i>
+                                    <p>나중에 볼 상품</p>
+                                </Link>
                             </div>
                         </div>
                     </header>

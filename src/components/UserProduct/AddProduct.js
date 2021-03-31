@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import Transition from '../../contents/js/TransitionSizeName';
 
 // CSS
@@ -6,9 +6,15 @@ import '../../contents/css/UserProduct/AddProduct.css';
 
 // Component
 import Step from './StepRouter';
+import axios from 'axios';
+
+// Context
+import {ServerContext} from '../../App';
+
 
 let transition = null;
 const AddProduct = ({history, location}) => {
+console.log(location);
 /*
     data = {
         info : { 
@@ -31,8 +37,11 @@ const AddProduct = ({history, location}) => {
     }
 */
     // state
-    const [data, setData] = useState((location.state && location.state._id) ? location.state : {info:{nick:undefined},size:{}});
-    const [step, setStep] = useState((data && data._id) ? 2 : 1);
+    const [data, setData] = useState((location.state?.data?._id) ? location.state.data : {info:{nick:undefined},size:{}});
+    const [step, setStep] = useState(data?._id ? 2 : 1);
+
+    // Context
+    const server = useContext(ServerContext);
 
     // Field
     if(!transition) transition = new Transition("KOR");
@@ -86,6 +95,60 @@ const AddProduct = ({history, location}) => {
     const event = {
         save : () => {
             confirm.toggle(true, confirmSaveWrapper);
+        },
+        saveSend : async (canSave) => {
+            confirm.toggle(false, confirmSaveWrapper);
+            if(!canSave) {alert.toggle(true, "입력이 완료되지 않았어요."); return}
+            const response = await axios({
+                method: location?.state?.mode === "modify" ? "PUT" : "POST", 
+                url: server + '/user/product',
+                withCredentials: true,
+                data: data,
+                timeout: 3000
+            }).catch((err) => {
+                if(!err.response?.status) return {data:{status:500}};
+                switch(err.response.status) {
+                    case 401 : {
+                        return {data:{status:401}};
+                    }
+                    default : {
+                        return {data:{status:500}};
+                    }
+                }
+            });
+            if(response?.data?.status) {
+                switch(response.data.status) {
+                    case 200 : {
+                        // 200 변경 성공
+                        history.goBack();
+                        break;
+                    }
+                    case -200 : {
+                        // -200 변경 실패
+                        alert.toggle(true, "서버오류로 인해 변경에 실패하였습니다.");
+                        break;
+                    }
+                    case 404 : {
+                        // 404 유저 데이터 찾을 수 없음 UserModel.findById(불가)
+                        alert.toggle(true, "잠시 후 다시 요청해주세요.");
+                        break;
+                    }
+                    case -404 : {
+                        // -404 요청 데이터 형식을 갖추고 있지 않음
+                        alert.toggle(true, "잘못된 접근입니다.");
+                        break;
+                    }
+                    case 401 : {
+                        // auth Error
+                        alert.toggle(true, "잘못된 접근입니다.");
+                        break;
+                    }
+                    default : {
+                        // server Error
+                        alert.toggle(true, "잠시 후 다시 요청해주세요.");
+                    }
+                }
+            } else alert.toggle(true, "잠시 후 다시 요청해주세요.");
         }
     }
     return  (
@@ -95,7 +158,7 @@ const AddProduct = ({history, location}) => {
                 <div className="confirm-frame">
                     <h1>상품 추가를 <q style={{color:"#ff0000", margin:"0 0.3rem"}}>종료</q>합니다.</h1>
                     <div>
-                        <div onClick={() => history.goBack()}><b style={{color:"#ff0000"}}>나가기</b></div>
+                        <div onClick={() => history.goBack()} style={{color:"#ff0000"}}>종료</div>
                         <div onClick={() => confirm.toggle(false, confirmOutWrapper)}>취소</div>
                     </div>
                 </div>
@@ -105,7 +168,7 @@ const AddProduct = ({history, location}) => {
                 <div className="confirm-frame">
                     <h1>입력한 <q style={{color:"#00966B", margin:"0 0.3rem"}}>저장</q>할까요?</h1>
                     <div>
-                        <div onClick={() => event.save()}><b style={{color:"#00966B"}}>저장</b></div>
+                        <div onClick={() => event.saveSend(canSave)} style={{color:"#00966B"}}>저장</div>
                         <div onClick={() => confirm.toggle(false, confirmSaveWrapper)}>취소</div>
                     </div>
                 </div>
@@ -133,7 +196,6 @@ const AddProduct = ({history, location}) => {
                 <div className="control-wrapper">
                     <button onClick={(e) => setStep(step-1)} className={step <= 2 ? "off" : null}>이전단계</button>
                     <div>
-                        <div className={`dot ${step > 0 ? "on" : null}`}></div>
                         <div className={`dot ${step > 1 ? "on" : null}`}></div>
                         <div className={`dot ${step > 2 ? "on" : null}`}></div>
                         <div className={`dot ${step > 3 ? "on" : null}`}></div>

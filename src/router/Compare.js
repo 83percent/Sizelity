@@ -16,9 +16,7 @@ export const ProductContext = createContext(null);
 
 
 const Compare = ({history, location}) => {
-    // Cookie
-    const [{sizelity_currentSearchData}, setCookies] = useCookies([]);
-
+    // Field
     const referrer = document.referrer;
     
     // State
@@ -49,22 +47,29 @@ const Compare = ({history, location}) => {
                         const pname = response.data.info.pname;
                         let isSame = false;
     
-                        let current = sizelity_currentSearchData;
-                        if(current) {
-                            for(const element of current) {
-                                if(element[0] === sname && element[1] === pname) {
-                                    isSame = true;
-                                    break;
-                                }
+                        // ---------------------
+                        let current = null;
+                        try {
+                            current = JSON.parse(localStorage.getItem("current"));
+                            if(current) {
+                                for(const element of current) {
+                                    if(element[0] === sname && element[1] === pname) {
+                                        isSame = true;
+                                        break;
+                                    }
+                                }        
                             }
-                        } else {
-                            current = new Array([]);
-                        }
+                        } catch{current = []}
                         if(!isSame) {
-                            if(current.length > 20) current.pop();
-                            current.unshift([ response.data.info.sname, response.data.info.pname, response.data.info.subtype, response.data.praw.full]);
-                            setCookies("sizelity_currentSearchData",current,{path:"/", maxAge:(500 * 24 * 60 * 60)});
+                            const r_d = response.data;
+                            if(current.length > 31) current.pop();
+                            current.unshift([ r_d.info.sname, r_d.info.pname, r_d.info.subtype, r_d.praw.full]);
+                            localStorage.setItem("current", JSON.stringify(current));
                         }
+
+                        // ---------------------
+                        
+                        
                     } catch{} finally {
                         setData(response.data);
                     }
@@ -78,15 +83,17 @@ const Compare = ({history, location}) => {
         if(!data) {
             // 상품 정보 없음. -> 검색
             let query = null;
-            if(referrer) {
-                const urlModule = new URLModule();
-                const {domain, code} = urlModule.get(referrer);
-                if(domain && code) query = `${domain}/${code}`;
-            } else if(location.search) {
+            const urlModule = new URLModule();
+            let canReadReferrer = null;
+            if(referrer) canReadReferrer = urlModule.get(referrer);
+            if(location.search) {
                 //const {domain, code} = new URLSearchParams(location.search);
                 const params = new URLSearchParams(location.search);
                 const domain = params.get("shop");
                 const code = params.get("no");
+                if(domain && code) query = `${domain}/${code}`;
+            } else if(canReadReferrer) {
+                const {domain, code} = canReadReferrer;
                 if(domain && code) query = `${domain}/${code}`;
             }
             if(query) {

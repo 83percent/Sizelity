@@ -1,9 +1,6 @@
 import axios from "axios";
 import { useContext, useRef, useState } from "react";
 
-// CSS
-import '../../contents/css/Alert.css';
-
 // Context
 import { ServerContext } from '../../App';
 
@@ -109,7 +106,7 @@ const ChangePassword = ({history}) => {
                     }
                     default : {
                         // server Error
-                        event.alertToggle(true, "잠시 후 다시 요청해주세요.");
+                        event.alertToggle(true,     "잠시 후 다시 요청해주세요.");
                     }
                 }
             } else event.alertToggle(true, "잠시 후 다시 요청해주세요.");

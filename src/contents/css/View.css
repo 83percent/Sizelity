@@ -23,7 +23,7 @@
     text-align: center;
 }
 #View > header > i {
-    font-size: 2.4rem;
+    font-size: 2.6rem;
     margin-top: 0.5rem;
     padding: 1rem;
 }
@@ -72,26 +72,49 @@
 #View > header > .user-wrapper > .user-title {
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-start;
     padding: 1.5rem 0 1rem 1.5rem;
 }
-
-#View > header > .user-wrapper > .user-title > p {
-    font-size: 1.5rem;
+#View > header > .user-wrapper > .user-title > i {
+    font-size: 4.3rem;
+    color: #00000070;
+}
+#View > header > .user-wrapper > .user-title > div {
+    padding-left: 9px;
+    position: relative;
+    bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+#View > header > .user-wrapper > .user-title > div > p {
+    position: relative;
+    top: 5px;
+    left: 2px;
+    color: #888888;
+}
+#View > header > .user-wrapper > .user-title > div > div {
+    display: flex;
+    align-items: flex-end;
+}
+#View > header > .user-wrapper > .user-title > div > div > h1 {
     font-weight: 400;
-    
+}
+#View > header > .user-wrapper > .user-title > div > div > p {
+    position: relative;
+    bottom: 3px;
+    left: 5px;
+    font-size: 1.2rem;
 }
 #View > header > .user-wrapper > .user-title > a {
-    padding: 0 0.3rem;
+    padding: 1.5rem;
 }
 #View > header > .user-wrapper > .user-title > a > i {
-    font-size: 1.4rem;
+    font-size: 2.0rem;
     color: #000000;
     opacity: 0.3;
-}
-#View > header > .user-wrapper > .user-title > i.hover {
-    opacity: 1.0;
 }
 #View > header > .user-wrapper > .user-btn-frame {
     display: flex;
@@ -100,12 +123,24 @@
 #View > header > .user-wrapper > .user-btn-frame > a {
     all: unset;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-top: 1px solid #dbdbdb;
+    padding: 1.0rem 0;
+    color: #000000;
+}
+#View > header > .user-wrapper > .user-btn-frame > a > i {
+    opacity: 0.3;
+    font-size: 1.5rem;
+    margin-right: 0.3rem;
+}
+#View > header > .user-wrapper > .user-btn-frame > a > p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border-top: 1px solid #dbdbdb;
-    padding: 0.8rem 0;
-    color: #000000;
+    font-size: 1.2rem;
 }
     /*      section     */
 #View > section {
@@ -137,7 +172,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-bottom: 3rem;
+    padding-bottom: 6rem;
 }
 #View > section#Main h1 {
     font-size: 2.0rem;

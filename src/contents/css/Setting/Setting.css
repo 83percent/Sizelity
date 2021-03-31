@@ -39,16 +39,17 @@ section#Setting > article > .menu-wrapper > ul {
 section#Setting > article > .menu-wrapper > ul > .menu-element {
     all: unset;
     color: #000000;
-    padding: 0.6rem 1rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
     border-top: 1px solid #dbdbdb;
 }
 section#Setting > article > .menu-wrapper > ul > .menu-element > i {
     font-size: 1.6rem;
+    opacity: 0.5;
 }
 section#Setting > article > .menu-wrapper > ul > .menu-element > p {
-    margin-left: 0.3rem;
+    margin-left: 0.6rem;
     font-size: 1.1rem;
 }
 section#Setting > article > .change-wrapper {
