@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 // Context
 import {ServerContext} from '../../App';
@@ -19,7 +19,7 @@ const ChangeUserInfomation = ({history}) => {
     // Field
     const userData = (()=> {
         try {
-            const {username, name} = JSON.parse(localStorage.getItem("authWithSizelity"));
+            let {username, name} = JSON.parse(localStorage.getItem("authWithSizelity"));
             if(!username) username = "";
             if(!name) name = "";
             return {username, name};
@@ -150,7 +150,7 @@ const ChangeUserInfomation = ({history}) => {
             if(!alertWrapper.current) return;
             if(force === undefined) force = !alertWrapper.current.classList.contains("on");
             if(force) {
-                if(text != undefined) alertWrapper.current.querySelector("h1").innerHTML = text;
+                if(text !== undefined) alertWrapper.current.querySelector("h1").innerHTML = text;
             }
             alertWrapper.current.classList.toggle("on",force);
         }

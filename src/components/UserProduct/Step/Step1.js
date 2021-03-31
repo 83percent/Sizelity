@@ -73,7 +73,7 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
                         if(product && product.praw && product.praw.code === analyze.code) return; // 중복된 데이터 검색
                         const response = await axios({
                             method: 'get',
-                            url: `${server}/product/get?shop=${analyze.domain}&no=${analyze.code}`,
+                            url: `${server}/product/${analyze.domain}/${analyze.code}`,
                             timeout: 3500
                         }).catch((err) => {
                             alertToggle(true, "네트워크 오류");

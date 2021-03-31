@@ -39,7 +39,7 @@ section#AddProduct > article > .step-wrapper > main > .input-frame > input {
     background: #fff;
     padding: 0.3rem 0.8rem;
     border-bottom: 2px solid #88888880;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 section#AddProduct > article > .step-wrapper > main > .input-frame > input.off {
     text-decoration: line-through;

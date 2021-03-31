@@ -56,6 +56,18 @@ class TransitionSizeName {
             length : {
                 KOR : "총 길이",
                 JPN : "そたけ"
+            },
+            height : {
+                KOR : "높이"
+            },
+            heel : {
+                KOR : "굽높이"
+            },
+            width : {
+                KOR : "발볼"
+            },
+            S_length : {
+                KOR : "길이"
             }
         }
         this.cateObj = {

@@ -21,7 +21,7 @@ const UserMenu = ({history}) => {
         logout : async () => {
             if(window.confirm("로그아웃 하시겠습니까?")) {
                 console.log(history);
-                const response = await login.delete();
+                await login.delete();
                 setUserInfo(null);
                 history.replace("/");   
             }

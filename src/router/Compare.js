@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {createContext, useMemo, useEffect, useState ,useContext} from 'react';
+import React, {createContext, useEffect, useState ,useContext} from 'react';
 import { useCookies } from 'react-cookie';
 import URLModule from '../contents/js/URL';
 

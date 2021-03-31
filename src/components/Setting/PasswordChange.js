@@ -118,7 +118,7 @@ const ChangePassword = ({history}) => {
             if(!alertWrapper.current) return;
             if(force === undefined) force = !alertWrapper.current.classList.contains("on");
             if(force) {
-                if(text != undefined) alertWrapper.current.querySelector("h1").innerHTML = text;
+                if(text !== undefined) alertWrapper.current.querySelector("h1").innerHTML = text;
             }
             alertWrapper.current.classList.toggle("on",force);
         }

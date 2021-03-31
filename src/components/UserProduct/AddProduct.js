@@ -32,7 +32,7 @@ const AddProduct = ({history, location}) => {
 */
     // state
     const [data, setData] = useState((location.state && location.state._id) ? location.state : {info:{nick:undefined},size:{}});
-    const [step, setStep] = useState((data && data._id) ? 4 : 1);
+    const [step, setStep] = useState((data && data._id) ? 2 : 1);
 
     // Field
     if(!transition) transition = new Transition("KOR");
@@ -46,6 +46,9 @@ const AddProduct = ({history, location}) => {
                 if(!data.praw.domain || !data.praw.code || !data.praw.full) return false;
             }
             if(!data.size.name) return false;
+            else {
+                if(Object.entries(data.size).length < 2) return false;
+            }
             return true;
         } catch {return false;}
     })(data);
@@ -82,21 +85,9 @@ const AddProduct = ({history, location}) => {
     }
     const event = {
         save : () => {
-            if(canSave) window.alert("저장하시겠습니까?");
-        },
-        dataChange : (data) => {
-            if(navWrapper.current) {
-                navWrapper.current.classList.add("c_e");
-                setTimeout(()=> {
-                    setData(data);
-                    navWrapper.current.classList.remove("c_e");
-                }, 450);
-            } else {
-                setData(data);
-            }
+            confirm.toggle(true, confirmSaveWrapper);
         }
     }
-    console.log("INCOME DATA : ", data);
     return  (
         <section id="AddProduct">
             <div className="confirm-wrapper" ref={confirmOutWrapper}>
@@ -131,26 +122,27 @@ const AddProduct = ({history, location}) => {
             <article>
                 <Step 
                     data={data}
-                    setData={event.dataChange}
+                    setData={setData}
                     step={step}
                     setStep={setStep}
                     alertToggle={alert.toggle}
+                    save={event.save}
                 />
             </article>
             <footer>
                 <div className="control-wrapper">
-                    <button onClick={() => step > 1 ? setStep(step-1) : undefined}>이전단계</button>
+                    <button onClick={(e) => setStep(step-1)} className={step <= 2 ? "off" : null}>이전단계</button>
                     <div>
                         <div className={`dot ${step > 0 ? "on" : null}`}></div>
                         <div className={`dot ${step > 1 ? "on" : null}`}></div>
                         <div className={`dot ${step > 2 ? "on" : null}`}></div>
                         <div className={`dot ${step > 3 ? "on" : null}`}></div>
                     </div>
-                    <button onClick={() => step < 4 ? setStep(step+1) : undefined}>다음단계</button>
+                    <button className="off">다음단계</button>
                 </div>
                 <div ref={navWrapper} className="nav-wrapper" onClick={() => canSave ? confirm.toggle(true, confirmSaveWrapper) : undefined}>
                     <div className={`status ${canSave ? "save" : null}`}>
-                        <p>{canSave ? "여기를 누르시면 저장가능합니다." : "작성중"}</p>
+                        <p>{canSave ? "이곳을 누르시면 저장 가능합니다." : "작성중"}</p>
                     </div>
                     <nav className={`myProductNav ${canSave ? "save" : null}`} ref={navigation} >
                         <div className="size">
