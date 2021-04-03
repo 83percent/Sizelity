@@ -15,7 +15,7 @@ export default class Login {
                 'Content-Type' : 'application/json'
             },
             method: 'post',
-            url: __server + '/login',
+            url: __server + '/login/signin',
             data: {username, password},
             withCredentials: true,
             timeout: 3000
