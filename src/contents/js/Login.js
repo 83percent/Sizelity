@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 //const URL = "http://192.168.11.2:3001/user/signin";
-const __server = "http://localhost:3001";
+//const __server = "http://localhost:3001";
 //const URL = "http://172.30.1.31:3001/user/signin";
-//const URL = "https://13.124.51.75:3001/user/signin";
+const __server = "https://server.sizelity.com";
 //const URL = "https://svjoemqvtl.execute-api.ap-northeast-2.amazonaws.com/user"; // gateway
 //const URL = "https://toe8rj14gc.execute-api.ap-northeast-2.amazonaws.com/user";
 
@@ -51,7 +51,8 @@ export default class Login {
                 data: {username, password},
                 withCredentials: true,
                 timeout: 3000
-            }).catch(() => {
+            }).catch((err) => {
+                console.log(err);
                 return {data:{status:-200}};
             });
             if(response?.data) {
