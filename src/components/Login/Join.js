@@ -46,7 +46,7 @@ const Join = ({history}) => {
                     resultWrapper.current.classList.add("on");
                     const result = await axios({
                         method : 'post',
-                        url : `${server}/login/signup`,
+                        url : `${server}/account/signup`,
                         withCredentials: true,
                         data : account,
                         timeout : 3000

@@ -20,10 +20,9 @@ const UserMenu = ({history}) => {
     const Event = {
         logout : async () => {
             if(window.confirm("로그아웃 하시겠습니까?")) {
-                console.log(history);
                 await login.delete();
                 setUserInfo(null);
-                history.replace("/");   
+                history.replace("/");
             }
             return null;
         },
