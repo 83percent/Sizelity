@@ -38,27 +38,3 @@ Copyright : JAEHOON LEE (83percent)
 - 'pm2'
 
 ## Proejct Update
-### 2021-03-03
-- Connect Server and end login test.
-
-- Product search for use query complete (when access 'direct service' or 'current search date') 
-
-- Current Search Date store in Cookie logic.
-* But, after change Cookie logic make api lib.
-
-- "My Product Nav Bottom Bar" insert 'Open My Product List' button.
-
-### 2021-03-06
-- Insert Alert top slide bar in User Sign in/up Page. (with controller : event.alertToggle(force, msg);
-
-### 2021-03-08
-- Home (path : / ) change the View Component
-- Router , src folder splite
-
-### 2021-03-09
-- User after compare product complete test with server.
-- Will Update, Component receive result of connect server response alert model.
-
-### 2021-03-13
-- "Compare Router" splite.
-- My Product Control page make and test complete.
