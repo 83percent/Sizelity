@@ -126,7 +126,7 @@ const ChangeUserInfomation = ({history}) => {
                     }
                     case 404 : {
                         // 404 유저 데이터 찾을 수 없음 UserModel.findById(불가)
-                        event.alertToggle(true, "잠시 후 다시 요청해주세요.");
+                        event.alertToggle(true, "잠시 후 다시 시도해주세요.");
                         break;
                     }
                     case -404 : {
@@ -141,10 +141,10 @@ const ChangeUserInfomation = ({history}) => {
                     }
                     default : {
                         // server Error
-                        event.alertToggle(true, "잠시 후 다시 요청해주세요.");
+                        event.alertToggle(true, "잠시 후 다시 시도해주세요.");
                     }
                 }
-            } else event.alertToggle(true, "잠시 후 다시 요청해주세요.");
+            } else event.alertToggle(true, "잠시 후 다시 시도해주세요.");
         },
         alertToggle : (force, text) => {
             if(!alertWrapper.current) return;
@@ -153,6 +153,9 @@ const ChangeUserInfomation = ({history}) => {
                 if(text !== undefined) alertWrapper.current.querySelector("h1").innerHTML = text;
             }
             alertWrapper.current.classList.toggle("on",force);
+        }, // alertToggle
+        accountout : () => {
+            history.push("/setting/accountout");
         }
     }
     return (
@@ -196,6 +199,9 @@ const ChangeUserInfomation = ({history}) => {
                     </div>
                 </div>
             </article>
+            <div className="signout">
+                <p onClick={() => event.accountout()}>Sizelity 계정 삭제</p>
+            </div>
             <div className="footer-btn">
                 <div onClick={() => event.changeInfo()}>
                     {

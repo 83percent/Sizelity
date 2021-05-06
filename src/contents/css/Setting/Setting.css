@@ -9,14 +9,14 @@ section#Setting > .back {
     padding: 1.5rem;
 }
 section#Setting > header {
-    padding: 3rem 2rem 0.5rem 2rem;
+    padding: 3rem 2rem 0.5rem 3rem;
 }
 section#Setting > header > h1 {
     font-size: 2.5rem;
-    font-weight: 500;
+    font-weight: 400;
 }
 section#Setting > header > p {
-    color: #888888;
+    color: #777777;
     margin-left: 0.2rem;
 }
 section#Setting > article > .menu-wrapper {
@@ -53,10 +53,10 @@ section#Setting > article > .menu-wrapper > ul > .menu-element > p {
     font-size: 1.1rem;
 }
 section#Setting > article > .change-wrapper {
-
+    padding-left: 2rem;
 }
 section#Setting > article > .change-wrapper > .title {
-    padding: 1.5rem 2rem 0 2rem; 
+    padding: 1.5rem 2rem 0 1rem; 
 }
 section#Setting > article > .change-wrapper > .title > h2 {
     font-size: 1.5rem;
@@ -64,7 +64,7 @@ section#Setting > article > .change-wrapper > .title > h2 {
 }
 section#Setting > article > .change-wrapper > .title > p {
     font-size: 0.9rem;
-    color: #888;
+    color: #777777;
 }
 section#Setting > article > .change-wrapper > .input-wrapper {
     width: 100%;
@@ -74,11 +74,48 @@ section#Setting > article > .change-wrapper > .input-wrapper {
 }
 section#Setting > article > .change-wrapper > .input-wrapper > input {
     all: unset;
-    margin-left: 2rem;
+    margin-left: 1rem;
     padding-left: 1rem;
     padding-bottom: 0.3rem;
     font-size: 1.3rem;
-    border-bottom: 2px solid #00000050;
+    border-bottom: 1px solid #00000050;
+}
+section#Setting > article > .change-wrapper > .option-wrapper {
+    margin-top: 1rem;
+    padding: 0 1rem;
+}
+section#Setting > article > .change-wrapper > .option-wrapper > select {
+    border: 1px solid #88888880;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: #ffffff80;
+    font-size: 1.2rem;
+    padding-right: 2rem;
+    width: 100%;
+}
+section#Setting > article > .suggest-wrapper {
+    width: 100%;
+    display: flex;
+    margin-top: 2.5rem;
+    flex-direction: column;
+}
+section#Setting > article > .suggest-wrapper > input {
+    all: unset;
+    margin-left: 3rem;
+    padding-left: 1rem;
+    padding-bottom: 0.3rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #00000050;
+}
+section#Setting > .signout {
+    margin-top: 2rem;
+    padding-left: 3rem;
+}
+section#Setting > .signout > p {
+    font-size: 1.2rem;
+    opacity: 0.5;
+    color: #ff0000;
+    font-weight: 400;
 }
 section#Setting > .footer-btn {
     position: fixed;
