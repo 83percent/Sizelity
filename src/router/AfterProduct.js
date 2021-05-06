@@ -52,14 +52,31 @@ const AfterProduct = ({history}) => {
             }
         },
         removeAfterList : async (data) => {
-            const result = await axios({
-                method: 'delete',
+            await axios({
+                method: 'DELETE',
                 url : `${server}/user/after`,
                 withCredentials: true,
-                data : data,
-                timeout : 4000
+                data : {products : data},
+                timeout : 3500
+            }).catch(err => {
+                switch(err.response?.status) {
+                    case 200 : {
+                        // 삭제 성공
+                        break;
+                    }
+                    case 401 : {
+                        // 로그인 안됨
+                        window.alert("로그인 후 이용가능 합니다.");
+                        break;
+                    }
+                    case 500 :
+                    default : {
+                        // Server Error
+                        window.alert("서버 오류가 발생했습니다.");
+                        break;
+                    }
+                }
             });
-            console.log("삭제 결과 : ",result);
         }
 
     }
@@ -78,11 +95,7 @@ const AfterProduct = ({history}) => {
                 search: `?shop=${element.praw.domain}&no=${element.praw.code}`
             });
         },
-        removeData : {
-            _id : userInfo && userInfo._id ? userInfo._id : null,
-            upwd : userInfo && userInfo.sili_p ? userInfo.sili_p : null,
-            product : ["asdfsaf"]
-        },
+        removeData : [],
         count : 0,
         remove : (_id, e) => {
             e.stopPropagation();
@@ -97,7 +110,7 @@ const AfterProduct = ({history}) => {
                 target.classList.add("remove");
                 setTimeout(() => target.remove(),360);
             }
-            event.removeData.product.push(_id);
+            event.removeData.push(_id);
             event.count++;
         },
         removeSend : async () => {

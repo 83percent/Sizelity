@@ -215,38 +215,38 @@ const ViewCompare = ({history, productData}) => {
                     }
                 };
                 ( async () => { 
-                    const result = await axios({
+                    const response = await axios({
                         method: 'post',
                         url : `${server}/user/after`,
                         data : sendData,
                         withCredentials: true,
                         setTimeout: 4000
-                    }).catch(() => {
-                        return {data : {status : -200}};
-                    });;
-                    console.log(result.data);
-                    if(result.data) {
+                    }).catch((err) => {
+                        if(err.response?.status) {
+                            switch(err.response.status) {
+                                case 401 : {
+                                    alert.alertToggle(true, "로그인 후 이용가능합니다.", "error");
+                                    break;
+                                }
+                                case 455 : {
+                                    alert.alertToggle(true, "최대 50개만 저장 가능합니다..", "error");
+                                    break;
+                                }
+                                case 500 :
+                                default : {
+                                    alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
+                                    break;
+                                }
+                            }
+                        } else alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
+                    }).finally(() => {
                         wrapperToggle.favorite(false);
-                        switch(result.data.status) {
-                            case 200 : {
-                                isAfterRequest = true;
-                                alert.alertToggle(true, "나중에 볼 상품에 추가하였습니다.", "clear");
-                                break;
-                            }
-                            case 0 : {
-                                isAfterRequest = true;
-                                alert.alertToggle(true, "이미 추가된 상품입니다.", "normal");
-                                break;
-                            }
-                            case -1 : {
-                                alert.alertToggle(true, "로그인 후 이용가능합니다.", "error");
-                                break;
-                            }
-                            default : {
-                                alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
-                                break;
-                            }
-                        }
+                    });
+                    console.log(response, response?.status === 200);
+                    if(response?.status === 200) {
+                        isAfterRequest = true;
+                        alert.alertToggle(true, "나중에 볼 상품에 추가하였습니다.", "clear");
+                        console.log("CALL")
                     }
                 })();
             } catch(error) {
