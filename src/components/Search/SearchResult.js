@@ -111,7 +111,7 @@ const SearchResult = ({praw, history}) => {
                         </div>
                     )
                 }
-                case -404 : {
+                case 403 : {
                     return (
                         <div className="Search-none">
                             <i className="material-icons">mood_bad</i>
@@ -119,6 +119,8 @@ const SearchResult = ({praw, history}) => {
                         </div>
                     )
                 }
+                case 408 :
+                case 500 :
                 default : {
                     return (
                         <>

@@ -13,7 +13,7 @@ class SizelityURL {
         let isFind = false;
         const result = {domain:undefined, code:undefined, type:undefined};
         const _pris = ["blog","smartstore"];
-        const _codeParams = ['branduid', 'product_no', 'logNo'];
+        const _codeParams = ['branduid', 'product_no', 'logNo', 'index_no'];
         const _pathParams = ['products','product'];
         try {
             if(_url.indexOf("http") === -1) {

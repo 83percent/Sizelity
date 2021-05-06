@@ -3,8 +3,8 @@ import Cookie from './Cookie';
 import URLModule from './URL';
 
 
-//const URL = "http://localhost:3001/product";
-const URL = "https://server.sizelity.com";
+const server = "http://localhost:3001";
+//const URL = "https://server.sizelity.com";
 //const URL = "http://172.30.1.31:3001/product/get";
 
 class ProductSearch {
@@ -93,6 +93,10 @@ class ProductSearch {
             return true;
         } else return false;
     }
+    /*
+        Connect Server : 상품 데이터 가져오기
+
+    */
     async search(url) {
         const urlModule = new URLModule();
         try {
@@ -101,11 +105,14 @@ class ProductSearch {
             if(data === null) return {status : -404};
             if(data) {
                 const response = await axios({
-                    method : 'get',
-                    url : `${URL}/${data.domain}/${data.code}`,
+                    method : 'POST',
+                    url : `${server}/product/${data.domain}/${data.code}`,
+                    timeout: 3500
+                }).catch(err => {
+                    return {data :{status : err?.response?.status ? err.response.status : 408}}
                 });
                 console.log("%c Product Search Result : ", "background: red; color: #fff;",response.data);
-                if(response.data._id) {
+                if(response.data?._id) {
                     response.data.status = 200;
                 }
                 return response.data

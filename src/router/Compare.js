@@ -32,7 +32,7 @@ const Compare = ({history, location}) => {
         const getProduct = async (query) => {
             try {
                 const response = await axios({
-                    method: "get",
+                    method: 'POST',
                     url : `${server}/product/${query}`,
                     timeout : 2500
                 }).catch(() => {
@@ -41,7 +41,7 @@ const Compare = ({history, location}) => {
                 console.log("검색 결과 : ", response.data);
                 if(response.data?._id) {
                     // 데이터 가져오기 성공.
-                    try {
+                    try {   
                         // 최근 검색 상품 쿠키에 넣기
                         const sname = response.data.info.sname;
                         const pname = response.data.info.pname;
