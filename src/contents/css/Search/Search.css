@@ -172,36 +172,39 @@ section#Search {
 /*
     Current     
 */
-#Search > .currentWrapper {
+#Search > .current-wrapper {
     background: #ffffff;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid #e3e8ee;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
 }
-#Search > .currentWrapper > .Search-currentNav {
+#Search > .current-wrapper > header {
     display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
+    padding-left: 1rem;
 }
-#Search .Search-currentNav > h1 {
+#Search header > h1 {
+    padding: 1rem 0;
     font-size: 1.2rem;
     font-weight: 400;
     flex-grow: 1;
 }
-#Search .Search-currentNav > button {
+#Search header > button {
     all: unset;
     color: #ffffff;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
+    font-weight: 300;
+    font-size: 1.0rem;
     transition-duration: 0.3s;
 }
-#Search .Search-currentNav > button.save {
-    border-radius: 2rem;
-    background: #00966B;
-    color: #ffffff;
-    padding: 0.5rem 1.3rem;
+#Search header > button > p {
+    padding: 0.5rem 1rem;
 }
-#Search .Search-currentNav > button.delete {
-    border-radius: 2rem;
-    color: #ff000080;
+#Search header > button.save > p {
+    color: #ffffff;
+    background-color: #00966B;
+    border-radius: 3rem;
+}
+#Search header > button.delete > p {
+    color: #dd181890;
 }
 #Search .Search-currentNone {
     display: flex;
@@ -209,40 +212,53 @@ section#Search {
     justify-content: center;
     padding: 3rem 0;
 }
-#Search .Search-currentElement {
+#Search > .current-wrapper > ul > li {
     display: flex;
     align-items: center;
     border-top: 1px solid #dbdbdb;
-    padding-left: 1rem;
     transition-duration: 0.4s;
     position: relative;
     left: 0;
 }
-#Search .Search-currentElement.remove {
+
+#Search > .current-wrapper > ul > li.remove {
     left: -100%;
-    transition-duration: 0;
 }
-#Search .Search-currentElement > .Search-currentInfoFrame {
+#Search > .current-wrapper > ul > li > div {
     display: flex;
     align-items: center;
-    flex-grow: 1;
+    background-color: #ffffff;
+    z-index: 800;
+    width: 100vw;
+    position: relative;
+    left: 0;
+    transition-duration: 0.5s;
+}
+#Search > .current-wrapper > ul.on > li > div {
+    left: -4rem;
+}
+#Search > .current-wrapper > ul > li > div > .info-frame {
+    display: flex;
+    align-items: center;
+    width: 85vw;
     overflow: hidden;
     padding: 0.8rem 0;
+    margin-left: 1rem;
 }
-#Search .Search-currentElement > .Search-currentInfoFrame > .Search-currentName {
+#Search > .current-wrapper > ul > li > div > .info-frame > .title {
     flex-grow: 1;
 }
-#Search .Search-currentElement > .Search-currentInfoFrame > div {
+#Search > .current-wrapper > ul > li > div > .info-frame > div {
     overflow: hidden;
     min-width: 3.5rem;
-}   
-#Search .Search-currentElement > .Search-currentInfoFrame p {
+}
+#Search > .current-wrapper > ul > li > div > .info-frame p {
     font-size: 0.9rem;
     color: #00000080;
     overflow: hidden;
     white-space: nowrap;
 }
-#Search .Search-currentElement > .Search-currentInfoFrame h1 {
+#Search > .current-wrapper > ul > li > div > .info-frame h1 {
     font-size: 1.2rem;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -250,24 +266,24 @@ section#Search {
     -ms-text-overflow: ellipsis;
     white-space: nowrap;
 }
-#Search .Search-currentElement > .Search-currentBtnFrame > i {
-    font-size: 1.35rem;
+#Search > .current-wrapper > ul > li > div > a > i {
+    font-size: 1.5rem;
     color: #000000;
     padding: 1rem;
 }
-#Search .Search-currentElement > button {
+#Search > .current-wrapper > ul > li > button {
     all: unset;
-    width: 0;
+    position: absolute;
     overflow: hidden;
     transition-duration: 0.3s;
     text-align: center;
-}
-#Search .Search-currentElement > button.active {
-    width: 3rem;
-    padding: 0.5rem 0.3rem;
-}
-#Search .Search-currentElement > button > i {
-    color: #dd1818;
+    top: 0;
+    right: 0;
+    width: 4rem;
+    height: 100%;
+    background-color: #dd1818;
+    color: #ffffff;
+
 }
 /*      after   */
 section#Search > .hn {

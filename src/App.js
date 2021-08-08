@@ -22,7 +22,7 @@ import NotFound from './router/NotFoundRouter';
 import EventRouter from './router/EventRouter';
 import HelpRouter from './router/HelpRouter';
 
-import NonLogin from './router/Error/NonLogin';
+import NonLogin from './router/Error/NonLogin'; 
 
 
 import Test from './router/Test';
@@ -88,7 +88,6 @@ const App = () => {
                                 <Route path="/setting" component={SettingRouter} />
                                 
                                 <Route exact path="/test" component={Test}/>
-                                
                                 
                                 <Route exact path="/notlogin" component={NonLogin} />
                                 <Route exact path="/error" component={Wrong} />

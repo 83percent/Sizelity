@@ -23,7 +23,7 @@ const Menu = ({closerEvent}) => {
                     {
                         (userInfo && userInfo._id) ? (
                             <ul>
-                                <li><Link to="/closet">나의 상품</Link></li>
+                                <li><Link to="/closet">나의 옷장</Link></li>
                                 <li><Link to="/after">나중에 볼 상품</Link></li>
                                 
                             </ul>

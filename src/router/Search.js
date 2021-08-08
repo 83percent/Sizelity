@@ -128,10 +128,7 @@ const Search = ({history}) => {
                     <i className="material-icons">{(userInfo && userInfo._id) ? "keyboard_arrow_right" : "lock"}</i>
                 </div>
             </div>
-            <div className="currentWrapper">
-                <SearchCurrent 
-                    history={history}/>
-            </div>
+            <SearchCurrent history={history}/>
         </section>
     )
 }

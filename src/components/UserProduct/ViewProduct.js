@@ -1,28 +1,28 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import Transition from '../../contents/js/TransitionSizeName';
 import { Link } from 'react-router-dom';
+
+import Transition from '../../contents/js/TransitionSizeName';
+import UserProductModule from '../../contents/js/UserProduct';
 
 // CSS
 import '../../contents/css/UserProduct/ViewProduct.css';
 import '../../contents/css/MyProductNav.css';
 
 // Context
-import { MediaContext } from '../../App';
-import { LoginContext } from '../../App';
-import { ServerContext } from '../../App';
+import { MediaContext, LoginContext, ServerContext } from '../../App';
 
 
 let transition = null;
-const UserProduct = ({history}) => {
-    const backIsCompare = history.location.state ? history.location.state.isCompare : false;
+const UserProduct = ({history, location}) => {
+    const backIsCompare = location?.state?.isCompare;
     //const comparePtype = history.location.state ? history.location.state.ptype : null; -> 
-
+    
     // Cookie
     const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
     const cookie = sizelity_myRecently;
-
+    
     // Context
     const { userInfo } = useContext(LoginContext);
     const media = useContext(MediaContext);
@@ -30,14 +30,16 @@ const UserProduct = ({history}) => {
     
     // State
     const [productData, setProductData] = useState(null);
-
+    
     // Ref
     const alertWrapper = useRef(null);
     const confirmWrapper = useRef(null);
     const deleteBtn = useRef(null);
     const modifyBtn = useRef(null);
+    const listRef = useRef(null);
 
     // Field
+    const userProductModule = useMemo(() => new UserProductModule(server), [server]);
     if(!transition) transition = new Transition("KOR");
     const cate = ["set","outer","top","bottom"]; // 지원 항목
     let mode = 1; // -1 : delete mode / 0 : modify mode / 1 : cookie change mode
@@ -46,20 +48,17 @@ const UserProduct = ({history}) => {
         frame : null
     };
     
-    // Analyze ProductData
-    const analyzeData = ((data) => {
-        if(!data || data.length < 1) return null;
-        else {
-            const result = {};
-            for(const element of data) {
-                if(element.info.ptype) {
-                    if(!result[element.info.ptype]) result[element.info.ptype] = [];
-                    result[element.info.ptype].push(element);
-                }
+    const analyzeData = useMemo(() => {
+        return productData?.reduce((acc, element) => {
+            let ptype = element.info.ptype;
+            if(ptype) {
+                if(!acc[ptype]) acc[ptype] = [];
+                acc[ptype].push(element);
             }
-            return result;
-        }
-    })(productData);
+            return acc;
+        }, {});
+    }, [productData]);
+
     const event = {
         listToggle : (e, force) => {
             if(!e) return;
@@ -196,80 +195,93 @@ const UserProduct = ({history}) => {
             click : () => {
                 
             }
-        }
-    }
-    const alert = {
-        // type : error || normal || clear
-        alertToggle : (force, msg, type) => {
-            if(!alertWrapper.current) return;
-            const cl = alertWrapper.current.classList;
-            if(force === undefined) force = !cl.contains("on");
-            if(force === true) {
-                if(msg !== undefined) {
-                    if(type === "error" || type === "normal" || type === "clear") {
-                        const title = alertWrapper.current.querySelector("p");
-                        if(title) {
-                            title.innerHTML = msg;
-                            title.classList.remove("error", "normal", "clear");
-                            title.classList.add(type);
-                        }
-                    }
-                }
-                cl.add("on");
-            } else {
-                cl.remove("on");
-            }
         },
-        confirmToggle : (force, data, type) => {
-            if(!confirmWrapper.current) return;
-            const cl = confirmWrapper.current.classList;
-            if(force === undefined) force = !cl.contains("on");
-            if(force === true) {
-                if(data !== undefined) {
-                    if(type === "error" || type === "normal" || type === "clear") {
-                        const title = confirmWrapper.current.querySelector("q");
-                        if(title) {
-                            title.innerHTML = data.info.nick ? data.info.nick : data.info.pname ? data.info.pname : null;
-                            title.classList.remove("error", "normal", "clear");
-                            title.classList.add(type);
+        toggleOption : function(target) {
+            for(let i=0; i<3; ++i) {
+                if(target.nodeName === 'BUTTON') break;
+                else target = target.parentElement;
+            }
+            if(target.nodeName !== 'BUTTON') return;
+            target.classList.toggle("on");
+            listRef.current.classList.toggle("on");
+        }, // toggleOption(target)
+        
+    }
+    const alert = useMemo(() => {
+        return {
+            // type : error || normal || clear
+            alertToggle : (force, msg, type) => {
+                if(!alertWrapper.current) return;
+                const cl = alertWrapper.current.classList;
+                if(force === undefined) force = !cl.contains("on");
+                if(force === true) {
+                    if(msg !== undefined) {
+                        if(type === "error" || type === "normal" || type === "clear") {
+                            const title = alertWrapper.current.querySelector("p");
+                            if(title) {
+                                title.innerHTML = msg;
+                                title.classList.remove("error", "normal", "clear");
+                                title.classList.add(type);
+                            }
                         }
                     }
+                    cl.add("on");
+                } else {
+                    cl.remove("on");
                 }
-                cl.add("on");
-            } else {
-                cl.remove("on");
-            }
-        }
-    }
-    useEffect(() => {
-        if(!userInfo) return;
-        console.log("%c Request My Fav Product Data !!", "background: black; color: #fff;");
-        if(productData === null) {
-            try {
-                (async () => {
-                    if(userInfo._id) {
-                        const response = await axios({
-                            method: 'get',
-                            url: `${server}/user/product`,
-                            withCredentials: true,
-                            timeout: 3500
-                        }).catch(() => {
-                            console.log("ERROR");
-                            alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
-                            return;
-                        });
-                        if(response && response.data) {
-                            setProductData(response.data);
-                        } else return;
-                    } else {
-                        return null;
+            },
+            confirmToggle : (force, data, type) => {
+                if(!confirmWrapper.current) return;
+                const cl = confirmWrapper.current.classList;
+                if(force === undefined) force = !cl.contains("on");
+                if(force === true) {
+                    if(data !== undefined) {
+                        if(type === "error" || type === "normal" || type === "clear") {
+                            const title = confirmWrapper.current.querySelector("q");
+                            if(title) {
+                                title.innerHTML = data.info.nick ? data.info.nick : data.info.pname ? data.info.pname : null;
+                                title.classList.remove("error", "normal", "clear");
+                                title.classList.add(type);
+                            }
+                        }
                     }
-                })();
-            } catch {
-                alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
+                    cl.add("on");
+                } else {
+                    cl.remove("on");
+                }
             }
         }
-    }, [productData, userInfo]);
+    }, [])
+    useEffect(() => {
+        async function fetchData() {
+            const response = await userProductModule.get(userInfo._id);
+            console.log(response.constructor);
+            if(response.constructor === Array) {
+                setProductData(response);
+            } else {
+                switch(response) {
+                    case 0 : {
+                        alert.alertToggle(true, "인터넷 연결을 확인하세요.", "error");
+                        break;
+                    }
+                    case 400 : {
+                        alert.alertToggle(true, "인터넷 연결을 확인하세요.", "error");
+                        break;
+                    }
+                    case 401 : {
+                        alert.alertToggle(true, "로그인 후 이용가능합니다..", "error");
+                        break;
+                    }
+                    case 500 :
+                    default : {
+                        console.log(response);
+                        alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
+                    }
+                }
+            }
+        } // fetchData
+        if(userInfo && productData === null) fetchData();
+    }, [productData, userInfo, alert, userProductModule]);
     return (
         <section id="UserProduct">
             <div className="alertWrapper" ref={alertWrapper}>
@@ -302,7 +314,7 @@ const UserProduct = ({history}) => {
             <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
             <header>
                 <div className="title">
-                    <h1 className="name">{userInfo ? userInfo.name : "XXX"}</h1>
+                    <h1 className="name">{userInfo?.name ? userInfo.name : "XXX"}</h1>
                     <h1>님의 옷장</h1>
                 </div>
                 <Link to="/closet/add">
@@ -314,14 +326,11 @@ const UserProduct = ({history}) => {
                 {
                     productData ? 
                         productData.length > 0 ? (
-                            <div className="list-wrapper">
+                            <div className="list-wrapper" ref={listRef}>
                                 <div className="list-nav">
-                                    <div className="delete" onClick={() => event.delete.mode((mode !== -1))} ref={deleteBtn}>
-                                        <i className="material-icons">delete</i>
-                                    </div>
-                                    <div className="modify" onClick={() => event.modify.mode((mode !== 0))} ref={modifyBtn}>
-                                        <i className="material-icons">mode_edit</i>
-                                    </div>
+                                    <button onClick={(e) => event.toggleOption(e.target)}>
+                                        <i className="material-icons">edit</i>
+                                    </button>
                                 </div>
                                 {
                                     analyzeData ? (
@@ -333,30 +342,37 @@ const UserProduct = ({history}) => {
                                                             <p>{transition.getCate(c)}</p>
                                                             <i className="material-icons">keyboard_arrow_down</i>
                                                         </div>
-                                                        <ul>
+                                                        <ul >
                                                             {
                                                                 analyzeData[c].map((element, i2) => {
+                                                                    const {sname, nick, pname, subtype} = element.info;
                                                                     return (
-                                                                        <li key={i2} className="list" onClick={(e) => event.elementClick(element, e)}>
-                                                                            <div className="size">
-                                                                                <p>{element.size.name}</p>
+                                                                        <li key={i2} onClick={(e) => event.elementClick(element, e)}>
+                                                                            <div className="info-frame">
+                                                                                <h2>{element.size.name}</h2>
+                                                                                <div className="info">
+                                                                                    <p>{sname ? sname : ""}</p>
+                                                                                    <h1>{nick ? nick : pname}</h1>
+                                                                                    {nick ? pname ? <h2>{pname}</h2> : null : null}
+                                                                                </div>
+                                                                                <div className="type">
+                                                                                    <p>{subtype}</p>
+                                                                                </div>
+                                                                                {
+                                                                                    element?.praw?.full ? (
+                                                                                        <a href={`http://${element.praw.full}`} onClick={(e) => e.stopPropagation()}>
+                                                                                            <i className="material-icons">open_in_new</i>
+                                                                                        </a> 
+                                                                                    ) : null
+                                                                                }
                                                                             </div>
-                                                                            <div className="info">
-                                                                                <p>{element.info.sname ? element.info.sname : ""}</p>
-                                                                                <h1>{element.info.nick ? element.info.nick : element.info.pname}</h1>
-                                                                                {element.info.nick ? element.info.pname ? <h2>{element.info.pname}</h2> : null : null}
-                                                                            </div>
-                                                                            <div className="type">
-                                                                                <p>{element.info.subtype}</p>
-                                                                            </div>
-                                                                            {element?.praw?.full ? 
-                                                                                <div className="link">
-                                                                                    <a href={`http://${element.praw.full}`} onClick={(e) => e.stopPropagation()}>
-                                                                                        <i className="material-icons">open_in_new</i>
-                                                                                    </a>
-                                                                                </div> : null}
                                                                             <div className="btn-wrapper">
-
+                                                                                <button style={{backgroundColor: "#00966B"}}>
+                                                                                    <i className="material-icons" >edit</i>
+                                                                                </button>
+                                                                                <button style={{backgroundColor: "#dd1818"}}>
+                                                                                    <i className="material-icons">delete</i>
+                                                                                </button>
                                                                             </div>
                                                                         </li>
                                                                     )

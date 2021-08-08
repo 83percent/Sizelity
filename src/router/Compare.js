@@ -1,111 +1,69 @@
-import axios from 'axios';
 import React, {createContext, useEffect, useState ,useContext} from 'react';
-import { useCookies } from 'react-cookie';
-import URLModule from '../contents/js/URL';
-
+import ProductSearch from '../contents/js/ProductSearch';
 // CSS
 import '../contents/css/Compare/Compare_Router.css';
 
 // Component
 import Main from '../components/Compare/Compare_Main';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Context
 import {ServerContext} from '../App';
 export const ProductContext = createContext(null);
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
-const Compare = ({history, match,location}) => {
-    // Field
-    const referrer = document.referrer;
-    console.log(match);
-    console.log(location);
-    console.log(history);
+const Compare = ({history, location}) => {
     // State
-    const [data, setData] = useState(history.location?.state?.data);
-    const [loader, setLoader] = useState(!data);
+    const [productData, setProductData] = useState(location?.state?.productData);
+    const [loader, setLoader] = useState(!productData);
     const [status, setStatus] = useState(0);
 
     // Context 
     const server = useContext(ServerContext);
-    
 
-    useEffect(() => { 
-        const getProduct = async (query) => {
-            try {
-                const response = await axios({
-                    method: 'POST',
-                    url : `${server}/product/${query}`,
-                    timeout : 2500
-                }).catch(() => {
-                    return {data:{status:500}};
-                });
-                console.log("검색 결과 : ", response.data);
-                if(response.data?._id) {
-                    // 데이터 가져오기 성공.
-                    try {   
-                        // 최근 검색 상품 쿠키에 넣기
-                        const sname = response.data.info.sname;
-                        const pname = response.data.info.pname;
-                        let isSame = false;
-    
-                        // ---------------------
-                        let current = null;
-                        try {
-                            current = JSON.parse(localStorage.getItem("current"));
-                            if(current) {
-                                for(const element of current) {
-                                    if(element[0] === sname && element[1] === pname) {
-                                        isSame = true;
-                                        break;
-                                    }
-                                }        
-                            }
-                        } catch{current = []}
-                        if(!isSame) {
-                            const r_d = response.data;
-                            if(current.length > 31) current.pop();
-                            current.unshift([ r_d.info.sname, r_d.info.pname, r_d.info.subtype, r_d.praw.full]);
-                            localStorage.setItem("current", JSON.stringify(current));
-                        }
+    // Field
+    const _useQuery = useQuery();
 
-                        // ---------------------
-                        
-                        
-                    } catch{} finally {
-                        setData(response.data);
-                    }
+
+    async function getProduct() {
+        // 상품 정보 없음. -> 검색
+        const _ProductSearch = new ProductSearch(server);
+        let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
+        if(_useQuery.get("domain")) {
+            console.log("url 전체를 활용하여 검색");
+            // ?domain= 이 존재
+            _searchResult = await _ProductSearch.search({url : _useQuery.get("domain")});
+        } else {
+            console.log("shop + code를 활용하여 검색");
+            _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
+        }
+        console.log("결과 : ",_searchResult);
+        try {
+            if(typeof _searchResult === 'number') {
+                // 검색 결과 오류
+                setStatus(_searchResult);
+            } else {
+                if(_searchResult?._id) {
+                    setProductData(_searchResult);
                 } else {
-                    if(response.data.status) setStatus(response.data.status);
+                    // 비어있는 값 (정보 없음.)
+                    setStatus(204);
                 }
-            } catch(error) {setStatus({status: -200})}
+            }
+        } catch(err) {
+            console.log(err);
+            setStatus(500);
+        } finally {
             setLoader(false);
         }
+    }
 
-        if(!data) {
-            // 상품 정보 없음. -> 검색
-            let query = null;
-            const urlModule = new URLModule();
-            let canReadReferrer = null;
-            if(referrer) canReadReferrer = urlModule.get(referrer);
-            if(location.search) {
-                //const {domain, code} = new URLSearchParams(location.search);
-                const params = new URLSearchParams(location.search);
-                const domain = params.get("shop");
-                const code = params.get("no");
-                if(domain && code) query = `${domain}/${code}`;
-            } else if(canReadReferrer) {
-                const {domain, code} = canReadReferrer;
-                if(domain && code) query = `${domain}/${code}`;
-            }
-            if(query) {
-                getProduct(query);
-            } else {
-                setData(null);
-                setLoader(false);
-            }
-        }
-    }, []);
+    useEffect(() => { 
+        if(!productData) { getProduct(); }
+    }, []); // useEffect
 
     return (
         loader ? (
@@ -118,17 +76,17 @@ const Compare = ({history, match,location}) => {
                 }}></div>
             </section>
         ) : (
-            data ? (
-                <ProductContext.Provider value={data}>
+            productData ? (
+                <ProductContext.Provider value={productData}>
                     <Main 
                         history={history}
-                        productData={data}
+                        productData={productData}
                     />
                 </ProductContext.Provider>
             ) : (
                 <section id="Compare">
                     {
-                        status === 404 ? (
+                        status === 204 ? (
                             <div className="title">
                                 <i className="material-icons">sentiment_very_dissatisfied</i>
                                 <h1>죄송합니다.</h1>
@@ -137,13 +95,14 @@ const Compare = ({history, match,location}) => {
                                 <p>영업일 기준 2일이내에 자동으로 입력됩니다.</p>
                                 <button onClick={() => history.replace("/search")}>다른 상품 검색</button>
                             </div>
-                        ) : status === 500 ? (
+                        ) : status === 400 ? (
                             <div className="title">
                                 <i className="material-icons">sentiment_very_dissatisfied</i>
                                 <h1>죄송합니다.</h1>
-                                <h1>서버와의 연결에 실패했습니다.</h1>
+                                <h1>문제가 발생했습니다.</h1>
+                                <p>잘못된 요청 정보를 전달하였습니다.</p>
                             </div>
-                        ) : status === -200 ? (
+                        ) : status === 500 ? (
                             <div className="title">
                                 <i className="material-icons">sentiment_very_dissatisfied</i>
                                 <h1>죄송합니다.</h1>
