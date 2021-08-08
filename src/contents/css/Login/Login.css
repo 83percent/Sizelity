@@ -1,5 +1,5 @@
 section#View-login {
-    height: 100%;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ section#View-login > article .input-wrapper {
 section#View-login > article .input-wrapper > input {
     border-radius: 0.5rem;
     width: 80%;
-    padding: 0.6rem 1.3rem;
+    padding: 0.8rem 1.3rem;
     font-size: 1.2rem;
     border: 1px solid #dbdbdb;
     outline: none;
@@ -81,7 +81,7 @@ section#View-login > article > .login-option-wrapper {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 
 }
 section#View-login > article > .login-option-wrapper > a {
@@ -91,7 +91,7 @@ section#View-login > article > .login-option-wrapper > a {
     color: #000000;
 }
 section#View-login > article > .login-option-wrapper > a > h4 {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: #000000;
     
 }

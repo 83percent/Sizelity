@@ -7,6 +7,7 @@ const Event = () => {
     return (
         <Switch>
             <Route exact path="/event" component={EventList} />
+            
         </Switch>
     )
 }

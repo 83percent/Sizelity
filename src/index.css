@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'NotoSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -20,8 +20,11 @@ ul,ol {
   list-style: none;
 }
 h1,h2,h3,h4,p,q,a,button,li,input,label {
-  font-family: NotoSans;
+  word-break: keep-all;
   font-weight: 300;
+}
+.en {
+  font-family: 'Montserrat';
 }
 html, body {
   width: 100%;
@@ -34,7 +37,6 @@ html, body {
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
-  height: 100%;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -66,15 +68,16 @@ input:-webkit-autofill,
   -webkit-text-fill-color: #000 !important;
 }
 
-#ad {
-  position: fixed;
-  border: 1px solid salmon;
-  height: 5rem;
-  width: 100%;
-  bottom: 0;
-  background: #ffffff80;
-  z-index: 999;
+a.sizelity_logo {
+  background: #00966B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+a.sizelity_logo > i {
+  color: #ffffff;
+}
+
 /*
 ##Device = Desktops
 ##Screen = 1281px to higher resolution desktops

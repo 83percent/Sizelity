@@ -1,6 +1,7 @@
 import {useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 // CSS
 import '../../contents/css/Compare/Compare_Main.css';
@@ -14,7 +15,10 @@ import Menu from './Compare_Menu';
 import { MediaContext } from '../../App';
 import { LoginContext } from '../../App';
 import { ServerContext } from '../../App';
-import { useCookies } from 'react-cookie';
+
+// Sample Product ADs Image
+import Sample1 from '../../contents/image/sample_image1.png';
+import Sample2 from '../../contents/image/sample_image2.png';
 
 
 const ViewCompare = ({history, productData}) => {
@@ -335,8 +339,37 @@ const ViewCompare = ({history, productData}) => {
                             history={history}/>
                         <Compare
                             productData={productData} 
-                            myProduct={sizelity_myRecently}/>    
-                    
+                            myProduct={sizelity_myRecently}/>
+                        <div id="ADs">
+                            <h1>이런 상품 어떠세요?</h1>
+                            <ul>
+                                <li>
+                                    <a>
+                                        <img src={Sample1} alt="sample" />
+                                        <p>쿠라 카라 셔츠 OPS</p>
+                                        <p>리즈비커밍</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <img src={Sample1} alt="sample" />
+                                        <p>쿠라 카라 셔츠 OPSasdfsafasdfsa adsfasdf asdf asdfasdf asfasfasf safsafasfsa fdsafasdfasfwefwav adsfasf </p>
+                                        <p>리즈비커밍</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <img src={Sample2} alt="sample" />
+                                        <p>쿠라 카라 셔츠 OPSasdfsafasdfsa adsfasdf asdf asdfasdf asfasfasf safsafasfsa fdsafasdfasfwefwav adsfasf </p>
+                                        <p>리즈비커밍</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <Link>
+                                <p>추천 상품 더보기</p>
+                                <i className="material-icons">chevron_right</i>
+                            </Link>
+                        </div>
                     </>
                 ) : (
                     <div className="loaderFrame">

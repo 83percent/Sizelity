@@ -61,7 +61,7 @@ const ViewLogin = ({history}) => {
 
             if(result.name) {
                 setUserInfo(result);
-                history.goBack();
+                history.replace("/");
             } else {
                 // 로그인 실패
                 if(result === false) {

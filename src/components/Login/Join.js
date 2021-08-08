@@ -24,11 +24,11 @@ const Join = ({history}) => {
     const name = useRef(null);
 
     let gender = null;
-    let genderSelect = 'not';
+    let genderSelect = null;
     let privacy = null;
 
     const event = {
-        submitEvent : () => {
+        submitEvent : () => {            
             if(!checkRule()) return false;
             const account = {
                 uid : email.current.value,
@@ -38,8 +38,8 @@ const Join = ({history}) => {
                 privacy : true,
                 alert : privacy[2].checked
             }
-            console.log(account);
             
+            //console.log(account);
             // SUBMIT
             ( async () => {
                 try {
@@ -119,7 +119,7 @@ const Join = ({history}) => {
     }
     const checkRule = () => {
         // Check
-        const toggleWrong = (target, force) => target.current.classList.toggle("wrong",force);
+        const toggleWrong = (target, force) => target.current.parentElement.classList.toggle("wrong",force);
         const isEmail = ((value) => {
             return (/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i).test(value);
         })(email.current.value);
@@ -186,54 +186,47 @@ const Join = ({history}) => {
                 </div>
                 <h2>회원가입</h2>
             </header>
-            <article className="bottom">
+            <article>
                 <form>
-                    <div style={{flexGrow : 1}}>
+                    <div className="loginInfo-input-wrapper">
+                        <h1>로그인 정보</h1>
+                        <div className="input-frame">
+                            <h2>이메일</h2>
+                            <input type="email" className="en" placeholder="이메일" ref={email} autoComplete="off" id="input-email"/>
+                        </div>
+                        <div className="input-frame" style={{marginBottom: "0"}}>
+                            <h2>비밀번호</h2>
+                            <input type="password" placeholder="비밀번호" ref={pwd} id="input-password" minLength="8" maxLength="25"/>
+                        </div>
+                        <p style={{marginBottom: "1rem"}}>영문 대소문자, 숫자, 특수문자 포함 8~20자</p>
+                        <div className="input-frame">
+                            <h2>비밀번호 확인</h2>
+                            <input type="password" placeholder="비밀번호 확인" ref={rePwd} id="input-re-password" minLength="8" maxLength="25"/>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>개인정보</h1>
+                        <div className="input-frame" style={{marginBottom: "1rem"}}>
+                            <h2>이름</h2>
+                            <input type="text" placeholder="이름" id="input-first" ref={name} autoComplete="off"/>
+                        </div>
+                        <div className="gender">
+                            <label>
+                                <p>남자</p>
+                                <div className="dot"></div>
+                                <input type="radio" name="gender" value="male" onClick={() => event.genderChange()}/>
+                            </label>
+                            <label>
+                                <p>여자</p>
+                                <div className="dot"></div>
+                                <input type="radio" name="gender" value="female" onClick={() => event.genderChange()}/>
+                            </label>
+                        </div>
+                    </div>
+                    <div style={{marginTop: "1rem", marginBottom: "3rem"}}>
+                        <h1>약관</h1>
                         <ul>
-                            <li className="title-wrapper">
-                                <h1>로그인 정보</h1>
-                            </li>
-                            <li className="input-wrapper">
-                                <input type="email" placeholder="이메일 (E-Mail)" ref={email} autoComplete="off" id="input-email"/>
-                            </li>
-                            <li className="input-wrapper">
-                                <input type="password" placeholder="비밀번호 (Password)" ref={pwd} id="input-password" minLength="8" maxLength="25"/>
-                            </li>
-                            <li className="input-wrapper">
-                                <input type="password" placeholder="비밀번호 확인 (Re-Password)" ref={rePwd} id="input-re-password" minLength="8" maxLength="25"/>
-                            </li>
-                            <p>영문 대소문자, 숫자, 특수문자 포함 8~20자</p>
-                        </ul>
-                        <ul>
-                            <li className="title-wrapper">
-                                <h1>개인정보</h1>
-                            </li>
-                            <li className="input-wrapper">
-                                <input type="text" placeholder="이름" id="input-first" ref={name} autoComplete="off"/>
-                            </li>
-                            <li className="input-wrapper">
-                                <label>
-                                    <p>남자</p>
-                                    <div className="dot"></div>
-                                    <input type="radio" name="gender" value="male" onClick={() => event.genderChange()}/>
-                                </label>
-                                <label>
-                                    <p>여자</p>
-                                    <div className="dot"></div>
-                                    <input type="radio" name="gender" value="female" onClick={() => event.genderChange()}/>
-                                </label>
-                                <label className="on">
-                                    <p>비공개</p>
-                                    <div className="dot"></div>
-                                    <input type="radio" name="gender" value="not" defaultChecked onClick={() => event.genderChange()}/>
-                                </label>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li className="title-wrapper">
-                                <h1>약관</h1>
-                            </li>
-                            <li className="privacy-wrapper">
+                            <li className="privacy-frame">
                                 <label>
                                     <p>사이즈리티 서비스 이용약관 (필수)</p>
                                     <input type="checkbox" onClick={(e) => event.privacyEvent(e)}/>
@@ -242,7 +235,7 @@ const Join = ({history}) => {
                                     <i className="material-icons">find_in_page</i>
                                 </button>
                             </li>
-                            <li className="privacy-wrapper">
+                            <li className="privacy-frame">
                                 <label>
                                     <p>개인정보 수집 및 이용동의 (필수)</p>
                                     <input type="checkbox" onClick={(e) => event.privacyEvent(e)}/>
@@ -251,7 +244,7 @@ const Join = ({history}) => {
                                     <i className="material-icons">find_in_page</i>
                                 </button>
                             </li>
-                            <li className="privacy-wrapper">
+                            <li className="privacy-frame">
                                 <label>
                                     <p>프로모션 안내 메일 수신동의 (선택)</p>
                                     <input type="checkbox" onClick={(e) => event.privacyEvent(e)}/>
@@ -262,9 +255,9 @@ const Join = ({history}) => {
                             </li>
                         </ul>
                     </div>
-                    <div className="submit-wrapper">
-                        <button type="button" onClick={() => event.submitEvent()}>가입하기</button>
-                    </div>
+                    <button type="button" onClick={() => event.submitEvent()}>
+                        <i className="material-icons">check</i>
+                    </button>
                 </form>
             </article>
         </section>

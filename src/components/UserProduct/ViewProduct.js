@@ -303,7 +303,7 @@ const UserProduct = ({history}) => {
             <header>
                 <div className="title">
                     <h1 className="name">{userInfo ? userInfo.name : "XXX"}</h1>
-                    <h1>님의 상품</h1>
+                    <h1>님의 옷장</h1>
                 </div>
                 <Link to="/closet/add">
                     <i className="material-icons">add</i>

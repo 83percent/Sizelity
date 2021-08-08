@@ -15,10 +15,12 @@ import {ServerContext} from '../App';
 export const ProductContext = createContext(null);
 
 
-const Compare = ({history, location}) => {
+const Compare = ({history, match,location}) => {
     // Field
     const referrer = document.referrer;
-    
+    console.log(match);
+    console.log(location);
+    console.log(history);
     // State
     const [data, setData] = useState(history.location?.state?.data);
     const [loader, setLoader] = useState(!data);

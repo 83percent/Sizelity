@@ -9,7 +9,7 @@ import './contents/fonts/Montserrat_use.css';
 import './contents/fonts/NotoSans.css';
 
 // Component
-import View from './router/View';
+import ViewRouter from './router/ViewRouter';
 
 import Compare from './router/Compare';
 import AfterProduct from './router/AfterProduct';
@@ -36,10 +36,9 @@ export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
 export const ServerContext = createContext(null);
 
+//const __server = 'http://192.168.11.10:3001';
 const __server = 'http://localhost:3001';
 //const __server = 'https://server.sizelity.com';
-//const server = 'http://192.168.11.2:3001';
-//const __server = 'https://13.124.51.75:3001';
 let loginModule = null;
 const App = () => {
     const [media, setMedia] = useState("Phone");
@@ -50,7 +49,7 @@ const App = () => {
             return JSON.parse(auth);
         }
     });
-    //const __userInfo = useMemo(() => {}, [sizelity_user._id]);
+
     // autoLogin
     useEffect(() => {
         if(userInfo === null) {
@@ -76,7 +75,7 @@ const App = () => {
                     <MediaContext.Provider value={media}>
                         <BrowserRouter>
                             <Switch>
-                                <Route exact path="/" component={View} />
+                                <Route exact path="/" component={ViewRouter} />
                                 <Route path="/compare" component={Compare} />
                                 <Route exact path="/view/compare" component={Compare} />
                                 <Route exact path="/search" component={Search} />

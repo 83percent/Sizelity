@@ -75,7 +75,6 @@ section.View-Compare > article {
     min-height: 100%;
     background: #ffffff;
     border-top: 1px solid #dbdbdb;
-    padding-bottom: 8rem;
 }
 section.View-Compare > article > div.standard-wrapper {
     display: flex;
@@ -114,7 +113,7 @@ section.View-Compare > article > div.standard-wrapper > button > i.active {
 
 /*      Compare Wrapper     */
 section.View-Compare > article .compare-element {
-    border-bottom: 1px solid #dbdbdb;
+    /* border-bottom: 1px solid #dbdbdb; */
     padding: 0.5rem 1rem;
 }
 section.View-Compare > article .compare-element .compare-title-frame {

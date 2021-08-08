@@ -1,6 +1,6 @@
 section#Search {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     background: #f0f2f5;
     padding-bottom: 5rem;
 }
@@ -19,8 +19,7 @@ section#Search {
     padding: 1rem 0;
 }
 #Search > .inputWrapper > i {
-    padding: 1rem 0.5rem;
-    color: #000;
+    padding: 1rem;
 }
 #Search > .inputResult {
     width: 100%;
@@ -96,7 +95,83 @@ section#Search {
     font-size: 1.1rem;
 }
 
-/*      Current     */
+/*
+    Product ADs
+*/
+#Search > nav#ads {
+    position: fixed;
+    z-index: 999;
+    bottom: -100%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+#Search > nav#ads.on {
+    bottom: 0;
+    background: #00000040;
+}
+#Search > nav#ads > div {
+    flex-grow: 1;
+}
+#Search > nav#ads > section {
+    position: relative;
+    bottom: -100%;
+    background: #fff;
+    padding: 1rem;
+    -webkit-transition-duration: 0.7s;
+    -o-transition-duration: 0.7s;
+    -moz-transition-duration: 0.7s;
+    transition-duration: 0.7s;
+}
+#Search > nav#ads.on > section {
+    bottom: 0;
+}
+#Search > nav#ads > section > .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+#Search > nav#ads > section > .title > h1 {
+    flex-grow: 1;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+#Search > nav#ads > section > .title > i {
+    cursor: pointer;
+}
+#Search > nav#ads > section > ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+#Search > nav#ads > section > ul > li > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#Search > nav#ads > section > ul > li > a > img {
+    width: 14rem;
+    height: 25rem;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+#Search > nav#ads > section > .more {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+#Search > nav#ads > section > .more > a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+#Search > nav#ads > section > .more > a > p {
+    font-size: 1.2rem;
+}
+/*
+    Current     
+*/
 #Search > .currentWrapper {
     background: #ffffff;
     border-bottom: 1px solid #dbdbdb;
@@ -115,7 +190,6 @@ section#Search {
 #Search .Search-currentNav > button {
     all: unset;
     color: #ffffff;
-    margin: 0.3rem 0;
     padding: 0.5rem 0;
     transition-duration: 0.3s;
 }
@@ -217,6 +291,11 @@ section#Search > .hn > div > p {
     font-size: 1.2rem;
     font-weight: 400;
     color: #000;
+}
+section#Search > .hn > div > i:first-of-type {
+    font-size: 1.4rem;
+    opacity: 0.7;
+    margin-right: 0.3rem;
 }
 section#Search > .hn > div > i {
     font-size: 1.6rem;

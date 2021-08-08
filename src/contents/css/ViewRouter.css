@@ -1,33 +1,34 @@
-#View {
+main#home {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background: #f0f2f5;
 }
-#View > .loaderFrame {
+main#home > .loaderFrame {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#View > .loaderFrame > .loader {
+main#home > .loaderFrame > .loader {
     width: 2rem;
     height: 2rem;
     border: 2px solid #000000;
     border-top: 2px solid #00000000;
 }
 /*      section     */
-#View > header {
+main#home > header {
     text-align: center;
 }
-#View > header > i {
+main#home > header > i {
     font-size: 2.6rem;
     margin-top: 0.5rem;
     padding: 1rem;
 }
-#View > header > .login-wrapper, #View > header > .user-wrapper {
+main#home > header > .login-wrapper, main#home > header > .user-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,20 +42,20 @@
     border-bottom: 1px solid #dbdbdb;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
 }
-#View > header > .login-wrapper {
+main#home > header > .login-wrapper {
     padding: 1rem;
 }
-#View > header > .login-wrapper.active, #View > header > .user-wrapper.active  {
+main#home > header > .login-wrapper.active, main#home > header > .user-wrapper.active  {
     top: 0;
 }
-#View > header > .login-wrapper > i {
+main#home > header > .login-wrapper > i {
     font-size: 3.0rem;
     margin-bottom: 0.5rem;
 }
-#View > header > .login-wrapper > p {
-    font-size: 1.1rem;
+main#home > header > .login-wrapper > p {
+    font-size: 1.2rem;
 }
-#View > header > .login-wrapper > a {
+main#home > header > .login-wrapper > a {
     all: unset;
     color: #ffffff;
     background: #00966B;
@@ -64,23 +65,23 @@
     padding: 0.7rem 0;
     border-radius: 0.5rem;
 }
-#View > header > .user-wrapper {
+main#home > header > .user-wrapper {
     width: 100%;
     display: flex;
     align-items: stretch;
 }
-#View > header > .user-wrapper > .user-title {
+main#home > header > .user-wrapper > .user-title {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     padding: 1.5rem 0 1rem 1.5rem;
 }
-#View > header > .user-wrapper > .user-title > i {
+main#home > header > .user-wrapper > .user-title > i {
     font-size: 4.3rem;
     color: #00000070;
 }
-#View > header > .user-wrapper > .user-title > div {
+main#home > header > .user-wrapper > .user-title > div {
     padding-left: 9px;
     position: relative;
     bottom: 5px;
@@ -89,38 +90,38 @@
     align-items: flex-start;
     flex-grow: 1;
 }
-#View > header > .user-wrapper > .user-title > div > p {
+main#home > header > .user-wrapper > .user-title > div > p {
     position: relative;
     top: 5px;
     left: 2px;
     color: #888888;
 }
-#View > header > .user-wrapper > .user-title > div > div {
+main#home > header > .user-wrapper > .user-title > div > div {
     display: flex;
     align-items: flex-end;
 }
-#View > header > .user-wrapper > .user-title > div > div > h1 {
+main#home > header > .user-wrapper > .user-title > div > div > h1 {
     font-weight: 400;
 }
-#View > header > .user-wrapper > .user-title > div > div > p {
+main#home > header > .user-wrapper > .user-title > div > div > p {
     position: relative;
     bottom: 3px;
     left: 5px;
     font-size: 1.2rem;
 }
-#View > header > .user-wrapper > .user-title > a {
+main#home > header > .user-wrapper > .user-title > a {
     padding: 1.5rem;
 }
-#View > header > .user-wrapper > .user-title > a > i {
+main#home > header > .user-wrapper > .user-title > a > i {
     font-size: 2.0rem;
     color: #000000;
     opacity: 0.3;
 }
-#View > header > .user-wrapper > .user-btn-frame {
+main#home > header > .user-wrapper > .user-btn-frame {
     display: flex;
     align-items: center;
 }
-#View > header > .user-wrapper > .user-btn-frame > a {
+main#home > header > .user-wrapper > .user-btn-frame > a {
     all: unset;
     width: 100%;
     display: flex;
@@ -131,73 +132,69 @@
     padding: 1.0rem 0;
     color: #000000;
 }
-#View > header > .user-wrapper > .user-btn-frame > a > i {
+main#home > header > .user-wrapper > .user-btn-frame > a > i {
     opacity: 0.3;
     font-size: 1.5rem;
     margin-right: 0.3rem;
 }
-#View > header > .user-wrapper > .user-btn-frame > a > p {
+main#home > header > .user-wrapper > .user-btn-frame > a > p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 1.2rem;
 }
     /*      section     */
-#View > section {
+main#home > section {
     flex-grow: 1;
 }
 
 /*      logoWrapper     */
-#View > .logoWrapper {
-    width: 100%;
+main#home > .logoWrapper {
     text-align: center;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
 }
-#View > .logoWrapper > a {
-    all: unset;
-    font-size: 1.7em;
-    font-weight: 500;
-    color: #000000;
+main#home > .logoWrapper > a {
+    width: 3rem;
+    height: 3rem;
+    background: #00966B;
+    border-radius: 5px;
 }
-#View > section#Main {
+main#home > .logoWrapper > a > i {
+    font-size: 1.8rem;
+}
+main#home > section#Main {
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: center;
     align-items: center;
 }
-#View > section#Main > #search-wrapper {
-    width: 100%;
+main#home > section#Main > #search-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding-bottom: 6rem;
 }
-#View > section#Main h1 {
+main#home > section#Main h1 {
     font-size: 2.0rem;
-    font-weight: 500;
+    font-weight: 400;
 }
-#View > section#Main #search-input-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+main#home > section#Main #search-input-wrapper {
+    width: 100vw;
+    margin-top: 1.2rem;
     padding: 0 1rem;
-    margin-top: 2rem;
 }
-#View > section#Main #search-input-wrapper > #search-input-frame {
-    width: 100%;
+main#home > section#Main #search-input-wrapper > #search-input-frame {
     height: auto;
     display: flex;
+    border-radius: 6px;
     border: 1px solid #dbdbdb;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
     background: #ffffff;
-}
-#View > section#Main #search-input-wrapper > #search-input-frame > p {
     font-size: 1.2rem;
-    color: #00000070;
+    color: #00000090;
 }
-#View > section#Main #search-input-wrapper > #search-input-frame > input {
+main#home > section#Main #search-input-wrapper > #search-input-frame > input {
     flex-grow: 1;
     font-size: 1.2rem;
     font-weight: 400;
@@ -208,7 +205,7 @@
     transition-duration: 0.2s;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
-#View > section#Main #search-input-wrapper > #search-input-frame > button {
+main#home > section#Main #search-input-wrapper > #search-input-frame > button {
     background: #00966B;
     color: #fff;
     font-size: 1.0rem;
@@ -223,7 +220,7 @@
     opacity: 1;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
-#View > section#Main #search-input-wrapper > #search-input-frame > button.off {
+main#home > section#Main #search-input-wrapper > #search-input-frame > button.off {
     color: #00966B;
     font-size: 0;
     padding: 0;

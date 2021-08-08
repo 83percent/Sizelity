@@ -63,6 +63,9 @@ const Compare = ({productData, myProduct}) => {
                         <div className="standard-colorBar"></div>
                     </div>
                     <button onClick={(e) => viewTypeEvent(e)}>
+                        <p className="en">CM</p>
+                    </button>
+                    <button onClick={(e) => viewTypeEvent(e)}>
                         <i className="material-icons">assessment</i>
                     </button>
                 </div>

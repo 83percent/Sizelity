@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import { useContext, useEffect, useRef } from 'react';
 
 // CSS
-import '../contents/css/View.css';
+import '../contents/css/ViewRouter.css';
 
 // Context
 import {LoginContext} from '../App';
@@ -30,7 +30,7 @@ const View = () => {
     },[]);
 
     return (
-        <div id="View">
+        <main id="home">
             {
                 userInfo ? (
                     <header>
@@ -66,7 +66,7 @@ const View = () => {
                         <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>lock</i>
                         <div className="login-wrapper" ref={loginWrapper}>
                             <i className="material-icons">lock</i>
-                            <p><b>자신의 계정</b>에 옷을 저장하고</p>
+                            <p><b>나의 옷장</b>에 옷을 저장하고</p>
                             <p>언제, 어디서든 꺼내어 비교하세요.</p>
                             <Link to="/login">로그인</Link>
                         </div>
@@ -85,9 +85,11 @@ const View = () => {
                 </div>
             </section>
             <div className="logoWrapper">
-                <Link to="/">Sizelity.</Link>
+                <Link to="/" className="sizelity_logo">
+                    <i className="material-icons">sell</i>
+                </Link>
             </div>
-        </div>
+        </main>
     );
 }
 export default View;
