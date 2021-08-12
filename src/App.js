@@ -1,7 +1,7 @@
 // Module
 import {createContext, useEffect, useState } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import LoginModule from './contents/js/Login';
+import AccountModule from './contents/js/Account';
 import { CookiesProvider } from 'react-cookie';
 
 // Font
@@ -39,8 +39,11 @@ export const ServerContext = createContext(null);
 //const __server = 'http://192.168.11.10:3001';
 const __server = 'http://localhost:3001';
 //const __server = 'https://server.sizelity.com';
-let loginModule = null;
+
+let accountModule = null;
 const App = () => {
+
+    // State
     const [media, setMedia] = useState("Phone");
     const [userInfo, setUserInfo] = useState(() => {
         const auth = sessionStorage.getItem("auth");
@@ -49,17 +52,18 @@ const App = () => {
             return JSON.parse(auth);
         }
     });
+    
 
     // autoLogin
     useEffect(() => {
         if(userInfo === null) {
             ( async () => {
-                if(!loginModule) loginModule = new LoginModule();
-                const auth = await loginModule.autoAuth();
+                if(!accountModule) accountModule = new AccountModule(__server);
+                const auth = await accountModule.autoLogin();
                 setUserInfo(auth);
             })();
         }
-    }, []);
+    }, [accountModule]);
     /* useEffect(() => {
         if(userInfo !== null) setCookie("sizelity_user",userInfo,{path:"/",maxAge:(500 * 24 * 60 * 60)})
     }, [userInfo]); */

@@ -1,13 +1,9 @@
 import React, {useMemo, useRef} from "react";
-import Proptype from 'prop-types';
+
 import Transition from '../../contents/js/TransitionSizeName';
 
 
 const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
-    console.log("%c \t <Component>\t Active Size : ","background:#00966B;color:#ffffff;", activeSize);
-    console.log("%c \t <Component>\t My Product Data","background:#00966B;color:#ffffff;", myProductData);
-    console.log("%c \t <Component>\t Product Size Array","background:#00966B;color:#ffffff;", productSizeData);
-
     const analyzeData = (productSizeData) => {
         if(productSizeData.constructor !== Array) return false;
         
@@ -28,7 +24,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
 
                         if(analyzeResult[key] === undefined) throw new Error(`Analyze Error Can't match "${key}"`); // 상품별로 서로 맞지 않는 수치정보를 가지고있음.\
                         if(value < 0) throw new Error(`${key} value is not accept value.`);
-                        
+
                         analyzeResult[key][index] = value; 
                     }
                 }
@@ -49,35 +45,44 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     const sizeData = useMemo( () => analyzeData(productSizeData), [productSizeData]);
     const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length","length"];
     const transition = new Transition("KOR");
-
     return (
         <ul className="compare-frame">
             {
                 priority.map((sn, index) => {
                     if(!sizeData[sn]) return null;
+                    else if(!myProductData || !myProductData[sn]) return null;
                     return (
                         <li key={index} className="compare-element">
-                            {
-                                myProductData && myProductData[sn]
-                                ? 
-                                <div className="compare-title-frame">
-                                    <h1>{transition.get(sn)}</h1>
-                                    <i className="material-icons">help_outline</i>
-                                </div> 
-                                : 
-                                <div className="compare-title-frame">
-                                    <h1>{transition.get(sn)}</h1>
-                                    <i className="material-icons">help_outline</i>
-                                    <p>나의 옷에 수치정보가 존재하지 않습니다.</p>
-                                </div>
-                            }
-                            
-                            <DrawGraphResult
-                                activeSize={activeSize}
-                                myProductData={myProductData ? myProductData[sn]: null}
-                                productSizeData={sizeData[sn]}
-                                productSizeName={sizeData.size}
-                                />
+                                <>
+                                    <div className="compare-title-frame">
+                                        <h1>{transition.get(sn)}</h1>
+                                        <i className="material-icons">help_outline</i>
+                                    </div>
+                                    <DrawGraphResult
+                                        activeSize={activeSize}
+                                        myProductData={myProductData ? myProductData[sn]: null}
+                                        productSizeData={sizeData[sn]}
+                                        productSizeName={sizeData.size}
+                                        />
+                                </>
+                        </li>
+                    )
+                })
+            }
+            {
+                priority.map((sn, index) => {
+                    if(!sizeData[sn]) return null;
+                    else if(myProductData && myProductData[sn]) return null;
+                    return (
+                        <li key={index} className="compare-element">
+                                <>
+                                    <div className="compare-title-frame">
+                                        <h1>{transition.get(sn)}</h1>
+                                    </div>
+                                    <div className="empty-info">
+                                        <p>나의 옷에 '{transition.get(sn)}' 수치가 없어요.</p>
+                                    </div>
+                                </>
                         </li>
                     )
                 })
@@ -85,12 +90,6 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
             
         </ul>
     );
-}
-
-CompareGraphList.proptype = {
-    activeSize : Proptype.string.isRequired,
-    myProductData : Proptype.object,
-    productSizeData : Proptype.object.isRequired
 }
 
 const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData, productSizeName}) => {
@@ -273,12 +272,6 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
         </div>
     );
 }); //DrawGraphResult : Component
-DrawGraphResult.Proptype = {
-    activeSize : Proptype.string,
-    myProductData : Proptype.number,
-    productSizeData : Proptype.array.isRequired,
-    productSizeName : Proptype.array.isRequired
-}
 
 
 const CompareResult = React.memo(({activeRate, myRate}) => {
@@ -313,12 +306,6 @@ const CompareResult = React.memo(({activeRate, myRate}) => {
         return (<div className="compare-result blank"></div>);
     }
 });
-
-CompareResult.proptype = {
-    activeRate : Proptype.number,
-    myRate : Proptype.number
-}
-
 
 export default React.memo(CompareGraphList);
 

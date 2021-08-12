@@ -1,6 +1,5 @@
 import { useContext, useRef, useState } from "react";
 import { ServerContext } from "../../App";
-import LoginModule from '../../contents/js/Login';
 import AccountModule from '../../contents/js/Account';
 // Context
 import {LoginContext} from '../../App';
@@ -63,14 +62,7 @@ const AccountOut = ({history}) => {
                 setLoader(false);
                 event.alertToggle(true, response.msg);
             }
-            /* if(response?.status === 200) {
-                // 탈퇴 성공
-                if(!login) login = new LoginModule();
-                await login.delete();
-                setUserInfo(null);
-                history.replace("/");
-                return;
-            } */
+            
         }, // outOfAccount
     };
     return (

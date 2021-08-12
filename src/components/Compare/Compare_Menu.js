@@ -16,8 +16,7 @@ const Menu = ({closerEvent}) => {
             <div className="menu-closer" onClick={() => closerEvent(false)}></div>
             <div className="menu-frame">
                 <div onClick={() => closerEvent(false)}>
-                    <p>닫기</p>
-                    <i className="material-icons">keyboard_arrow_right</i>
+                    <i className="material-icons">close</i>
                 </div>
                 <header>
                     {
@@ -44,9 +43,6 @@ const Menu = ({closerEvent}) => {
                 </article>
                 <footer>
                     <ul>
-                        <li>
-                            <Link to="/help">고객센터</Link>
-                        </li>
                         {
                             (userInfo && userInfo._id) ? (
                                 <li>

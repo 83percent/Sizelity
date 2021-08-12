@@ -32,7 +32,7 @@ const ViewCompare = ({history, productData}) => {
     const menuFrame = useRef(null);
     const favWrapper = useRef(null);
     const afterAlert = useRef(null);
-
+    const nav = useRef(null);
 
     // Field
     let isAfterRequest = false;
@@ -67,7 +67,13 @@ const ViewCompare = ({history, productData}) => {
                     favWrapper.current.classList.remove("active");
                 }
             }
-        }
+        },
+        navToggle : function(force) {
+            if(nav.current) {
+                if(force === undefined) force = !(nav.current.classList.contains("active"));
+                nav.current.classList.toggle("active", force);
+            }
+        } // NavToggle
     }
     const alert = {
         // type : error || normal || clear
@@ -135,7 +141,7 @@ const ViewCompare = ({history, productData}) => {
                                     switch(response.data.status) {
                                         case 200 : {
                                             isMyProductRequest = true;
-                                            alert.alertToggle(true, "나의 상품에 추가하였습니다.", "clear");
+                                            alert.alertToggle(true, "나의 옷장에 추가하였습니다.", "clear");
                                             break;
                                         }
                                         case 0 : {
@@ -171,7 +177,7 @@ const ViewCompare = ({history, productData}) => {
             } else {
                 // 사이즈 선택안됨
                 wrapperToggle.favorite(false);
-                alert.alertToggle(true, "나의 상품으로 등록할 <b>사이즈를 선택</b>해주세요.", "error");
+                alert.alertToggle(true, "나의 옷장에 등록하려는 <b>사이즈를 선택</b>해주세요.", "error");
             }
         }
     }
@@ -280,12 +286,17 @@ const ViewCompare = ({history, productData}) => {
                             <Menu 
                                 closerEvent={wrapperToggle.menu}/>
                         </section>
-                        <NavMyProduct
-                            myProductData={sizelity_myRecently}
-                            history={history}/>
+                        <div id="myProduct-nav-wrapper" className="" ref={nav}>
+                            <NavMyProduct
+                                myProductData={sizelity_myRecently}
+                                history={history}
+                                nav={nav}
+                                navToggle={wrapperToggle.navToggle}/>
+                        </div>
                         <Compare
                             productData={productData} 
-                            myProduct={sizelity_myRecently}/>
+                            myProduct={sizelity_myRecently}
+                            navToggle={wrapperToggle.navToggle}/>
                         <div id="ADs">
                             <h1>이런 상품 어떠세요?</h1>
                             <ul>

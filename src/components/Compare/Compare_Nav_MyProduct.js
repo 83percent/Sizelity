@@ -13,22 +13,13 @@ import { MediaContext } from '../../App';
     @param setMyProductData : 현재 나의 옷 정보가 담긴 Object state 를 변경하는 함수
 */
 let transition = null;
-const NavMyProduct = ({myProductData, history}) => {
+const NavMyProduct = ({myProductData, history, nav, navToggle}) => {
     // Context
     const media = useContext(MediaContext);
-
-    // ref
-    const nav = useRef(null);
     
     if(!transition) transition = new Transition("KOR");
 
     const event = {
-        navToggle : function(force) {
-            if(nav.current) {
-                if(force === undefined) force = !(nav.current.classList.contains("active"));
-                nav.current.classList.toggle("active", force);
-            }
-        },
         moveCloset : function() {
             if(nav.current.classList.contains("active")) {
                 history.push({
@@ -42,16 +33,16 @@ const NavMyProduct = ({myProductData, history}) => {
     } // event
 
     useEffect(() => {
-        setTimeout(() => { event.navToggle(true); }, 300)
+        setTimeout(() => { navToggle(true); }, 300)
     }, [myProductData]);
     return (
-        <div id="myProduct-nav-wrapper" className="" ref={nav}>
+        <>
             {
                 media === "Phone" ?
-                <div className="navCloser"  onTouchStart={() => event.navToggle()}></div> : 
-                <div className="navCloser"  onClick={() => event.navToggle()}></div> 
+                <div className="navCloser"  onTouchStart={() => navToggle()}></div> : 
+                <div className="navCloser"  onClick={() => navToggle()}></div> 
             }
-            <nav className="myProductNav" onClick={() => event.navToggle(true)}>
+            <nav className="myProductNav" onClick={() => navToggle(true)}>
             {
                 myProductData ? (
                     <>
@@ -80,7 +71,7 @@ const NavMyProduct = ({myProductData, history}) => {
                 )
             }
             </nav>
-        </div>
+        </>
     )
 }
 

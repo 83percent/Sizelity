@@ -39,6 +39,7 @@ section.View-Compare > header > .size-wrapper {
 section.View-Compare > header > .size-wrapper > ul {
     display: flex;
     flex-wrap: nowrap;
+    margin-bottom: 1rem;
 }
 section.View-Compare > header > .size-wrapper .size-element {
     margin-left: 1rem;
@@ -76,10 +77,36 @@ section.View-Compare > article {
     background: #ffffff;
     border-top: 1px solid #dbdbdb;
 }
+section.View-Compare > article > .type-compare {
+    display: flex;
+    width: 100vw;
+}
+section.View-Compare > article > .type-compare > div {
+    padding: 1rem;
+    width: 100%;
+}
+section.View-Compare > article > .type-compare > div:last-of-type {
+    border-left: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+}
+section.View-Compare > article > .type-compare > div > p {
+    font-size: 1.0rem;
+    margin-left: 0.2rem;
+    margin-bottom: 0.2rem;
+    color: #555;
+}
+section.View-Compare > article > .type-compare > div > div {
+    display: flex;
+}
+section.View-Compare > article > .type-compare > div > div > p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin: 0 0.2rem;
+}
 section.View-Compare > article > div.standard-wrapper {
     display: flex;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem 0.5rem 1rem;
 }
 section.View-Compare > article > div.standard-wrapper > .standard-frame {
     display: flex;
@@ -104,7 +131,7 @@ section.View-Compare > article > div.standard-wrapper > button {
     
 }
 section.View-Compare > article > div.standard-wrapper > button > i {
-    font-size: 2.0rem;
+    font-size: 2.4em;
     opacity: 0.3;
 }
 section.View-Compare > article > div.standard-wrapper > button > i.active {
@@ -132,14 +159,21 @@ section.View-Compare > article .compare-element .compare-title-frame > i {
     font-size: 1.2rem;
     margin-top: 3px;
     padding-left: 0.3rem;
-    padding-right: 0.4rem;
+    
     color: #00000060;
 }
-section.View-Compare > article .compare-element .compare-title-frame > p {
+section.View-Compare > article .compare-element > .empty-info {
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-top: 0.3rem;
+}
+section.View-Compare > article .compare-element > .empty-info > p {
     color: #ff1616;
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding: 1.5rem;
 }
 
 section.View-Compare > article .compare-element > .graph-analyze {
@@ -155,7 +189,7 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     justify-content: center;
     align-items: center;
 }
-section.View-Compare > article .compare-element > .graph-analyze > .compare-result.none {
+section.View-Compare > article > .compare-wrapper.only-graph .compare-result {
     display: none;
 }
 section.View-Compare > article .compare-element > .graph-analyze > .compare-result.blank {
@@ -379,11 +413,12 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
 #View > section#fav-select-wrapper .fav-select-btn {
     display: flex;
     align-items: center;
-    width: 100%;
+    justify-content: space-around;
+    width: 100vw;
 }
 #View > section#fav-select-wrapper .fav-select-btn > button {
     all: unset;
-    width: 50%;
+    width: 100%;
     text-align: center;
     padding: 1rem 0;
     border-top: 1px solid #dbdbdb;
@@ -392,8 +427,8 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     justify-content: center;
 }
 #View > section#fav-select-wrapper .fav-select-btn > button > i {
-    opacity: 0.3;
-    font-size: 1.5rem;
+    opacity: 0.6;
+    font-size: 1.6rem;
     margin-right: 0.3rem;
 }
 #View > section#fav-select-wrapper .fav-select-btn > button > p {
@@ -401,6 +436,7 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 1.2rem;
+    font-weight: 400;
 }
 #View > section#fav-select-wrapper > ._blank {
     flex-grow: 1;
@@ -461,10 +497,10 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     padding: 2rem 0;
     font-size: 1.2rem;
     text-align: center;
-    
+    font-weight: 400;
 }
 #View > .alertWrapper p.title.error {
-    color: tomato;
+    color: #ff0000;
 }
 #View > .alertWrapper p.title.clear {
     color: #00966B;

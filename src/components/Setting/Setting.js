@@ -1,28 +1,29 @@
 import { useContext } from 'react';
-import LoginModule from '../../contents/js/Login';
-
+import AccountModule from '../../contents/js/Account';
 // CSS
 import '../../contents/css/Setting/Setting.css';
 
 // Context
-import {LoginContext} from '../../App';
+import { LoginContext, ServerContext } from '../../App';
 import { Link } from 'react-router-dom';
 
-let login = null;
 const UserMenu = ({history}) => {
+
+
+
     const {userInfo ,setUserInfo} = useContext(LoginContext);
-    if(!login) login = new LoginModule();
+    const server = useContext(ServerContext);
     if(!userInfo)  {
         history.replace("/notlogin");
         return null;
     }
 
-    const Event = {
+    const event = {
         logout : async () => {
             if(window.confirm("로그아웃 하시겠습니까?")) {
-                await login.delete();
-                setUserInfo(null);
+                await new AccountModule(server).logout();
                 history.replace("/");
+                setUserInfo(null);
             }
             return null;
         },
@@ -52,10 +53,21 @@ const UserMenu = ({history}) => {
                 </div>
                 <div className="menu-wrapper">
                     <div className="menu-wrapper-title">
+                        <h1>고객센터</h1>
+                    </div>
+                    <ul>
+                        <Link to="/help" className="menu-element">
+                            <i className="material-icons">help</i>
+                            <p>고객센터</p>
+                        </Link>
+                    </ul>
+                </div>
+                <div className="menu-wrapper">
+                    <div className="menu-wrapper-title">
                         <h1>로그인</h1>
                     </div>
                     <ul>
-                        <li className="menu-element" onClick={() => Event.logout()}>
+                        <li className="menu-element" onClick={() => event.logout()}>
                             <i className="material-icons">lock</i>
                             <p>로그아웃</p>
                         </li>

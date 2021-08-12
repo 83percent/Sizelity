@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useRef } from 'react';
 
 import AccountModule from '../../contents/js/Account';
 
@@ -56,27 +56,23 @@ const ViewLogin = ({history}) => {
             event.disabled(true, e.target);
             const result = await accountModule.login({username : __id, password : __password});
             if(result?.type === 'success') {
-                setUserInfo(result.data);
                 history.replace("/");
+                setUserInfo(result.data);
                 return null;
             } else {
-                event.openAlert(result.msg);
+                event.disabled(false)
+                event.alertToggle(result.msg);
             }
         }
     }
     const event = {
-        alertToggle : function() {
-            
-        },
-        closeAlert : function() {
-            if(!alertWrapper.current) return;
-            alertWrapper.current.classList.remove("on");
-        },
-        openAlert : function(Msg) {
-            if(!alertWrapper.current) return;
-            alertText.current.innerHTML = Msg;
-            this.disabled(false)
-            alertWrapper.current.classList.add("on");
+        alertToggle : function(msg, toggle) {
+            if(toggle === false) {
+                alertWrapper.current.classList.remove("on");
+            } else {
+                alertText.current.innerHTML = msg;
+                alertWrapper.current.classList.add("on");
+            }
         },
         disabled : function(force, submit) {
             if(!alertWrapper.current) return;
@@ -93,7 +89,7 @@ const ViewLogin = ({history}) => {
                 <div className="alert-frame">
                     <p ref={alertText}></p>
                 </div>
-                <div className="blank" onTouchStart={() => event.closeAlert()}></div>
+                <div className="blank" onTouchStart={() => event.alertToggle("",false)}></div>
             </div>
             <div className="Login-backFrame" onClick={() => history.goBack()}>
                 <i className="material-icons">arrow_back</i>

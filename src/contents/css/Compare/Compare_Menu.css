@@ -44,8 +44,8 @@ section#Menu > .menu-frame > div {
     padding: 1rem;
     width: 100%;
 }
-section#Menu > .menu-frame > div > p {
-    font-size: 1.1rem;
+section#Menu > .menu-frame > div > i {
+    font-size: 1.9rem;
     font-weight: 500;
     position: relative;
     top: -1px;

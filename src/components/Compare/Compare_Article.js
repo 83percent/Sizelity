@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Proptype from 'prop-types';
+import ProductTypeModule from '../../contents/js/ProductType';
 
 // CSS
 import '../../contents/css/Compare/Compare_Article.css';
@@ -7,34 +8,26 @@ import '../../contents/css/Compare/Compare_Article.css';
 // Component
 import CompareGraphList from "./Compare_Graph";
 
-const Compare = ({productData, myProduct}) => {
+const Compare = ({productData, myProduct, navToggle}) => {
+
     // data에 온전하지 못한 정보가 담겨 올 것을 대비해 데이터 검증.js 를 만들어 
     // 검증 후 지금의 Component를 화면에 출력 / 그렇지 못한 경우 데이터가 없다는 페이지로 이동
     const [activeSize, setActiveSize] = useState(null);
 
-    const viewTypeEvent = (e) => {
+    // Ref
+    const compareGraphRef = useRef(null);
+
+    const viewTypeEvent = (target) => {
         // 그래프만 보기
-        const status = e.target.classList.contains("active");
+        const status = target.classList.contains("active");
         if(status) {
             // 활성화 상태 : 그래프만 보임
-            
-            e.target.classList.remove("active");
-            const frameArr = document.getElementsByClassName("compare-result");
-            if(frameArr.length > 0) {
-                Array.from(frameArr).forEach(element => {
-                    element.classList.remove("none");
-                });
-            }
+            target.classList.remove("active");
+            compareGraphRef.current.classList.remove("only-graph");
         } else {
             // 비활성화 상태 : 결과도 같이 보임 -> 그래프만 보이게 display:none
-            
-            e.target.classList.add("active");
-            const frameArr = document.getElementsByClassName("compare-result");
-            if(frameArr.length > 0) {
-                Array.from(frameArr).forEach(element => {
-                    element.classList.add("none");
-                });
-            }
+            target.classList.add("active");
+            compareGraphRef.current.classList.add("only-graph");
         }
     }
     //const selectSize = (sizeName) => {changeActiveSize(sizeName);}
@@ -57,19 +50,36 @@ const Compare = ({productData, myProduct}) => {
                     
             </header>
             <article>
+                <section className="type-compare">
+                    <div>
+                        <p>현재 보고있는 상품</p>
+                        <div>
+                            <p>{ProductTypeModule.getTypeName(productData.info.ptype)}</p>
+                            <p>/</p>
+                            <p>{productData.info?.subtype}</p>
+                        </div>
+                    </div>
+                    <div onClick={() => navToggle(true)}>
+                        <p>나의 옷</p>
+                        <div>
+                            <p>{ProductTypeModule.getTypeName(myProduct.info.ptype)}</p>
+                            <p>/</p>
+                            <p>{myProduct.info?.subtype}</p>
+                        </div>
+                    </div>
+                </section>
+            
                 <div className="standard-wrapper">
+                    
                     <div className="standard-frame">
                         <p>나의 옷</p>
                         <div className="standard-colorBar"></div>
                     </div>
-                    <button onClick={(e) => viewTypeEvent(e)}>
-                        <p className="en">CM</p>
-                    </button>
-                    <button onClick={(e) => viewTypeEvent(e)}>
+                    <button onClick={(e) => viewTypeEvent(e.target)}>
                         <i className="material-icons">assessment</i>
                     </button>
                 </div>
-                <div className="compare-wrapper">
+                <div className="compare-wrapper" ref={compareGraphRef}>
                     <CompareGraphList
                         activeSize={activeSize}
                         myProductData={myProduct ? myProduct.size : null}
@@ -120,30 +130,30 @@ export default React.memo(Compare);
 const HeaderSizeList = ({ sizeData, selectSize }) => {
     const sizeElementList = useRef(null);
 
-    const sizeElementClickEvent = (e,size) => {
-        e.stopPropagation();
-        let target = e.target;
+    const sizeElementClickEvent = (target,size) => {
         if(target.classList.contains("size-element")) target = target.querySelector("p");
 
         const tl = target.classList;
         if(tl.contains("active")) {
             tl.remove("active");
+            sizeElementList.current.nextElementSibling.checked = false;
             selectSize(null);
         } else {
-            if(sizeElementList.current.querySelector(".active")) {
-                sizeElementList.current.querySelector(".active").classList.remove("active");
+            if(sizeElementList.current !== null) {
+                sizeElementList.current.classList.remove("active");
             }
-            e.target.nextElementSibling.checked = true;
+            target.nextElementSibling.checked = true;
+            sizeElementList.current = target;
             tl.add("active");
             selectSize(size);
         }
     }
     return (
-        <ul ref={sizeElementList}>
+        <ul>
             {
                 sizeData.map((size, index) => (
                     <li className="size-element" key={index} >
-                        <p onClick={(e) => {sizeElementClickEvent(e, size.name)}}>{size.name}</p>
+                        <p onClick={(e) => {sizeElementClickEvent(e.target, size.name)}}>{size.name}</p>
                         <input type="radio" name="select-size" value={size.name}/>
                     </li>
                 ))

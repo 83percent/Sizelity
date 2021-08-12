@@ -29,7 +29,7 @@ class Account {
                     const {_id, uid, name, password} = response.data;
                     localStorage.setItem('authWithSizelity',JSON.stringify({_id, username: uid, name ,password}));
                     sessionStorage.setItem('auth',JSON.stringify({_id, name}));
-                    
+
                     return {type: 'success', data : response.data};
                 }
                 case 204 : {
@@ -61,6 +61,21 @@ class Account {
         if(!localStorage.getItem("authWithSizelity")) {return null;}
         const {username, password} = JSON.parse(localStorage.getItem("authWithSizelity"));
         if(!username ||!password) return null;
+        return await axios({
+            method: 'POST',
+            url:  `${this.server}/account/signin`,
+            data: {username, password},
+            withCredentials: true,
+            timeout : 5500
+        }).then(response => {
+            if(response?.status === 200) {
+                sessionStorage.setItem('auth',JSON.stringify({_id: response.data._id, name: response.data.name}));
+                return {_id: response.data._id, name: response.data.name};
+            }
+        }).catch(err => {
+            console.log(err);
+            return null;
+        });
     }
 
     // 계정 삭제
