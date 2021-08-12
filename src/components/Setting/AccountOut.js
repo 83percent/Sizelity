@@ -1,26 +1,28 @@
-import axios from "axios";
 import { useContext, useRef, useState } from "react";
 import { ServerContext } from "../../App";
 import LoginModule from '../../contents/js/Login';
-
+import AccountModule from '../../contents/js/Account';
 // Context
 import {LoginContext} from '../../App';
 
-let login = null;
+let accountModule = null;
 const AccountOut = ({history}) => {
     // State
     const [loader, setLoader] = useState(false);
-    const [option, setOption] = useState(null);
+    const [isOther, setIsOther] = useState(false);
 
     // Ref
     const alertWrapper = useRef(null);
-    const password = useRef(null);
-    const suggestInput = useRef(null);
+    const SendData = useRef({
+        password : "",
+        option : "",
+        suggest : ""
+    });
+
 
     // Context
     const server = useContext(ServerContext);
     const {userInfo ,setUserInfo} = useContext(LoginContext);
-
     
     if(!userInfo)  {
         history.replace("/notlogin");
@@ -36,65 +38,39 @@ const AccountOut = ({history}) => {
             }
             alertWrapper.current.classList.toggle("on",force);
         }, // alertToggle
-        outOfAccount : async () => {
-            if(!password.current.value) {
+        send : async (data) => {
+            setLoader(true);
+            const {password, option} = data;
+            if(password.length === 0) {
                 event.alertToggle(true,"비밀번호를 입력해주세요.");
                 return;
             }
-            if(!(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,20}$/).test(password.current.value)) {
+            if(!(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,20}$/).test(password)) {
                 event.alertToggle(true,"형식에 맞지 않는 비밀번호 입니다.");
                 return;
             }
-            if(!option) {
+            if(option === "") {
                 event.alertToggle(true,"탈퇴 사유를 선택해주세요.");
                 return;
             }
-            if(option === 'other') {
-                if(suggestInput.current.value.length < 3) {
-                    event.alertToggle(true,"탈퇴 사유를 선택해주세요.");
-                    return;
-                }
+            if(!accountModule) accountModule = new AccountModule(server);
+            
+            const response = await accountModule.remove(data);
+            if(response.type === 'success') {
+                setUserInfo(null);
+                history.replace("/");
+            } else {
+                setLoader(false);
+                event.alertToggle(true, response.msg);
             }
-            const response = await axios({
-                method: 'DELETE',
-                url: `${server}/user`,
-                withCredentials: true,
-                data : {
-                    password : password.current.value,
-                    option: option,
-                    suggest: option === 'other' ? suggestInput.current.value : undefined
-                },
-                timeout: 3500
-            }).catch(err => {
-                if(!err?.response?.status) {
-                    event.alertToggle(true, "잠시 후 다시 시도해주세요.");
-                    return;
-                } else 
-                switch(err.response.status) {
-                    case 400 : {
-                        event.alertToggle(true, "오류가 발생했어요.");
-                        return;
-                    }
-                    case 404 : {
-                        event.alertToggle(true, "비밀번호를 확인해주세요.");
-                        return;
-                    }
-                    case 500 :
-                    default : {
-                        event.alertToggle(true, "잠시 후 다시 시도해주세요.");
-                        return;
-                    }
-                    
-                }
-            });
-            if(response?.status === 200) {
+            /* if(response?.status === 200) {
                 // 탈퇴 성공
                 if(!login) login = new LoginModule();
                 await login.delete();
                 setUserInfo(null);
                 history.replace("/");
                 return;
-            }
+            } */
         }, // outOfAccount
     };
     return (
@@ -116,7 +92,7 @@ const AccountOut = ({history}) => {
                         <p>사용자를 확인합니다.</p>
                     </div>
                     <div className="input-wrapper">
-                        <input type="password" placeholder="사용자를 확인합니다." ref={password} minLength="8" maxLength="25"/>
+                        <input type="password" placeholder="사용자를 확인합니다." onChange={e => SendData.current.password = e.target.value} minLength="8" maxLength="25"/>
                     </div>
                 </div>
                 <div className="change-wrapper">
@@ -125,7 +101,7 @@ const AccountOut = ({history}) => {
                         <p>Sizelity 발전을 위해 소중한 의견을 전달해주세요.</p>
                     </div>
                     <div className="option-wrapper">
-                        <select defaultValue="" onChange={(e) => setOption(e.target.value)}>
+                        <select defaultValue="" onChange={(e) => {SendData.current.option = e.target.value; setIsOther(e.target.value === "other")}}>
                             <option value="" disabled hidden>탈퇴사유를 알려주세요</option>
                             <option value="lessInfo">필요한 정보가 없어요</option>
                             <option value="howCan">어떻게 사용하는지 모르겠어요</option>
@@ -138,15 +114,15 @@ const AccountOut = ({history}) => {
                     
                 </div>
                 {
-                    option === 'other' ? (
+                    isOther ? (
                         <div className="suggest-wrapper">
-                            <input type="text" maxLength="200" placeholder="기타 사유를 알려주세요" ref={suggestInput}/>
+                            <input type="text" maxLength="200" placeholder="기타 사유를 알려주세요" onChange={e => SendData.current.suggest = e.target.value}/>
                          </div>
                      ): null
                 }
             </article>
             <div className="footer-btn">
-                <div onClick={() => event.outOfAccount()}>
+                <div onClick={() => event.send(SendData.current)}>
                     {
                         loader ? (
                             <div className="loader"></div>

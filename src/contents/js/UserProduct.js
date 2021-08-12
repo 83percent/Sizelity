@@ -21,16 +21,29 @@ class UserProduct {
             withCredentials: true,
             timeout : 5500
         }).then(response => {
-            console.log("모듈 반환값 : ", response)
             if(response.status === 200) {
                 return response.data;
             }
         }).catch(err => {
-            console.log(err.response.status);
             if(err?.response?.status) return err.response.status;
             else return 0;
         })
     } // get(id)
+
+    async remove(id, productID) {
+        if(id === undefined) return StatusCode.invalid; // invalid
+        return await axios({
+            method : 'DELETE',
+            url : `${this.server}/user/product/${id}/${productID}`,
+            withCredentials: true,
+            timeout: 5500
+        }).then(response => {
+            console.log("모듈 반환값 : ", response)
+            return true;
+        }).catch(() => {
+            return false;
+        })
+    }
 }
 
 export default UserProduct;

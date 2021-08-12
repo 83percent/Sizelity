@@ -26,7 +26,7 @@ export default class Login {
                     return {data:{status:404}};
                 }
                 default : {
-                    return {data:{status:-200}};
+                    return {data:{status:-200}};    
                 }
             }
         }); // catch

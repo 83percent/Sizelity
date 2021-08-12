@@ -1,6 +1,6 @@
 section#UserProduct {
     background: #f0f2f5;
-    min-height: 100%;
+    min-height: 100vh;
 }
 section#UserProduct > i {
     position: absolute;
@@ -40,14 +40,15 @@ section#UserProduct > header > a {
     padding-left: 0.8rem;
 }
 section#UserProduct > header > a > i {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: #888888;
     position: relative;
     top: 0.1rem;
 }
 section#UserProduct > header > a > p {
     color: #888888;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
 /*      article     */
@@ -55,25 +56,29 @@ section#UserProduct > article {
     padding-top: 1rem;
 }
 section#UserProduct > article > .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
     background: #ffffff;
     text-align: center;
     padding: 2rem 0;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
 }
 section#UserProduct > article > .empty > p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 section#UserProduct > article > .empty > i {
-    font-size: 4.0rem;
+    font-size: 5.0rem;
     color: #88888880;
     
 }
-section#UserProduct > article > .empty > button {
+section#UserProduct > article > .empty > a {
     all: unset;
     background: #00966B;
-    padding: 0.7rem 1.8rem;
+    font-size: 1.2rem;
+    padding: 0.6rem 2.3rem;
     margin-top: 0.8rem;
     border-radius: 2rem;
     color: #ffffff
@@ -120,6 +125,9 @@ section#UserProduct > article .list-nav > button.on > i {
 /*
     목록
 */
+section#UserProduct > article > .list-wrapper {
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
+}
 section#UserProduct > article .list-frame {
     background: #fff;
     border-top: 1px solid #dbdbdb;
@@ -136,8 +144,13 @@ section#UserProduct > article .list-frame > .cate-nav {
 section#UserProduct > article .list-frame > .cate-nav > p {
     font-size: 1.3rem;
     margin-left: 0.5rem;
-    font-weight: 400;
+    font-weight: 500;
     flex-grow: 1;
+    opacity: 0.4;
+    transition-duration: 0.3s;
+}
+section#UserProduct > article .list-frame.on > .cate-nav > p {
+    opacity: 1;
 }
 section#UserProduct > article .list-frame > .cate-nav > i {
     opacity: 0.3;
@@ -310,63 +323,4 @@ section#UserProduct > .alertWrapper p.clear {
 }
 section#UserProduct > .alertWrapper p.normal {
     color: #000;
-}
-/*      confirm     */
-section#UserProduct > .confirmWrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-}
-section#UserProduct > .confirmWrapper.on {
-    height: 100%;
-}
-section#UserProduct > .confirmWrapper > .alertClose {
-    flex-grow: 0;
-}
-section#UserProduct > .confirmWrapper.on > .alertClose {
-    flex-grow: 1;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame {
-    position: absolute;
-    top: -16rem;
-    width: 100%;
-    text-align: center;
-    background: #fff;
-    border-bottom: 1px solid #dbdbdb;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    transition-duration: 0.4s;
-}
-section#UserProduct > .confirmWrapper.on > .confirmFrame {
-    top: 0;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame > div {
-    padding: 1.8rem 0 1rem 0;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame > div > q {
-    font-size: 1.5rem;
-    font-weight: 400;
-    white-space: nowrap;
-    overflow: hidden;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame > div > h1 {
-    font-size: 1.2rem;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame > ul {
-    display: flex;
-    align-items: center;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame > ul > li {
-    flex-grow: 1;
-    text-align: center;
-    border-top: 1px solid #dbdbdb;
-    padding: 0.8rem 0;
-    font-size: 1.2rem;
-}
-section#UserProduct > .confirmWrapper > .confirmFrame > ul > li:first-child {
-    border-right: 1px solid #dbdbdb;
 }

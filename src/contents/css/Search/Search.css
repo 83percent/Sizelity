@@ -189,11 +189,9 @@ section#Search {
 }
 #Search header > button {
     all: unset;
-    color: #ffffff;
     padding: 0.5rem 0.5rem;
     font-weight: 300;
     font-size: 1.0rem;
-    transition-duration: 0.3s;
 }
 #Search header > button > p {
     padding: 0.5rem 1rem;
@@ -260,6 +258,7 @@ section#Search {
 }
 #Search > .current-wrapper > ul > li > div > .info-frame h1 {
     font-size: 1.2rem;
+    font-weight: 400;
     overflow-x: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;

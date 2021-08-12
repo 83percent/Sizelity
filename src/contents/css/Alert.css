@@ -57,7 +57,7 @@ section > .alert-wrapper > .alert-frame {
     width: 100%;
     height: auto;
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
     background: #fff;
     border-bottom: 1px solid #dbdbdb;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);

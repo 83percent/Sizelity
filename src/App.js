@@ -11,9 +11,9 @@ import './contents/fonts/NotoSans.css';
 // Component
 import ViewRouter from './router/ViewRouter';
 
-import Compare from './router/Compare';
-import AfterProduct from './router/AfterProduct';
-import UserProduct from './router/UserProduct';
+import Compare from './router/CompareRouter';
+import AfterProduct from './router/AfterProductRouter';
+import UserProduct from './router/UserProductRouter';
 import Wrong from './router/WrongRouter';
 import Search from './router/Search';
 import LoginRouter from './router/LoginRouter';

@@ -62,9 +62,6 @@ section#View-Join > article > form > div > .input-frame {
     border: 1px solid #dbdbdb;
     border-radius: 0.5rem;
 }
-section#View-Join > article > form > div > .input-frame.wrong {
-    border: 1px solid #ff0000;
-}
 section#View-Join > article > form > div > .input-frame > input {
     width: 100%;
     padding: 0.5rem 1rem;
@@ -274,6 +271,7 @@ section#View-Join > article > form > button > i {
 }
 #View-Join > .alert-wrapper > .alert-frame > p {
     color: #ff0000;
+    font-size: 1.2rem;
 }
 #View-Join > .alert-wrapper > .blank {
     flex-grow: 1;

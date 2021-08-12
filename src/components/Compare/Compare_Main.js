@@ -2,6 +2,8 @@ import {useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import AfterProduct from '../../contents/js/AfterProduct';
+
 
 // CSS
 import '../../contents/css/Compare/Compare_Main.css';
@@ -12,9 +14,7 @@ import NavMyProduct from './Compare_Nav_MyProduct';
 import Menu from './Compare_Menu';
 
 // Context
-import { MediaContext } from '../../App';
-import { LoginContext } from '../../App';
-import { ServerContext } from '../../App';
+import { MediaContext, LoginContext, ServerContext } from '../../App';
 
 // Sample Product ADs Image
 import Sample1 from '../../contents/image/sample_image1.png';
@@ -22,7 +22,7 @@ import Sample2 from '../../contents/image/sample_image2.png';
 
 
 const ViewCompare = ({history, productData}) => {
-    const [{sizelity_myRecently}] = useCookies([]);
+    const [{ sizelity_myRecently }] = useCookies([]);
     // Context 
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
@@ -38,6 +38,8 @@ const ViewCompare = ({history, productData}) => {
     let isAfterRequest = false;
     let isMyProductRequest = false;
     let activeSize = null;
+    
+    let afterProductModule = null;
 
 
     const wrapperToggle = {
@@ -70,6 +72,7 @@ const ViewCompare = ({history, productData}) => {
     const alert = {
         // type : error || normal || clear
         alertToggle : (force, msg, type) => {
+            console.log("Alert")
             if(!afterAlert.current) return;
             const cl = afterAlert.current.classList;
             if(force === undefined) force = !cl.contains("on");
@@ -173,93 +176,36 @@ const ViewCompare = ({history, productData}) => {
         }
     }
     const after = {
-        set : function() {
+        set : async function(id) {
             if(isAfterRequest) {
                 // 해당 페이지에서 한번 요청한적 있음.
                 wrapperToggle.favorite(false);
                 alert.alertToggle(true, "이미 추가된 상품입니다.", "normal");
                 return;
             }
-            /*
-            {
-                _id : String,
-                upwd : String,
-                product : {
-                    praw : {
-                        domain : String,
-                        code : String,
-                        full : String
-                    },
-                    info : {
-                        sname : String,
-                        pname : String,
-                        subtype : String
-                    }
-                }
-            }
-            */
             if(!userInfo._id) {
                 //  로그인 안된 상태
                 alert.alertToggle(true, "로그인 후 이용가능 합니다.", "error");
                 return;
             }
-            try {
-                const sendData = {
-                    product : {
-                        praw : {
-                            domain : productData.praw.domain,
-                            code : productData.praw.code,
-                            full : productData.praw.full
-                        },
-                        info : {
-                            sname : productData.info.sname,
-                            pname : productData.info.pname,
-                            subtype : productData.info.subtype
-                        }
-                    }
-                };
-                ( async () => { 
-                    const response = await axios({
-                        method: 'post',
-                        url : `${server}/user/after`,
-                        data : sendData,
-                        withCredentials: true,
-                        setTimeout: 4000
-                    }).catch((err) => {
-                        if(err.response?.status) {
-                            switch(err.response.status) {
-                                case 401 : {
-                                    alert.alertToggle(true, "로그인 후 이용가능합니다.", "error");
-                                    break;
-                                }
-                                case 455 : {
-                                    alert.alertToggle(true, "최대 50개만 저장 가능합니다..", "error");
-                                    break;
-                                }
-                                case 500 :
-                                default : {
-                                    alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
-                                    break;
-                                }
-                            }
-                        } else alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
-                    }).finally(() => {
-                        wrapperToggle.favorite(false);
-                    });
-                    console.log(response, response?.status === 200);
-                    if(response?.status === 200) {
-                        isAfterRequest = true;
-                        alert.alertToggle(true, "나중에 볼 상품에 추가하였습니다.", "clear");
-                        console.log("CALL")
-                    }
-                })();
-            } catch(error) {
-                console.log(error);
-                wrapperToggle.favorite(false);
-                alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
-                return false;
+
+            if(!afterProductModule) afterProductModule = new AfterProduct(server);
+            const response = await afterProductModule.set(id);
+            wrapperToggle.favorite(false);
+            switch(response.type) {
+                case 'success' : {
+                    isAfterRequest = true;
+                    alert.alertToggle(true, "나중에 볼 상품에 추가하였습니다.", "clear");
+                    break;
+                }
+
+                case 'error' :
+                default : {
+                    alert.alertToggle(true, response?.msg, "error");
+                    break;
+                }
             }
-        }
+        }, // async after.set(id)
     }
     return (
         <div id="View">
@@ -305,7 +251,7 @@ const ViewCompare = ({history, productData}) => {
                                                     <i className="material-icons">door_sliding</i>
                                                     <p>나의 옷장</p>
                                                 </button>
-                                                <button onClick={() => after.set()}>
+                                                <button onClick={() => after.set(productData._id)}>
                                                     <i className="material-icons">watch_later</i>
                                                     <p>나중에 볼 상품</p>
                                                 </button>

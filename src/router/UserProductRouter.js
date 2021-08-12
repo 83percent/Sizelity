@@ -17,7 +17,7 @@ const UserProduct = ({history}) => {
     }
     return (
         <Switch>
-            <Route exact path="/closet/add" component={AddComponent} />
+            <Route exact path="/closet/create" component={AddComponent} />
             <Route path="/closet" component={ViewComponent} />
         </Switch>
     )

@@ -12,12 +12,13 @@ section#After > header {
     padding: 3rem 2rem 0.5rem 2rem;
 }
 section#After > header > h1 {
-    font-size: 2.1rem;
+    font-size: 2.2rem;
     font-weight: 500;
 }
 section#After > header > p {
-    font-size: 0.9rem;
-    color: #888888;
+    font-size: 1.0rem;
+    font-weight: 400;
+    color: #666;
 }
 /*      article     */
 section#After > article {
@@ -32,6 +33,9 @@ section#After > article > .loaderFrame, section#After > article > .After-none {
     justify-content: center;
     padding: 1rem;
 }
+section#After > article > .After-none > p {
+    font-size: 1.2rem;
+}
 section#After > article > .loaderFrame > .loader  {
     width: 1.8rem;
     height: 1.8rem;
@@ -42,27 +46,27 @@ section#After > article > .func-btn-wrapper {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 0.5rem 1rem;
     border-bottom: 1px solid #dbdbdb;
 }
 section#After > article > .func-btn-wrapper > button {
     all: unset;
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
     color: #ff000080;
-    padding: 0.5rem 0;
-    border-radius: 2rem;
-    transition-duration: 0.3s;
 }
-section#After > article > .func-btn-wrapper > button.on {
+section#After > article > .func-btn-wrapper > button > p {
+    padding: 0.5rem 1rem;
+    font-weight: 300;
+    border-radius: 2rem;
+
+}
+section#After > article > .func-btn-wrapper > button.on > p {
     background: #00966B;
     color: #fff;
-    padding: 0.5rem 1.3rem;
 }
 section#After > article > ul > li {
     display: flex;
     align-items: center;
     border-top: 1px solid #dbdbdb;
-    padding-left: 1rem;
     transition-duration: 0.4s;
     position: relative;
     left: 0;
@@ -73,50 +77,66 @@ section#After > article > ul > li:first-child {
 section#After > article > ul > li.remove {
     left: -100%;
 }
-section#After > article > ul > li > .After-elementInfoFrame {
+section#After > article > ul > li > div {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 1rem;
+    top: 0;
+    left: 0;
+    z-index: 800;
+    background-color: #fff;
+    transition-duration: 0.4s;
+}
+section#After > article > ul.on > li > div { 
+    left: -4rem;
+}
+section#After > article > ul > li > div > .info-frame {
     display: flex;
     align-items: center;
     flex-grow: 1;
     overflow: hidden;
     padding: 0.8rem 0;
 }
-section#After > article > ul > li > .After-elementInfoFrame p {
+section#After > article > ul > li > div > .info-frame > .title {
+    flex-grow: 1;
+    overflow: hidden;
+}
+section#After > article > ul > li p {
     font-size: 0.9rem;
     color: #00000080;
     overflow: hidden;
     white-space: nowrap;
 }
-section#After > article > ul > li > .After-elementInfoFrame h1 {
+section#After > article > ul > li h1 {
     font-size: 1.2rem;
+    font-weight: 400;
     overflow-x: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     white-space: nowrap;
 }
-section#After > article > ul > li > .After-elementInfoFrame > .After-elementInfo {
-    flex-grow: 1;
-    overflow: hidden;
-    min-width: 3.5rem;
+section#After > article > ul > li > div > a {
+    padding: 1.2rem 0.8rem 1rem 0.8rem;
 }
-section#After > article > ul > li > a > i {
-    font-size: 1.35rem;
+section#After > article > ul > li > div > a > i {
+    font-size: 1.5rem;
     color: #000000;
-    padding: 1rem;
 }
 section#After > article > ul > li > button {
     all: unset;
-    width: 0;
+    z-index: 700;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4rem;
+    height: 100%;
+    background-color: #dd1818;
     overflow: hidden;
-    transition-duration: 0.3s;
     text-align: center;
-}
-section#After > article > ul > li > button.active {
-    width: 3rem;
-    padding: 0.5rem 0;
-}
-section#After > article > ul > li > button > i {
-    color: #dd1818;
+    color: #ffffff;
 }
 section#After > .remove-wrapper {
     position: fixed;
