@@ -1,12 +1,12 @@
 import { Route, Switch } from 'react-router';
 
 // Component
-import EventList from '../components/Event/Event_List';
+import EventMain from '../components/Event/Event_Main';
 
 const Event = () => {
     return (
         <Switch>
-            <Route exact path="/event" component={EventList} />
+            <Route exact path="/event" component={EventMain} />
             
         </Switch>
     )

@@ -31,10 +31,6 @@ const NavMyProduct = ({myProductData, history, nav, navToggle}) => {
             }
         }
     } // event
-
-    useEffect(() => {
-        setTimeout(() => { navToggle(true); }, 300)
-    }, [myProductData]);
     return (
         <>
             {

@@ -286,7 +286,7 @@ const ViewCompare = ({history, productData}) => {
                             <Menu 
                                 closerEvent={wrapperToggle.menu}/>
                         </section>
-                        <div id="myProduct-nav-wrapper" className="" ref={nav}>
+                        <div id="myProduct-nav-wrapper" className="active" ref={nav}>
                             <NavMyProduct
                                 myProductData={sizelity_myRecently}
                                 history={history}
@@ -297,36 +297,6 @@ const ViewCompare = ({history, productData}) => {
                             productData={productData} 
                             myProduct={sizelity_myRecently}
                             navToggle={wrapperToggle.navToggle}/>
-                        <div id="ADs">
-                            <h1>이런 상품 어떠세요?</h1>
-                            <ul>
-                                <li>
-                                    <a>
-                                        <img src={Sample1} alt="sample" />
-                                        <p>쿠라 카라 셔츠 OPS</p>
-                                        <p>리즈비커밍</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img src={Sample1} alt="sample" />
-                                        <p>쿠라 카라 셔츠 OPSasdfsafasdfsa adsfasdf asdf asdfasdf asfasfasf safsafasfsa fdsafasdfasfwefwav adsfasf </p>
-                                        <p>리즈비커밍</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <img src={Sample2} alt="sample" />
-                                        <p>쿠라 카라 셔츠 OPSasdfsafasdfsa adsfasdf asdf asdfasdf asfasfasf safsafasfsa fdsafasdfasfwefwav adsfasf </p>
-                                        <p>리즈비커밍</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <Link>
-                                <p>추천 상품 더보기</p>
-                                <i className="material-icons">chevron_right</i>
-                            </Link>
-                        </div>
                     </>
                 ) : (
                     <div className="loaderFrame">
