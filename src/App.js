@@ -24,8 +24,9 @@ import HelpRouter from './router/HelpRouter';
 
 import NonLogin from './router/Error/NonLogin'; 
 
-
 import Test from './router/Test';
+
+import dotenv from 'dotenv';
 
 // CSS 
 import './contents/css/Alert.css';
@@ -36,9 +37,11 @@ export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
 export const ServerContext = createContext(null);
 
-//const __server = 'http://192.168.11.10:3001';
-const __server = 'http://localhost:3001';
-//const __server = 'https://server.sizelity.com';
+dotenv.config();
+console.log("URL : ", process.env)
+
+const __server = process.env.REACT_APP_SERVER_TEST_URL;
+//const __server = process.env.REACT_APP_SERVER_URL;
 
 let accountModule = null;
 const App = () => {
