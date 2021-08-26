@@ -1,0 +1,75 @@
+#change-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--base-background);
+}
+#change-wrapper > header {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    padding-top: 3rem;
+}
+#change-wrapper > header > h1 {
+    font-size: 2.0rem;
+    font-weight: 700;
+    flex-grow: 1;
+}
+#change-wrapper > header > i {
+    padding-bottom: 0.3rem;
+}
+#change-wrapper > main {
+    flex-grow: 1;
+}
+#change-wrapper > main > section {
+    background: #fff;
+    border-top: 1px solid #e3e8ee;
+    border-bottom: 1px solid #e3e8ee;
+    padding: 1rem 2rem 1rem 2rem;
+}
+#change-wrapper > main > section > div {
+    margin-bottom: 2rem;
+}
+#change-wrapper > main > section > div > h2 {
+    font-weight: 500;
+}
+#change-wrapper > main > section > div > input {
+    all: unset;
+    width: 100%;
+    padding-top: 0.5rem;
+    font-size: 1.4rem;
+    text-align: right;
+    border-bottom: 2px solid #dbdbdb;
+}
+#change-wrapper > main > section > div > div {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #888;
+    margin-top: 0.5rem;
+}
+#change-wrapper > main > section > div > div > label {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+#change-wrapper > main > section > div > div > label > p {
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 0.8rem 0;
+}
+#change-wrapper > main > section > div > div > label > input {
+    display: none;
+}
+
+
+#change-wrapper > button {
+    all: unset;
+    background: var(--base-color);
+    color: #fff;
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+}
