@@ -1,144 +1,24 @@
 section#View-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--base-background);
     height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #f0f2f5;
 }
-section#View-login > .Login-backFrame {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-}
-section#View-login > article {
-    width: 100%;
-}
-section#View-login > article {
-    width: 100%;
-}
-section#View-login > article > #loginForm {
-    display: flex;
-    flex-direction: column;
-}
-section#View-login > article .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-section#View-login > article .input-wrapper > input {
-    border-radius: 0.5rem;
-    width: 80%;
-    padding: 0.8rem 1.3rem;
-    font-size: 1.2rem;
-    border: 1px solid #dbdbdb;
-    outline: none;
-    transition-duration: 0.2s;
-    margin-bottom: 0.6rem;
-}
-section#View-login > article .input-wrapper > input:focus, section#View-login > article .input-wrapper > input.on {
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    border-color: #00966B;
-}
-section#View-login > article .input-wrapper > input.wrong {
-    border-color: crimson;
-}
-section#View-login > article .submit-wrapper {
-    margin: 0.3rem 0;
-    text-align: center;
-    
-}
-section#View-login > article .submit-wrapper > button#submit-btn {
-    width: 83%;
-    padding: 0.6rem 0;
-    border: none;
-    border-radius: 0.5rem;
-    background: #00966B;
-    color: #ffffff;
-    font-size: 1.4rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition-duration: 0.2s;
-}
-section#View-login > article .submit-wrapper > button#submit-btn:disabled {
-    opacity: 0.5;
-    cursor: default;
-}
-section#View-login > article > div.line {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 0.5rem;
-}
-section#View-login > article > div.line > div {
-    border-top: 1px solid #cacaca;
-    width: 63%;
-}
-section#View-login > article > .login-option-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+section#View-login > .logo-wrapper {
     margin-top: 1rem;
-
 }
-section#View-login > article > .login-option-wrapper > a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-}
-section#View-login > article > .login-option-wrapper > a > h4 {
-    font-size: 1.1rem;
-    color: #000000;
-    
-}
-section#View-login > article > .login-option-wrapper > a > h2 {
-    font-size: 1.1rem;
-    color: #00966B;
-    font-weight: 400;
-    margin-left: 0.5rem;
-}
-section#View-login footer {
-    background: #ffffff;
-}
-section#View-login > .alert-wrapper {
-    display: flex;
-    flex-direction: column;
+section#View-login > ul {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    z-index: 999;
+    bottom: 0;
+    margin-bottom: 1rem;
 }
-section#View-login > .alert-wrapper.ready {
-    height: 100%;
+section#View-login > ul > li {
+    margin-bottom: 0.5rem;
 }
-section#View-login > .alert-wrapper.on {
-    height: 100%;
+section#View-login > ul > li > a { 
+    cursor: pointer;
 }
-section#View-login > .alert-wrapper > .alert-frame {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: -8rem;
-    width: 100%;
-    height: 5rem;
-    background: #ffffff;
-    transition-duration: 0.4s;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
-}
-section#View-login > .alert-wrapper > .alert-frame > p {
-    color: #ff0000;
-    font-size: 1.2rem;
-}
-section#View-login > .alert-wrapper.on > .alert-frame {
-    top: 0;
-}
-section#View-login > .alert-wrapper.on > .blank {
-    flex-grow: 1;
+section#View-login > ul > li > a > img {
+    width: 90vw;
 }

@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import AccountModule from '../../contents/js/Account';
+import { useCookies } from 'react-cookie';
+
 // CSS
 import '../../contents/css/Setting/Setting.css';
 
@@ -8,22 +10,30 @@ import { LoginContext, ServerContext } from '../../App';
 import { Link } from 'react-router-dom';
 
 const UserMenu = ({history}) => {
+    // Cookie
+    const cookies = useCookies(['sizelity_token']);
 
-
-
+    // Context
     const {userInfo ,setUserInfo} = useContext(LoginContext);
     const server = useContext(ServerContext);
+
     if(!userInfo)  {
         history.replace("/notlogin");
         return null;
     }
 
     const event = {
-        logout : async () => {
+        logout : () => {
             if(window.confirm("로그아웃 하시겠습니까?")) {
-                await new AccountModule(server).logout();
-                history.replace("/");
-                setUserInfo(null);
+                try {
+                    cookies[2]('sizelity_token');
+                    new AccountModule(server).logout();
+                    history.replace("/");
+                    setUserInfo(null);
+                } catch {
+                    return;
+                }
+                
             }
             return null;
         },

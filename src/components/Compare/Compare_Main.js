@@ -16,9 +16,6 @@ import Menu from './Compare_Menu';
 // Context
 import { MediaContext, LoginContext, ServerContext } from '../../App';
 
-// Sample Product ADs Image
-import Sample1 from '../../contents/image/sample_image1.png';
-import Sample2 from '../../contents/image/sample_image2.png';
 
 
 const ViewCompare = ({history, productData}) => {

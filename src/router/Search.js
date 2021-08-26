@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 // CSS
 import '../contents/css/Search/Search.css';
@@ -11,10 +11,6 @@ import SearchCurrent from '../components/Search/SearchCurrent';
 import { LoginContext }from '../App';
 import { MediaContext } from '../App';
 
-// SampleImage
-import SampleImage1 from '../contents/image/sample_image1.png';
-import SampleImage2 from '../contents/image/sample_image2.png';
-import { Link } from 'react-router-dom';
 
 const Search = ({history}) => {
     // State
@@ -27,7 +23,6 @@ const Search = ({history}) => {
     // Ref
     const searchInput = useRef(null);
     const alertWrapper = useRef(null);
-    const adsRef = useRef(null);
 
     const searchClickEvent = (e) => {
         e.stopPropagation();
@@ -53,16 +48,6 @@ const Search = ({history}) => {
             alertWrapper.current.classList.toggle("on",force);
         }
     }
-    useEffect(() => {
-        // 50%
-        if(Math.floor((Math.random()*10)) % 2 === 1) {
-            setTimeout(() => {
-                try {
-                    adsRef.current.classList.add("on");
-                } catch {}
-            }, 1500);
-        }
-    }, [adsRef])
     return (
         <section id="Search">
             <div className="alert-wrapper" ref={alertWrapper}>
@@ -78,39 +63,7 @@ const Search = ({history}) => {
                 }
                 
             </div>
-            <nav id="ads" ref={adsRef}>
-                <div onClick={(e) => e.target.parentElement.classList.remove("on")}>
-
-                </div>
-                <section>
-                    <div className="title">
-                        <h1>이런 상품 어떠세요?</h1>
-                        <i className="material-icons" onClick={() => adsRef.current.classList.remove("on")}>close</i>
-                    </div>
-                    <ul>
-                        <li>
-                            <a href="https://leezbecoming.com/product/detail.html?product_no=4143&cate_no=1&display_group=2">
-                                <img src={SampleImage1} alt="sample1"/>
-                                <p>쿠라 카라 셔츠 OPS</p>
-                                <p>리즈비커밍</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://leezbecoming.com/product/detail.html?product_no=4141&cate_no=1&display_group=2">
-                                <img src={SampleImage2} alt="sample2"/>
-                                <p>호킨 볼레로 나시 세트</p>
-                                <p>리즈비커밍</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <div className="more">
-                        <Link to="/">
-                            <p>추천 상품 더보기</p>
-                            <i className="material-icons">chevron_right</i>
-                        </Link>
-                    </div>
-                </section>
-            </nav>
+            
             <div className="inputWrapper">
                 <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
                 <input ref={searchInput} type="text" autoComplete="off" placeholder="상품 주소를 입력해주세요."/>

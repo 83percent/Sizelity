@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 class Account {
     constructor(server) {
         this.server = server;
@@ -28,7 +27,6 @@ class Account {
                 case 200 : {
                     const {_id, uid, name, password} = response.data;
                     localStorage.setItem('authWithSizelity',JSON.stringify({_id, username: uid, name ,password}));
-                    sessionStorage.setItem('auth',JSON.stringify({_id, name}));
 
                     return {type: 'success', data : response.data};
                 }
@@ -58,18 +56,13 @@ class Account {
 
     // 자동 로그인
     async autoLogin() {
-        if(!localStorage.getItem("authWithSizelity")) {return null;}
-        const {username, password} = JSON.parse(localStorage.getItem("authWithSizelity"));
-        if(!username ||!password) return null;
         return await axios({
             method: 'POST',
-            url:  `${this.server}/account/signin`,
-            data: {username, password},
+            url:  `${this.server}/auth/`,
             withCredentials: true,
             timeout : 5500
         }).then(response => {
             if(response?.status === 200) {
-                sessionStorage.setItem('auth',JSON.stringify({_id: response.data._id, name: response.data.name}));
                 return {_id: response.data._id, name: response.data.name};
             }
         }).catch(err => {
@@ -90,7 +83,6 @@ class Account {
             timeout: 5500
         }).then(response => {
             if(response.status === 200) {
-                sessionStorage.removeItem("auth");
                 localStorage.removeItem("authWithSizelity");
                 return {type : "success"}
             }
@@ -107,21 +99,30 @@ class Account {
 
     // 로그아웃
     async logout() {
-        return await axios({
+        /* return await axios({
             method : 'GET',
             url : `${this.server}/user/logout`,
             withCredentials: true,
             timeout: 5500
         }).then(response => {
             if(response.status === 200) {
-                sessionStorage.removeItem("auth");
-                localStorage.removeItem("authWithSizelity");
+                Cookies.remove('sizelity_token');
+                localStorage.removeItem("sizelity_token");
                 return true;
             }
         }).catch(err => {
             console.error(err);
             return false;
-        })
+        }); */
+        try {
+            localStorage.removeItem("sizelity_token");
+            return true;
+        } catch(error) {
+            console.error(error);
+            return false;
+        }
+        
+        
     }
 }
 

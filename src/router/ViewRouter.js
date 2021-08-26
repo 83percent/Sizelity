@@ -84,7 +84,7 @@ const View = () => {
                     </Link>
                 </div>
             </section>
-            <div className="logoWrapper">
+            <div className="logo-wrapper">
                 <Link to="/" className="sizelity_logo">
                     <i className="material-icons">sell</i>
                 </Link>

@@ -1,0 +1,77 @@
+#account {
+    height: 100vh;
+    background: var(--base-background);
+    overflow: hidden;
+}
+#account > .logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+}
+#account > article {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#account > article > h1 {
+    z-index: 888;
+    font-size: 2.3rem;
+    font-weight: 700;
+    padding: 1.5rem 2rem 2rem 2rem;
+    flex-grow: 1;
+    text-align: center;
+}
+#account > article > div {
+    padding-bottom: 10rem;
+    z-index: 777;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#account > article > div > img {
+    width: 90vw;
+    z-index: 777;
+}
+#account > section {
+    z-index: 999;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    padding-top: 2rem;
+    background: #fff;
+    border-radius: 2rem 2rem 0 0;
+    box-shadow: 0 -10px 10px #88888810;
+    border-top: 1px solid #e3e8ee;
+}
+#account > section > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#account > section > div > a {
+    all: unset;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.7rem;
+}
+#account > section > div > a.facebook {
+    background: #166FE5;
+    color: #ffffff;
+}
+#account > section > div > a.naver {
+    background: #19CE60;
+    color: #ffffff;
+}
+
+#account > section > div > a.kakao {
+    background: #FAE100;
+    color: #3C1E1E;
+}

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import axios from 'axios';
 import AfterProductModule from '../contents/js/AfterProduct';
 
 // Css
@@ -71,7 +70,7 @@ const AfterProduct = ({history}) => {
     }
     useEffect(() => {
         if(afterList === null) request.getAfterList();
-    }, []);
+    }, [afterList, request]);
     return (
         <section id="After">
             <i className="material-icons back" onClick={() => history.goBack()}>arrow_back</i>
