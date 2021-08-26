@@ -2,11 +2,10 @@
 import { Route, Switch } from "react-router";
 
 // Component
-import Setting from '../components/Setting/Setting';
+import SettingList from '../components/Setting/SettingList';
 
 // - User
 import ChangeInfomation from '../components/Setting/InformaionChange';
-import ChangePassword from '../components/Setting/PasswordChange';
 import AccountOut from "../components/Setting/AccountOut";
 
 const SettingRouter = () => {
@@ -14,9 +13,8 @@ const SettingRouter = () => {
     return (
         <>
             <Switch>
-                <Route exact path="/setting/" component={Setting} />
+                <Route exact path="/setting/" component={SettingList} />
                 <Route exact path="/setting/chinfo" component={ChangeInfomation} />
-                <Route exact path="/setting/chpwd" component={ChangePassword} />
                 <Route exact path="/setting/accountout" component={AccountOut} />
             </Switch>
         </>

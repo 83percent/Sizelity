@@ -27,7 +27,6 @@ const Compare = ({history, location}) => {
     // Field
     const _useQuery = useQuery();
 
-
     async function getProduct() {
         // 상품 정보 없음. -> 검색
         const _ProductSearch = new ProductSearch(server);

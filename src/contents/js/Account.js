@@ -9,7 +9,7 @@ class Account {
 
     }
 
-    // 계정 로그인
+    /* // 계정 로그인
     async login({username, password}) {
         return await axios({
             method : 'POST',
@@ -52,7 +52,7 @@ class Account {
                 }
             }
         });
-    }
+    } */
 
     // 자동 로그인
     async autoLogin() {

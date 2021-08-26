@@ -6,7 +6,6 @@ import { CookiesProvider, useCookies } from 'react-cookie';
 
 // Font
 import './contents/fonts/Montserrat_use.css';
-import './contents/fonts/NotoSans.css';
 import './contents/fonts/AppleSDGothicNeo.css';
 
 
@@ -45,7 +44,6 @@ const App = () => {
 
         try {
             const accountModule = new AccountModule(__server);
-            console.log(sizelity_token)
             if(!sizelity_token) {
                 const token = localStorage.getItem("sizelity_token");
                 console.log(token)

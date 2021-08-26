@@ -25,8 +25,8 @@ const AccountRouter = () => {
             </article>
             <section>
                 <div>
-                    <a className="facebook" href="">페이스북 로그인</a>
-                    <a className="naver" href="">네이버 로그인</a>
+                    <a className="facebook" href={`${server}/auth/kakao`}>페이스북 로그인</a>
+                    <a className="naver" href={`${server}/auth/kakao`}>네이버 로그인</a>
                     <a className="kakao" href={`${server}/auth/kakao`}>카카오 로그인</a>
 
                 </div>

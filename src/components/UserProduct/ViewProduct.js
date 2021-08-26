@@ -279,7 +279,7 @@ const UserProduct = ({history, location}) => {
                         </>
                     ) : (
                         <div className="empty">
-                            <p>다른 상품과 비교할 상품을 골라주세요.</p>
+                            <p>상품과 비교할 나의 옷을 골라주세요.</p>
                         </div>
                     )
                 }

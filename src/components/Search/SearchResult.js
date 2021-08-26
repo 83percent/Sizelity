@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import ProductSearch from '../../contents/js/ProductSearch';
 import SearchHistory from "../../contents/js/SearchHistory";
 
@@ -13,18 +13,24 @@ const SearchResult = ({praw, history}) => {
     // Context
     const server = useContext(ServerContext);
     
-    const __fetchSearchData = async (praw) => {
-        const productSearch = new ProductSearch(server);
+    // Memo
+    const productSearch = useMemo(() => {
+        return new ProductSearch(server);
+    }, [server]);
+
+    // Callback
+    const __fetchSearchData = useCallback( async (praw) => {
         try {
             setOnLoader(true);
             const __response = await productSearch.search({url: praw});
             console.log("결과", __response);
             setResponse(__response);
-            setOnLoader(false);
         } catch(error) {
-            console.error(error);
+            setResponse(500);
+        } finally {
+            setOnLoader(false);
         }
-    }
+    }, [productSearch]);
 
     const resultClickEvent = (productData) => {
         const { sname, pname, subtype } = productData.info;
@@ -44,7 +50,7 @@ const SearchResult = ({praw, history}) => {
     }
     useEffect(() => {
         if(praw !== null) __fetchSearchData(praw);
-    },[praw]);
+    },[praw, __fetchSearchData]);
     if(onLoader) {
         return (
             <div className="loader"></div>

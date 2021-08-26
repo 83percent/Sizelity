@@ -1,4 +1,3 @@
-import Proptype from 'prop-types'
 import { ptype } from '../../../contents/js/ProductType';
 import { useEffect, useRef } from 'react';
 
@@ -121,8 +120,8 @@ const Step3 = ({data, setData, setStep, alertToggle}) => {
         <>
             <header>
                 <h1>어떤 종류인가요?</h1>
-                <p>어떤 종류의 옷인가요?</p>
-                <p>종류별로 정리되어 저장됩니다.</p>
+                <p>옷의 종류를 선택하여 옷장을 정리해보세요.</p>
+                <p>옷의 세부 종류를 입력하면 옷 비교 중 도움이 될거에요.</p>
             </header>
             <main>
                 <div className="ptype-list-frame">
@@ -147,8 +146,7 @@ const Step3 = ({data, setData, setStep, alertToggle}) => {
                         <div className="sub-input-wrapper">
                             <div className="title">
                                 <h1>세부 종류 입력</h1>
-                                <p>추후 쉽게 구별하기 위해</p>
-                                <p>입력하는 것을 추천합니다</p>
+                                <p>비교 중에 내 옷의 특징을 잘 알 수 있게 입력해주세요.</p>
                             </div>
                             <div className="sub-input-frame">
                                 <input
@@ -162,19 +160,12 @@ const Step3 = ({data, setData, setStep, alertToggle}) => {
                         </div>
                     </div>
                 </div>
-                <div className="apply" >
+                <div className="apply">
                     <h1 ref={applyBtn} onClick={() => event.apply()}>적용</h1>
                 </div>
             </main>
         </>
     )
-}
-
-Step3.proptype = {
-    data : Proptype.object.isRequired,
-    setData : Proptype.func.isRequired,
-    setStep : Proptype.func.isRequired,
-    alertToggle : Proptype.func.isRequired
 }
 
 export default Step3;

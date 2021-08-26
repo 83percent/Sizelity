@@ -1,42 +1,47 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import AfterProductModule from '../contents/js/AfterProduct';
 
 // Css
 import '../contents/css/Router/AfterProduct.css';
 
 // Context 
-import {LoginContext ,ServerContext} from '../App';
+import {ServerContext} from '../App';
 
-let afterProductModule = null;
 const AfterProduct = ({history}) => {
+    // State
+    const [deleteOption, setDeleteOption] = useState(false);
+    const [afterList, setAfterList] = useState(undefined);
+
+    console.log(afterList);
 
     // Context
-    const {userInfo} = useContext(LoginContext);
     const server = useContext(ServerContext);
 
-    // State
-    const [loader, setLoader] = useState(true);
-    const [deleteOption, setDeleteOption] = useState(false);
-    const [afterList, setAfterList] = useState(null);
+    // Memo
+    const afterProductModule = useMemo(() => {
+        return new AfterProductModule(server);
+    }, [server])
 
-    // Ref
-    const listRef = useRef(null)
-    if(!userInfo || !userInfo._id || !userInfo.name) {
-        history.replace("/wrong");
-    }
-    const request = {
-        getAfterList : async () => {
-            if(!afterProductModule) afterProductModule = new AfterProductModule(server);
+    // Callback
+    const getAfterList = useCallback(async () => {
+        try {
             const response = await afterProductModule.get();
-            setLoader(false);
             if(response?.type === 'error') {
                 window.alert(response?.msg);
+                setAfterList(null);
             } else {
                 setAfterList(response);
             }
-        },
+        } catch {
+            window.alert("상품 목록을 불러올 수 없습니다.");
+        }
+    }, [afterProductModule])
+
+    // Ref
+    const listRef = useRef(null);
+
+    const request = {
         removeAfterList : async (productID, target) => {
-            if(!afterProductModule) afterProductModule = new AfterProductModule(server);
             const response = await afterProductModule.remove(productID);
             if(response) {
                 for(let i=0; i<4; ++i) {
@@ -69,8 +74,8 @@ const AfterProduct = ({history}) => {
         }
     }
     useEffect(() => {
-        if(afterList === null) request.getAfterList();
-    }, [afterList, request]);
+        if(afterList === undefined) getAfterList();
+    }, [afterList, getAfterList]);
     return (
         <section id="After">
             <i className="material-icons back" onClick={() => history.goBack()}>arrow_back</i>
@@ -86,7 +91,7 @@ const AfterProduct = ({history}) => {
                     </button>
                 </div>
                     {
-                        loader ? (
+                        afterList === undefined ? (
                             <div className="loaderFrame">
                                 <div className="loader"></div>
                             </div>

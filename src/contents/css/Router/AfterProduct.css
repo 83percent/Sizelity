@@ -97,20 +97,20 @@ section#After > article > ul > li > div > .info-frame {
     align-items: center;
     flex-grow: 1;
     overflow: hidden;
-    padding: 0.8rem 0;
+    padding: 0.9rem 0;
 }
 section#After > article > ul > li > div > .info-frame > .title {
     flex-grow: 1;
     overflow: hidden;
 }
 section#After > article > ul > li p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #00000080;
     overflow: hidden;
     white-space: nowrap;
 }
 section#After > article > ul > li h1 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 400;
     overflow-x: hidden;
     text-overflow: ellipsis;

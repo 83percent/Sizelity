@@ -1,13 +1,13 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Component
-import ViewRouter from './ViewRouter';
+import ViewRouter from './IndexRouter';
 import Compare from './CompareRouter';
 import AfterProduct from './AfterProductRouter';
 import UserProduct from './UserProductRouter';
 import Wrong from './WrongRouter';
-import Search from './Search';
+import Search from './SearchRouter';
 import LoginRouter from './LoginRouter';
 import SettingRouter from './SettingRouter';
 import NotFound from './NotFoundRouter';

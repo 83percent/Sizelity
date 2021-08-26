@@ -9,9 +9,6 @@ import '../../../contents/css/UserProduct/Step1.css';
 import {ServerContext} from '../../../App';
 
 let urlModule = null;
-//const server = 'http://localhost:3001';
-//const server = 'http://3.36.87.114:3001';
-//const server = 'http://192.168.11.2:3001';
 
 const Step1 = ({data, setData, setStep, alertToggle}) => {
     // state
@@ -37,8 +34,6 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
         }
     });
 
-    console.log("검색 결과 : ",product);
-    
     
     const event = {
         onSelect : (e) => {
@@ -205,8 +200,8 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
         <>
             <header>
                 <h1>상품 주소를 아시나요?</h1>
-                <p>상품의 인터넷 주소를 복사/붙여넣기</p>
-                <p>보다 쉽게 "나의 상품"을 채워보세요.</p>
+                <p>구매했던 상품의 주소를 붙여넣어</p>
+                <p>보다 쉽게 "나의 옷장"을 채워보세요.</p>
             </header>
             <ul className="help-wrapper">
                 <li>
@@ -218,16 +213,19 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
                 </li>
             </ul>
             <main>
-                <div className={`selectOption ${(data && data.praw) ? "on" : null}`} ref={productInputWrapper}>
+                <div className={`selectOption ${(data && data.praw) ? "on" : ""}`} ref={productInputWrapper}>
                     <input type="hidden" value="true" />
-                    <p onClick={(e) => event.onSelect(e)}>네, 알고있어요.</p>
+                    <h2 onClick={(e) => event.onSelect(e)}>
+                        <i className="material-icons">check</i>
+                        <p>네, 알고있어요.</p>
+                    </h2>
                     <div>
                         <div className="select-column-wrapper">
                             <div className="row-input-frame">
                                 <input 
                                     type="text"
                                     ref={productInput}
-                                    onKeyPress={(e) => e.key === "Enter" ? event.productSearch() : null}
+                                    onKeyPress={(e) => e.key === "Enter" ? event.productSearch() : ""}
                                     autoComplete="off"
                                     placeholder="http://"
                                     defaultValue={(data && data.praw && data.praw.full) ? `${data.praw.full}` : ''}
@@ -263,7 +261,10 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
                 </div>
                 <div className="selectOption">
                     <input type="hidden" value="false" />
-                    <p onClick={(e) => event.onSelect(e)}>아니요, 모르겠어요.</p>
+                    <h2 onClick={(e) => event.onSelect(e)}>
+                        <i className="material-icons">check</i>
+                        <p>아니요, 모르겠어요.</p>
+                    </h2>
                 </div>
                 <div className="apply" >
                     <h1 ref={applyBtn} onClick={() => event.apply()}>다음단계</h1>

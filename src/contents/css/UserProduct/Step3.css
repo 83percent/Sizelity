@@ -122,11 +122,11 @@ section#AddProduct .step3 .ptype-list-frame > div > .sub-input-wrapper > .title 
     margin-right: 2rem;
 }
 section#AddProduct .step3 .ptype-list-frame > div > .sub-input-wrapper > .title > h1 {
-    font-size: 1.8rem;
-    font-weight: 400;
+    font-size: 2.0rem;
+    font-weight: 500;
 }
 section#AddProduct .step3 .ptype-list-frame > div > .sub-input-wrapper > .title > p {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: #888;
 }
 section#AddProduct .step3 .ptype-list-frame > div > .sub-input-wrapper > .sub-input-frame {
@@ -135,7 +135,7 @@ section#AddProduct .step3 .ptype-list-frame > div > .sub-input-wrapper > .sub-in
 section#AddProduct .step3 .ptype-list-frame > div > .sub-input-wrapper > .sub-input-frame > input {
     all: unset;
     background: #fff;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding: 0.8rem 0 0.4rem 0;
     border-bottom: 2px solid #dbdbdb;
 }

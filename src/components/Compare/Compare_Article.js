@@ -60,12 +60,22 @@ const Compare = ({productData, myProduct, navToggle}) => {
                         </div>
                     </div>
                     <div onClick={() => navToggle(true)}>
-                        <p>나의 옷</p>
-                        <div>
-                            <p>{ProductTypeModule.getTypeName(myProduct.info.ptype)}</p>
-                            <p>/</p>
-                            <p>{myProduct.info?.subtype}</p>
-                        </div>
+                        {
+                            myProduct ? (
+                                <>
+                                    <p>나의 옷</p>
+                                    <div>
+                                        <p>{ProductTypeModule.getTypeName(myProduct.info.ptype)}</p>
+                                        <p>/</p>
+                                        <p>{myProduct.info?.subtype}</p>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="none">
+                                    <p>비교할 나의 옷을 선택해주세요.</p>
+                                </div>
+                            )
+                        }
                     </div>
                 </section>
             

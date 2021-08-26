@@ -166,7 +166,7 @@ section#Search {
     align-items: center;
     width: 85vw;
     overflow: hidden;
-    padding: 0.8rem 0;
+    padding: 0.9rem 0;
     margin-left: 1rem;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame > .title {
@@ -177,13 +177,13 @@ section#Search {
     min-width: 3.5rem;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #00000080;
     overflow: hidden;
     white-space: nowrap;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame h1 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 400;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -240,58 +240,4 @@ section#Search > .hn > div > i:first-of-type {
 }
 section#Search > .hn > div > i {
     font-size: 1.6rem;
-}
-
-/*      Alert       */
-section#Search > .alert-wrapper {
-    position: fixed;
-    display: flex;
-    flex-direction: column;;
-    width: 100%;
-    height: auto;
-    z-index: 999;
-}
-section#Search > .alert-wrapper.on {
-    height: 100%;
-}
-section#Search > .alert-wrapper > .alert-frame {
-    position: absolute;
-    top: -15rem;
-    left: 0;
-
-    text-align: center;
-    width: 100%;
-    height: auto;
-    padding-top: 2rem;
-    padding-bottom: 1rem;
-    background: #fff;
-    border-bottom: 1px solid #dbdbdb;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    transition-duration: 0.4s;
-}
-section#Search > .alert-wrapper > .alert-frame > i {
-    font-size: 3.0rem;
-}
-section#Search > .alert-wrapper > .alert-frame > h1 {
-    font-size: 1.5rem;
-    padding-bottom: 1rem;
-}
-section#Search > .alert-wrapper > .alert-frame > button {
-    all: unset;
-    width: 90%;
-    padding: 0.8rem 0;
-    font-size: 1.1rem;
-    border-radius: 0.5rem;
-    background: #00966B;
-    color: #fff;
-}
-section#Search > .alert-wrapper.on > .alert-frame {
-    top: 0;
-}
-section#Search > .alert-wrapper > .alert-closer {
-    flex-grow: 0;
-}
-section#Search > .alert-wrapper.on > .alert-closer {
-    flex-grow: 1;
-
 }

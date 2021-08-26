@@ -25,7 +25,7 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                     setData(__data);
                     setStep(3);
                 } else {
-                    alertToggle(true, "'미지정'으로 설정할 수 없습니다.");
+                    alertToggle(true, "'상품명으로 표시'로 설정할 수 없습니다.");
                 }
             } else {
                 // 지정 명칭 존재
@@ -37,7 +37,7 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                     setData(__data);
                     setStep(3);
                 } else {
-                    alertToggle(true, "2~20자의 이름을 지어주세요.");
+                    alertToggle(true, "저장할 이름을 만들어주세요.<br />2~20자 입력");
                 }
                 
             }
@@ -49,7 +49,6 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                 <h1>어떻게 표시할까요?</h1>
                 <p>나중에 알아볼 수 있는 이름을 지어주세요.</p>
                 <p>언제든지 수정 가능할 수 있어요.</p>
-                <p>미지정은 상품명이 존재하는 경우만 사용할 수 있어요.</p>
             </header>
             <main>
                 <div className="input-frame">
@@ -57,16 +56,19 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                         type="text"
                         ref={nickInput}
                         autoComplete="off"
-                        placeholder="이름을 만들어주세요."
+                        placeholder="표시할 이름을 만들어주세요."
                         maxLength="20"
                         defaultValue={__data.info.nick ? __data.info.nick : undefined}/>
-                    <h2>2~20자 사용가능합니다.</h2>
+                    <h2>2~20자 입력.</h2>
                     {
                         __data.info.pname ? (
                             <>
                                 <p className="line">OR</p>
                                 <label>
-                                    <h1>미지정</h1>
+                                    <h1>
+                                        <i className="material-icons">check</i>
+                                        <p>상품명으로 표시할게요.</p>
+                                    </h1>
                                     <input type="checkbox" ref={nickUnset} style={{display:"none"}} onChange={() => event.unsetToggle()}/>
                                 </label>
                             </>

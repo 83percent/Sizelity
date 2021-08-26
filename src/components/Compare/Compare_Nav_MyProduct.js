@@ -1,5 +1,4 @@
-import React, {useContext, useEffect, useRef} from 'react';
-import Proptype from 'prop-types';
+import React, {useContext} from 'react';
 import Transition from '../../contents/js/TransitionSizeName';
 
 // CSS
@@ -69,11 +68,6 @@ const NavMyProduct = ({myProductData, history, nav, navToggle}) => {
             </nav>
         </>
     )
-}
-
-NavMyProduct.proptype = {
-    myProductData : Proptype.object,
-    history : Proptype.object.isRequired
 }
 
 export default React.memo(NavMyProduct);

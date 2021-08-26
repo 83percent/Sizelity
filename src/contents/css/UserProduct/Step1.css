@@ -5,7 +5,34 @@ section#AddProduct > article > .step1 > main > .selectOption > div {
 section#AddProduct > article > .step1 > main > .selectOption.on > div {
     height: 100%;
 }
-section#AddProduct > article > .step1 > main > div > p {
+section#AddProduct > article > .step1 > main > .selectOption > h2 {
+    display: flex;
+    align-items: center;
+}
+section#AddProduct > article > .step1 > main > .selectOption.on > h2 {
+    opacity: 1;
+}
+section#AddProduct > article > .step1 > main > .selectOption > h2 > p {
+    font-weight: 500;
+}
+section#AddProduct > article > .step1 > main > .selectOption > h2 > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    height: 0;
+    margin-right: 0.5rem;
+    background: var(--base-color);
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    transition-duration: 0.3s;
+}
+section#AddProduct > article > .step1 > main > .selectOption.on > h2 > i {
+    width: 2rem;
+    height: 2rem;
+}
+section#AddProduct > article > .step1 > main > div > h2 {
     font-size: 1.9rem;
     font-weight: 400;
     margin-left: 2rem;

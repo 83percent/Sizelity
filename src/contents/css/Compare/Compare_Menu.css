@@ -46,7 +46,6 @@ section#Menu > .menu-frame > div {
 }
 section#Menu > .menu-frame > div > i {
     font-size: 1.9rem;
-    font-weight: 500;
     position: relative;
     top: -1px;
 }
@@ -64,8 +63,8 @@ section#Menu > .menu-frame > footer {
 }
 section#Menu > .menu-frame li a {
     color: #000000;
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1.9rem;
+    font-weight: 600;
     overflow-x: hidden;
     white-space: nowrap;
 }
