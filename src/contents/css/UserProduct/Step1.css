@@ -1,21 +1,21 @@
-section#AddProduct > article > .step1 > main > .selectOption > div {
-    overflow-y: hidden;
-    height: 0;
+/*
+    STEP1 - MAIN
+*/
+#AddProduct > article > .step1 > main > label > input{
+    display: none;
 }
-section#AddProduct > article > .step1 > main > .selectOption.on > div {
-    height: 100%;
-}
-section#AddProduct > article > .step1 > main > .selectOption > h2 {
+#AddProduct > article > .step1 > main > label > h2 {
     display: flex;
     align-items: center;
+    padding-top: 1rem;
 }
-section#AddProduct > article > .step1 > main > .selectOption.on > h2 {
+#AddProduct > article > .step1 > main > label.on > h2 {
     opacity: 1;
 }
-section#AddProduct > article > .step1 > main > .selectOption > h2 > p {
+#AddProduct > article > .step1 > main > label > h2 > p {
     font-weight: 500;
 }
-section#AddProduct > article > .step1 > main > .selectOption > h2 > i {
+#AddProduct > article > .step1 > main > label > h2 > i {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,87 +28,97 @@ section#AddProduct > article > .step1 > main > .selectOption > h2 > i {
     font-size: 1.3rem;
     transition-duration: 0.3s;
 }
-section#AddProduct > article > .step1 > main > .selectOption.on > h2 > i {
+#AddProduct > article > .step1 > main > label.on > h2 > i {
     width: 2rem;
     height: 2rem;
 }
-section#AddProduct > article > .step1 > main > div > h2 {
+/*
+    INPUT URL
+*/ 
+#AddProduct > article > .step1 > main > label > div {
+    overflow-y: hidden;
+    height: 0;
+}
+#AddProduct > article > .step1 > main > label.on > div {
+    height: 100%;
+}
+#AddProduct > article > .step1 > main > label > h2 {
     font-size: 1.9rem;
     font-weight: 400;
     margin-left: 2rem;
-    opacity: 0.5;
+    opacity: 0.4;
     transition-duration: 0.4s;
 }
-section#AddProduct > article > .step1 .select-column-wrapper {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    padding: 0.5rem 0;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-    margin: 1rem 0;
-}
-section#AddProduct > article > .step1 .row-input-frame {
+#AddProduct > article > .step1 .input-frame {
     display: flex;
     align-items: center;
-    padding: 0.3rem 2rem 0.3rem 2rem;
-    border-bottom: 2px solid #ccc;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.5rem 0.3rem 1rem;
+    margin: 1rem;
 }
-section#AddProduct > article > .step1 .row-input-frame > input {
+#AddProduct > article > .step1 .input-frame > input {
     all: unset;
     flex-grow: 1;
+    font-size: 1.3rem;
+}
+#AddProduct > article > .step1 .input-frame > i {
+    color: #fff;
+    width: 4rem;
+    text-align: center;
+    padding: 0.3rem 0;
+    background-color: #888;
+    border-radius: 1.5rem;
+}
+/*
+    Result 
+*/
+#AddProduct > article > .step1 article > p {
+    padding-left: 2rem;
     font-size: 1.2rem;
+    color: var(--base-color);
 }
-section#AddProduct > article > .step1 .row-input-frame > i {
-    color: #888;
+#AddProduct > article > .step1 article > div {
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+    margin: 0.5rem 1rem;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > p {
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    color: #00966B;
+#AddProduct > article > .step1 article > div > div.info-frame {
+    padding: 1rem 1rem 0 1.3rem;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > .shop-info-frame {
-    margin-top: 0.5rem;
+#AddProduct > article > .step1 article > div > div.info-frame > p {
+    font-size: 1.0rem;
+    font-weight: 500;
+    color: #555;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > .shop-info-frame > p {
-    font-size: 0.9rem;
-    font-weight: 400;
-    margin-left: 1.1rem;
-    color: #888;
+#AddProduct > article > .step1 article > div > div.info-frame > h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > .shop-info-frame > h1 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-left: 1rem;
-}
-section#AddProduct > article > .step1 .select-column-wrapper > ul {
+#AddProduct > article > .step1 article > div > div.size-frame {
     display: flex;
     overflow-x: auto;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > ul > li {
+#AddProduct > article > .step1 article > div > div.size-frame > label {
     padding-left: 1rem;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > ul > li > p {
-    font-size: 5.0rem;
-    font-family: Montserrat;
+#AddProduct > article > .step1 article > div > div.size-frame > label:last-of-type {
+    padding-right: 1rem;
+}
+#AddProduct > article > .step1 article > div > div.size-frame > label > p {
+    font-size: 5.3rem;
     font-weight: 400;
     transition-duration: 0.4s;
-    opacity: 0.3;
+    opacity: 0.2;
 }
-section#AddProduct > article > .step1 .select-column-wrapper > ul > li.on > p {
+#AddProduct > article > .step1 article > div > div.size-frame > label.on > p {
     opacity: 1.0;
 }
-section#AddProduct > article > .step1 > main > div.on > p {
+#AddProduct > article > .step1 article > div > div.size-frame > label > input {
+    display: none;
+}
+#AddProduct > article > .step1 > main > div.on > p {
     opacity: 1.0;
-}
-/*      검색 결과 없음    */
-section#AddProduct > article > .step1 .select-column-wrapper > .no-data {
-    text-align: center;
-    padding: 1.5rem 0;
-}
-section#AddProduct > article > .step1 .select-column-wrapper > .no-data > i {
-    font-size: 3.0rem;
-    color: #888;
 }

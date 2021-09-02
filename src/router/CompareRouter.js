@@ -41,19 +41,13 @@ const Compare = ({history, location}) => {
         }
         console.log("결과 : ",_searchResult);
         try {
-            if(typeof _searchResult === 'number') {
+            if(_searchResult.type === 'success') {
                 // 검색 결과 오류
-                setStatus(_searchResult);
+                setProductData(_searchResult.data);
             } else {
-                if(_searchResult?._id) {
-                    setProductData(_searchResult);
-                } else {
-                    // 비어있는 값 (정보 없음.)
-                    setStatus(204);
-                }
+                setStatus(_searchResult.status);
             }
         } catch(err) {
-            console.log(err);
             setStatus(500);
         } finally {
             setLoader(false);

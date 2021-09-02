@@ -1,121 +1,30 @@
+section#AddProduct > article > i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2rem 1.5rem;
+    font-size: 2.2rem;
+}
+/*
+    HEADER
+*/
 section#AddProduct > article > .step-wrapper > header {
-    padding: 3rem 0 1rem 2rem;
+    padding: 2rem 0 1rem 2rem;
 }
 section#AddProduct > article > .step-wrapper > header > h1 {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     font-weight: 600;
+    margin-bottom: 0.3rem;
 }
 section#AddProduct > article > .step-wrapper > header > p {
-    color: #666;
+    color: #555;
     font-weight: 400;
     font-size: 1.1rem;
     margin-left: 2px;
 }
-section#AddProduct > article > .step-wrapper > main > div {
-    padding-bottom: 0.5rem;
-}
-section#AddProduct > article > .step-wrapper > main > div > p {
-    display: flex;
-    align-items: center;
-}
-section#AddProduct > article > .step-wrapper .input-frame {
-    background: #fff;
-}
-
-/**/
-section#AddProduct > article > .step-wrapper > main {
-    padding-bottom: 15rem;
-}
-section#AddProduct > article > .step-wrapper > main > .input-frame {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-    margin-top: 0.8rem;
-    padding: 1rem 2rem 0.5rem 2rem;
-}
-section#AddProduct > article > .step-wrapper > main > .input-frame > input {
-    all: unset;
-    width: 100%;
-    background: #fff;
-    padding: 0.8rem 0.8rem 0.3rem 0.8rem;
-    font-weight: 400;
-    border-bottom: 2px solid #88888880;
-    font-size: 1.3rem;
-}
-section#AddProduct > article > .step-wrapper > main > .input-frame > input.off {
-    text-decoration: line-through;
-    opacity: 0.4;
-}
-section#AddProduct > article > .step-wrapper > main > .input-frame > h2 {
-    font-size: 1.1rem;
-    color: #888888;
-    width: 100%;
-    text-align: right;
-}
-section#AddProduct > article main > .input-frame > .line {
-    font-family: Montserrat;
-    padding-top: 0.8rem;
-    font-size: 1.4rem;
-    color: #888888;
-    font-weight: 500;
-    text-align: center;
-}
-section#AddProduct > article main > .input-frame > label > h1 {
-    display: flex;
-    align-items: center;
-    font-size: 1.7rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    opacity: 0.3;
-    transition-duration: 0.3s;
-}
-section#AddProduct > article main > .input-frame > label > h1.on {
-    opacity: 1;
-}
-section#AddProduct > article main > .input-frame > label > h1 > i {
-    overflow: hidden;
-    width: 0;
-    height: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    color: #ffffff;
-    background: var(--base-color);
-    transition-duration: 0.3s;
-}
-section#AddProduct > article main > .input-frame > label > h1.on > i {
-    width: 2rem;
-    height: 2rem;
-}
-section#AddProduct > article main > .apply {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    
-}
-section#AddProduct > article main > .apply > h1 {
-    margin-top: 1.5rem;
-    padding: 0.3rem 2rem 0.5rem 1rem;
-    border-top: 2px solid #88888860;
-    float: right;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #00966B;
-    transition-duration: 0.4s;
-}
-section#AddProduct > article main > .apply > h1.off {
-    opacity: 0.4;
-}
-
-
-/*        Help        */
+/*
+    HELP
+*/
 section#AddProduct > article > .step-wrapper > .help-wrapper {
     width: 100%;
     height: auto;
@@ -123,16 +32,61 @@ section#AddProduct > article > .step-wrapper > .help-wrapper {
 }
 section#AddProduct > article > .step-wrapper > .help-wrapper > li {
     background: #fff;
-    padding: 0.5rem 2rem;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
+    margin: 0.7rem 1rem;
+    padding: 1rem;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 section#AddProduct > article > .step-wrapper > .help-wrapper > li > i {
-    font-size: 1.5rem;
-    position: relative;
-    top: 2px;
+    font-size: 2rem;
     color: #888;
     padding-right: 0.4rem;
+}
+section#AddProduct > article > .step-wrapper > .help-wrapper > li > div {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+/*
+    MAIN
+*/
+section#AddProduct > article > .step-wrapper > main > div {
+    padding-bottom: 1rem;
+}
+section#AddProduct > article > .step-wrapper > main > div > p {
+    display: flex;
+    align-items: center;
+}
+
+/*
+    Main
+*/
+section#AddProduct > article > .step-wrapper > main {
+    padding-bottom: 2rem;
+}
+
+
+/*
+    APPLY
+*/
+section#AddProduct > article .apply-frame {
+    margin: 0 1rem;
+}
+section#AddProduct > article .apply-frame > button {
+    all: unset;
+    width: 100%;
+    padding: 1.1rem 0;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--base-color);
+    color: #ffffff;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+section#AddProduct > article .apply-frame > button:disabled {
+    background-color: var(--system-gray-1);
+    color: #00000040;
 }

@@ -2,59 +2,28 @@ section#UserProduct {
     background: #f0f2f5;
     min-height: 100vh;
 }
-section#UserProduct > i {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 2rem 2rem 1rem 1rem;
-    z-index: 900;
-}
 /*      header      */
 section#UserProduct > header {
-    padding-top: 4.4rem;
-    position: relative;
-    z-index: 888;
-    margin-bottom: 1rem;
+    padding: 2rem 1rem 2rem 2rem;
+    display: flex;
 }
 section#UserProduct > header > .title {
-    margin-left: 2.3rem;
+    flex-grow: 1;
 }
 section#UserProduct > header > .title > h1 {
     font-weight: 400;
-    font-size: 2.3rem;
+    font-size: 2.0rem;
 }
-
 section#UserProduct > header > .title > .name {
     font-weight: 600;
-    position: relative;
-    top: 0.3rem;
 }
-section#UserProduct > header > a {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #888888;
-    bottom: 0;
-    right: 0;
-    padding-right: 3.0rem;
-    padding-left: 0.8rem;
-}
-section#UserProduct > header > a > i {
-    font-size: 1.7rem;
-    color: #888888;
-    position: relative;
-    top: 0.1rem;
-}
-section#UserProduct > header > a > p {
-    color: #888888;
-    font-size: 1.4rem;
-    font-weight: 500;
+section#UserProduct > header > i {
+    padding: 0 0.5rem;
+    font-size: 2.2rem;
 }
 
 /*      article     */
-section#UserProduct > article {
-    padding-top: 1rem;
-}
+
 section#UserProduct > article > .empty {
     display: flex;
     flex-direction: column;
@@ -68,17 +37,20 @@ section#UserProduct > article > .empty {
 }
 section#UserProduct > article > .empty > p {
     font-size: 1.2rem;
+    margin-top: 0.2rem;
 }
 section#UserProduct > article > .empty > i {
     font-size: 5.0rem;
     color: #88888880;
-    
+    margin-bottom: 0.5rem;
 }
 section#UserProduct > article > .empty > a {
     all: unset;
     background: #00966B;
-    font-size: 1.2rem;
-    padding: 0.6rem 2.3rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 0.8rem 0;
+    width: 90%;
     margin-top: 0.8rem;
     border-radius: 2rem;
     color: #ffffff
@@ -269,58 +241,4 @@ section#UserProduct > article .list-frame > ul > li > .btn-wrapper > button {
     width: 5rem;
     cursor: pointer;
     z-index: 999;
-}
-/*      
-    Alert   
-*/
-section#UserProduct > .alertWrapper {
-    position: fixed;
-    top: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    z-index: 999;
-}
-section#UserProduct > .alertWrapper.on {
-    height: 100%;
-}
-section#UserProduct > .alertWrapper > .alertFrame {
-    position: absolute;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    border-bottom: 1px solid #dbdbdb;
-    background-color: #fff;
-
-    width: 100%;
-
-    top: -7rem;
-    left: 0;
-    transition-duration: 0.3s;
-}
-section#UserProduct > .alertWrapper.on > .alertFrame {
-    top: 0;
-    z-index: 999;
-
-}
-section#UserProduct > .alertWrapper > .alertClose {
-    flex-grow: 0;
-}
-section#UserProduct > .alertWrapper.on > .alertClose {
-    flex-grow: 1;
-}
-section#UserProduct > .alertWrapper p {
-    padding: 2rem 0;
-    font-size: 1.2rem;
-    text-align: center;
-    
-}
-section#UserProduct > .alertWrapper p.error {
-    color: tomato;
-}
-section#UserProduct > .alertWrapper p.clear {
-    color: #00966B;
-}
-section#UserProduct > .alertWrapper p.normal {
-    color: #000;
 }

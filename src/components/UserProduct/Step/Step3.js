@@ -1,121 +1,77 @@
-import { ptype } from '../../../contents/js/ProductType';
-import { useEffect, useRef } from 'react';
+import { ptype as ProductTypeArrays } from '../../../contents/js/ProductType';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 // CSS
 import '../../../contents/css/UserProduct/Step3.css';
 
 const Step3 = ({data, setData, setStep, alertToggle}) => {
+    // Memo
+    const __data = useMemo(() => {
+        return JSON.parse(JSON.stringify(data));
+    }, [data]);
 
-    const __data = JSON.parse(JSON.stringify(data));
+    // State
+    const [ptype, setPtype] = useState(__data?.info?.ptype);
+    const [subType, setSubType] = useState(__data?.info?.subtype || "")
 
-    const applyBtn = useRef(null);
-    const listWrapper = useRef(null);
+    // Ref
     const subInputWrapper = useRef(null);
-    const subInput = useRef(null);
-    const subTextFrame = useRef(null);
-
-    const option = useRef({
-        type : undefined,
-        typeFrame : undefined,
-        subtype : undefined
-    });
-    const event = {
-        onType : (type, e) => {
-            if(listWrapper.current.classList.contains("close")) {
-                event.listToggle(false);
-                event.subInputToggle(true);
-            } else {
-                if(e) e.stopPropagation();
-                else return;
-                let frame = e.target;
-                for(let i=0; i < 3; ++i) {
-                    if(frame.classList.contains("size-element")) break;
-                    frame = frame.parentElement;
-                }
-                if(frame.classList.contains("size-element")) {
-                    if(frame === option.current.typeFrame) {
-                        event.listToggle(true);
-                        event.subInputToggle(false);
-                    } else {
-                        if(option.current.typeFrame) {
-                            option.current.typeFrame.classList.remove("on");
-                        }
-                        frame.classList.add("on");
+    const listWrapper = useRef(null);
     
-                        option.current.type = type;
-                        option.current.typeFrame = frame;
-                    }
-                }
-            }
-        },
-        listToggle : (force) => {
-            if(!listWrapper.current) return;
-            else {
-                listWrapper.current.classList.toggle("close", force);
-                if(!force) applyBtn.current.innerHTML = "적용";
-            }
-        },
-        subInputToggle : (force) => {
-            if(!subInputWrapper.current) return;
-            else {
-                subInputWrapper.current.classList.toggle("close",force);
-                if(!force) applyBtn.current.innerHTML = "적용";
-            }
-        },
-        subTextToggle : (force) => {
-            if(!subTextFrame.current) return;
-            else {
-                subTextFrame.current.classList.toggle("close",force);
+    const event = {
+        onType : (type) => {
+            const listClassList = listWrapper.current.classList;
+            if(listClassList.contains("close")) {
+                listClassList.remove("close");
+                // 세부 정보 닫기
+                listWrapper.current.classList.remove("close");
+                subInputWrapper.current.classList.remove("on");
+            } else {
+                setPtype(type);
+                // 세부 정보 열기
+                listWrapper.current.classList.add("close");
+                subInputWrapper.current.classList.add("on");
             }
         },
         apply : () => {
-            if(!listWrapper.current.classList.contains("close")) {
-                if(option.current.type) {
-                    event.listToggle(true);
-                    event.subInputToggle(false);
-                }
-                else alertToggle(true,"종류를 선택해주세요.");
-            } else {
-                if(!subInputWrapper.current.classList.contains("close")) {
-                    const sub = subInput.current.value;
-                    if(sub.length === 0 || (sub.length > 1 && sub.length < 9 )) {
-                        subTextFrame.current.querySelector("h1").innerHTML = sub;
-                        sub.length === 0 ? option.current.subtype = undefined : option.current.subtype = sub;
-                        event.subInputToggle(true);
-                        sub.length === 0 ? event.subTextToggle(true) : event.subTextToggle(false);
-                        applyBtn.current.innerHTML = "다음단계";
-                    } else {
-                        option.current.subtype = undefined;
-                        event.subTextToggle(true);
-                        alertToggle(true,"세부 종류는 생략 또는 2~8 글자 입력이 가능합니다.");
-                    }
-                } else {
-                    // 다음 단계
-                    console.log("저장하려는 데이터 : ", option.current);
-                    
-                    __data.info.ptype = option.current.type;
-                    __data.info.subtype = option.current.subtype;
-                    setData(__data);
-                    setStep(4);
-                }
+            if(!ptype) {
+                alertToggle(true, "옷의 종류를 선택해주세요", 'error');
+                return;
+            } else if((subType.length < 2 || subType.length > 10)) {
+                alertToggle(true, "세부 종류를 입력해주세요", 'error');
+                return;
             }
+            try {
+                __data.info.ptype = String(ptype).trim();
+                __data.info.subtype = String(subType).trim();
+
+                setData(__data);
+                setStep(4);
+            } catch {
+                alertToggle(true, "문제가 발생했어요", 'error');
+            }
+            
         }
     }
+
     useEffect(() => {
-        // 기본 설정
-        if(__data.info.ptype) {
-            if(listWrapper.current) {
-                let frame = listWrapper.current.querySelector(`input[type='hidden'][value='${__data.info.ptype}']`);
-                if(frame) {
-                    frame = frame.parentElement;
-                    frame.classList.add("on");
-                    option.current.type = __data.info.ptype;
-                    option.current.typeFrame = frame;
-                    if(__data.info.subtype) option.current.subtype = __data.info.subtype;
-                }
+        if(!ptype) {
+            // 초기 값 없음.
+            listWrapper.current.classList.remove("close");
+        } else {
+            let frame = document.querySelector(`input[name="ptype"][value="${ptype}"]`);
+            if(!frame) return;
+            else frame = frame.parentElement;
+            frame.classList.add("on");
+            return () => {
+                let frame = document.querySelector(`input[name="ptype"][value="${ptype}"]`);
+                if(!frame) return;
+                else frame = frame.parentElement;
+                frame.classList.remove("on");
             }
         }
-    }, []);
+    }, [ptype]);
+
     return (
         <>
             <header>
@@ -123,47 +79,43 @@ const Step3 = ({data, setData, setStep, alertToggle}) => {
                 <p>옷의 종류를 선택하여 옷장을 정리해보세요.</p>
                 <p>옷의 세부 종류를 입력하면 옷 비교 중 도움이 될거에요.</p>
             </header>
-            <main>
-                <div className="ptype-list-frame">
-                    <ul ref={listWrapper} className={__data.info.ptype ? "close" : null}>
-                        {
-                            ptype.map((element, index) => {
-                                return (
-                                    <li key={index} className="size-element" onClick={(e) => event.onType(element.value, e)}>
-                                        <h1>{element.name}</h1>
-                                        <div className="dot"></div>
-                                        <input type="hidden" value={element.value} />
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                    <div className="out close" ref={subTextFrame} onClick={() => {event.subInputToggle(false); event.listToggle(true);}}>
-                        <h1></h1>
-                        <div className="dot"></div>
-                    </div>
-                    <div className={`in ${__data.info.ptype ? null : "close"}`} ref={subInputWrapper}>
-                        <div className="sub-input-wrapper">
-                            <div className="title">
-                                <h1>세부 종류 입력</h1>
-                                <p>비교 중에 내 옷의 특징을 잘 알 수 있게 입력해주세요.</p>
-                            </div>
-                            <div className="sub-input-frame">
-                                <input
-                                    type="text"
-                                    autoComplete="off"
-                                    placeholder="ex) 긴바지, 반팔"
-                                    defaultValue={__data.info.subtype? __data.info.subtype : null}
-                                    ref={subInput}/>
-                                <p>생략 또는 2 ~ 8글자</p>
-                            </div>
+            <main style={{paddingBottom: "0"}}>
+                <ul ref={listWrapper} className={ptype ? "close":null}>
+                    {
+                        ProductTypeArrays.map((element, index) => {
+                            return (
+                                <li key={index} onClick={() => event.onType(element.value)}>
+                                    <div className="dot"><i className="material-icons">check</i></div>
+                                    <h1>{element.name}</h1>
+                                    <input type="hidden" name="ptype" value={element.value} />
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+                <div>
+                    <div className={`input-wrapper ${ptype ? "on" : ""}`} ref={subInputWrapper}>
+                        <div className="title">
+                            <h2>세부 종류 입력</h2>
+                            <p>내 옷의 크기를 짐작할 수 있는 옷의 세부 종류를 입력해주세요.</p>
+                            <p>예) 청바지(X), 긴바지(O) 또는 긴청바지(O)</p>
+                        </div>
+                        <div className="input-frame">
+                            <input
+                                type="text"
+                                autoComplete="off"
+                                placeholder="ex) 긴바지, 8부 바지, 반팔"
+                                maxLength="10"
+                                onChange={(e) => setSubType(e.target.value)}
+                                defaultValue={__data?.info.subtype ? __data.info.subtype : null}/>
+                            <p>{subType.length}/10</p>
                         </div>
                     </div>
                 </div>
-                <div className="apply">
-                    <h1 ref={applyBtn} onClick={() => event.apply()}>적용</h1>
-                </div>
             </main>
+            <div className="apply-frame">
+                <button onClick={() => event.apply()} disabled={(subType.length < 2 || subType.length > 10)}>다음단계</button>
+            </div>
         </>
     )
 }

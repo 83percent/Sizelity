@@ -1,0 +1,67 @@
+#AddProduct > article > .step2 > main {
+    padding-bottom: 1rem;
+}
+#AddProduct > article > .step2 > main > div {
+    display: flex;
+    flex-direction: column;
+    
+    margin-top: 0.8rem;
+    margin: 0 1rem;
+}
+#AddProduct > article > .step2 > main > div > .input-frame {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    margin-top: 1rem;
+    padding: 1rem 1rem 0.8rem 1rem;
+    border: 1px solid #dbdbdb;
+    border-radius: 0.5rem;
+}
+#AddProduct > article > .step2 > main > div > .input-frame > input {
+    all: unset;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 0 0.3rem;
+}
+
+/*
+    수정 모드
+*/
+#AddProduct > article > .step2 > main > div > .input-frame > input:disabled {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+#AddProduct > article > .step2 > main > div > label > h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    opacity: 0.3;
+    transition-duration: 0.3s;
+}
+#AddProduct > article > .step2 > main > div > label > h1 > p {
+    font-weight: 500;
+}
+#AddProduct > article > .step2 > main > div > label.on > h1 {
+    opacity: 1;
+}
+#AddProduct > article > .step2 > main > div > label > h1 > i {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    color: #ffffff;
+    background: var(--base-color);
+    transition-duration: 0.3s;
+}
+#AddProduct > article > .step2 > main > div > label.on > h1 > i {
+    width: 2rem;
+    height: 2rem;
+}

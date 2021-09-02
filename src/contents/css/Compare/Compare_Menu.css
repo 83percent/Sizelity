@@ -69,11 +69,11 @@ section#Menu > .menu-frame li a {
     white-space: nowrap;
 }
 section#Menu > .menu-frame h1, section#Menu > .menu-frame h2 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     font-weight: 500;
     overflow-x: hidden;
     white-space: nowrap;
 }
 section#Menu > .menu-frame h2 {
-    color: #00966B;
+    color: var(--base-color);
 }

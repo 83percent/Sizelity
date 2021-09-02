@@ -1,38 +1,22 @@
-import React, { useContext } from "react";
-
 // CSS
 import '../../contents/css/Compare/Compare_Menu.css';
 
 // Context 
-import {LoginContext}from '../../App';
 import { Link } from "react-router-dom";
 
-
 const Menu = ({closerEvent}) => {
-    const {userInfo} = useContext(LoginContext);
-    
     return (
         <>
-            <div className="menu-closer" onClick={() => closerEvent(false)}></div>
+            <div className="menu-closer" onClick={() => closerEvent()}></div>
             <div className="menu-frame">
-                <div onClick={() => closerEvent(false)}>
+                <div onClick={() => closerEvent()}>
                     <i className="material-icons">close</i>
                 </div>
                 <header>
-                    {
-                        (userInfo && userInfo._id) ? (
-                            <ul>
-                                <li><Link to="/closet">나의 옷장</Link></li>
-                                <li><Link to="/after">나중에 볼 상품</Link></li>
-                                
-                            </ul>
-                        ) : (
-                            <ul>
-                                <li><Link to="/login">로그인</Link></li>
-                                <p></p>
-                            </ul>
-                        )
-                    }
+                    <ul>
+                        <li><Link to="/closet">나의 옷장</Link></li>
+                        <li><Link to="/after">나중에 볼 상품</Link></li>
+                    </ul>
                 </header>
                 <article>
                     <ul>
@@ -43,13 +27,9 @@ const Menu = ({closerEvent}) => {
                 </article>
                 <footer>
                     <ul>
-                        {
-                            (userInfo && userInfo._id) ? (
-                                <li>
-                                    <Link to="/setting">설정</Link>
-                                </li>
-                            ) : null
-                        }
+                        <li>
+                            <Link to="/setting">설정</Link>
+                        </li>
                     </ul>
                 </footer>
             </div>

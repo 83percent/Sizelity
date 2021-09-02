@@ -2,8 +2,12 @@ import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useContext, useEffect, useRef } from 'react';
 
+
 // CSS
 import '../contents/css/IndexRouter.css';
+
+// Svg
+import {ReactComponent as Female} from '../contents/asset/female_24dp.svg';
 
 // Context
 import {LoginContext} from '../App';
@@ -38,10 +42,26 @@ const IndexRouter = () => {
     return (
         <main id="home">
             <header>
-                <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>sentiment_satisfied_alt</i>
+                {
+                    userInfo?.gender === 'female' ? (
+                        <i onClick={() => toggleLoginWrapper(true)}>
+                            <Female width="2.6rem" height="2.6rem" fill="#000000" style={{marginTop: "1rem"}}/>
+                        </i>
+                    ) : (
+                        <i className="material-icons" onClick={() => toggleLoginWrapper(true)}>face</i>
+                    )
+                }
+                
                 <div className="user-wrapper" ref={loginWrapper}>
                     <div className="user-title">
-                        <i className='material-icons'>sentiment_satisfied_alt</i>
+                        {
+                            userInfo?.gender === 'female' ? (
+                                <Female width="4.3rem" height="4.3rem" fill="#888888"/>
+                            ) : (
+                                <i className='material-icons'>face</i>
+                            )
+                        }
+                        
                         <div>
                             <p>환영합니다.</p>
                             <div>

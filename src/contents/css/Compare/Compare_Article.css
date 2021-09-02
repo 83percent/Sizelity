@@ -102,7 +102,7 @@ section.View-Compare > article > .type-compare > div > div.none {
 }
 section.View-Compare > article > .type-compare > div > div > p {
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 500;
     margin: 0 0.2rem;
 }
 section.View-Compare > article > .type-compare > div > div.none > p {
@@ -145,7 +145,7 @@ section.View-Compare > article > div.standard-wrapper > button > i.active {
 
 /*      Compare Wrapper     */
 section.View-Compare > article > .compare-wrapper {
-    padding-bottom: 8rem;
+    padding-bottom: 10rem;
 }
 section.View-Compare > article .compare-element {
     /* border-bottom: 1px solid #dbdbdb; */
@@ -378,141 +378,3 @@ section.View-Compare > article .compare-element > .graph-analyze > .compare-resu
     right: -0.7rem;
 }
 
-/*      Fav     */
-#View > section#fav-select-wrapper {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    z-index: 999;
-    padding-bottom: 5rem;
-    top: 0;
-}
-#View > section#fav-select-wrapper.active {
-    display: flex;
-}
-#View > section#fav-select-wrapper > article {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    border-bottom: 1px solid #dbdbdb;
-    position: absolute;
-    transition-duration: 0.3s;
-    top: -15rem;    
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    padding-top: 2rem;
-}
-#View > section#fav-select-wrapper.active > article.active {
-    top: 0;
-}
-#View > section#fav-select-wrapper > article > i {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-#View > section#fav-select-wrapper h1 {
-    font-size: 1.5rem;
-    padding-bottom: 1rem;
-}
-#View > section#fav-select-wrapper .fav-select-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100vw;
-}
-#View > section#fav-select-wrapper .fav-select-btn > button {
-    all: unset;
-    width: 100%;
-    text-align: center;
-    padding: 1rem 0;
-    border-top: 1px solid #dbdbdb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-#View > section#fav-select-wrapper .fav-select-btn > button > i {
-    opacity: 0.6;
-    font-size: 1.6rem;
-    margin-right: 0.3rem;
-}
-#View > section#fav-select-wrapper .fav-select-btn > button > p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 1.2rem;
-    font-weight: 400;
-}
-#View > section#fav-select-wrapper > ._blank {
-    flex-grow: 1;
-}
-#View > section#fav-select-wrapper .fav-select-login {
-    display: flex;
-    width: 100%;
-    padding: 0 1rem;
-    padding-bottom: 1rem;
-}
-#View > section#fav-select-wrapper .fav-select-login > a {
-    all: unset;
-    text-align: center;
-    flex-grow: 1;
-    padding: 0.8rem 0;
-    border-radius: 0.5rem;
-    background: #00966B;
-    color: #ffffff;
-    font-size: 1.1rem;
-}
-/*      Alert       */
-#View > .alertWrapper{
-    position: fixed;
-    top: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    z-index: 999;
-}
-#View > .alertWrapper.on {
-    height: 100%;
-}
-#View > .alertWrapper > .alertFrame {
-    position: absolute;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    border-bottom: 1px solid #dbdbdb;
-    background-color: #fff;
-
-    width: 100%;
-
-    top: -7rem;
-    left: 0;
-    transition-duration: 0.3s;
-}
-#View > .alertWrapper.on > .alertFrame {
-    top: 0;
-
-}
-#View > .alertWrapper > .alertClose {
-    flex-grow: 0;
-}
-#View > .alertWrapper.on > .alertClose {
-    flex-grow: 1;
-}
-#View > .alertWrapper p.title {
-    padding: 2rem 0;
-    font-size: 1.2rem;
-    text-align: center;
-    font-weight: 400;
-}
-#View > .alertWrapper p.title.error {
-    color: #ff0000;
-}
-#View > .alertWrapper p.title.clear {
-    color: #00966B;
-}
-#View > .alertWrapper p.title.normal {
-    color: #000;
-}

@@ -1,6 +1,6 @@
-import axios from "axios";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import URLModule from '../../../contents/js/URL';
+import ProductSearchModule from "../../../contents/js/ProductSearch";
 
 // CSS
 import '../../../contents/css/UserProduct/Step1.css';
@@ -8,268 +8,221 @@ import '../../../contents/css/UserProduct/Step1.css';
 // Context
 import {ServerContext} from '../../../App';
 
-let urlModule = null;
 
 const Step1 = ({data, setData, setStep, alertToggle}) => {
     // state
     const [product, setProduct] = useState(null);
+    const [isKnow, setIsKnow] = useState(undefined);
+    const [activeSize, setActiveSize] = useState(null);
+
+    // Memo
+    const __data = useMemo(() => {
+        return JSON.parse(JSON.stringify(data));
+    }, [data])
+
 
     // Context
     const server = useContext(ServerContext);
-
-    // ref
-    const productInputWrapper = useRef(null);
-    const productInput = useRef(null); // product url input frame
-    const sizeListFrame = useRef(null);
-    const applyBtn = useRef(null);
-    const select = useRef({
-        option : {
-            value : undefined,
-            frame : undefined
-        },
-        size : {
-            value : undefined,
-            frame : undefined,
-            index : undefined
-        }
-    });
-
     
     const event = {
-        onSelect : (e) => {
-            if(e) e.stopPropagation();
-            else return;
-            if(select.current.option.frame) {
-                select.current.option.frame.classList.remove("on");
+        currentSearch : null,
+        urlModule : null,
+        productSearchModule : null,
+        productSearch : async function(value) {
+            if(value.length < 10) {
+                alertToggle(true, "입력한 주소가 너무 짧습니다", 'error');
+                return;
             }
-            select.current.option.frame = e.target;
-            for(let i=0; i < 3; ++i) {
-                if(select.current.option.frame.classList.contains("selectOption")) {
-                    select.current.option.frame.classList.add("on");
-                    break;
-                }
-                select.current.option.frame = select.current.option.frame.parentElement;
-            }
-            select.current.option.value = select.current.option.frame.querySelector("input[type=hidden]").value;
-            event.applyToggle();
-        },
-        productSearch : async () => {
-            if(!urlModule) urlModule = new URLModule();
-            if(productInput.current.value < 10) return; 
-            let inputURL = productInput.current.value;
             try {
-                inputURL = ((inputURL.indexOf("http") === 0) ? inputURL : "http://" + inputURL);
+                console.log(value);
                 const isURL = ((value) => {
                     return (/^(file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/).test(value);
-                })(inputURL);
-                if(isURL) {
-                    const analyze = urlModule.get(inputURL);
-                    if(analyze) {
-                        if(product && product.praw && product.praw.code === analyze.code) return; // 중복된 데이터 검색
-                        const response = await axios({
-                            method: 'get',
-                            url: `${server}/product/${analyze.domain}/${analyze.code}`,
-                            timeout: 3500
-                        }).catch((err) => {
-                            alertToggle(true, "네트워크 오류");
-                            return {data:{status:-200}}
-                        });
-                        if(response.data._id || response.data.status) setProduct(response.data);
-                        else {
-                            alertToggle(true, "잠시 후 다시 시도해주세요.");
-                            setProduct({status:-200});
-                        }
-                    } else {
-                        alertToggle(true, "검색 할 수 없는 주소입니다.");    
-                    }
-                } else {
-                    alertToggle(true, "상품의 주소값이 형식에 맞지 않습니다.");
+                })(value);
+                if(!isURL) {
+                    alertToggle(true, "상품의 주소값이 형식에 맞지 않습니다.", 'error');
+                    return;
                 }
-            } catch(err) {
-                alertToggle(true, "잠시 후 다시 시도해주세요.");
+
+                if(!this.urlModule) this.urlModule = new URLModule();
+                const analyze = this.urlModule.get(value);
+                if(!analyze) {
+                    alertToggle(true, "검색 할 수 없는 주소입니다.", 'error');   
+                    return;
+                }
+                if(this.currentSearch?.domain === analyze?.domain && this.currentSearch?.code === analyze?.code) return;
+                if(product?.praw && product?.praw?.code === analyze.code) return; // 중복된 데이터 검색
+                if(!this.productSearchModule) this.productSearchModule = new ProductSearchModule(server);
+
+                const response = await this.productSearchModule.search({
+                    domain : analyze.domain,
+                    code : analyze.code,
+                    url : analyze.full
+                }, false);
+
+                this.currentSearch = {
+                    domain : analyze.domain,
+                    code : analyze.code,
+                }
+                switch(response.type) {
+                    case 'success' : {
+                        setProduct(response.data);
+                        break;
+                    }
+                    case 'error' : {
+                        alertToggle(true, response.msg, 'error');
+                        break;
+                    }
+                    default : {
+                        alertToggle(true, "문제가 발생했어요", 'error');
+                        break;
+                    }
+                }
+            } catch {
+                alertToggle(true, "문제가 발생했어요", 'error');
             }
         },
         // 검색된 상품의 사이즈 선택
-        onSize : function(size, index, e) {
-            if(e) e.stopPropagation();
-            else return;
-            if(select.current.size.value === size) {
-                // 같은거 두번쨰 누름 -> 사이즈 선택 취소
-                select.current.size.frame.classList.remove("on");
-                select.current.size.value = undefined;
-            } else {
-                let frame = e.target;
-                for(let i=0; i<3; ++i) {
-                    if(frame.classList.contains("size-element")) break;
-                    frame = frame.parentElement;
-                }
-                if(select.current.size.frame) select.current.size.frame.classList.remove("on");
-                else {
-                    
-                }
-                frame.classList.add("on");
-                select.current.size.frame = frame;
-                select.current.size.value = size;
-                select.current.size.index = index;
-            }
-            event.applyToggle();
-        },
-        applyToggle : () => {
-            if(!applyBtn.current) return;
-            const data = select.current;
-            const toggle = (() => {
-                if(data.option.value === "false") {
-                    return true;
-                } else if (data.option.value === "true"){
-                    if(data.size.value !== undefined) {
-                        return true;
-                    } else return false;
-                } else {
-                    // option.value === undefined
-                    return false;
-                }
-            })();
-            applyBtn.current.classList.toggle("off", !toggle);
-            return toggle;
+        selectSize : function(target) {
+            let frame = document.querySelector(`input.on[name="size"]`);
+            frame = frame?.parentElement;
+            if(frame?.nodeName === 'LABEL') frame.classList.remove("on");
+
+            frame = target.parentElement;
+            if(frame.nodeName !== 'LABEL') return;
+
+            frame.classList.add("on");
+
+            return;
         },
         apply : () => {
-            if(event.applyToggle()) {
-                if(select.current.option.value === "false") {
-                    // 아니요, 모르겠어요.
-                    setData({info:{},size:{}});
-                    setStep(2);
-                } else if(select.current.option.value === "true") {
-                    if(select.current.size.value !== undefined) {
-                        if(product && product.praw) {
-                            const __data = JSON.parse(JSON.stringify(data));
-                            __data.praw = product.praw;
-                            __data.info = product.info;
-                            __data.size = product.size[select.current.size.index];
-                            console.log("저장 데이터 : ",data);
-                            setData(__data);
-                            setStep(3);
-                        }       
-                    } else {
-                        // 오류 -> '네, 알고있어요.' 선택 후 사이즈 선택 안하고 다음단계 이벤트 활성화
-                    }
-                } else {
-                    // 둘중 아무것도 선택하지 않고 다음단계 활성화
-                }
+            if(isKnow === undefined) return;
+
+            if(isKnow) {
+                // '네, 알고있어요'
+                let _sizeData = product.size.filter(({name}) => {
+                    return name === activeSize;
+                });
+                if(_sizeData.length === 0) {
+                    alertToggle(true, '문제가 발생했어요', 'error');
+                    return;
+                };
+                __data.praw = product.praw;
+                __data.info = product.info;
+                __data.size = _sizeData[0];
+                setData(__data);
+
+            } else {
+                // '아니요, 모르겠어요.'
+                __data.praw = {};
+                setData(__data);
             }
+            setStep(2);
         }
     }
-    console.log(select);
-    useEffect(() => {
-        const fetch = async () => {
-            if(data && data.praw && data.praw.full) await event.productSearch();
-        }
-        fetch();
-    }, []);
-    useEffect(() => {
-        if(sizeListFrame.current) {
-            try {
-                if(product.praw.full === data.praw.full) {
-                    const frame = sizeListFrame.current.querySelectorAll(`input[type='hidden']`);
-                    
-                    if(frame) {
-                        const size = data.size.name;
-                        for(const index in frame) {
-                            if(frame[index].value === size) {
-                                select.current.size.value = size;
-                                select.current.size.frame = frame[index].parentElement;
-                                select.current.size.index = index;
 
-                                frame[index].parentElement.classList.add("on");
-
-                                select.current.option.value="true";
-                                select.current.option.frame = productInputWrapper.current ? productInputWrapper.current : null;
-                                break;
-                            }
-                        }
-                    }
+    useEffect(() => {
+        if(isKnow !== undefined) {
+            const button = document.querySelector('button[name="apply"]');
+            if(isKnow) {
+                if(!activeSize) {
+                    button.disabled = true;
                 } else {
-                    const frame = sizeListFrame.current.querySelector(`.size-element.on`);
-                    console.log("ON Frame : ", frame);
-                    if(frame) frame.classList.remove("on");
+                    button.disabled = false;
                 }
-            } catch{}
-            
+            } else {
+                button.disabled = false;
+            }
+            let frame = document.querySelector(`input[name='url'][value='${isKnow}']`);
+            frame = frame?.parentElement;
+            if(frame?.nodeName !== 'LABEL') return;
+            frame.classList.add("on");
+            return () => {
+                // 이전 값
+                document.querySelector(`input[name='url'][value='${isKnow}']`)?.parentElement.classList.remove('on');
+            }
         }
-    }, [product]);
+    }, [isKnow, activeSize])
+
+    useEffect(() => {
+        if(activeSize) {
+            let frame = document.querySelector(`input[name='size'][value='${activeSize}']`);
+            frame = frame?.parentElement;
+            if(frame?.nodeName !== 'LABEL') return;
+            frame.classList.add("on");
+            return () => {
+                document.querySelector(`input[name="size"][value="${activeSize}"]`)?.parentElement.classList.remove('on');
+            }
+        }
+    }, [activeSize])
+
     return (
         <>
             <header>
                 <h1>상품 주소를 아시나요?</h1>
-                <p>구매했던 상품의 주소를 붙여넣어</p>
-                <p>보다 쉽게 "나의 옷장"을 채워보세요.</p>
+                <p>구매했던 상품의 상세보기 주소를 알고 있다면, 손쉽게 추가!</p>
+                <p>주소를 몰라도 직접 입력해서 추가해보세요</p>
             </header>
             <ul className="help-wrapper">
                 <li>
                     <i className="material-icons">help_outline</i>
                     <div>
-                        <p>내 옷의 치수를 직접 제어보세요.</p>
-                        <p>귀찮음은 잠깐, 편리함은 계속!</p>
+                        <p>상품 구매 후, 바로 주소를 입력해 내 옷장에 추가해보세요</p>
                     </div>
                 </li>
             </ul>
             <main>
-                <div className={`selectOption ${(data && data.praw) ? "on" : ""}`} ref={productInputWrapper}>
-                    <input type="hidden" value="true" />
-                    <h2 onClick={(e) => event.onSelect(e)}>
+                <label>
+                    <input type="radio" name="url" value="true"/>
+                    <h2 onClick={() => setIsKnow(true) }>
                         <i className="material-icons">check</i>
                         <p>네, 알고있어요.</p>
                     </h2>
                     <div>
-                        <div className="select-column-wrapper">
-                            <div className="row-input-frame">
+                        <>
+                            <div className="input-frame">
                                 <input 
                                     type="text"
-                                    ref={productInput}
-                                    onKeyPress={(e) => e.key === "Enter" ? event.productSearch() : ""}
+                                    onKeyPress={(e) => e.key === "Enter" ? event.productSearch(e.target.value) : ""}
                                     autoComplete="off"
                                     placeholder="http://"
-                                    defaultValue={(data && data.praw && data.praw.full) ? `${data.praw.full}` : ''}
                                 />
-                                <i className="material-icons" onClick={() => event.productSearch()}>search</i>
+                                <i className="material-icons" onClick={(e) => event.productSearch(e.target.parentElement.querySelector('input').value)}>search</i>
                             </div>
                             {
-                                (product && product.size) ? (
-                                    <>
-                                        <p>상품의 사이즈를 선택해주세요.</p>
-                                        <div className="shop-info-frame">
-                                            <p>{product.info.sname}</p>
-                                            <h1>{product.info.pname}</h1>
+                                (product?.size) ? (
+                                    <article>
+                                        <p>구매한 사이즈를 선택해주세요.</p>
+                                        <div>
+                                            <div className="info-frame">
+                                                <p>{product.info.sname}</p>
+                                                <h1>{product.info.pname}</h1>
+                                            </div>
+                                            <div className="size-frame">
+                                                {product.size.map((element,index) => (
+                                                    <label key={index} className="size-element">
+                                                        <p>{element.name}</p>
+                                                        <input type="radio" name="size" value={element.name} onClick={(e) => setActiveSize(e.target.value)}></input>
+                                                    </label>
+                                                ))}
+                                            </div>
                                         </div>
-                                        <ul ref={sizeListFrame}>
-                                            {product.size.map((element,index) => (
-                                                <li key={index} className="size-element" onClick={(e) => event.onSize(element.name, index, e)}>
-                                                    <p>{element.name}</p>
-                                                    <input type="hidden" value={element.name}></input>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </>
-                                ) : (product && product.status === 404) ? (
-                                    <div className="no-data">
-                                        <i className="material-icons">sentiment_very_dissatisfied</i>
-                                        <p>입력하신 상품 정보가 아직 없어요.</p>
-                                    </div>
+                                    </article>
                                 ) : null
                             }   
-                        </div>
+                        </>
                     </div>
-                </div>
-                <div className="selectOption">
-                    <input type="hidden" value="false" />
-                    <h2 onClick={(e) => event.onSelect(e)}>
+                </label>
+                <label>
+                    <input type="radio" name="url" value="false" />
+                    <h2 onClick={() => setIsKnow(false) }>
                         <i className="material-icons">check</i>
                         <p>아니요, 모르겠어요.</p>
                     </h2>
-                </div>
-                <div className="apply" >
-                    <h1 ref={applyBtn} onClick={() => event.apply()}>다음단계</h1>
-                </div>
+                </label>
             </main>
+            <div className="apply-frame">
+                <button name='apply' onClick={() => event.apply()} disabled={isKnow === undefined ? true : false} >다음 단계</button>
+            </div>
         </>
     )
 }

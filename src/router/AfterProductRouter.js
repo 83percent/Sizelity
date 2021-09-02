@@ -2,7 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'r
 import AfterProductModule from '../contents/js/AfterProduct';
 
 // Css
-import '../contents/css/Router/AfterProduct.css';
+import '../contents/css/AfterProduct.css';
 
 // Context 
 import {ServerContext} from '../App';
@@ -11,8 +11,6 @@ const AfterProduct = ({history}) => {
     // State
     const [deleteOption, setDeleteOption] = useState(false);
     const [afterList, setAfterList] = useState(undefined);
-
-    console.log(afterList);
 
     // Context
     const server = useContext(ServerContext);
@@ -78,11 +76,14 @@ const AfterProduct = ({history}) => {
     }, [afterList, getAfterList]);
     return (
         <section id="After">
-            <i className="material-icons back" onClick={() => history.goBack()}>arrow_back</i>
             <header>
-                <h1>나중에 볼 상품</h1>
+                <div>
+                    <h1>나중에 볼 상품</h1>
+                    <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
+                </div>
+                
                 <p>최대 50개 저장됩니다.</p>
-                <p>(50개 초과시 오래된 순서로 자동삭제됩니다.)</p>
+                <p>50개 초과시 오래된 순서로 자동삭제됩니다.</p>
             </header>
             <article>
                 <div className="func-btn-wrapper">

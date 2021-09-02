@@ -1,26 +1,24 @@
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
+import ProductType from '../../contents/js/ProductType';
 
-import Transition from '../../contents/js/TransitionSizeName';
 import UserProductModule from '../../contents/js/UserProduct';
+
+// Component
+import MyProduct from '../Nav/MyProduct';
 
 // CSS
 import '../../contents/css/UserProduct/ViewProduct.css';
-import '../../contents/css/MyProductNav.css';
+import '../../contents/css/Nav/Alert.css';
 
 // Context
 import { MediaContext, LoginContext, ServerContext } from '../../App';
 
 
-let transition = null;
 const UserProduct = ({history, location}) => {
-    const backIsCompare = location?.state?.isCompare;
-    //const comparePtype = history.location.state ? history.location.state.ptype : null; -> 
-    
     // Cookie
     const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
-    const cookie = sizelity_myRecently;
     
     // Context
     const { userInfo } = useContext(LoginContext);
@@ -28,8 +26,10 @@ const UserProduct = ({history, location}) => {
     const server = useContext(ServerContext);
     
     // State
-    const [productData, setProductData] = useState(null);
-    
+    const [productData, setProductData] = useState(undefined);
+    console.log(productData);   
+
+
     // Ref
     const alertWrapper = useRef(null);
     const listRef = useRef(null);
@@ -37,16 +37,16 @@ const UserProduct = ({history, location}) => {
 
     // Field
     const userProductModule = useMemo(() => new UserProductModule(server), [server]);
-    if(!transition) transition = new Transition("KOR");
-    const cate = ["set","outer","top","bottom"]; // 지원 항목
-    
     
     const analyzeData = useMemo(() => {
         return productData?.reduce((acc, element) => {
-            let ptype = element.info.ptype;
-            if(ptype) {
+            let ptype = element.info?.ptype;
+            if(ProductType.supportCate.includes(ptype)) {
                 if(!acc[ptype]) acc[ptype] = [];
                 acc[ptype].push(element);
+            } else {
+                if(!acc.unknown) acc.unknown = [];
+                acc.unknown.push(element);
             }
             return acc;
         }, {});
@@ -65,7 +65,7 @@ const UserProduct = ({history, location}) => {
             if(listRef.current.classList.contains("on")) {
                 this.toggleOption();
             } else {
-                setCookie ("sizelity_myRecently",data,{path:"/", maxAge:(500 * 24 * 60 * 60)});
+                setCookie("sizelity_myRecently",data, {path:"/", maxAge:(500 * 24 * 60 * 60)});
             }
         }, // elementClick
         toggleOption : function() {
@@ -94,7 +94,6 @@ const UserProduct = ({history, location}) => {
                 }
             });
         }, // modifyMyProduct
-        
     } // event
     const alert = useMemo(() => {
         return {
@@ -105,7 +104,7 @@ const UserProduct = ({history, location}) => {
                 if(force === undefined) force = !cl.contains("on");
                 if(force === true) {
                     if(msg !== undefined) {
-                        if(type === "error" || type === "normal" || type === "clear") {
+                        if(['error', 'normal', 'clear'].includes(type)) {
                             const title = alertWrapper.current.querySelector("p");
                             if(title) {
                                 title.innerHTML = msg;
@@ -124,59 +123,46 @@ const UserProduct = ({history, location}) => {
     useEffect(() => {
         async function fetchData() {
             const response = await userProductModule.get(userInfo._id);
-            console.log(response.constructor);
-            if(response.constructor === Array) {
-                setProductData(response);
-            } else {
-                switch(response) {
-                    case 0 : {
-                        alert.alertToggle(true, "인터넷 연결을 확인하세요.", "error");
-                        break;
-                    }
-                    case 400 : {
-                        alert.alertToggle(true, "인터넷 연결을 확인하세요.", "error");
-                        break;
-                    }
-                    case 401 : {
-                        alert.alertToggle(true, "로그인 후 이용가능합니다..", "error");
-                        break;
-                    }
-                    case 500 :
-                    default : {
-                        console.log(response);
-                        alert.alertToggle(true, "잠시 후 다시 시도해주세요.", "error");
-                    }
+            switch(response.type) {
+                case 'success' : {
+                    setProductData(response.data);
+                    break;
+                }
+                case 'error' : {
+                    alert.alertToggle(true, response?.msg , "error");
+                    break;
+                }
+                default : {
+                    alert.alertToggle(true, "문제가 발생했어요" , "error");
+                    break;
                 }
             }
         } // fetchData
-        if(userInfo && productData === null) fetchData();
+        if(userInfo && productData === undefined) fetchData();
     }, [productData, userInfo, alert, userProductModule]);
     return (
         <section id="UserProduct">
-            <div className="alertWrapper" ref={alertWrapper}>
-                <div className="alertFrame">
-                    <p></p>
+            <nav id="alert-wrapper" ref={alertWrapper}>
+                <div>
+                    <p className="title"></p>
                 </div>
                 {
                     media === "Desktops" ?
-                    <div className="alertClose" onClick={() => alert.alertToggle(false)}></div> :
-                    <div className="alertClose" onTouchStart={() => alert.alertToggle(false)}></div>
+                    <aside onClick={() => alert.alertToggle(false)}></aside> :
+                    <aside onTouchStart={() => alert.alertToggle(false)}></aside>
                 }
-            </div>
-            <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
+            </nav>
             <header>
                 <div className="title">
                     <h1 className="name">{userInfo?.name ? userInfo.name : "XXX"}</h1>
                     <h1>님의 옷장</h1>
                 </div>
-                <Link to="/closet/create">
-                    <i className="material-icons">add</i>
-                    <p>추가</p>
-                </Link>
+                <i className="material-icons" style={{fontSize: "2.4rem"}}onClick={() => history.push('/closet/create')}>add</i>
+                <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
             </header>
             <article>
                 {
-                    productData ? 
+                    productData !== undefined ? 
                         productData.length > 0 ? (
                             <div className="list-wrapper" ref={listRef}>
                                 <div className="list-nav">
@@ -186,22 +172,27 @@ const UserProduct = ({history, location}) => {
                                 </div>
                                 {
                                     analyzeData ? (
-                                        cate.map((c, i1) => {
-                                            if(analyzeData[c] && analyzeData[c].length > 0) {
+                                        ProductType.supportCate.map((type, i1) => {
+                                            if(analyzeData[type]?.length > 0) {
                                                 return (
                                                     <div key={i1} className="list-frame">
                                                         <div className="cate-nav" onClick={(e) => event.listToggle(e.target)}>
-                                                            <p>{transition.getCate(c)}</p>
+                                                            <p>{ProductType.getTypeName(type)}</p>
                                                             <i className="material-icons">keyboard_arrow_down</i>
                                                         </div>
                                                         <ul>
                                                             {
-                                                                analyzeData[c].map((element, i2) => {
-                                                                    const {sname, nick, pname, subtype} = element.info;
+                                                                analyzeData[type].map((element, i2) => {
+                                                                    console.log(element)
+                                                                    const {
+                                                                        _id,
+                                                                        info : {sname, nick, pname, subtype},
+                                                                        size : {name}
+                                                                     } = element;
                                                                     return (
                                                                         <li key={i2} >
                                                                             <div className="info-frame" onClick={(e) => event.elementClick(element, e)}>
-                                                                                <h2>{element.size.name}</h2>
+                                                                                <h2>{name}</h2>
                                                                                 <div className="info">
                                                                                     <p>{sname ? sname : ""}</p>
                                                                                     <h1>{nick ? nick : pname}</h1>
@@ -212,7 +203,7 @@ const UserProduct = ({history, location}) => {
                                                                                 </div>
                                                                                 {
                                                                                     element?.praw?.full ? (
-                                                                                        <a href={`http://${element.praw.full}`} onClick={(e) => e.stopPropagation()}>
+                                                                                        <a href={`http://${element?.prwa?.full}`} onClick={(e) => e.stopPropagation()}>
                                                                                             <i className="material-icons">open_in_new</i>
                                                                                         </a> 
                                                                                     ) : null
@@ -222,7 +213,7 @@ const UserProduct = ({history, location}) => {
                                                                                 <button style={{backgroundColor: "#00966B"}} onClick={() => event.modifyMyProduct(element)}>
                                                                                     <i className="material-icons">edit</i>
                                                                                 </button>
-                                                                                <button style={{backgroundColor: "#dd1818"}} onClick={(e) => event.removeMyProduct(e.target, element._id)}>
+                                                                                <button style={{backgroundColor: "#dd1818"}} onClick={(e) => event.removeMyProduct(e.target, _id)}>
                                                                                     <i className="material-icons">delete</i>
                                                                                 </button>
                                                                             </div>
@@ -239,11 +230,11 @@ const UserProduct = ({history, location}) => {
                                         <div></div>
                                     )
                                 }
-
                             </div>
                         ) : (
                             <div className="empty">
-                                <i className="material-icons">insert_emoticon</i>
+                                <i className="material-icons">sentiment_dissatisfied</i>
+                                <p>옷장이 비었어요</p>
                                 <p><b style={{fontWeight:"500"}}>{userInfo.name}님의 옷장</b>을 채워주세요.</p>
                                 <Link to="/closet/create">내 옷 추가하기</Link>
                             </div>
@@ -255,35 +246,7 @@ const UserProduct = ({history, location}) => {
                     )
                     }
             </article>
-            <nav className="myProductNav">
-                {
-                    cookie ? (
-                        <>
-                            <div className="size">
-                                <p>{cookie.size.name}</p>
-                            </div>
-                            <div className="info">
-                                <p>{cookie.info.sname ? cookie.info.sname : null}</p>
-                                <h1>{cookie.info.nick ? cookie.info.nick : cookie.info.pname ? cookie.info.pname : null}</h1>
-                                <div>
-                                    <p>{transition.getCate(cookie.info.ptype)}</p>
-                                    <b>/</b>
-                                    <p>{cookie.info.subtype ? cookie.info.subtype : null}</p>
-                                </div>
-                            </div>
-                            {
-                                backIsCompare ? <div className="changeBtn active" onClick={() => history.goBack()}>
-                                    <i className="material-icons">close</i>
-                                </div> : null
-                            }
-                        </>
-                    ) : (
-                        <div className="empty">
-                            <p>상품과 비교할 나의 옷을 골라주세요.</p>
-                        </div>
-                    )
-                }
-            </nav>
+            <MyProduct myProductData={sizelity_myRecently} history={history}/>
         </section>
     )
 }

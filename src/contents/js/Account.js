@@ -1,58 +1,29 @@
 import axios from 'axios';
+
+
+let instance = null;
 class Account {
     constructor(server) {
+        if(instance) return instance;
         this.server = server;
+        instance = this;
     }
 
-    // 계정 생성
-    async create() {
-
-    }
-
-    /* // 계정 로그인
-    async login({username, password}) {
+    // 계정 정보 가져오기
+    async getUser() {
         return await axios({
-            method : 'POST',
-            url : `${this.server}/account/signin`,
-            data : {
-                username, password
-            },
-            withCredentials : true,
+            method: 'GET',
+            url: `${this.server}/user`,
+            withCredentials: true,
             timeout: 5500
         }).then(response => {
-
-            console.log(response);
-
-            switch(response.status) {
-                case 200 : {
-                    const {_id, uid, name, password} = response.data;
-                    localStorage.setItem('authWithSizelity',JSON.stringify({_id, username: uid, name ,password}));
-
-                    return {type: 'success', data : response.data};
-                }
-                case 204 : {
-                    return {type: 'error', msg : response.data.error};
-                }
-                default : {
-                    return {type: 'error', msg: "문제가 발생했습니다."};
-                }
-            }
-            
+            if(response?.status === 200) return {type: 'success', data : response.data};
+            else return {type: 'error', msg: '서버에 문제가 발생했습니다.'};
         }).catch(err => {
-            console.log(err);
-            switch(err?.response?.status) {
-                case 401 : {
-                    return {type: 'error', msg: "아이디 또는 비밀번호를 확인해주세요."};
-                }
-                case 500 : {
-                    return {type : "error", msg : "잠시후 다시 시도해주세요."};
-                }
-                default : {
-                    return {type : "error", msg : "네트워크 연결을 확인해주세요."};
-                }
-            }
+            if(err?.response?.data?.error) return {type: 'error', msg: err.response.data.error};
+            else return {type: 'error', msg: '네트워크 연결을 확인하세요.'};
         });
-    } */
+    }
 
     // 자동 로그인
     async autoLogin() {
@@ -63,7 +34,7 @@ class Account {
             timeout : 5500
         }).then(response => {
             if(response?.status === 200) {
-                return {_id: response.data._id, name: response.data.name};
+                return response.data;
             }
         }).catch(err => {
             console.log(err);
@@ -72,29 +43,44 @@ class Account {
     }
 
     // 계정 삭제
-    async remove({password, option, suggest}) {
+    async remove(reason) {
         return await axios({
             method: 'DELETE',
             url: `${this.server}/user`,
-            data : {
-                password, option, suggest
-            },
+            data : {reason},
             withCredentials : true,
             timeout: 5500
         }).then(response => {
             if(response.status === 200) {
-                localStorage.removeItem("authWithSizelity");
+                localStorage.removeItem("sizelity_token");
                 return {type : "success"}
             }
         }).catch(err => {
-            if(err?.response?.status) return {type : "error", msg : err.repsonse.data.error};
+            if(err?.response?.data) return {type : "error", msg : err.response.data.error};
             else return {type : "error", msg : "네트워크 연결을 확인해주세요."};
         });
     }
 
     // 계정 수정
-    async patch() {
-
+    async patch(data) {
+        return await axios({
+            method: 'PATCH',
+            url: `${this.server}/user`,
+            data : data,
+            withCredentials : true,
+            timeout: 5500
+        }).then(response => {
+            console.log(response);
+            if(response.status === 200) {
+                return {type : "success"};
+            } else {
+                return {type : "error", msg : response.data.error};
+            }
+        }).catch(err => {
+            console.log(err);
+            if(err?.response?.status) return {type : "error", msg : err.repsonse.data.error};
+            else return {type : "error", msg : "네트워크 연결을 확인해주세요."};
+        }); 
     }
 
     // 로그아웃

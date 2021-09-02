@@ -107,6 +107,10 @@ class TransitionSizeName {
                 ENG : "Bottom",
                 JPN : "",
             },
+            suit : {
+                KOR : "한벌 옷",
+                ENG : "Suit"
+            },
             set : {
                 KOR : "세트",
                 ENG : "Set",

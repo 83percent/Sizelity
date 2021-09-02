@@ -45,7 +45,7 @@ const Step = ({data, setData, step, setStep, alertToggle, save}) => {
         }
         case 4 : {
             return (
-                <div className="step-wrapper step3 step4">
+                <div className="step-wrapper step4">
                     <Step4
                         data={data}
                         setData={setData}

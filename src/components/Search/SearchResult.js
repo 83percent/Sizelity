@@ -24,7 +24,11 @@ const SearchResult = ({praw, history}) => {
             setOnLoader(true);
             const __response = await productSearch.search({url: praw});
             console.log("결과", __response);
-            setResponse(__response);
+            if(__response?.type === 'success') {
+                setResponse(__response?.type);
+            } else {
+                setResponse(null);
+            }
         } catch(error) {
             setResponse(500);
         } finally {

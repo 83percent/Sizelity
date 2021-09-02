@@ -2,34 +2,34 @@ section#AddProduct {
     background: #f0f2f5;
     min-height: 100vh;
 }
-section#AddProduct > .closer {
-    float: right;
-    padding: 1.5rem 1.5rem 0.5rem 0.5rem;
-}
+
 /*      Nav     */
 section#AddProduct > footer {
     position: fixed;
     left:0;
     bottom: 0;
     width: 100%;
-    
 }
+/*
+    CONTROL
+*/
 section#AddProduct > footer > .control-wrapper {
-    background: #f0f2f560;
+    position: relative;
+    background: #f0f2f590;
     display: flex;
     align-items: center;
-    padding-bottom: 0.4rem;
+    padding-bottom: 1.2rem;
 }
 section#AddProduct > footer > .control-wrapper > button {
     all: unset;
+    position: absolute;
+    left: 0;
     padding: 0.5rem 1.5rem;
     font-size: 1.1rem;
     font-weight: 400;
     color: #888888;
 }
-section#AddProduct > footer > .control-wrapper > button.off {
-    visibility: hidden;
-}
+
 section#AddProduct > footer > .control-wrapper > div {
     flex-grow: 1;
     display: flex;
@@ -48,131 +48,30 @@ section#AddProduct > footer > .control-wrapper > div > .dot.on {
     height: 0.7rem;
     background-color: #00966B;
 }
-section#AddProduct > footer > .nav-wrapper {
+
+
+
+/*
+    PREVIEW
+*/
+section#AddProduct > footer > .preview-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: auto;
     z-index: 998;
-    transition-duration: 0.4s;
 }
-section#AddProduct > footer > .nav-wrapper.c_e {
-    opacity: 0;
-}
-section#AddProduct > footer > .nav-wrapper > nav {
+section#AddProduct > footer > .preview-wrapper > nav {
     position: relative;
-    opacity: 0.6;
     height: auto;
 }
-section#AddProduct > footer > .nav-wrapper > nav.save {
-    position: relative;
-    opacity: 1.0;
-}
-section#AddProduct > footer > .nav-wrapper > .status {
+section#AddProduct > footer > .preview-wrapper > div {
     text-align: center;
     padding: 0.4rem 0;
     background: #00966B;
-    border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
-    opacity: 0.6;
-    transition-duration: 0.4s;
 }
-section#AddProduct > footer > .nav-wrapper > .status.save {
-    opacity: 1.0;
-}
-section#AddProduct > footer > .nav-wrapper > .status > p {
+section#AddProduct > footer > .preview-wrapper > div > p {
     color: #ffffff;
-    font-weight: 300;
-}
-/*      alert       */
-section#AddProduct > .alert-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    z-index: 999;
-}
-section#AddProduct > .alert-wrapper.on {
-    height: 100%;
-}
-section#AddProduct > .alert-wrapper > .alert-frame {
-    width: 100%;
-    position: absolute;
-    top: -12rem;
-    text-align: center;
-    padding: 2.3rem 0;
-    transition-duration: 0.4s;
-    background: #fff;
-    border-bottom: 1px solid #dbdbdb;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
-}
-section#AddProduct > .alert-wrapper.on > .alert-frame {
-    top: 0;
-}
-section#AddProduct > .alert-wrapper > .alert-frame > p {
-    color: #ff0000;
-    font-size: 1.2rem;
-}
-section#AddProduct > .alert-wrapper > .alert-closer {
-    flex-grow: 0;
-}
-section#AddProduct > .alert-wrapper.on > .alert-closer {
-    flex-grow: 1;
-}
-/*      confirm     */
-section#AddProduct > .confirm-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    z-index: 999;
-}
-section#AddProduct > .confirm-wrapper > .confirm-frame {
-    position: absolute;
-    top: -10rem;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    transition-duration: 0.4s;
-    border-bottom: 1px solid #dbdbdb;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 0%);
-}
-section#AddProduct > .confirm-wrapper > .confirm-frame {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-section#AddProduct > .confirm-wrapper > .confirm-frame > h1 {
-    padding: 2rem 0;
-    font-size: 1.4rem;
-}
-section#AddProduct > .confirm-wrapper > .confirm-frame > div {
-    display: flex;
-    width: 100%;
-    border-top: 1px solid #dbdbdb;
-}
-section#AddProduct > .confirm-wrapper > .confirm-frame > div > div {
-    flex-grow: 1;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 0.8rem 0;
-}
-section#AddProduct > .confirm-wrapper > .confirm-frame > div > div:first-child {
-    border-right: 1px solid #dbdbdb;
-}
-section#AddProduct > .confirm-wrapper.on > .confirm-frame {
-    top: 0;
-}
-section#AddProduct > .confirm-wrapper.on {
-    height: 100%;
-}
-section#AddProduct > .confirm-wrapper > .confirm-closer {   
-    flex-grow: 1;
+    font-weight: 400;
 }

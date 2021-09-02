@@ -3,7 +3,7 @@
     2021-08-08 수정 (이재훈)
     : 데이터 추가
 */
-
+const supportCate = ["set", 'outer', 'top', 'suit', 'onepiece', 'bottom', 'skirt', 'shoes', 'unknown'];
 const ptype = [
     {value : "set", name : "세트"},
     {value : "outer", name : "아우터"},
@@ -126,42 +126,13 @@ const getSizeRate = (name) => {
             return [
                 [ "height", "높이"],
                 [ "heel", "굽높이"],
-                [ "width", "발볼"],
+                [ "S_width", "발볼"],
                 [ "S_length", "길이"]
             ];
         }
         default : {return [];}
     }
 }
-/* const subtype = (type) => {
-    switch(type) {
-        case "set" : {
-            return _set;
-        }
-        case "outer" : {
-            return _outer;
-        }
-        case "top" : {
-            return _top;
-        }
-        case "onepiece" : {
-            return _onepiece;
-        }
-        case "bottom" : {
-            return _bottom;
-        }
-        case "skirt" : {
-            return _skirt;
-        }
-        case "shoes" : {
-            return _shoes;
-        }
-        default : {
-            return null;
-        }
-    }
-} */
 module.exports = {
-    ptype, sizeName, getSizeRate, getSizeRateName, getTypeName
-    /* subtype : subtype */
+    supportCate, ptype, sizeName, getSizeRate, getSizeRateName, getTypeName
 }

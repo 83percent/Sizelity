@@ -92,7 +92,7 @@ main#home > header > .user-wrapper > .user-title > div {
 }
 main#home > header > .user-wrapper > .user-title > div > p {
     position: relative;
-    top: 5px;
+    top: 0;
     left: 2px;
     color: #888888;
 }

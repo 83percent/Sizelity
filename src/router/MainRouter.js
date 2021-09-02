@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Component
-import ViewRouter from './IndexRouter';
+import IndexRouter from './IndexRouter';
 import Compare from './CompareRouter';
 import AfterProduct from './AfterProductRouter';
 import UserProduct from './UserProductRouter';
@@ -26,7 +26,7 @@ const MainRouter = () => {
     } else {
         return (
             <Switch>
-                <Route exact path="/" component={ViewRouter} />
+                <Route exact path="/" component={IndexRouter} />
                 <Route path="/account" compoent={AccountRouter} />
                 <Route path="/compare" component={Compare} />
                 <Route exact path="/view/compare" component={Compare} />

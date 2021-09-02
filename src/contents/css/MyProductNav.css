@@ -1,50 +1,50 @@
 nav.myProductNav {
-    display: flex;
-    align-items: center;
     position: fixed;
-    height: 5.8rem;
     bottom: 0;
-    right: 0;
     width: 100%;
-    background: #00966B;
+    background: var(--base-color);
     color: #ffffff;
     z-index: 999;
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap;
     transition-duration: 0.6s;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    box-shadow: 0 -4px 10px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
-nav.myProductNav > .size > p {
+nav.myProductNav > .product-wrapper {
+    display: flex;
+    align-items: center;
+    padding-top: 0.3rem;
+}
+nav.myProductNav > .product-wrapper > .size > p {
     font-size: 3.0rem;
     font-weight: 400;
-    padding: 0.7rem;
+    padding: 0.7rem 0.9rem;
 }
-nav.myProductNav > .info {
+nav.myProductNav > .product-wrapper > .info {
     flex-grow: 1;
     overflow: hidden;
 }
-nav.myProductNav > .info > p {
+nav.myProductNav > .product-wrapper > .info > p {
     position: relative;
-    top: 3px;
+    top: 1px;
     left: 2px;
     font-size: 0.9rem;
     color: #eee;
 }
-nav.myProductNav > .info > h1 {
+nav.myProductNav > .product-wrapper > .info > h1 {
     font-size: 1.7rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-nav.myProductNav > .info > h2 {
+nav.myProductNav > .product-wrapper > .info > h2 {
     font-size: 0.9rem;
-    color: #ccc;
+    color: #888;
     position: relative;
     top: -2px;
     left: 2px
 }
-nav.myProductNav > .info > div {
+nav.myProductNav > .product-wrapper > .info > div {
     position: relative;
     bottom: 3px;
     left: 2px;
@@ -52,30 +52,94 @@ nav.myProductNav > .info > div {
     align-items: center;
     
 }
-nav.myProductNav > .info > div > p {
+nav.myProductNav > .product-wrapper > .info > div > p {
     color: #ccc;
 }
-nav.myProductNav > .info > div > b {
+nav.myProductNav > .product-wrapper > .info > div > b {
     color: #ccc;
     padding: 0 0.5rem;
 }
-nav.myProductNav > .empty {
+nav.myProductNav > .product-wrapper > .empty {
     height: 4rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-nav.myProductNav > .empty > p {
+nav.myProductNav > .product-wrapper > .empty > p {
     font-size: 1.3rem;
     font-weight: 200;
 }
-nav.myProductNav > .changeBtn {
-    padding: 1rem 1rem 1rem 0.5rem;
+nav.myProductNav > .product-wrapper > .changeBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 100%;
+    border-left: 1px solid #fff;
 }
-nav.myProductNav > .changeBtn.active > i {
+nav.myProductNav > .product-wrapper > .changeBtn.active > i {
     border-radius: 50%;
+    font-size: 1.6rem;
     padding: 0.1rem;
     background-color: #fff;
     color: #00966B;
+}
+
+/*
+    button
+*/
+nav.myProductNav > .btn-wrapper {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #dbdbdb;
+    color: #dbdbdb;
+}
+nav.myProductNav > .btn-wrapper > button {
+    all: unset;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    border-left: 1px solid #dbdbdb;
+    padding: 0.8rem 0;
+}
+nav.myProductNav > .btn-wrapper > button:first-of-type {
+    border-left: none;
+}
+
+
+nav.myProductNav  > .open-btn {
+    position: absolute;
+    z-index: 999;
+    left: -6rem;
+    bottom: 0rem;
+    width: 6rem;
+    height: 6rem;
+    border-right: 1px solid #fff;
+    background-color: var(--base-color);
+    box-shadow: 0 -4px 10px #88888830;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+nav.myProductNav  > .open-btn > span {
+    position: absolute;
+    left: 0.5rem;
+}
+nav.myProductNav  > .open-btn > i {
+    margin-left: 1rem;
+    font-size: 3.2rem;
+}
+
+/*
+    NONE
+*/
+nav.myProductNav > .product-wrapper > h2.none {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.3rem;
+    font-weight: 400;
 }

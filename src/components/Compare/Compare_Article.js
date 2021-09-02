@@ -19,8 +19,7 @@ const Compare = ({productData, myProduct, navToggle}) => {
 
     const viewTypeEvent = (target) => {
         // 그래프만 보기
-        const status = target.classList.contains("active");
-        if(status) {
+        if(target.classList.contains("active")) {
             // 활성화 상태 : 그래프만 보임
             target.classList.remove("active");
             compareGraphRef.current.classList.remove("only-graph");
@@ -30,7 +29,6 @@ const Compare = ({productData, myProduct, navToggle}) => {
             compareGraphRef.current.classList.add("only-graph");
         }
     }
-    //const selectSize = (sizeName) => {changeActiveSize(sizeName);}
     return (
         <section className="View-Compare">
             <header>
@@ -42,7 +40,7 @@ const Compare = ({productData, myProduct, navToggle}) => {
                     </div>
                 </div>
                 <div className="size-wrapper">
-                    <HeaderSizeList 
+                    <SizeList 
                         sizeData={productData.size}
                         activeSize={activeSize}
                         selectSize={setActiveSize}/>
@@ -52,14 +50,14 @@ const Compare = ({productData, myProduct, navToggle}) => {
             <article>
                 <section className="type-compare">
                     <div>
-                        <p>현재 보고있는 상품</p>
+                        <p>보고있는 상품</p>
                         <div>
                             <p>{ProductTypeModule.getTypeName(productData.info.ptype)}</p>
                             <p>/</p>
                             <p>{productData.info?.subtype}</p>
                         </div>
                     </div>
-                    <div onClick={() => navToggle(true)}>
+                    <div>
                         {
                             myProduct ? (
                                 <>
@@ -137,7 +135,7 @@ export default React.memo(Compare);
 
 
 /*      header - Size list       */
-const HeaderSizeList = ({ sizeData, selectSize }) => {
+const SizeList = ({ sizeData, selectSize }) => {
     const sizeElementList = useRef(null);
 
     const sizeElementClickEvent = (target,size) => {
@@ -171,7 +169,7 @@ const HeaderSizeList = ({ sizeData, selectSize }) => {
         </ul>
     );
 }
-HeaderSizeList.proptype = {
+SizeList.proptype = {
     sizeData : Proptype.array.isRequired,
     selectSize : Proptype.func.isRequired // 어떤 사이즈를 선택했는지를 부모 컴포넌트에 리턴함
 }

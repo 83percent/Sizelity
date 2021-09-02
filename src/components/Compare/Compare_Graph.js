@@ -1,12 +1,18 @@
-import React, {useMemo, useRef} from "react";
-
+import React, {useContext, useMemo, useRef} from "react";
 import Transition from '../../contents/js/TransitionSizeName';
 
+// SVG
+import {ReactComponent as Female} from '../../contents/asset/female_24dp.svg';
+
+// Context
+import { LoginContext } from "../../App";
 
 const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
+    // Context
+    const {userInfo} = useContext(LoginContext);
     const analyzeData = (productSizeData) => {
         if(productSizeData.constructor !== Array) return false;
-        
+
         const analyzeResult = {
             size : []
         }
@@ -63,6 +69,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                                         myProductData={myProductData ? myProductData[sn]: null}
                                         productSizeData={sizeData[sn]}
                                         productSizeName={sizeData.size}
+                                        gender={userInfo?.gender}
                                         />
                                 </>
                         </li>
@@ -92,7 +99,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     );
 }
 
-const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData, productSizeName}) => {
+const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData, productSizeName, gender}) => {
     const graphFrame = useRef(null);
     let activeRate = null;
 
@@ -210,7 +217,15 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
                                 return (
                                     <div key={index} className="point myProduct active">
                                         <div>
-                                            <i className="material-icons myProduct-mark">account_circle</i>
+                                            {
+                                                gender === 'female' ? (
+                                                    <i className="myProduct-mark">
+                                                        <Female width="1.7rem" height="1.7rem" fill="#000000"/>
+                                                    </i>
+                                                ) : (
+                                                    <i className="material-icons myProduct-mark">face</i>
+                                                )
+                                            }
                                         </div>
                                         <p className="point-sr">{productSizeData[((index+1)/4)-1]}</p>
                                         <input type="hidden" name="Compare-size" value={productSizeName[((index+1)/4)-1]}/>
@@ -222,7 +237,15 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
                                 // Marking.myProduct
                                 return (
                                     <div key={index} className="mark myProduct">
-                                        <i className="material-icons myProduct-mark">account_circle</i>
+                                        {
+                                            gender === 'female' ? (
+                                                <i className="myProduct-mark">
+                                                    <Female width="1.7rem" height="1.7rem" fill="#000000"/>
+                                                </i>
+                                            ) : (
+                                                <i className="material-icons myProduct-mark">face</i>
+                                            )
+                                        }
                                         <p className="mark-sr">{myProductData}</p>
                                     </div>
                                 )
@@ -231,7 +254,15 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
                                 // point.myProduct
                                 return (
                                     <div key={index} className="point myProduct">
-                                        <i className="material-icons myProduct-mark">account_circle</i>
+                                        {
+                                            gender === 'female' ? (
+                                                <i className="myProduct-mark">
+                                                    <Female width="1.7rem" height="1.7rem" fill="#000000"/>
+                                                </i>
+                                            ) : (
+                                                <i className="material-icons myProduct-mark">face</i>
+                                            )
+                                        }
                                         <p className="point-sr">{productSizeData[((index+1)/4)-1]}</p>
                                         <input type="hidden" name="Compare-size" value={productSizeName[((index+1)/4)-1]}/>
                                         <input type="hidden" name="Compare-rate" value={productSizeData[((index+1)/4)-1]}/>

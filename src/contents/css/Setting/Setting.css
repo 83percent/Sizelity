@@ -1,58 +1,292 @@
-.setting-list {
-    
+#list-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
-.setting-list > header {
+#list-wrapper > .loader-frame {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#list-wrapper > .loader-frame > .loader {
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid var(--base-color);
+    border-bottom: 2px solid #00000000;
+}
+#list-wrapper > header {
     display: flex;
     align-items: center;
     padding: 2rem;
     padding-top: 3rem;
 }
-.setting-list > header > h1 {
+#list-wrapper > header > h1 {
     font-size: 2.0rem;
     font-weight: 700;
     flex-grow: 1;
 }
-.setting-list > header > i {
+#list-wrapper > header > i {
     padding-bottom: 0.3rem;
+    font-size: 2rem;
 }
-.setting-list > main {
+#list-wrapper > main.list-frame {
 
 }
-.setting-list > main > div {
+#list-wrapper > main.list-frame > div {
     margin-bottom: 1rem;
     border-bottom: 1px solid #e3e8ee;
     padding: 1rem 2rem 2rem 2rem;
 }
-.setting-list > main > div:last-of-type {
+#list-wrapper > main.list-frame > div:last-of-type {
     border-bottom: none;
 }
-.setting-list > main > div > h2 {
+#list-wrapper > main.list-frame > div > h2 {
     font-size: 1.1rem;
     color: #888;
     margin-bottom: 1rem;
 }
-.setting-list > main > div > ul {
+#list-wrapper > main.list-frame > div > ul {
 
     
 }
-.setting-list > main > div > ul > li {
-    padding-bottom: 2rem;
+#list-wrapper > main.list-frame > div > ul > li {
+    margin-bottom: 2rem;
+    cursor: pointer;
 }
-.setting-list > main > div > ul > li:last-of-type {
-    padding-bottom: 0;
+#list-wrapper > main.list-frame > div > ul > li:last-of-type {
+    margin-bottom: 0;
 }
-.setting-list > main > div > ul > li > a {
-    display: flex;
+#list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) {
+    all: unset;
+    display: flex;    
+    width: 100%;
     align-items: center;
     position: relative;
 }
-.setting-list > main > div > ul > li > a > i {
+#list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > i {
     font-size: 2.0rem;
+    margin-right: 1.2rem;
 }
-
-.setting-list > main > div > ul > li > a > p {
+#list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > p {
     position: relative;
     top: 1px;
-    margin-left: 1.2rem;
     font-size: 1.4rem;
+    font-weight: 500;
+    flex-grow: 1;
+}
+#list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > h4 {
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+#list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > span {
+    font-size: 2.0rem;
+    margin-left: 1rem;
+    opacity: 0.5;
+}
+/*
+    Profile
+*/
+#list-wrapper > main.profile-frame {
+    padding: 0 2rem 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dbdbdb;
+}
+#list-wrapper > main.profile-frame > i {
+    font-size: 4.8rem;
+    opacity: 0.3;
+    margin-right: 1rem;
+}
+#list-wrapper > main.profile-frame > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#list-wrapper > main.profile-frame > div > p {
+    margin-bottom: 0.5rem;
+    padding: 0.1rem 1.3rem;
+    font-weight: 600;
+    border-radius: 2rem;
+}
+#list-wrapper > main.profile-frame > div > h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding-bottom: 0.3rem;
+}
+/*
+    Gender
+*/
+#list-wrapper > article.gender-frame {
+    padding: 0 2rem;
+}
+#list-wrapper > article.gender-frame > div {
+    margin-bottom: 1rem;
+}
+#list-wrapper > article.gender-frame > div > label {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+}
+#list-wrapper > article.gender-frame > div > label > p {
+    font-size: 1.4rem;
+    flex-grow: 1;
+    font-weight: 500;
+    padding: 1rem 0;
+
+}
+#list-wrapper > article.gender-frame > div > label > input {
+    display: none;
+}
+#list-wrapper > article.gender-frame > div > label > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--base-color);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.7rem;
+    width: 0rem;
+    height: 0rem;
+    opacity: 0;
+    overflow: hidden;
+    transition-duration: 0.3s;
+}
+#list-wrapper > article.gender-frame > div > label.on > i {
+    width: 2.2rem;
+    height: 2.2rem;
+    opacity: 0.9;
+}
+/*
+    Name
+*/
+#list-wrapper > article.name-frame {
+    padding: 0 2rem;
+}
+#list-wrapper > article.name-frame > p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+#list-wrapper > article.name-frame > div {
+    margin-bottom: 2rem;
+}
+#list-wrapper > article.name-frame > div > label {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #dbdbdb;
+    padding-bottom: 0.5rem;
+}
+#list-wrapper > article.name-frame > div > label > input {
+    all: unset;
+    flex-grow: 1;
+    font-size: 1.4rem;
+}
+#list-wrapper > article.name-frame > div > label > p {
+    margin-right: 0.5rem;
+}
+#list-wrapper > article.name-frame > div > label.wrong {
+    border-color: #dd1818;
+}
+#list-wrapper > article.name-frame > div > label.wrong > input {
+    color: #dd1818;
+}
+#list-wrapper > article.name-frame > div > label.wrong > p {
+    color: #dd1818;
+}
+/*
+    Write
+*/
+#list-wrapper > article.write-frame {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+#list-wrapper > article.write-frame > input {
+    all: unset;
+    width: 100%;
+    padding: 0.5rem 2rem;
+    border-bottom: 2px solid #dbdbdb;
+    font-size: 1.4rem;
+}
+#list-wrapper > article.write-frame > textarea {
+    all: unset;
+    height: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+}
+#list-wrapper > article.write-frame > div {
+    position: fixed;
+    bottom: 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+#list-wrapper > article button {
+    all: unset;
+    width: 100%;
+    max-width: 92vw;
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 0.7rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background-color: var(--base-color);
+    color: #fff;
+    transition-duration: 0.3s;
+}
+#list-wrapper > article button:disabled {
+    opacity: 0.3;
+}
+
+/*
+    Account Out
+*/
+#list-wrapper > article.out-frame > div > label {
+    opacity: 0.5;
+    transition-duration: 0.3s;
+}
+#list-wrapper > article.out-frame > div > label.on {
+    opacity: 1;
+}
+#list-wrapper > article.out-frame > div > label.on > p {
+    text-decoration: underline;
+}
+#list-wrapper > article.out-frame > div > label > i {
+    background-color: var(--base-red);
+}
+
+/*
+    etc
+*/
+#list-wrapper > .button-wrapper {
+    position: fixed;
+    bottom: 1.5rem;
+    width: 100vw;
+    
+}
+#list-wrapper > .button-wrapper > div {
+    width: 100%;
+    max-width: 92vw;
+    margin: 0 auto;
+}
+#list-wrapper > .button-wrapper > div > p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+#list-wrapper > .button-wrapper button {
+    all: unset;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+    border-radius: 0.7rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    background-color: var(--base-red);
+    color: #fff;
+    transition-duration: 0.3s;
+}
+#list-wrapper > .button-wrapper button:disabled {
+    opacity: 0.3;
 }
