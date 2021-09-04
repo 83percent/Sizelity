@@ -39,8 +39,8 @@ const NoticeList = ({history}) => {
         else return null;
     }, [data])
     
-    const notices = useMemo(() => {f
-        if(data) return data.filter(e => e.important === alse);
+    const notices = useMemo(() => {
+        if(data) return data.filter(e => e.important === false);
         else return null;
     }, [data]);
 
