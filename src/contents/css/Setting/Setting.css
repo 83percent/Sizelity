@@ -290,3 +290,71 @@
 #list-wrapper > .button-wrapper button:disabled {
     opacity: 0.3;
 }
+/*
+    wrong
+*/
+#list-wrapper > .wrong {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #dd1818;
+}
+#list-wrapper > .none {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 3rem;
+}
+#list-wrapper > .none > i {
+    font-size: 6.0rem;
+    margin-bottom: 1rem;
+    color: #888;
+}
+#list-wrapper > .none > p {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+#list-wrapper > ul.notice-wrapper {
+
+}
+#list-wrapper > ul.notice-wrapper > li {
+    border-bottom: 1px solid #e3e8ee;
+}
+#list-wrapper > ul.notice-wrapper > li > div.title {
+    display: flex;
+    padding: 1rem 2rem;
+    align-items: center;
+}
+#list-wrapper > ul.notice-wrapper > li > div.title > i {
+    color: #888
+}
+#list-wrapper > ul.notice-wrapper > li.on > div.title > i {
+    transform: rotate(180deg)
+}
+#list-wrapper > ul.notice-wrapper > li > div.title > div {
+    flex-grow: 1;
+}
+
+#list-wrapper > ul.notice-wrapper.important > li > div.title {
+    background-color: #FFE44D;
+}
+#list-wrapper > ul.notice-wrapper > li > div.title > div > p {
+    margin-bottom: 0.2rem;
+    color: #555;
+}
+#list-wrapper > ul.notice-wrapper > li > div.title > div > h2 {
+    font-weight: 500;
+}
+#list-wrapper > ul.notice-wrapper > li > div.text {
+    height: 0;
+    overflow: hidden;
+    background-color: #eeeeee;
+}
+#list-wrapper > ul.notice-wrapper > li > div.text > p {
+    font-size: 1.1rem;
+}
+#list-wrapper > ul.notice-wrapper > li.on > div.text {
+    height: auto;
+    padding: 1rem 2rem;
+}
