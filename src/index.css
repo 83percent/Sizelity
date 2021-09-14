@@ -191,5 +191,5 @@ a.sizelity_logo > i {
 */
 
 @media (min-width: 320px) and (max-width: 480px) {
-  html { font-size: 12px; }
+  html { font-size: 14px; }
 }

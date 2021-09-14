@@ -11,7 +11,7 @@ import './contents/fonts/AppleSDGothicNeo.css';
 
 // Component
 import MainRouter from './router/MainRouter';
-import Test from './router/Test';
+//import Test from './router/Test';
 
 import dotenv from 'dotenv';
 
@@ -22,6 +22,7 @@ import './contents/css/Error.css';
 export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
 export const ServerContext = createContext(null);
+export const ADContext = createContext(null);
 
 dotenv.config();
 
@@ -33,7 +34,8 @@ const App = () => {
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
     const [userInfo, setUserInfo] = useState(undefined);
-    
+    const [ADCheck, setADCheck] = useState(0);
+
     // Cookie
     const [cookie, setCookie, removeCookie] = useCookies(['sizelity_token']);
 
@@ -67,6 +69,7 @@ const App = () => {
     useEffect(() => {
         if(userInfo === undefined) getUser();
     }, [userInfo, getUser]);
+    
     useEffect(() => {
         setMedia(window.screen.width > 1024 ? "Desktops" : "Phone");
     }, []);
@@ -80,18 +83,20 @@ const App = () => {
     } else {
         return (
             <CookiesProvider>
-                <ServerContext.Provider value={__server}>
-                    <LoginContext.Provider value={{userInfo, setUserInfo}}>
-                        <MediaContext.Provider value={media}>
-                            <BrowserRouter>
-                                <Switch>
-                                    <Route exact path="/test" component={Test}/>
-                                    <Route path="/" component={MainRouter} />
-                                </Switch>
-                            </BrowserRouter>
-                        </MediaContext.Provider>
-                    </LoginContext.Provider>
-                </ServerContext.Provider>
+                <ADContext.Provider value={{ADCheck, setADCheck}}>
+                    <ServerContext.Provider value={__server}>
+                        <LoginContext.Provider value={{userInfo, setUserInfo}}>
+                            <MediaContext.Provider value={media}>
+                                <BrowserRouter>
+                                    <Switch>
+                                        {/* <Route exact path="/test" component={Test}/> */}
+                                        <Route path="/" component={MainRouter} />
+                                    </Switch>
+                                </BrowserRouter>
+                            </MediaContext.Provider>
+                        </LoginContext.Provider>
+                    </ServerContext.Provider>
+                </ADContext.Provider>
             </CookiesProvider>
         );
     }

@@ -17,6 +17,11 @@ import { MediaContext, LoginContext, ServerContext } from '../../App';
 
 
 const UserProduct = ({history, location}) => {
+    /*
+        location.state.callback -> 수정 및 추가 완료시 alert을 노출추가를 위해 location 추가했는데
+        문제 발생 : 1회성으로 작동하게 하려면 복잡
+    */
+    console.log(history);
     // Cookie
     const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
     
@@ -27,8 +32,6 @@ const UserProduct = ({history, location}) => {
     
     // State
     const [productData, setProductData] = useState(undefined);
-    console.log(productData);   
-
 
     // Ref
     const alertWrapper = useRef(null);
@@ -140,6 +143,22 @@ const UserProduct = ({history, location}) => {
         } // fetchData
         if(userInfo && productData === undefined) fetchData();
     }, [productData, userInfo, alert, userProductModule]);
+
+    useEffect(() => {
+        const callback = location.state?.callback;
+        if(!callback) return;
+        switch(callback?.type) {
+            case 'create' : {
+                if(callback.state) alert.alertToggle(true, '옷을 추가했어요', 'clear');
+                break;
+            }
+            case 'modify' : {
+                if(callback.state) alert.alertToggle(true, '옷 정보를 수정했어요', 'clear');
+                break;
+            }
+            default : break;
+        }
+    }, [location, alert])
     return (
         <section id="UserProduct">
             <nav id="alert-wrapper" ref={alertWrapper}>
@@ -157,7 +176,7 @@ const UserProduct = ({history, location}) => {
                     <h1 className="name">{userInfo?.name ? userInfo.name : "XXX"}</h1>
                     <h1>님의 옷장</h1>
                 </div>
-                <i className="material-icons" style={{fontSize: "2.4rem"}}onClick={() => history.push('/closet/create')}>add</i>
+                <i className="material-icons" style={{fontSize: "2.2rem"}}onClick={() => history.push('/closet/create')}>add</i>
                 <i className="material-icons" onClick={() => history.goBack()}>arrow_back</i>
             </header>
             <article>

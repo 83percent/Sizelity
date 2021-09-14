@@ -1,0 +1,41 @@
+#doc-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+#doc-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#doc-frame > i {
+    font-size: 12rem;
+    opacity: 0.4;
+    margin-bottom: 1rem;
+}
+#doc-frame > h1 {
+    font-weight: 700;
+    font-size: 2.3rem;
+}
+#doc-frame > div {
+    margin-top: 1rem;
+}
+#doc-frame > div > p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4px;
+}
+#doc-frame > button {
+    all: unset;
+    width: 20rem;
+    padding: 1rem 0;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #fff;
+    background-color: var(--base-color);
+    cursor: pointer;
+}

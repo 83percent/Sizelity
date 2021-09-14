@@ -49,12 +49,12 @@ const Step = ({data, setData, step, setStep, alertToggle, save}) => {
                     <Step4
                         data={data}
                         setData={setData}
-                        setStep={setStep}
                         alertToggle={alertToggle}
                         save={save}/>
                 </div>
             )
         }
+        default : return null;
     }
 }
 export default Step;

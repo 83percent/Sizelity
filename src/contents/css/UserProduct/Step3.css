@@ -40,7 +40,7 @@
     font-size: 1.3rem;
 }
 #AddProduct .step3 > main > ul > li > h1 {
-    font-size: 2.0rem;
+    font-size: 1.8rem;
     opacity: 0.4;
 }
 #AddProduct .step3 > main > ul > li.on > h1 {
@@ -75,16 +75,15 @@
     padding: 0 1rem;
 }
 #AddProduct .step3 > main > div > .input-wrapper > .title > h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 500;
     margin-top: 1.0rem;
     margin-bottom: 0.3rem;
 }
 #AddProduct .step3 > main > div > .input-wrapper > .title > p {
     color: #555;
-    font-weight: 400;
-    font-size: 1.1rem;
     margin-left: 2px;
+    margin-bottom: 4px;
 }
 #AddProduct .step3 > main > div > .input-wrapper > .input-frame {
     display: flex;
@@ -99,6 +98,9 @@
 #AddProduct .step3 > main > div > .input-wrapper > .input-frame > input {
     all: unset;
     width: 100%;
-    font-size: 1.3rem;
-    padding: 0 0.3rem;
+    font-size: 1.1rem;
+    padding: 0 0.1rem;
+}
+#AddProduct .step3 > main > div > .input-wrapper > .input-frame > p {
+    font-size: 0.9rem;
 }

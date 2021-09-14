@@ -4,7 +4,6 @@
 */
 
 import axios from 'axios';
-import StatusCode from './StatusCode';
 
 /*
     사용자의 옷장 상품 핸들링
@@ -19,7 +18,7 @@ class UserProduct {
     }
     // 상품 목록 불러오기
     async get(id) {
-        if(id === undefined) return StatusCode.invalid; // invalid
+        if(id === undefined) return  {type : 'error', msg: '잘못된 접근입니다'};
         return await axios({
             method: 'GET',
             url : `${this.server}/user/product`,
@@ -30,7 +29,7 @@ class UserProduct {
             else return {type : 'error', msg: '문제가 발생했어요'};
         }).catch(err => {
             if(err?.response?.data?.error)  {
-                if(err?.response.status == 401) return {type:'error', msg: '로그인 후 이용가능 합니다'};
+                if(err?.response.status === 401) return {type:'error', msg: '로그인 후 이용가능 합니다'};
                 else return {type:'error', msg: err.response.data.error}
             }
             else return {type: 'error', msg: '네트워크 연결을 확인하세요'}
@@ -52,7 +51,7 @@ class UserProduct {
             }
         }).catch(err => {
             if(err?.response?.data?.error)  {
-                if(err?.response.status == 401) return {type:'error', msg: '로그인 후 이용가능 합니다'};
+                if(err?.response.status === 401) return {type:'error', msg: '로그인 후 이용가능 합니다'};
                 else return {type:'error', msg: err.response.data.error}
             }
             else return {type: 'error', msg: '네트워크 연결을 확인하세요'}
@@ -75,7 +74,7 @@ class UserProduct {
             }
         }).catch(err => {
             if(err?.response?.data?.error)  {
-                if(err?.response.status == 401) return {type:'error', msg: '로그인 후 이용가능 합니다'};
+                if(err?.response.status === 401) return {type:'error', msg: '로그인 후 이용가능 합니다'};
                 else return {type:'error', msg: err.response.data.error}
             }
             else return {type: 'error', msg: '네트워크 연결을 확인하세요'}
@@ -83,7 +82,7 @@ class UserProduct {
     }
 
     async remove(id, productID) {
-        if(id === undefined) return StatusCode.invalid; // invalid
+        if(id === undefined) return false; // invalid
         return await axios({
             method : 'DELETE',
             url : `${this.server}/user/product/${id}/${productID}`,

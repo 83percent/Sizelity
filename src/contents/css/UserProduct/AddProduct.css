@@ -15,18 +15,16 @@ section#AddProduct > footer {
 */
 section#AddProduct > footer > .control-wrapper {
     position: relative;
-    background: #f0f2f590;
+    background: #f0f2f5;
     display: flex;
     align-items: center;
-    padding-bottom: 1.2rem;
+    padding: 1.2rem 0;
 }
 section#AddProduct > footer > .control-wrapper > button {
     all: unset;
     position: absolute;
     left: 0;
     padding: 0.5rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 400;
     color: #888888;
 }
 
@@ -73,5 +71,5 @@ section#AddProduct > footer > .preview-wrapper > div {
 }
 section#AddProduct > footer > .preview-wrapper > div > p {
     color: #ffffff;
-    font-weight: 400;
+    font-size: 0.9rem;
 }

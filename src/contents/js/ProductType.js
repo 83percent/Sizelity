@@ -2,6 +2,9 @@
 
     2021-08-08 수정 (이재훈)
     : 데이터 추가
+
+    2021-09-13 수정 (이재훈)
+    : 우선순위 추가
 */
 const supportCate = ["set", 'outer', 'top', 'suit', 'onepiece', 'bottom', 'skirt', 'shoes', 'unknown'];
 const ptype = [
@@ -43,7 +46,6 @@ const getSizeRateName = function(name) {
         thigh : "허벅지",
         B_length : "총길이(하의)",
         hem : "밑단",
-        width : "폭",
         calve : "종아리",
         length : "총길이(한벌)",
         height : "높이",
@@ -69,7 +71,6 @@ const getSizeRate = (name) => {
                 [ "thigh", "허벅지"],
                 [ "B_length","총길이(하의)"],
                 [ "hem", "밑단"],
-                [ "width", "폭"],
                 [ "calve", "종아리"]
             ];
         }
@@ -80,7 +81,7 @@ const getSizeRate = (name) => {
                 [ "chest","가슴"],
                 [ "sleeve","소매(팔길이, 팔)"],
                 [ "arm","암홀(팔통)"],
-                [ "T_length","총길이 (상의)"]
+                [ "T_length","총길이"]
             ];
         }
         case 'suit' : {
@@ -92,10 +93,9 @@ const getSizeRate = (name) => {
                 [ "waist", "허리"],
                 [ "hips", "엉덩이"],
                 [ "thigh", "허벅지"],
-                [ "width", "폭"],
                 [ "hem", "밑단"],
                 [ "calve", "종아리"],
-                [ "length","총길이 (한벌)"]
+                [ "length","총길이"]
             ];
         }
         case 'onepiece' : {
@@ -105,21 +105,27 @@ const getSizeRate = (name) => {
                 [ "sleeve","소매(팔길이, 팔)"],
                 [ "arm","암홀(팔통)"],
                 [ "waist", "허리"],
-                [ "width", "폭"],
-                [ "length","총길이 (한벌)"]
+                [ "hem", "밑단"],
+                [ "length","총길이"]
             ];
         }
-        case 'bottom' :
-        case 'skirt' : {
+        case 'bottom' : {
             return [
                 [ "waist", "허리"],
                 [ "crotch", "밑위"],
                 [ "hips", "엉덩이"],
                 [ "thigh", "허벅지"],
-                [ "B_length","총길이 (하의)"],
+                [ "B_length","총길이"],
                 [ "hem", "밑단"],
-                [ "width", "폭"],
                 [ "calve", "종아리"]
+            ];
+        }
+        case 'skirt' : {
+            return [
+                [ "waist", "허리"],
+                [ "hips", "엉덩이"],
+                [ "B_length","총길이"],
+                [ "hem", "밑단"]
             ];
         }
         case 'shoes' : {
@@ -133,6 +139,13 @@ const getSizeRate = (name) => {
         default : {return [];}
     }
 }
+
+const priority = [ 
+    "shoulder","chest","sleeve","arm","T_length",
+    "waist","crotch","hips","thigh","hem","calve","B_length",
+    "length",
+    "height","heel","S_width", "S_length"];
+
 module.exports = {
-    supportCate, ptype, sizeName, getSizeRate, getSizeRateName, getTypeName
+    supportCate, ptype, sizeName, getSizeRate, getSizeRateName, getTypeName, priority
 }

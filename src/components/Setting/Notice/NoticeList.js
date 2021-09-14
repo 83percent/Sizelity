@@ -27,7 +27,7 @@ const NoticeList = ({history}) => {
                 setData(null);
             }    
         }
-    }, [server, data]);
+    }, [server]);
 
     // Memo
     const importantNotices = useMemo(() => {

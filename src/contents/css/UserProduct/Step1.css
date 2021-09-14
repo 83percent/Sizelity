@@ -29,8 +29,8 @@
     transition-duration: 0.3s;
 }
 #AddProduct > article > .step1 > main > label.on > h2 > i {
-    width: 2rem;
-    height: 2rem;
+    width: 1.7rem;
+    height: 1.7rem;
 }
 /*
     INPUT URL
@@ -43,9 +43,8 @@
     height: 100%;
 }
 #AddProduct > article > .step1 > main > label > h2 {
-    font-size: 1.9rem;
-    font-weight: 400;
-    margin-left: 2rem;
+    font-size: 1.7rem;
+    margin-left: 1.8rem;
     opacity: 0.4;
     transition-duration: 0.4s;
 }
@@ -61,7 +60,7 @@
 #AddProduct > article > .step1 .input-frame > input {
     all: unset;
     flex-grow: 1;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 #AddProduct > article > .step1 .input-frame > i {
     color: #fff;

@@ -15,15 +15,16 @@ section#Search {
 #Search > .inputWrapper > input {
     all: unset;
     flex-grow: 1;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     padding: 1rem 0;
 }
 #Search > .inputWrapper > i {
     padding: 1rem;
+    font-size: 1.6rem;
 }
 #Search > .inputResult {
     width: 100%;
-    min-height: 9rem;
+    min-height: 8.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +32,7 @@ section#Search {
     transition-duration: 0.3s;
 }
 #Search > .inputResult > .loader {
-    border: 3px solid black;
+    border: 3px solid #000;
     border-top: 3px solid #00000000;
     width: 2rem;
     height: 2rem;
@@ -50,33 +51,28 @@ section#Search {
     justify-content: center;
 }
 #Search > .inputResult > .Search-success > p {
-    position: relative;
-    top: 0.15rem;
     margin-left: 0.1rem;
     font-size: 0.9rem;
-    font-weight: 300;
     color: #000;
 }
 #Search > .inputResult > .Search-success > h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+    font-weight: 500;
     overflow-x: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
-    font-weight: 400;
-    color: #000;
 }
 #Search > .inputResult > .Search-success > div {
     display: flex;
     align-items: center;
-    color: #00000090;
+    opacity: 0.9;
     margin-left: 0.1rem;
 }
 #Search > .inputResult > .Search-success > div > p {
     font-size: 0.9rem;
-    font-weight: 300;
 }
 #Search > .inputResult > .Search-success > div > b {
     margin: 0 0.3rem;
@@ -108,19 +104,19 @@ section#Search {
     padding-left: 1rem;
 }
 #Search header > h1 {
-    padding: 1rem 0;
-    font-size: 1.2rem;
-    font-weight: 400;
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
     flex-grow: 1;
 }
 #Search header > button {
     all: unset;
-    padding: 0.5rem 0.5rem;
+    padding: 0 0.5rem;
     font-weight: 300;
     font-size: 1.0rem;
 }
 #Search header > button > p {
     padding: 0.5rem 1rem;
+    font-size: 0.9rem;
 }
 #Search header > button.save > p {
     color: #ffffff;
@@ -153,7 +149,7 @@ section#Search {
     align-items: center;
     background-color: #ffffff;
     z-index: 800;
-    width: 100vw;
+    width: 100%;
     position: relative;
     left: 0;
     transition-duration: 0.5s;
@@ -166,7 +162,7 @@ section#Search {
     align-items: center;
     width: 85vw;
     overflow: hidden;
-    padding: 0.9rem 0;
+    padding: 0.85rem 0;
     margin-left: 1rem;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame > .title {
@@ -177,14 +173,15 @@ section#Search {
     min-width: 3.5rem;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame p {
-    font-size: 1rem;
-    color: #00000080;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 2px;
     overflow: hidden;
     white-space: nowrap;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame h1 {
-    font-size: 1.3rem;
-    font-weight: 400;
+    font-size: 1.15rem;
+    font-weight: 500;
     overflow-x: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
@@ -192,9 +189,9 @@ section#Search {
     white-space: nowrap;
 }
 #Search > .current-wrapper > ul > li > div > a > i {
-    font-size: 1.5rem;
-    color: #000000;
-    padding: 1rem;
+    font-size: 1.4rem;
+    padding: 0.8rem;
+    padding-right: 1rem;
 }
 #Search > .current-wrapper > ul > li > button {
     all: unset;
@@ -214,7 +211,6 @@ section#Search {
 section#Search > .hn {
     all : unset;
     background-color: #fff;
-    
     display: flex;
     align-items: center;
     border-top: 1px solid #dbdbdb;
@@ -225,18 +221,17 @@ section#Search > .hn > div    {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
 }
 section#Search > .hn > div > p {
     flex-grow: 1;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #000;
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
 }
 section#Search > .hn > div > i:first-of-type {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     opacity: 0.7;
-    margin-right: 0.3rem;
+    margin-right: 0.5rem;
 }
 section#Search > .hn > div > i {
     font-size: 1.6rem;

@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState ,useContext} from 'react';
+import React, {createContext, useEffect, useState ,useContext, useMemo} from 'react';
 import ProductSearch from '../contents/js/ProductSearch';
 // CSS
 import '../contents/css/Compare/Compare_Router.css';
@@ -11,10 +11,6 @@ import { Link, useLocation } from 'react-router-dom';
 import {ServerContext} from '../App';
 export const ProductContext = createContext(null);
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-
 const Compare = ({history, location}) => {
     // State
     const [productData, setProductData] = useState(location?.state?.productData);
@@ -24,39 +20,42 @@ const Compare = ({history, location}) => {
     // Context 
     const server = useContext(ServerContext);
 
-    // Field
-    const _useQuery = useQuery();
+    // Location
+    const search = useLocation().search;
 
-    async function getProduct() {
-        // 상품 정보 없음. -> 검색
-        const _ProductSearch = new ProductSearch(server);
-        let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
-        if(_useQuery.get("domain")) {
-            console.log("url 전체를 활용하여 검색");
-            // ?domain= 이 존재
-            _searchResult = await _ProductSearch.search({url : _useQuery.get("domain")});
-        } else {
-            console.log("shop + code를 활용하여 검색");
-            _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
-        }
-        console.log("결과 : ",_searchResult);
-        try {
-            if(_searchResult.type === 'success') {
-                // 검색 결과 오류
-                setProductData(_searchResult.data);
-            } else {
-                setStatus(_searchResult.status);
-            }
-        } catch(err) {
-            setStatus(500);
-        } finally {
-            setLoader(false);
-        }
-    }
+    // Memo
+    const _useQuery = useMemo(() => {
+        return new URLSearchParams(search);
+    }, [search]);
 
     useEffect(() => { 
-        if(!productData) { getProduct(); }
-    }, []); // useEffect
+        if(!productData) {
+            (async () => {
+                const _ProductSearch = new ProductSearch(server);
+                let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
+                if(_useQuery.get("domain")) {
+                    console.log("url 전체를 활용하여 검색");
+                    // ?domain= 이 존재
+                    _searchResult = await _ProductSearch.search({url : _useQuery.get("domain")});
+                } else {
+                    console.log("shop + code를 활용하여 검색");
+                    _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
+                }
+                try {
+                    if(_searchResult.type === 'success') {
+                        // 검색 결과 오류
+                        setProductData(_searchResult.data);
+                    } else {
+                        setStatus(_searchResult.status);
+                    }
+                } catch(err) {
+                    setStatus(500);
+                } finally {
+                    setLoader(false);
+                }
+            })();
+        }
+    }, [productData, server, _useQuery]); // useEffect
 
     return (
         loader ? (

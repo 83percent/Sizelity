@@ -22,7 +22,7 @@
     padding-top: 3rem;
 }
 #list-wrapper > header > h1 {
-    font-size: 2.0rem;
+    font-size: 1.8rem;
     font-weight: 700;
     flex-grow: 1;
 }
@@ -36,22 +36,18 @@
 #list-wrapper > main.list-frame > div {
     margin-bottom: 1rem;
     border-bottom: 1px solid #e3e8ee;
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 0.8rem 1.8rem 1.8rem 1.8rem;
 }
 #list-wrapper > main.list-frame > div:last-of-type {
     border-bottom: none;
 }
 #list-wrapper > main.list-frame > div > h2 {
-    font-size: 1.1rem;
     color: #888;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
 }
-#list-wrapper > main.list-frame > div > ul {
-
-    
-}
 #list-wrapper > main.list-frame > div > ul > li {
-    margin-bottom: 2rem;
+    margin-bottom: 1.7rem;
     cursor: pointer;
 }
 #list-wrapper > main.list-frame > div > ul > li:last-of-type {
@@ -65,19 +61,18 @@
     position: relative;
 }
 #list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > i {
-    font-size: 2.0rem;
+    font-size: 1.7rem;
     margin-right: 1.2rem;
 }
 #list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > p {
     position: relative;
     top: 1px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 500;
     flex-grow: 1;
 }
 #list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > h4 {
-    font-size: 1.3rem;
-    font-weight: 400;
+    font-size: 1.2rem;
 }
 #list-wrapper > main.list-frame > div > ul > li > :is(a,button,div) > span {
     font-size: 2.0rem;
@@ -88,15 +83,16 @@
     Profile
 */
 #list-wrapper > main.profile-frame {
-    padding: 0 2rem 1.2rem 2rem;
+    padding: 0 1.3rem 0.5rem 1.3rem;
     display: flex;
     align-items: center;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #dbdbdb;
 }
 #list-wrapper > main.profile-frame > i {
-    font-size: 4.8rem;
+    font-size: 4.0rem;
     opacity: 0.3;
-    margin-right: 1rem;
+    margin-right: 0.7rem;
 }
 #list-wrapper > main.profile-frame > div {
     display: flex;
@@ -104,13 +100,14 @@
     align-items: flex-start;
 }
 #list-wrapper > main.profile-frame > div > p {
-    margin-bottom: 0.5rem;
-    padding: 0.1rem 1.3rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    padding: 0.1rem 1.2rem;
     font-weight: 600;
     border-radius: 2rem;
 }
 #list-wrapper > main.profile-frame > div > h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 500;
     padding-bottom: 0.3rem;
 }
@@ -126,13 +123,13 @@
 #list-wrapper > article.gender-frame > div > label {
     display: flex;
     align-items: center;
-    height: 4rem;
+    height: 3.6rem;
 }
 #list-wrapper > article.gender-frame > div > label > p {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     flex-grow: 1;
     font-weight: 500;
-    padding: 1rem 0;
+    padding: 0.8rem 0;
 
 }
 #list-wrapper > article.gender-frame > div > label > input {
@@ -181,9 +178,10 @@
 #list-wrapper > article.name-frame > div > label > input {
     all: unset;
     flex-grow: 1;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 #list-wrapper > article.name-frame > div > label > p {
+    font-size: 0.9rem;
     margin-right: 0.5rem;
 }
 #list-wrapper > article.name-frame > div > label.wrong {
@@ -208,13 +206,13 @@
     width: 100%;
     padding: 0.5rem 2rem;
     border-bottom: 2px solid #dbdbdb;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 #list-wrapper > article.write-frame > textarea {
     all: unset;
     height: 100%;
     padding: 1rem 2rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 #list-wrapper > article.write-frame > div {
     position: fixed;
@@ -225,11 +223,10 @@
 #list-wrapper > article button {
     all: unset;
     width: 100%;
-    max-width: 92vw;
     text-align: center;
-    padding: 1rem 0;
+    padding: 0.8rem 0;
     border-radius: 0.7rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 500;
     background-color: var(--base-color);
     color: #fff;
@@ -262,26 +259,26 @@
 #list-wrapper > .button-wrapper {
     position: fixed;
     bottom: 1.5rem;
-    width: 100vw;
+    width: 100%;
     
 }
 #list-wrapper > .button-wrapper > div {
     width: 100%;
-    max-width: 92vw;
+    max-width: 92%;
     margin: 0 auto;
 }
 #list-wrapper > .button-wrapper > div > p {
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 0.85rem;
+    margin-left: 3px;
     margin-bottom: 0.5rem;
 }
 #list-wrapper > .button-wrapper button {
     all: unset;
     width: 100%;
     text-align: center;
-    padding: 1rem 0;
-    border-radius: 0.7rem;
-    font-size: 1.3rem;
+    padding: 0.8rem 0;
+    border-radius: 0.6rem;
+    font-size: 1.2rem;
     font-weight: 500;
     background-color: var(--base-red);
     color: #fff;
@@ -315,15 +312,12 @@
     font-size: 1.4rem;
     font-weight: 500;
 }
-#list-wrapper > ul.notice-wrapper {
-
-}
 #list-wrapper > ul.notice-wrapper > li {
     border-bottom: 1px solid #e3e8ee;
 }
 #list-wrapper > ul.notice-wrapper > li > div.title {
     display: flex;
-    padding: 1rem 2rem;
+    padding: 0.7rem 1.7rem;
     align-items: center;
 }
 #list-wrapper > ul.notice-wrapper > li > div.title > i {
@@ -337,22 +331,21 @@
 }
 
 #list-wrapper > ul.notice-wrapper.important > li > div.title {
-    background-color: #FFE44D;
+    background-color: #00966B70;
 }
 #list-wrapper > ul.notice-wrapper > li > div.title > div > p {
     margin-bottom: 0.2rem;
+    font-size: 0.9rem;
     color: #555;
 }
 #list-wrapper > ul.notice-wrapper > li > div.title > div > h2 {
     font-weight: 500;
+    font-size: 1.3rem;
 }
 #list-wrapper > ul.notice-wrapper > li > div.text {
     height: 0;
     overflow: hidden;
     background-color: #eeeeee;
-}
-#list-wrapper > ul.notice-wrapper > li > div.text > p {
-    font-size: 1.1rem;
 }
 #list-wrapper > ul.notice-wrapper > li.on > div.text {
     height: auto;

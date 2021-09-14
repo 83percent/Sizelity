@@ -16,7 +16,7 @@ nav.myProductNav > .product-wrapper {
     padding-top: 0.3rem;
 }
 nav.myProductNav > .product-wrapper > .size > p {
-    font-size: 3.0rem;
+    font-size: 2.8rem;
     font-weight: 400;
     padding: 0.7rem 0.9rem;
 }
@@ -26,13 +26,12 @@ nav.myProductNav > .product-wrapper > .info {
 }
 nav.myProductNav > .product-wrapper > .info > p {
     position: relative;
-    top: 1px;
     left: 2px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #eee;
 }
 nav.myProductNav > .product-wrapper > .info > h1 {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -46,8 +45,7 @@ nav.myProductNav > .product-wrapper > .info > h2 {
 }
 nav.myProductNav > .product-wrapper > .info > div {
     position: relative;
-    bottom: 3px;
-    left: 2px;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     
@@ -99,11 +97,10 @@ nav.myProductNav > .btn-wrapper {
 nav.myProductNav > .btn-wrapper > button {
     all: unset;
     width: 100%;
-    font-size: 1.2rem;
     font-weight: 500;
     text-align: center;
     border-left: 1px solid #dbdbdb;
-    padding: 0.8rem 0;
+    padding: 0.7rem 0;
 }
 nav.myProductNav > .btn-wrapper > button:first-of-type {
     border-left: none;
@@ -113,11 +110,10 @@ nav.myProductNav > .btn-wrapper > button:first-of-type {
 nav.myProductNav  > .open-btn {
     position: absolute;
     z-index: 999;
-    left: -6rem;
+    left: -5.5rem;
     bottom: 0rem;
-    width: 6rem;
-    height: 6rem;
-    border-right: 1px solid #fff;
+    width: 5.5rem;
+    height: 5.5rem;
     background-color: var(--base-color);
     box-shadow: 0 -4px 10px #88888830;
     display: flex;
@@ -129,8 +125,7 @@ nav.myProductNav  > .open-btn > span {
     left: 0.5rem;
 }
 nav.myProductNav  > .open-btn > i {
-    margin-left: 1rem;
-    font-size: 3.2rem;
+    font-size: 3.0rem;
 }
 
 /*
@@ -142,4 +137,132 @@ nav.myProductNav > .product-wrapper > h2.none {
     padding: 1rem 0;
     font-size: 1.3rem;
     font-weight: 400;
+}
+
+
+/*
+    DETAIL
+*/
+article#detail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 998;
+    overflow: auto;
+}
+
+article#detail > .title {
+    display: flex;
+    align-items: center;
+    padding: 2rem 1rem 0.5rem 2rem;
+}
+article#detail > .title > h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    flex-grow: 1;
+}
+article#detail > .title > i {
+    padding: 0.5rem;
+    font-size: 2.0rem;
+}
+article#detail > section {
+    padding: 0.5rem 2rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #dbdbdb;
+}
+article#detail > section > .title {
+    display: flex;
+    align-items: center;
+}
+article#detail > section:last-of-type {
+    padding-bottom: 9.1rem;
+    border-bottom: none;
+}
+article#detail > section > p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--base-color);
+    margin-bottom: 0.5rem;
+}
+article#detail > section div {
+    margin-bottom: 0.5rem;
+}
+
+article#detail > section > div.row {
+    display: flex;
+    align-items: center;
+}
+article#detail > section > div.row > div {
+    width: 100%;
+}
+article#detail > section > div p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 2px;
+}
+article#detail > section > div h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    
+}
+
+/*
+    Expand Document
+*/
+article#detail > section.expand-wrapper {
+    
+}
+article#detail > section > .title {
+    display: flex;
+    align-items: center;
+}
+article#detail > section > .title > p:first-of-type {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--base-color);
+    flex-grow: 1;
+}
+article#detail > section.expand-wrapper > .expand-frame {
+    overflow: hidden;
+    height: 0;
+    margin: 0;
+}
+article#detail > section.expand-wrapper.on > .title > i {
+    transform: rotate(180deg);
+}
+article#detail > section.expand-wrapper.on > .expand-frame {
+    height: auto;
+}
+/*
+    Size Info
+*/
+article#detail > section > ul {
+
+}
+article#detail > section > ul > li {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    border-bottom: 1px solid #dbdbdb;
+}
+article#detail > section > ul > li > p {
+    flex-grow: 1;
+}
+article#detail > section > ul > li > h2 {
+    font-weight: 500;
+}
+article#detail > section > .btn-frame {
+    width: 100%;
+}
+article#detail > section > .btn-frame > button {
+    all: unset;
+    width: 100%;
+    padding: 0.8rem 0;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--system-gray-2);
+    border-radius: 0.5rem;
 }

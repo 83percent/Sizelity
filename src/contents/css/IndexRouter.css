@@ -75,16 +75,15 @@ main#home > header > .user-wrapper > .user-title {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding: 1.5rem 0 1rem 1.5rem;
+    padding: 1.3rem 0 0.8rem 1.3rem;
 }
 main#home > header > .user-wrapper > .user-title > i {
-    font-size: 4.3rem;
+    font-size: 3.8rem;
     color: #00000070;
 }
 main#home > header > .user-wrapper > .user-title > div {
     padding-left: 9px;
     position: relative;
-    bottom: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -93,7 +92,6 @@ main#home > header > .user-wrapper > .user-title > div {
 main#home > header > .user-wrapper > .user-title > div > p {
     position: relative;
     top: 0;
-    left: 2px;
     color: #888888;
 }
 main#home > header > .user-wrapper > .user-title > div > div {
@@ -101,13 +99,14 @@ main#home > header > .user-wrapper > .user-title > div > div {
     align-items: flex-end;
 }
 main#home > header > .user-wrapper > .user-title > div > div > h1 {
-    font-weight: 400;
+    white-space: nowrap;
+    font-size: 1.7rem;
+    font-weight: 600;
 }
 main#home > header > .user-wrapper > .user-title > div > div > p {
     position: relative;
     bottom: 3px;
     left: 5px;
-    font-size: 1.2rem;
 }
 main#home > header > .user-wrapper > .user-title > a {
     padding: 1.5rem;
@@ -134,14 +133,14 @@ main#home > header > .user-wrapper > .user-btn-frame > a {
 }
 main#home > header > .user-wrapper > .user-btn-frame > a > i {
     opacity: 0.3;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-right: 0.3rem;
 }
 main#home > header > .user-wrapper > .user-btn-frame > a > p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
     /*      section     */
 main#home > section {
@@ -152,6 +151,7 @@ main#home > section {
 main#home > section#Main {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -161,13 +161,14 @@ main#home > section#Main > #search-wrapper {
     flex-direction: column;
     align-items: center;
     padding-bottom: 6rem;
+    width: 100%;
 }
 main#home > section#Main h1 {
-    font-size: 2.0rem;
-    font-weight: 400;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 main#home > section#Main #search-input-wrapper {
-    width: 100vw;
+    width: 100%;
     margin-top: 1.2rem;
     padding: 0 1rem;
 }
@@ -176,9 +177,9 @@ main#home > section#Main #search-input-wrapper > #search-input-frame {
     display: flex;
     border-radius: 6px;
     border: 1px solid #dbdbdb;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
     background: #ffffff;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #00000090;
 }
 main#home > section#Main #search-input-wrapper > #search-input-frame > input {

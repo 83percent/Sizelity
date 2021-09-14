@@ -28,7 +28,12 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
                 __data.info.nick = undefined;
             }
             setData(__data);
-            setStep(3);
+            if(__data?.praw?.full) {
+                // 쇼핑몰에서 제공한 상품으로 종류 및 세부 타입 변경 금지
+                setStep(4);
+            } else {
+                setStep(3);
+            }
         }
     }
 

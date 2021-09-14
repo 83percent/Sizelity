@@ -17,7 +17,7 @@ const Write = ({history}) => {
                 <input type="text" placeholder="제목"/>
                 <textarea placeholder="개선사항을 알려주세요. 300자 이하."></textarea>
                 <div>
-                    <button>전송</button>
+                    <button style={{maxWidth: "93%"}}>전송</button>
                 </div>
             </article>
         </section>

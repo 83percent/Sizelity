@@ -21,10 +21,12 @@
 #AddProduct > article > .step2 > main > div > .input-frame > input {
     all: unset;
     width: 100%;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     padding: 0 0.3rem;
 }
-
+#AddProduct > article > .step2 > main > div > .input-frame > p {
+    font-size: 0.9rem;
+}
 /*
     수정 모드
 */
@@ -35,7 +37,7 @@
 #AddProduct > article > .step2 > main > div > label > h1 {
     display: flex;
     align-items: center;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding-top: 1rem;
     margin-top: 1rem;
     opacity: 0.3;
@@ -62,6 +64,6 @@
     transition-duration: 0.3s;
 }
 #AddProduct > article > .step2 > main > div > label.on > h1 > i {
-    width: 2rem;
-    height: 2rem;
+    width: 1.7rem;
+    height: 1.7rem;
 }

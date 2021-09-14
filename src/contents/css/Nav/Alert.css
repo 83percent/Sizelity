@@ -31,9 +31,7 @@
 #alert-wrapper > div > p.title {
     padding: 0.7rem 0.5rem;
     border-radius: 2rem;
-    font-size: 1.1rem;
     text-align: center;
-    font-weight: 400;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
     background-color: #ffffff;
 }

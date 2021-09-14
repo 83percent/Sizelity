@@ -1,0 +1,32 @@
+article#sizeHelp {
+    padding: 0 1rem;
+    overflow: hidden;
+    height: 0;
+}
+article#sizeHelp.active {
+    height: auto;
+}
+article#sizeHelp > div {
+    display: flex;
+    align-items: center;
+}
+article#sizeHelp > div.title > h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+article#sizeHelp > div.title > .dot {
+    padding: 0.3rem;
+    margin-right: 0.5rem;
+    background-color: var(--base-color);
+}
+article#sizeHelp > div.image {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.5rem 0;
+}
+article#sizeHelp > div >img {
+    width: 80%;
+    max-height: 70vh;
+    object-fit: contain;
+    object-position: center;
+}

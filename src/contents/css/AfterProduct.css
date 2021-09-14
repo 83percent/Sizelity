@@ -3,27 +3,25 @@ section#After {
     min-height: 100vh;
 }
 section#After > header {
-    padding: 2rem 1rem 0 2rem;
+    padding: 1.7rem 1rem 0 1.7rem;
 }
 section#After > header > div {
     display: flex;
     align-items: center;
-    margin-bottom: 0.3rem;
 }
 section#After > header > div > h1 {
     flex-grow: 1;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 600;
 }
 section#After > header > div > i {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
     font-size: 2.0rem;
+
 }
 section#After > header > p {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 0.2rem;
+    opacity: 0.7;
+    margin-bottom: 4px;
 }
 
 /*      article     */
@@ -39,9 +37,7 @@ section#After > article > .loaderFrame, section#After > article > .After-none {
     justify-content: center;
     padding: 1rem;
 }
-section#After > article > .After-none > p {
-    font-size: 1.2rem;
-}
+
 section#After > article > .loaderFrame > .loader  {
     width: 1.8rem;
     height: 1.8rem;
@@ -56,12 +52,13 @@ section#After > article > .func-btn-wrapper {
 }
 section#After > article > .func-btn-wrapper > button {
     all: unset;
-    padding: 0.5rem 0.5rem;
+    padding: 0.4rem 0.5rem;
     color: #ff000080;
 }
 section#After > article > .func-btn-wrapper > button > p {
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 1rem;
     font-weight: 500;
+    font-size: 0.9rem;
     border-radius: 2rem;
 }
 section#After > article > .func-btn-wrapper > button.on > p {
@@ -83,7 +80,7 @@ section#After > article > ul > li.remove {
     left: -100%;
 }
 section#After > article > ul > li > div {
-    width: 100vw;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
@@ -109,13 +106,13 @@ section#After > article > ul > li > div > .info-frame > .title {
     overflow: hidden;
 }
 section#After > article > ul > li p {
-    font-size: 1rem;
-    color: #00000080;
+    font-size: 0.9rem;
+    opacity: 0.7;
     overflow: hidden;
     white-space: nowrap;
 }
 section#After > article > ul > li h1 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 500;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -127,8 +124,7 @@ section#After > article > ul > li > div > a {
     padding: 1.2rem 0.8rem 1rem 0.8rem;
 }
 section#After > article > ul > li > div > a > i {
-    font-size: 1.5rem;
-    color: #000000;
+    font-size: 1.4rem;
 }
 section#After > article > ul > li > button {
     all: unset;

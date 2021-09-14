@@ -21,7 +21,7 @@ const Menu = ({closerEvent}) => {
                 <article>
                     <ul>
                         <li>
-                            <Link to='/event'><h2>이벤트</h2></Link>
+                            <Link to='/event'><h2>혜택 모아보기</h2></Link>
                         </li>
                     </ul>
                 </article>

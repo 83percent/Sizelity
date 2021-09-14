@@ -3,23 +3,23 @@ section#AddProduct > article > i {
     top: 0;
     right: 0;
     padding: 2rem 1.5rem;
-    font-size: 2.2rem;
+    font-size: 2.0rem;
 }
 /*
     HEADER
 */
 section#AddProduct > article > .step-wrapper > header {
-    padding: 2rem 0 1rem 2rem;
+    padding: 2rem 0 0.8rem 1.8rem;
 }
 section#AddProduct > article > .step-wrapper > header > h1 {
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     font-weight: 600;
     margin-bottom: 0.3rem;
 }
 section#AddProduct > article > .step-wrapper > header > p {
-    color: #555;
-    font-weight: 400;
-    font-size: 1.1rem;
+    color: #444;
+    font-size: 0.9rem;
+    margin-bottom: 3px;
     margin-left: 2px;
 }
 /*
@@ -33,19 +33,19 @@ section#AddProduct > article > .step-wrapper > .help-wrapper {
 section#AddProduct > article > .step-wrapper > .help-wrapper > li {
     background: #fff;
     margin: 0.7rem 1rem;
-    padding: 1rem;
+    padding: 0.7rem;
     border: 1px solid #dbdbdb;
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
 }
 section#AddProduct > article > .step-wrapper > .help-wrapper > li > i {
-    font-size: 2rem;
-    color: #888;
-    padding-right: 0.4rem;
+    font-size: 1.8rem;
+    color: #aaa;
+    padding-right: 0.3rem;
 }
 section#AddProduct > article > .step-wrapper > .help-wrapper > li > div {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 /*
@@ -76,9 +76,9 @@ section#AddProduct > article .apply-frame {
 section#AddProduct > article .apply-frame > button {
     all: unset;
     width: 100%;
-    padding: 1.1rem 0;
+    padding: 0.9rem 0;
     border-radius: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
     text-align: center;
     background-color: var(--base-color);

@@ -15,6 +15,7 @@ import Menu from './Compare_Menu';
 
 // Context
 import { MediaContext, LoginContext, ServerContext } from '../../App';
+import AD from '../AD/AD';
 
 
 const ViewCompare = ({history, productData}) => {
@@ -224,7 +225,8 @@ const ViewCompare = ({history, productData}) => {
                 productData={productData} 
                 myProduct={sizelity_myRecently}
                 navToggle={alert.navToggle}/>
-           </div> 
+            <AD />
+        </div> 
     );
 }
 export default ViewCompare;

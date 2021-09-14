@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import Proptype from 'prop-types';
 import ProductTypeModule from '../../contents/js/ProductType';
 
 // CSS
@@ -7,17 +6,19 @@ import '../../contents/css/Compare/Compare_Article.css';
 
 // Component
 import CompareGraphList from "./Compare_Graph";
+import SizeHelp from '../Nav/SizeHelp';
 
-const Compare = ({productData, myProduct, navToggle}) => {
 
+const Compare = ({productData, myProduct}) => {
     // data에 온전하지 못한 정보가 담겨 올 것을 대비해 데이터 검증.js 를 만들어 
     // 검증 후 지금의 Component를 화면에 출력 / 그렇지 못한 경우 데이터가 없다는 페이지로 이동
     const [activeSize, setActiveSize] = useState(null);
+    const [onSizeHelp, setOnSizeHelp] = useState(false);
 
     // Ref
     const compareGraphRef = useRef(null);
 
-    const viewTypeEvent = (target) => {
+    function viewTypeEvent (target) {
         // 그래프만 보기
         if(target.classList.contains("active")) {
             // 활성화 상태 : 그래프만 보임
@@ -27,6 +28,17 @@ const Compare = ({productData, myProduct, navToggle}) => {
             // 비활성화 상태 : 결과도 같이 보임 -> 그래프만 보이게 display:none
             target.classList.add("active");
             compareGraphRef.current.classList.add("only-graph");
+        }
+    }
+    function viewSizeHelp(target) {
+        // 의류별 사이즈 측정 위치 이미지 보기
+        if(target.classList.contains("active")) {
+            target.classList.remove("active");
+            setOnSizeHelp(false);
+        } else {
+            
+            target.classList.add("active");
+            setOnSizeHelp(true);
         }
     }
     return (
@@ -45,7 +57,6 @@ const Compare = ({productData, myProduct, navToggle}) => {
                         activeSize={activeSize}
                         selectSize={setActiveSize}/>
                 </div>
-                    
             </header>
             <article>
                 <section className="type-compare">
@@ -76,17 +87,21 @@ const Compare = ({productData, myProduct, navToggle}) => {
                         }
                     </div>
                 </section>
-            
                 <div className="standard-wrapper">
-                    
                     <div className="standard-frame">
                         <p>나의 옷</p>
                         <div className="standard-colorBar"></div>
                     </div>
+                    <button onClick={e => viewSizeHelp(e.target)}>
+                        <i className="material-icons">help_outline</i>
+                    </button>
                     <button onClick={(e) => viewTypeEvent(e.target)}>
                         <i className="material-icons">assessment</i>
                     </button>
                 </div>
+                <SizeHelp
+                    ptype={productData?.info?.ptype}
+                    on={onSizeHelp}/>
                 <div className="compare-wrapper" ref={compareGraphRef}>
                     <CompareGraphList
                         activeSize={activeSize}
@@ -98,40 +113,7 @@ const Compare = ({productData, myProduct, navToggle}) => {
     );
 }
 
-Compare.proptype = {
-    productData : Proptype.object.isRequired,
-    myProduct : Proptype.object
-}
-
 export default React.memo(Compare);
-
-
-
-/*{
-    status : 200,
-    praw : {
-        http : "www.mazia.kr/shop/shopdetail.html?branduid=27580",
-        type : "branduid",
-        code : "27580",
-        full : "www.mazia.kr/shop/shopdetail.html?branduid=27580"
-    },
-    info : {
-        sname : "Mazia look",
-        pname : "보스턴 핸드메이드 코트",
-        ptype : "아우터",
-        subtype : "코트",
-        size : [
-            {
-                name: "Free",
-                waist : 58,
-                sleeve : 72,
-                arm : 34.5,
-                length : 117,
-                bot: 77 // the bottom of a top
-            }
-        ]
-    }
-}*/
 
 
 /*      header - Size list       */
@@ -168,8 +150,4 @@ const SizeList = ({ sizeData, selectSize }) => {
             }
         </ul>
     );
-}
-SizeList.proptype = {
-    sizeData : Proptype.array.isRequired,
-    selectSize : Proptype.func.isRequired // 어떤 사이즈를 선택했는지를 부모 컴포넌트에 리턴함
 }

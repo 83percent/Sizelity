@@ -4,8 +4,9 @@ import { getSizeRate, getSizeRateName } from '../../../contents/js/ProductType';
 // CSS
 import '../../../contents/css/UserProduct/Step4.css';
 
-
-const Step4 = ({data, setData, setStep, alertToggle, save}) => {
+// Component
+import SizeHelp from '../../Nav/SizeHelp';
+const Step4 = ({data, setData, alertToggle, save}) => {
     // Field
     const SizeNameArray = ["S", "M", "L", "XL"];
 
@@ -27,7 +28,7 @@ const Step4 = ({data, setData, setStep, alertToggle, save}) => {
             else return __data.size.name;
         } else return "";
     });
-
+    const [sizeHelp, setSizeHelp] = useState(false);
 
     // Ref
     const sizeListWrapper = useRef(null);
@@ -52,6 +53,10 @@ const Step4 = ({data, setData, setStep, alertToggle, save}) => {
             else target.parentElement.classList.toggle('on');
 
         },
+        sizeHelpToggle(target) {
+            target.classList.toggle("on", !sizeHelp);
+            setSizeHelp(!sizeHelp)
+        }, // sizeHelpToggle(target)
         apply : () => {
             if(sizeName) {
                 const sizeObject = {};
@@ -132,7 +137,7 @@ const Step4 = ({data, setData, setStep, alertToggle, save}) => {
                 }
             }
         }
-    }, [])
+    }, [data])
 
     return (
         <>
@@ -175,9 +180,13 @@ const Step4 = ({data, setData, setStep, alertToggle, save}) => {
                 </div>
                 <div ref={rateWrapper} className={`size ${__data.size?.name ? "on" : ""}`}>
                     <div className="title">
-                        <h2>사이즈 입력</h2>
+                        <div>
+                            <h2>사이즈 입력</h2>
+                            <i className="material-icons" onClick={(e) => event.sizeHelpToggle(e.target)}>help_outline</i>
+                        </div>
                         <p>수치를 알고 있는 부위를 선택해 입력해주세요.</p>
                     </div>
+                    <SizeHelp ptype={__data?.info?.ptype} on={sizeHelp}/>
                     <ul>
                         {
                             sizeRate.map((element, index) => (
@@ -197,7 +206,6 @@ const Step4 = ({data, setData, setStep, alertToggle, save}) => {
                     <button name="apply" onClick={() => event.apply()}>저장</button>
                 </div>
             </main>
-            
         </>
     )
 }

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import StatusCode from './StatusCode';
 class AfterProduct {
     constructor(server) {
         this.server = server;

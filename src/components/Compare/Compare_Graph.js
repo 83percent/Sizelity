@@ -1,5 +1,5 @@
-import React, {useContext, useMemo, useRef} from "react";
-import Transition from '../../contents/js/TransitionSizeName';
+import { memo, useContext, useMemo } from "react";
+import { priority, getSizeRateName } from '../../contents/js/ProductType';
 
 // SVG
 import {ReactComponent as Female} from '../../contents/asset/female_24dp.svg';
@@ -9,8 +9,11 @@ import { LoginContext } from "../../App";
 
 const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     // Context
-    const {userInfo} = useContext(LoginContext);
-    const analyzeData = (productSizeData) => {
+    const { userInfo } = useContext(LoginContext);
+
+    // Memo
+    const sizeData = useMemo( () => {
+        //analyzeData(productSizeData)
         if(productSizeData.constructor !== Array) return false;
 
         const analyzeResult = {
@@ -42,15 +45,13 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                 if(analyzeResult[key].length !== __length) throw new Error(`Analyze size data not complete data. plz change data.`);
             }
 
-            console.log("%c\t\t\t -> Analyze Data : ", "background:#00966B;color:#ffffff;",analyzeResult);
+            //console.log("%c\t\t\t -> Analyze Data : ", "background:#00966B;color:#ffffff;",analyzeResult);
             return analyzeResult;
-        } catch(e) {
+        } catch(error) {
             return null;
         }
-    }
-    const sizeData = useMemo( () => analyzeData(productSizeData), [productSizeData]);
-    const priority = [ "shoulder","chest","sleeve","arm","T_length","waist","crotch","hips","thigh","hem","calve","B_length","length"];
-    const transition = new Transition("KOR");
+    }, [productSizeData]);
+
     return (
         <ul className="compare-frame">
             {
@@ -61,8 +62,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                         <li key={index} className="compare-element">
                                 <>
                                     <div className="compare-title-frame">
-                                        <h1>{transition.get(sn)}</h1>
-                                        <i className="material-icons">help_outline</i>
+                                        <h1>{getSizeRateName(sn)}</h1>
                                     </div>
                                     <DrawGraphResult
                                         activeSize={activeSize}
@@ -84,10 +84,10 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                         <li key={index} className="compare-element">
                                 <>
                                     <div className="compare-title-frame">
-                                        <h1>{transition.get(sn)}</h1>
+                                        <h1>{getSizeRateName(sn)}</h1>
                                     </div>
                                     <div className="empty-info">
-                                        <p>나의 옷에 '{transition.get(sn)}' 수치가 없어요.</p>
+                                        <p>나의 옷에 '{getSizeRateName(sn)}' 수치가 없어요.</p>
                                     </div>
                                 </>
                         </li>
@@ -99,8 +99,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
     );
 }
 
-const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData, productSizeName, gender}) => {
-    const graphFrame = useRef(null);
+const DrawGraphResult = memo(({ activeSize, myProductData, productSizeData, productSizeName, gender}) => {
     let activeRate = null;
 
     if(activeSize && myProductData) {
@@ -169,7 +168,7 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
     }
     return(
         <div className="graph-analyze">
-            <div className="Compare-graph" ref={graphFrame}>
+            <div className="Compare-graph">
                 {
                     graphData.map((element,index) => {
                         switch(element) {
@@ -305,7 +304,7 @@ const DrawGraphResult = React.memo(({ activeSize, myProductData, productSizeData
 }); //DrawGraphResult : Component
 
 
-const CompareResult = React.memo(({activeRate, myRate}) => {
+const CompareResult = memo(({activeRate, myRate}) => {
     if(activeRate && myRate) {
         const value = activeRate - myRate;
         const status = value > 0 ? 1 : value === 0 ? 0 : -1;
@@ -338,6 +337,6 @@ const CompareResult = React.memo(({activeRate, myRate}) => {
     }
 });
 
-export default React.memo(CompareGraphList);
+export default memo(CompareGraphList);
 
 

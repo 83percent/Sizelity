@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import ProductSearch from '../../contents/js/ProductSearch';
 import SearchHistory from "../../contents/js/SearchHistory";
+import { getTypeName } from '../../contents/js/ProductType';
 
 // Context
 import { ServerContext } from '../../App';
@@ -25,9 +26,9 @@ const SearchResult = ({praw, history}) => {
             const __response = await productSearch.search({url: praw});
             console.log("결과", __response);
             if(__response?.type === 'success') {
-                setResponse(__response?.type);
+                setResponse(__response);
             } else {
-                setResponse(null);
+                setResponse(__response);
             }
         } catch(error) {
             setResponse(500);
@@ -72,21 +73,21 @@ const SearchResult = ({praw, history}) => {
             }
             
         } else {
-            if(response && response.constructor === Object) {
-                const { sname, pname, ptype, subtype } = response.info;
+            if(response.type === 'success') {
+                const { sname, pname, ptype, subtype } = response.data.info;
                 return (
-                    <div onClick={() => resultClickEvent(response)} className="Search-success">
+                    <div onClick={() => resultClickEvent(response.data)} className="Search-success">
                         <p>{sname}</p>
                         <h1>{pname}</h1>
                         <div>
-                            <p>{ptype}</p>
+                            <p>{getTypeName(ptype)}</p>
                             <b>/</b>
                             <p>{subtype}</p>
                         </div>
                     </div>
                 )
             } else {
-                switch(response) {
+                switch(response.status) {
                     case 204 : {
                         return (
                             <div className="Search-none">

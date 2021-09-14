@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 const ServiceList = ({history}) => {
     return (
         <section id="list-wrapper">

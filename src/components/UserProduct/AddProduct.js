@@ -1,7 +1,7 @@
 import { useContext, useMemo, useRef, useState } from 'react';
-import Transition from '../../contents/js/TransitionSizeName';
-import axios from 'axios';
+import { getTypeName } from '../../contents/js/ProductType';
 import UserProductModule from '../../contents/js/UserProduct';
+import { useCookies } from 'react-cookie';
 
 // CSS
 import '../../contents/css/UserProduct/AddProduct.css';
@@ -15,19 +15,20 @@ import Confirm from '../Nav/Confirm';
 import { ServerContext, MediaContext} from '../../App';
 
 
-let transition = null;
 const AddProduct = ({history, location}) => {
     // state
     const [data, setData] = useState((location.state?.data?._id) ? location.state.data : {info:{nick:undefined},size:{}});
     const [step, setStep] = useState(data?._id ? 2 : 1);
 
+    
     // Context
     const server = useContext(ServerContext);
     const media = useContext(MediaContext);
+    const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
 
     // useMemo
     const isModify = useMemo(() => {
-        return (location?.state?.mode === 'modify')
+        return (location?.state?.mode === 'modify' || location?.state?.mode === 'modifyFromDetail')
     }, [location]);
 
     const userProductModule = useMemo(() => {
@@ -35,7 +36,6 @@ const AddProduct = ({history, location}) => {
     }, [server])
 
     // Field
-    if(!transition) transition = new Transition("KOR");
 
     /*
         Step
@@ -110,14 +110,24 @@ const AddProduct = ({history, location}) => {
             } else {
                 response = await userProductModule.set(data);
             }
-            console.log(response);
+
             confirm.saveToggle(false);
             switch(response?.type) {
                 case 'success' : {
-                    history.replace("/closet", {callback : {
-                        type: isModify ? "modify" : "create",
-                        state : true
-                    }});
+                    if(location.state?.mode === 'modifyFromDetail') {
+                        setCookie("sizelity_myRecently", data, {path:"/", maxAge:(500 * 24 * 60 * 60)});
+                        history.goBack();
+                    } else {
+                        if(isModify) {
+                            if(sizelity_myRecently._id === data._id) {
+                                setCookie("sizelity_myRecently", data, {path:"/", maxAge:(500 * 24 * 60 * 60)});
+                            }
+                        }
+                        history.replace("/closet", {callback : {
+                            type: isModify ? "modify" : "create",
+                            state : true
+                        }});
+                    }
                     break;
                 }
                 case 'error' : {
@@ -187,16 +197,20 @@ const AddProduct = ({history, location}) => {
                 <div className="control-wrapper">
                     {
                         step > 2 ? (
-                            <button onClick={() => setStep(step-1)}>이전단계</button>
+                            <button onClick={() => {
+                                if(step === 4 && data?.praw?.full) setStep(2);
+                                else setStep(step-1)
+                            }}>이전단계</button>
                         ) : null
                     }
                     <div>
                         <div className={`dot ${step > 1 ? "on" : ""}`}></div>
-                        <div className={`dot ${step > 2 ? "on" : ""}`}></div>
+                        {
+                            data?.praw?.full ? null : (<div className={`dot ${step > 2 ? "on" : ""}`}></div>)
+                        }
                         <div className={`dot ${step > 3 ? "on" : ""}`}></div>
                     </div>
                 </div>
-
                 <div className="preview-wrapper">
                     <div>
                         <p>{isModify ? "수정 중" : "추가 중"}</p>
@@ -210,7 +224,7 @@ const AddProduct = ({history, location}) => {
                                 <p>{data.info.sname ? data.info.sname : null}</p>
                                 <h1>{data.info.nick ? data.info.nick : data.info.pname ? data.info.pname : null}</h1>
                                 <div>
-                                    <p>{data.info.ptype ? transition.getCate(data.info.ptype) : null}</p>
+                                    <p>{data.info.ptype ? getTypeName(data.info.ptype) : null}</p>
                                     {data.info.subtype ? <><b>/</b><p>{data.info.subtype}</p></> : null}
                                 </div>
                             </div>

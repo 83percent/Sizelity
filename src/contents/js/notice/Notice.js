@@ -11,10 +11,10 @@ class Notice {
             url: `${this.server}/notice`,
             withCredentials: true,
             timeout: 5500
-        }).then(response => {{
+        }).then(response => {
             if(response.status === 200) return {type: 'success', data : response.data};
             else return {type: 'error', msg: response.data?.error};
-        }}).catch(err => {
+        }).catch(err => {
             if(err?.response?.data?.error) return {type: 'error', msg: err.response.data.erroor};
             else return {type: 'error', msg: '네트워크 연결을 확인하세요.'};
         })

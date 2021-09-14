@@ -113,7 +113,7 @@ const AfterProduct = ({history}) => {
                                                     <a href={`http://${element.praw.full}`}><i className="material-icons">open_in_new</i></a>
                                                 </div>
                                                 <button onClick={(e) => request.removeAfterList(element._id, e.target)} className={deleteOption ? "active" : ""}>
-                                                    <i className="material-icons">remove</i>
+                                                    <i className="material-icons">delete</i>
                                                 </button>
                                             </li>
                                         ))

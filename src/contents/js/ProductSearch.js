@@ -1,5 +1,4 @@
 import axios from "axios";
-import StatusCode from "./StatusCode";
 import URLModule from './URL';
 import SearchHistory from "./SearchHistory";
 
@@ -49,6 +48,7 @@ class ProductSearch {
             }
             // domain 과 code로 검색 요청
             const result = await this._useDomainCodeSearch(domain, code, full, save);
+
             return result;
         }
     }
@@ -56,7 +56,7 @@ class ProductSearch {
 
     // _id 값을 가지고 검색하는 함수 (private)
     async _useIDSearch(id, save) {
-        if(!id) return StatusCode.invalid;
+        if(!id) return {type: 'error', status: 400, msg : '잘못된 접근입니다.'};
         return await axios({
             method : 'GET',
             url : `${this.server}/product/${id}`,
@@ -86,7 +86,7 @@ class ProductSearch {
 
     // Domain 과 Code 로 검색하는 함수 (Private)
     async _useDomainCodeSearch(domain, code, full, save) {
-        if(!domain || !code) return StatusCode.invalid;
+        if(!domain || !code) return {type: 'error', status: 400, msg : '잘못된 접근입니다.'};
         return await axios({
             method : 'POST',
             url: `${this.server}/product/search`,
@@ -95,18 +95,22 @@ class ProductSearch {
             },
             timeout: 4500
         }).then(response => {
-            console.log(response);
+            console.log("검색 결과 : ",response);
             switch(response.status) {
                 case 200 : {
                     if(save) {
-                        new SearchHistory().set({
-                            sname : response.data.info.sname,
-                            pname : response.data.info.pname,
-                            subtype : response.data.info.subtype,
-                            full : response.data.praw.full
-                        });
+                        try {
+                            new SearchHistory().set({
+                                sname : response.data.info.sname,
+                                pname : response.data.info.pname,
+                                subtype : response.data.info.subtype,
+                                full : response.data.praw.full
+                            });
+                        } finally {
+                            return {type: 'success', data : response.data};
+                        }
                     }
-                    return {type: 'success', data : response.data};
+                    break;
                 }
                 case 204 : return {type: 'error', status: 204, msg: '상품 정보가 없어 쇼핑몰 측에 정보 요청을 보냈어요.'};
                 default : return {type: 'error', status: 500, msg : '문제가 발생했어요'};
