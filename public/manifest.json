@@ -1,6 +1,6 @@
 {
-  "short_name": "Sizelity",
-  "name": "Sizelity",
+  "short_name": "사이즈리티",
+  "name": "사이즈리티",
   "icons": [
     {
         "src": "/android-chrome-192x192.png",
@@ -10,7 +10,8 @@
     {
         "src": "/android-chrome-512x512.png",
         "sizes": "512x512",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "any maskable"
     }
   ],
   "start_url": ".",

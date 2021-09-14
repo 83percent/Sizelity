@@ -29,7 +29,7 @@ section#Main > #Main-sub-title {
 }
 section#Main > #Main-sub-title > p {
     font-size: 1.0rem;
-    font-weight: 200;
+    font-weight: 300;
     word-spacing: 2px;
     margin-bottom: 2px;
 }
@@ -63,7 +63,7 @@ section#Main > article > #Main-Link-Box {
 #Main-Link-Box > a {
     color: inherit;
     margin-top: 0.4rem;
-    font-weight: 200;
+    font-weight: 300;
 }
 #Main-Link-Box > .line {
     width: 100%;
