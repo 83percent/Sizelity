@@ -41,7 +41,7 @@
     bottom: 0;
     width: 100%;
     padding: 1rem;
-    padding-top: 2rem;
+    padding-top: 1.3rem;
     background: #fff;
     border-radius: 2rem 2rem 0 0;
     box-shadow: 0 -10px 10px #88888810;
@@ -55,11 +55,10 @@
 #account > section > div > a {
     all: unset;
     width: 100%;
-    padding: 1rem 0;
-    border: 1px solid #dbdbdb;
+    padding: 0.7rem 0;
     border-radius: 1rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 0.7rem;
 }
