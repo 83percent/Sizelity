@@ -8,10 +8,10 @@ const Auth = ({history}) => {
     if(sizelity_token) {
         console.log("쿠키 존재 로컬에 저장");
         localStorage.setItem(TOKEN_NAME, sizelity_token);
-        ///history.replace("/");
+        history.replace("/");
     } else {
         console.log("쿠키 없음");
-        //history.replace("/");
+        history.replace("/");
     }
     return null;
 }

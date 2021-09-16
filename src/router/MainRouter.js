@@ -32,7 +32,12 @@ const MainRouter = () => {
     if(isPopup) {
         // Phone 또는 Popup
         if(userInfo === null) {
-            return <AccountRouter />
+            return (
+                <Switch>
+                    <Route exact path="/" component={AccountRouter} />
+                    <Route path="/login" component={LoginRouter} />
+                </Switch>
+            )
         } else {
             return (
                 <Switch>
