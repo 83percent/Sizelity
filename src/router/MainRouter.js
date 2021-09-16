@@ -34,8 +34,8 @@ const MainRouter = () => {
         if(userInfo === null) {
             return (
                 <Switch>
-                    <Route exact path="/" component={AccountRouter} />
                     <Route path="/login" component={LoginRouter} />
+                    <Route path="/" component={AccountRouter} />
                 </Switch>
             )
         } else {

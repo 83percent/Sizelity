@@ -26,10 +26,10 @@ export const ADContext = createContext(null);
 
 dotenv.config();
 
-//const __server = process.env.REACT_APP_SERVER_TEST_URL;
 const __server = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
+    
     // State
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");

@@ -3,8 +3,11 @@ import { useCookies } from "react-cookie";
 const TOKEN_NAME = 'sizelity_token';
 const Auth = ({history}) => {
     const [cookie] = useCookies([TOKEN_NAME]);
+    
     const {sizelity_token} = cookie;
-    console.log(sizelity_token);
+
+    console.log("이게뭐냐 : ",sizelity_token);
+
     if(sizelity_token) {
         console.log("쿠키 존재 로컬에 저장");
         localStorage.setItem(TOKEN_NAME, sizelity_token);
