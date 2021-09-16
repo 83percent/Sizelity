@@ -31,7 +31,7 @@ const Auth = ({history}) => {
                 console.log("Auth.js : 쿠키 토큰 : ", sizelity_token);
     
                 console.log("Auth.js : 쿠키가 존재하지 않아서 cookie에 토큰 생성");
-                setCookie('sizelity_token', valid, {path: '/', maxAge:(500 * 24 * 60 * 60)});
+                setCookie('sizelity_token', valid, {path: '/', domain: 'sizelity.com',maxAge:(500 * 24 * 60 * 60)});
                 localStorage.setItem(TOKEN_NAME, valid);
                 const response = await accountModule.autoLogin();
     
