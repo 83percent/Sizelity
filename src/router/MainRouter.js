@@ -32,6 +32,7 @@ const MainRouter = () => {
     if(isPopup) {
         // Phone 또는 Popup
         if(userInfo === null) {
+            console.info("USERINFO === NULL")
             return (
                 <Switch>
                     <Route path="/login" component={LoginRouter} />
@@ -39,6 +40,7 @@ const MainRouter = () => {
                 </Switch>
             )
         } else {
+            console.info("USERINFO === NULL ELSE")
             return (
                 <Switch>
                     <Route exact path="/" component={IndexRouter} />
@@ -61,6 +63,7 @@ const MainRouter = () => {
             )
         }
     } else {
+        console.info("isPopup === FALSE")
         return (
             <DocHelp />
         )
