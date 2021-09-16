@@ -43,11 +43,8 @@ const App = () => {
     const getUser = useCallback( async () => {
         try {
             const {sizelity_token} = cookie;
-            console.log("쿠키 토큰 : ", sizelity_token)
-            
             if(!sizelity_token) {
                 const token = localStorage.getItem("sizelity_token");
-                console.log("저장소 토큰 : ", sizelity_token)
                 if(!token) {
                     setUserInfo(null);
                     return;
@@ -71,7 +68,7 @@ const App = () => {
 
     // autoLogin
     useEffect(() => {
-        if(userInfo === undefined) getUser();
+        if(!userInfo) getUser();
     }, [userInfo, getUser]);
     
     useEffect(() => {
@@ -92,10 +89,7 @@ const App = () => {
                         <LoginContext.Provider value={{userInfo, setUserInfo, loginTrigger: () => getUser}}>
                             <MediaContext.Provider value={media}>
                                 <BrowserRouter>
-                                    <Switch>
-                                        {/* <Route exact path="/test" component={Test}/> */}
-                                        <Route path="/" component={MainRouter} />
-                                    </Switch>
+                                    <MainRouter />
                                 </BrowserRouter>
                             </MediaContext.Provider>
                         </LoginContext.Provider>

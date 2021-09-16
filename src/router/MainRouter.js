@@ -28,7 +28,8 @@ const MainRouter = () => {
         else {
             return window.outerWidth > 600 ? false : true
         }
-    }, [media])
+    }, [media]);
+    
     if(isPopup) {
         // Phone 또는 Popup
         if(userInfo === null) {

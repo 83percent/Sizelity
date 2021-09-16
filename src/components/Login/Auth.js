@@ -30,6 +30,9 @@ const Auth = ({history}) => {
             setCookie('sizelity_token', valid, {path: '/'})
             localStorage.setItem(TOKEN_NAME, valid);
             const response = await accountModule.autoLogin();
+
+            console.log("getUser 결과 : ", response);
+
             if(response?._id) setUserInfo(response);
         }
     }, [accountModule])
