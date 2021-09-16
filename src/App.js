@@ -43,21 +43,32 @@ const App = () => {
     const getUser = useCallback( async () => {
         try {
             const {sizelity_token} = cookie;
+
+            console.info("App : cookie token : ", sizelity_token);
+
             if(!sizelity_token) {
                 const token = localStorage.getItem("sizelity_token");
+                console.info("쿠키토큰 없어서 저장소 탐색 : ", token);
                 if(!token) {
+                    console.info("저장소에도 토큰이 없어서 자동로그인을 종료합니다.");
                     setUserInfo(null);
                     return;
                 }
-                else setCookie('sizelity_token', token);
+                else {
+                    setCookie('sizelity_token', token);
+                    console.info("저장소에 토큰이 있어 쿠키에 복사 : ", token);
+                }
             }
             const accountModule = new AccountModule(__server);
             const result = await accountModule.autoLogin();
+            console.log("서버에 로그인 여부 확인 결과 : ", result);
             if(result?._id) {
+                console.log("결과를 'userInfo로 지정'");
                 localStorage.setItem("sizelity_token", sizelity_token);
                 setUserInfo(result);
             } else setUserInfo(null);
         } catch(error) {
+            console.log("애러 발생", error);
             removeCookie('sizelity_token');
             setUserInfo(null);
         } finally {
