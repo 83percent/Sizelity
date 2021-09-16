@@ -41,23 +41,27 @@ const App = () => {
 
     // CallBack
     const getUser = useCallback( async () => {
-        const {sizelity_token} = cookie;
         try {
-            const accountModule = new AccountModule(__server);
+            const {sizelity_token} = cookie;
+            console.log("쿠키 토큰 : ", sizelity_token)
+            
             if(!sizelity_token) {
                 const token = localStorage.getItem("sizelity_token");
-                if(token === null) {
+                console.log("저장소 토큰 : ", sizelity_token)
+                if(!token) {
                     setUserInfo(null);
                     return;
-                } else setCookie('sizelity_token', token);
+                }
+                else setCookie('sizelity_token', token);
             }
+            const accountModule = new AccountModule(__server);
             const result = await accountModule.autoLogin();
             if(result?._id) {
                 localStorage.setItem("sizelity_token", sizelity_token);
                 setUserInfo(result);
             } else setUserInfo(null);
         } catch(error) {
-            if(sizelity_token) removeCookie('sizelity_token');
+            removeCookie('sizelity_token');
             setUserInfo(null);
         } finally {
             setLoader(false);
@@ -85,7 +89,7 @@ const App = () => {
             <CookiesProvider>
                 <ADContext.Provider value={{ADCheck, setADCheck}}>
                     <ServerContext.Provider value={__server}>
-                        <LoginContext.Provider value={{userInfo, setUserInfo}}>
+                        <LoginContext.Provider value={{userInfo, setUserInfo, loginTrigger: () => getUser}}>
                             <MediaContext.Provider value={media}>
                                 <BrowserRouter>
                                     <Switch>
