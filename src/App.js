@@ -56,6 +56,7 @@ const App = () => {
                 }
                 else {
                     setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com',maxAge:(500 * 24 * 60 * 60)});
+                    //setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
                     console.info("저장소에 토큰이 있어 쿠키에 복사 : ", token);
                 }
             }
