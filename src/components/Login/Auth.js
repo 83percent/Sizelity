@@ -24,21 +24,15 @@ const Auth = ({history}) => {
 
     // Callback
     const getUser = useCallback(async (valid) => {
-        console.log("Auth.js : getUser() 의 valid 값 : ", valid);
         if(valid) {
             try {
                 const {sizelity_token} = cookie;
-                console.log("Auth.js : 쿠키 토큰 : ", sizelity_token);
     
-                console.log("Auth.js : 쿠키가 존재하지 않아서 cookie에 토큰 생성");
                 setCookie('sizelity_token', valid, {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
                 localStorage.setItem(TOKEN_NAME, valid);
                 const response = await accountModule.autoLogin();
     
-                console.log("getUser 결과 : ", response);
-    
                 if(response?._id) setUserInfo(response);
-                else console.log("저장 실패 : response?._id = ", response?._id);
             } catch(error) {
                 console.log("Auth.js : getUser() try Error : ", error);
             }

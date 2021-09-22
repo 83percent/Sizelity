@@ -48,8 +48,8 @@ const PersonalList = ({history}) => {
         logout : function() {
             if(window.confirm("로그아웃 하시겠습니까?")) {
                 try {
+                    localStorage.removeItem('sizelity_token');
                     cookies[2]('sizelity_token');
-                    accountModule.logout();
                     history.replace("/");
                     setUserInfo(null);
                 } catch {
