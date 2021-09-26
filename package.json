@@ -25,19 +25,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "react-snap"
-  },
-  "reactSnap": {
-    "include": [
-      "/event",
-      "/search"
-    ],
-    "preconnectThirdParty": true,
-    "asyncScriptTags": true,
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ]
   },
   "eslintConfig": {
     "extends": [
