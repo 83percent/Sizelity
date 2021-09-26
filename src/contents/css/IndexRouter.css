@@ -128,7 +128,7 @@ main#home > header > .user-wrapper > .user-btn-frame > a {
     justify-content: center;
     overflow: hidden;
     border-top: 1px solid #dbdbdb;
-    padding: 1.0rem 0;
+    padding: 0.8rem 0;
     color: #000000;
 }
 main#home > header > .user-wrapper > .user-btn-frame > a > i {
@@ -140,7 +140,17 @@ main#home > header > .user-wrapper > .user-btn-frame > a > p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1.1rem;
+}
+
+main#home > header > .user-wrapper > .event {
+    border-top: 1px solid #dbdbdb;
+    background-color: var(--base-color);
+    padding: 0.7rem 0;
+}
+main#home > header > .user-wrapper > .event > a {
+    all: unset;
+    color: #fff;
+    cursor: pointer;
 }
     /*      section     */
 main#home > section {

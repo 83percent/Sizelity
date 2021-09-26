@@ -27,7 +27,7 @@ nav.myProductNav > .product-wrapper > .info {
 nav.myProductNav > .product-wrapper > .info > p {
     position: relative;
     left: 2px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #eee;
 }
 nav.myProductNav > .product-wrapper > .info > h1 {
@@ -45,7 +45,7 @@ nav.myProductNav > .product-wrapper > .info > h2 {
 }
 nav.myProductNav > .product-wrapper > .info > div {
     position: relative;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
     

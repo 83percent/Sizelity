@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import { ServerContext, LoginContext } from "../../App";
 import AccountModule from '../..//contents/js/Account';
 import { useCallback, useContext, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 
 
 const TOKEN_NAME = 'sizelity_token';
@@ -46,7 +47,7 @@ const Auth = ({history}) => {
     
     return (
         <div style={{height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-            <a href="/" style={{width: "18rem", textAlign: "center", cursor: "pointer", padding: "1rem", backgroundColor: "#00966B", color: "#ffffff"}}>메인으로</a>
+            <Link to="/" style={{width: "18rem", textAlign: "center", cursor: "pointer", padding: "1rem", backgroundColor: "#00966B", color: "#ffffff"}}>메인으로</Link>
         </div>
     );
 }

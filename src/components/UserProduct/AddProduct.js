@@ -179,9 +179,10 @@ const AddProduct = ({history, location}) => {
                     <aside onTouchStart={() => alert.toggle(false)}></aside>
                 }
             </div>
-
             <article>
-                <i className="material-icons" onClick={() => confirm.cancelToggle(true)}>close</i>
+                <div className="close">
+                    <i className="material-icons" onClick={() => confirm.cancelToggle(true)}>close</i>
+                </div>
                 <Step 
                     data={data}
                     setData={setData}

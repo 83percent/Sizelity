@@ -83,6 +83,9 @@ const IndexRouter = () => {
                             <p>나중에 볼 상품</p>
                         </Link>
                     </div>
+                    <div className="event">
+                        <Link to="/event">놓칠 수 없는 쇼핑몰 이벤트를 한 눈에!</Link>
+                    </div>
                 </div>
             </header>
             <section id="Main">

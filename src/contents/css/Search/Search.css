@@ -23,8 +23,7 @@ section#Search {
     font-size: 1.6rem;
 }
 #Search > .inputResult {
-    width: 100%;
-    min-height: 8.5rem;
+    min-height: 7.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +44,7 @@ section#Search {
 #Search > .inputResult > .Search-success {
     width: 100%;
     height: 100%;
-    padding: 1rem;
+    padding: 0.7rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,8 +103,8 @@ section#Search {
     padding-left: 1rem;
 }
 #Search header > h1 {
-    padding: 0.8rem 0;
-    font-size: 1.1rem;
+    padding: 0.7rem 0;
+    font-size: 1rem;
     flex-grow: 1;
 }
 #Search header > button {
@@ -173,14 +172,14 @@ section#Search {
     min-width: 3.5rem;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame p {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     opacity: 0.7;
     margin-bottom: 2px;
     overflow: hidden;
     white-space: nowrap;
 }
 #Search > .current-wrapper > ul > li > div > .info-frame h1 {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 500;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -221,11 +220,10 @@ section#Search > .hn > div    {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0.7rem 1rem;
+    padding: 0.5rem 1rem;
 }
 section#Search > .hn > div > p {
     flex-grow: 1;
-    font-size: 1.1rem;
     margin-top: 0.1rem;
 }
 section#Search > .hn > div > i:first-of-type {

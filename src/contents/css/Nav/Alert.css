@@ -5,8 +5,8 @@
     align-items: center;
     position: fixed;
     top: 0;
-    width: 100%;
-    z-index: 999;
+    width: 100vw;
+    z-index: 998;
 }
 #alert-wrapper.on {
     height: 100%;
@@ -14,7 +14,7 @@
 #alert-wrapper > div {
     position: absolute;
     width: 94%;
-    margin: 0 1rem;
+    margin: 0 auto;
     top: -7rem;
     transition-duration: 0.3s;
 }
@@ -22,7 +22,7 @@
     top: 1rem;
 }
 #alert-wrapper > aside {
-    width: 100%;
+    width: 100vw;
     flex-grow: 0;
 }
 #alert-wrapper.on > aside {

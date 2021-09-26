@@ -21,7 +21,6 @@ const UserProduct = ({history, location}) => {
         location.state.callback -> 수정 및 추가 완료시 alert을 노출추가를 위해 location 추가했는데
         문제 발생 : 1회성으로 작동하게 하려면 복잡
     */
-    console.log(history);
     // Cookie
     const [{sizelity_myRecently}, setCookie] = useCookies(['sizelity_myRecently']);
     
@@ -211,7 +210,9 @@ const UserProduct = ({history, location}) => {
                                                                     return (
                                                                         <li key={i2} >
                                                                             <div className="info-frame" onClick={(e) => event.elementClick(element, e)}>
-                                                                                <h2>{name}</h2>
+                                                                                <div className="size-name">
+                                                                                    <h2>{name}</h2>
+                                                                                </div>
                                                                                 <div className="info">
                                                                                     <p>{sname ? sname : ""}</p>
                                                                                     <h1>{nick ? nick : pname}</h1>
@@ -222,7 +223,7 @@ const UserProduct = ({history, location}) => {
                                                                                 </div>
                                                                                 {
                                                                                     element?.praw?.full ? (
-                                                                                        <a href={`http://${element?.prwa?.full}`} onClick={(e) => e.stopPropagation()}>
+                                                                                        <a href={`http://${element?.praw?.full}`} onClick={(e) => e.stopPropagation()}>
                                                                                             <i className="material-icons">open_in_new</i>
                                                                                         </a> 
                                                                                     ) : null
@@ -254,7 +255,7 @@ const UserProduct = ({history, location}) => {
                             <div className="empty">
                                 <i className="material-icons">sentiment_dissatisfied</i>
                                 <p>옷장이 비었어요</p>
-                                <p><b style={{fontWeight:"500"}}>{userInfo.name}님의 옷장</b>을 채워주세요.</p>
+                                <p><b style={{fontWeight:"500"}}>{userInfo?.name}님의 옷장</b>을 채워주세요.</p>
                                 <Link to="/closet/create">내 옷 추가하기</Link>
                             </div>
                         )

@@ -1,20 +1,11 @@
 import { Route, Switch } from "react-router";
-import { useContext } from "react";
 
 import ViewComponent from '../components/UserProduct/ViewProduct';
 import AddComponent from '../components/UserProduct/AddProduct';
 
-import { LoginContext } from '../App';
 
 
-const UserProduct = ({history}) => {
-    // Context
-    const { userInfo } = useContext(LoginContext);
-
-    // LoginCheck
-    if(!userInfo || !userInfo._id || !userInfo.name) {
-        history.replace("/notlogin");
-    }
+const UserProduct = () => {
     return (
         <Switch>
             <Route exact path="/closet/create" component={AddComponent} />

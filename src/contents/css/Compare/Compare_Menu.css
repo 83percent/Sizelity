@@ -22,7 +22,7 @@ section#Menu > .menu-frame {
     position: absolute;
     top: 0;
     right: -15rem;
-    width: 13rem;
+    width: 12rem;
     height: 100%;
     background-color: #fff;
     transition-duration: 0.4s;
@@ -31,7 +31,7 @@ section#Menu > .menu-frame {
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
 }
 section#Menu > .menu-frame li {
-    padding-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
 }
 /*      article     */
 section#Menu.active > .menu-frame {
@@ -63,13 +63,13 @@ section#Menu > .menu-frame > footer {
 }
 section#Menu > .menu-frame li a {
     color: #000000;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 600;
     overflow-x: hidden;
     white-space: nowrap;
 }
 section#Menu > .menu-frame h1, section#Menu > .menu-frame h2 {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 600;
     overflow-x: hidden;
     white-space: nowrap;

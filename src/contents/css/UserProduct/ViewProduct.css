@@ -11,13 +11,13 @@ section#UserProduct > header > .title {
     flex-grow: 1;
 }
 section#UserProduct > header > .title > h1 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
 }
 section#UserProduct > header > .title > .name {
     font-weight: 600;
 }
 section#UserProduct > header > i {
-    padding: 0 0.5rem;
+    padding: 0 0.3rem;
     font-size: 2.0rem;
 }
 
@@ -105,7 +105,7 @@ section#UserProduct > article .list-frame {
 }
 section#UserProduct > article .list-frame:last-child {
     border-bottom: 1px solid #dbdbdb;
-    margin-bottom: 6rem;
+    margin-bottom: 8rem;
 }
 section#UserProduct > article .list-frame > .cate-nav {
     display: flex;
@@ -164,7 +164,7 @@ section#UserProduct > article .list-frame > ul > li.un {
     background: #00000020;
 }
 section#UserProduct > article .list-frame > ul > li > .info-frame {
-    width: 100%;
+    width: 100vw;
     display: flex;
     align-items: center;
     position: relative;
@@ -175,18 +175,21 @@ section#UserProduct > article .list-frame > ul > li > .info-frame {
     z-index: 800;
     transition-duration: 0.5s;
 }
-/*  삭제 수정 transition  */
+
 section#UserProduct > article > .list-wrapper.on > .list-frame > ul > li > .info-frame {
     left: -10rem;
 }
-section#UserProduct > article .list-frame > ul > li > .info-frame > h2 {
-    min-width: 6rem;
-    font-size: 2.2rem;
+section#UserProduct > article .list-frame > ul > li > .info-frame > .size-name {
     text-align: center;
+}
+section#UserProduct > article .list-frame > ul > li > .info-frame > .size-name > h2 {
+    font-size: 1.9rem;
+    font-weight: 500;
+    min-width: 6rem;
 }
 section#UserProduct > article .list-frame > ul > li > .info-frame > .info {
     overflow: hidden;
-    flex-grow: 1;
+    width: 100%;
 }
 section#UserProduct > article .list-frame > ul > li > .info > .info-frame > p {
     font-size: 0.9rem;
@@ -194,18 +197,18 @@ section#UserProduct > article .list-frame > ul > li > .info > .info-frame > p {
     position: relative;
 }
 section#UserProduct > article .list-frame > ul > li > div > .info > h1 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 500;
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 section#UserProduct > article .list-frame > ul > li > div > .info > p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     opacity: 0.7;
 }
 section#UserProduct > article .list-frame > ul > li > div > .info > h2 {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #888888;
     position: relative;
 }

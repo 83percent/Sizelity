@@ -3,7 +3,6 @@ import URLModule from '../../contents/js/URL';
 import SearchHistory from '../../contents/js/SearchHistory';
 
 const SearchCurrent = ({history}) => {
-    console.log(history)
     // Field
     const searchHistory = new SearchHistory()
 

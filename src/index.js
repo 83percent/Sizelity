@@ -1,14 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render, hydrate} from 'react-dom';
 import './index.css';
 import App from './App';
 
-import registerServiceWorker from 'react-service-worker';
+//import registerServiceWorker from 'react-service-worker';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-registerServiceWorker().register();
+const rootElement = document.getElementById("root");
+
+if(rootElement.hasChildNodes()) {
+  hydrate(
+    <React.StrictMode>
+      <App service={false}/>
+    </React.StrictMode>, 
+    rootElement);
+} else {
+  render(
+    <React.StrictMode>
+      <App service={true}/>
+    </React.StrictMode>,
+    rootElement);
+}
+
+/* registerServiceWorker().register(); */

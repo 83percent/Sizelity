@@ -73,7 +73,7 @@
     position: fixed;
     top: 0;
     height: 100%;
-    width: 100%;
+    width: 100vw;
     z-index: 999;
 }
 #View > section#fav-select-wrapper.active {
@@ -83,8 +83,7 @@
     position: absolute;
     top: -15rem;
     width: 94%;
-    margin: 0 1rem;
-    margin-top: 1rem;
+    margin: 1rem auto;
     border: 1px solid #dbdbdb;
     border-radius: 1rem;
     background: #ffffff;

@@ -1,6 +1,6 @@
 // Module
 import {createContext, useCallback, useEffect, useState } from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 import AccountModule from './contents/js/Account';
 import { CookiesProvider, useCookies } from 'react-cookie';
 
@@ -28,12 +28,18 @@ dotenv.config();
 
 const __server = process.env.REACT_APP_SERVER_URL;
 
-const App = () => {
-    
+const App = ({service}) => {
+
+    console.log("APP의 전달 값 : ", !!service , typeof service);
+
     // State
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
-    const [userInfo, setUserInfo] = useState(undefined);
+
+    const [userInfo, setUserInfo] = useState(!!service ? undefined : {_id:"612a33e16c6da42da4263a12",name:"SNAP",gender:"male"});
+
+    console.log("UserInfo 값 : ", userInfo);
+
     const [ADCheck, setADCheck] = useState(0);
 
     // Cookie
@@ -44,15 +50,14 @@ const App = () => {
         try {
             const {sizelity_token} = cookie;
 
-
             if(!sizelity_token) {
                 const token = localStorage.getItem("sizelity_token");
+                //console.log(token)
                 if(!token) {
-                    setUserInfo(null);
                     return;
                 }
                 else {
-                    setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com',maxAge:(500 * 24 * 60 * 60)});
+                    setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
                     //setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
                 }
             }
@@ -60,8 +65,10 @@ const App = () => {
             const result = await accountModule.autoLogin();
             if(result?._id) {
                 localStorage.setItem("sizelity_token", sizelity_token);
+                setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
+                //setCookie('sizelity_user', result, {path: '/'})
                 setUserInfo(result);
-            } else setUserInfo(null);
+            }
         } catch(error) {
             removeCookie('sizelity_token');
             setUserInfo(null);
@@ -69,7 +76,6 @@ const App = () => {
             setLoader(false);
         }
     }, [cookie, setCookie, removeCookie]);
-
 
     // autoLogin
     useEffect(() => {

@@ -26,15 +26,16 @@ article.confirm.active > article.active {
     top: 0;
 }
 article.confirm > article > .title {
-    padding: 1.7rem 0.5rem 1.5rem 0.5rem;
+    padding: 1.3rem 0.5rem 1.1rem 0.5rem;
     text-align: center;
 }
 article.confirm > article > .title > h4 {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
     color: #555;
 }
 article.confirm > article > .title > p {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 article.confirm > article > .btn-wrapper {
@@ -47,14 +48,14 @@ article.confirm > article > .btn-wrapper > button {
     all: unset;
     width: 100%;
     text-align: center;
-    padding: 0.8rem 0;
+    padding: 0.6rem 0;
     border-top: 1px solid #dbdbdb;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 article.confirm > article > .btn-wrapper > button > p {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 600;
 }
 article.confirm > aside {

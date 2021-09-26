@@ -13,7 +13,6 @@ class Event {
             ["etc", "기타"]
         ];
     }
-
     getADEventList(type) {
         return axios({
             method: 'GET',
