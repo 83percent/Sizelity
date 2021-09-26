@@ -68,7 +68,7 @@ const App = ({service}) => {
                 setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
                 //setCookie('sizelity_user', result, {path: '/'})
                 setUserInfo(result);
-            }
+            } else setUserInfo(null);
         } catch(error) {
             removeCookie('sizelity_token');
             setUserInfo(null);
@@ -79,7 +79,7 @@ const App = ({service}) => {
 
     // autoLogin
     useEffect(() => {
-        if(!userInfo) getUser();
+        if(userInfo === undefined) getUser();
     }, [userInfo, getUser]);
     
     useEffect(() => {
