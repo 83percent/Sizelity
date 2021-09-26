@@ -30,10 +30,12 @@ const AD = () => {
         if(popup === undefined && ADCheck % 4 === 0 && !Math.floor(Math.random() * 2)) {
             (async () => {
                 const response = await new PopupModule(server).getPopup();
-
                 if(response?.type === 'success') {
                     setPopup(response.data);
-                    
+                    popupRef.current.classList.add("on");
+                    setTimeout(() => {
+                        popupRef.current.querySelector("div").classList.add("on");
+                    }, 100)
                 }
                 else setPopup(null);
             })();
@@ -43,10 +45,7 @@ const AD = () => {
 
     useEffect(() => {
         if(!popup) {
-            popupRef.current.classList.add("on");
-            setTimeout(() => {
-                popupRef.current.querySelector("div").classList.add("on");
-            }, 100)
+            
         }
     }, [popup])
 
