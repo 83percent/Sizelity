@@ -143,12 +143,14 @@ main#home > header > .user-wrapper > .user-btn-frame > a > p {
 }
 
 main#home > header > .user-wrapper > .event {
+    display: flex;
     border-top: 1px solid #dbdbdb;
-    background-color: var(--base-color);
-    padding: 0.7rem 0;
 }
 main#home > header > .user-wrapper > .event > a {
     all: unset;
+    background-color: var(--base-color);
+    width: 100%;
+    padding: 0.7rem 0;
     color: #fff;
     cursor: pointer;
 }

@@ -36,8 +36,6 @@ const MainRouter = () => {
             //console.info("USERINFO === NULL")
             return (
                 <Switch>
-                    <Route exact path="/event" component={EventRouter} />
-                    <Route exact path="/search" component={Search} />
                     <Route path="/login" component={LoginRouter} />
                     <Route path="/" component={AccountRouter} />
                 </Switch>
@@ -55,7 +53,7 @@ const MainRouter = () => {
                     <Route exact path="/event" component={EventRouter} />
                     <Route exact path="/help" component={HelpRouter} />
         
-                    <Route exact path="/closet" component={UserProduct} />
+                    <Route path="/closet" component={UserProduct} />
                     <Route path="/login" component={LoginRouter} />
                     <Route path="/setting" component={SettingRouter} />
                     
@@ -68,13 +66,7 @@ const MainRouter = () => {
     } else {
         //console.info("isPopup === FALSE")
         return (
-            <Switch>
-                <Route>
-                    <Route exact path="/event" component={EventRouter} />
-                    <Route exact path="/search" component={Search} />
-                    <Route path="/" component={DocHelp}/>
-                </Route>
-            </Switch>
+            <DocHelp />
         )
     }
 }

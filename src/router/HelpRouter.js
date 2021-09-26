@@ -7,7 +7,6 @@ const HelpRouter = () => {
     return (
         <Switch>
             <Route exact path="/help" component={Main} />
-            
         </Switch>
     )
 }
