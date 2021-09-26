@@ -28,15 +28,13 @@ dotenv.config();
 
 const __server = process.env.REACT_APP_SERVER_URL;
 
-const App = ({service}) => {
-
-    console.log("APP의 전달 값 : ", !!service , typeof service);
+const App = () => {
 
     // State
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
 
-    const [userInfo, setUserInfo] = useState(!!service ? undefined : {_id:"612a33e16c6da42da4263a12",name:"SNAP",gender:"male"});
+    const [userInfo, setUserInfo] = useState(undefined);
 
     console.log("UserInfo 값 : ", userInfo);
 
@@ -54,6 +52,7 @@ const App = ({service}) => {
                 const token = localStorage.getItem("sizelity_token");
                 //console.log(token)
                 if(!token) {
+                    setUserInfo(null);
                     return;
                 }
                 else {

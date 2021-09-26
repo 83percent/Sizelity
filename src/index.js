@@ -10,13 +10,13 @@ const rootElement = document.getElementById("root");
 if(rootElement.hasChildNodes()) {
   hydrate(
     <React.StrictMode>
-      <App service={false}/>
+      <App />
     </React.StrictMode>, 
     rootElement);
 } else {
   render(
     <React.StrictMode>
-      <App service={true}/>
+      <App />
     </React.StrictMode>,
     rootElement);
 }
