@@ -29,7 +29,6 @@
   },
   "reactSnap": {
     "include": [
-      "/",
       "/event",
       "/search"
     ],

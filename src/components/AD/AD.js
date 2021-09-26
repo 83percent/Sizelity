@@ -33,16 +33,22 @@ const AD = () => {
 
                 if(response?.type === 'success') {
                     setPopup(response.data);
+                    
                 }
                 else setPopup(null);
-                popupRef.current.classList.add("on");
-                setTimeout(() => {
-                    popupRef.current.querySelector("div").classList.add("on");
-                }, 100)
             })();
         }
         setADCheck(ADCheck+1);
-    }, [popup, server])
+    }, [popup, server]);
+
+    useEffect(() => {
+        if(!popup) {
+            popupRef.current.classList.add("on");
+            setTimeout(() => {
+                popupRef.current.querySelector("div").classList.add("on");
+            }, 100)
+        }
+    }, [popup])
 
     if(popup) {
         return (

@@ -29,14 +29,11 @@ dotenv.config();
 const __server = process.env.REACT_APP_SERVER_URL;
 
 const App = () => {
-
     // State
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
-
     const [userInfo, setUserInfo] = useState(undefined);
 
-    console.log("UserInfo 값 : ", userInfo);
 
     const [ADCheck, setADCheck] = useState(0);
 
