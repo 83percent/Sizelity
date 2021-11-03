@@ -24,7 +24,8 @@ const NavMyProduct = ({myProductData, history, wrapper=undefined, navToggle=unde
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
     
-    function toggleDetailOpen(force) { 
+    function toggleDetailOpen(force) {
+        if(!myProductData) return;
         if(force !== undefined) {
             setDetailOpen(force);
         } else {

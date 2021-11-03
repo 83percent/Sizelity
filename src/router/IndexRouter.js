@@ -19,7 +19,7 @@ const setThemeColor = () => {
     }
 }
 
-const IndexRouter = () => {
+const IndexRouter = ({history}) => {
     const loginWrapper = useRef(null);
     const { userInfo } = useContext(LoginContext);
 
@@ -34,11 +34,19 @@ const IndexRouter = () => {
             }
         }
     }, [loginWrapper]);
+
     useEffect(() => {
         setThemeColor();
         toggleLoginWrapper(true);
     },[toggleLoginWrapper]);
 
+    useEffect(() => {
+        if(!["female","male"].includes(userInfo?.gender)) {
+            window.alert("성별을 선택해주세요.");
+            history.push("/setting/user/gender");
+        }
+    }, [userInfo])
+    
     return (
         <main id="home">
             <header>

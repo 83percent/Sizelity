@@ -5,6 +5,9 @@
 
     2021-09-13 수정 (이재훈)
     : 우선순위 추가
+
+    2021-10-31 수정 (이재훈)
+    : 암홀(팔통) -> 암홀, 팔통 두개로 분리 + 상의에 밑단 추가
 */
 const supportCate = ["set", 'outer', 'top', 'suit', 'onepiece', 'bottom', 'skirt', 'shoes', 'unknown'];
 const ptype = [
@@ -38,7 +41,9 @@ const getSizeRateName = function(name) {
         shoulder : "어깨",
         chest : "가슴",
         sleeve : "소매(팔길이, 팔)",
-        arm : "암홀(팔통)",
+        arm : "암홀",
+        T_hem: "팔통",
+        T_width: "밑단",
         T_length : "총길이(상의)",
         waist : "허리",
         crotch : "밑위",
@@ -63,7 +68,9 @@ const getSizeRate = (name) => {
                 [ "shoulder","어깨"],
                 [ "chest","가슴"],
                 [ "sleeve","소매(팔길이, 팔)"],
-                [ "arm","암홀(팔통)"],
+                [ "arm","암홀"],
+                [ "T_width", "팔통"],
+                [ "T_hem", "밑닽"],
                 [ "T_length","총길이(상의)"],
                 [ "waist", "허리"],
                 [ "crotch", "밑위"],
@@ -80,7 +87,9 @@ const getSizeRate = (name) => {
                 [ "shoulder","어깨"],
                 [ "chest","가슴"],
                 [ "sleeve","소매(팔길이, 팔)"],
-                [ "arm","암홀(팔통)"],
+                [ "arm","암홀"],
+                [ "T_width", "팔통"],
+                [ "T_hem", "밑닽"],
                 [ "T_length","총길이"]
             ];
         }
@@ -89,7 +98,8 @@ const getSizeRate = (name) => {
                 [ "shoulder","어깨"],
                 [ "chest","가슴"],
                 [ "sleeve","소매(팔길이, 팔)"],
-                [ "arm","암홀(팔통)"],
+                [ "arm","암홀"],
+                [ "T_width", "팔통"],
                 [ "waist", "허리"],
                 [ "hips", "엉덩이"],
                 [ "thigh", "허벅지"],
@@ -103,7 +113,8 @@ const getSizeRate = (name) => {
                 [ "shoulder","어깨"],
                 [ "chest","가슴"],
                 [ "sleeve","소매(팔길이, 팔)"],
-                [ "arm","암홀(팔통)"],
+                [ "arm","암홀"],
+                [ "T_width", "팔통"],
                 [ "waist", "허리"],
                 [ "hem", "밑단"],
                 [ "length","총길이"]
@@ -141,7 +152,7 @@ const getSizeRate = (name) => {
 }
 
 const priority = [ 
-    "shoulder","chest","sleeve","arm","T_length",
+    "shoulder","chest","sleeve","arm","T_width","T_hem","T_length",
     "waist","crotch","hips","thigh","hem","calve","B_length",
     "length",
     "height","heel","S_width", "S_length"];

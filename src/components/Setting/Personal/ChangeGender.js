@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { ServerContext } from "../../../App";
+import { ServerContext, LoginContext } from "../../../App";
 import AccountModule from '../../../contents/js/Account';
 
 const ChangeGender = ({history, location}) => {
@@ -8,6 +8,7 @@ const ChangeGender = ({history, location}) => {
 
     // Context
     const server = useContext(ServerContext);
+    const {userInfo, setUserInfo} = useContext(LoginContext);
     
 
     // useMemo
@@ -25,6 +26,9 @@ const ChangeGender = ({history, location}) => {
         });
         switch(response.type) {
             case 'success' : {
+                let _userInfo = JSON.parse(JSON.stringify(userInfo));
+                _userInfo.gender = gender;
+                setUserInfo(_userInfo);
                 window.alert("변경 되었습니다.");
                 history.goBack();
                 break;

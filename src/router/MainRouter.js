@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { Route, Switch } from "react-router-dom";
 
 // Component
@@ -29,7 +29,14 @@ const MainRouter = () => {
             return window.outerWidth > 600 ? false : true
         }
     }, [media]);
-    
+
+    useEffect(() => {
+        if(!["male","female"].includes(userInfo?.gender)) {
+            
+        }
+    }, [userInfo]);
+
+
     if(isPopup) {
         // Phone 또는 Popup
         if(!userInfo) {

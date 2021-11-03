@@ -1,3 +1,13 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+
+Disallow: /setting/*
+Disallow: /login
+Disallow: /login/*
+Disallow: /account/*
+Disallow: /help/*
+
+Sitemap : https://www.sizelity.com/sitemap.xml
