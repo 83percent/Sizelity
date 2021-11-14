@@ -68,7 +68,6 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData, compareCo
 
     useEffect(() => {
         if(!activeSize || compareCheck.current === true) return;
-        console.log("use Effect 패스")
         if(isMatch) {   
             compareCounting();
             compareCheck.current = true;

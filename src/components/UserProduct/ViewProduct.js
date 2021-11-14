@@ -201,7 +201,7 @@ const UserProduct = ({history, location}) => {
                                                         <ul>
                                                             {
                                                                 analyzeData[type].map((element, i2) => {
-                                                                    console.log(element)
+                                                                    //console.log(element)
                                                                     const {
                                                                         _id,
                                                                         info : {sname, nick, pname, subtype},

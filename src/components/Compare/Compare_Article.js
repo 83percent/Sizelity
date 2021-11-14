@@ -20,8 +20,6 @@ const Compare = ({productData, myProduct, CompareCount}) => {
     const compareCounting = useCallback(() => {
         const compareDomain = productData?.praw?.domain;
         const provideDomain = myProduct?.praw?.domain;
-        
-        console.log("카운팅 콜백")
 
         if(compareDomain) {
             // 같은 쇼핑몰일 경우 카운팅 X
