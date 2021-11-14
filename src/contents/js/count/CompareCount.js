@@ -17,7 +17,7 @@ class CompareCount {
             data : domains,
             withCredentials: true,
             timeout: 5500
-        });
+        }).response(response => console.log("카운팅 response : ",response));
     }
 }
 export default CompareCount;
