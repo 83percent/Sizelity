@@ -62,7 +62,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData, compareCo
             if(myProductData[element[0]]) acc++;
             return acc;
         }, 0)-1;
-        return __matchLength > 1;
+        return __matchLength > 0;
 
     }, [productSizeData, myProductData])
 
