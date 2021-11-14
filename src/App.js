@@ -53,16 +53,16 @@ const App = () => {
                     return;
                 }
                 else {
-                    //setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
-                    setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
+                    setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
+                    //setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
                 }
             }
             const accountModule = new AccountModule(__server);
             const result = await accountModule.autoLogin();
             if(result?._id) {
                 localStorage.setItem("sizelity_token", sizelity_token);
-                //setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
-                setCookie('sizelity_user', result, {path: '/'})
+                setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
+                //setCookie('sizelity_user', result, {path: '/'})
                 setUserInfo(result);
             } else setUserInfo(null);
         } catch(error) {
