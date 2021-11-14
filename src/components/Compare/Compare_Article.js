@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import ProductTypeModule from '../../contents/js/ProductType';
+
 
 // CSS
 import '../../contents/css/Compare/Compare_Article.css';
@@ -8,12 +9,25 @@ import '../../contents/css/Compare/Compare_Article.css';
 import CompareGraphList from "./Compare_Graph";
 import SizeHelp from '../Nav/SizeHelp';
 
-
-const Compare = ({productData, myProduct}) => {
+const Compare = ({productData, myProduct, CompareCount}) => {
     // data에 온전하지 못한 정보가 담겨 올 것을 대비해 데이터 검증.js 를 만들어 
     // 검증 후 지금의 Component를 화면에 출력 / 그렇지 못한 경우 데이터가 없다는 페이지로 이동
+    
     const [activeSize, setActiveSize] = useState(null);
     const [onSizeHelp, setOnSizeHelp] = useState(false);
+
+    // useCallBack
+    const compareCounting = useCallback(() => {
+        const compareDomain = productData?.praw?.domain;
+        const provideDomain = myProduct?.praw?.domain;
+        
+        console.log("카운팅 콜백")
+
+        if(compareDomain) {
+            // 같은 쇼핑몰일 경우 카운팅 X
+            if(compareDomain !== provideDomain) CompareCount.done({compareDomain, provideDomain});
+        }
+    }, [productData, myProduct, CompareCount])
 
     // Ref
     const compareGraphRef = useRef(null);
@@ -41,6 +55,8 @@ const Compare = ({productData, myProduct}) => {
             setOnSizeHelp(true);
         }
     }
+    
+
     return (
         <section className="View-Compare">
             <header>
@@ -106,7 +122,8 @@ const Compare = ({productData, myProduct}) => {
                     <CompareGraphList
                         activeSize={activeSize}
                         myProductData={myProduct ? myProduct.size : null}
-                        productSizeData={productData.size} />
+                        productSizeData={productData.size}
+                        compareCounting={compareCounting}/>
                 </div>
             </article>
         </section>

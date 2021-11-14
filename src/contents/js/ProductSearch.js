@@ -95,7 +95,7 @@ class ProductSearch {
             },
             timeout: 4500
         }).then(response => {
-            console.log("검색 결과 : ",response);
+            //console.log("검색 결과 : ",response);
             switch(response.status) {
                 case 200 : {
                     if(save) {

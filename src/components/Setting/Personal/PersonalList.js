@@ -19,7 +19,7 @@ const PersonalList = ({history}) => {
     const server = useContext(ServerContext);
 
     // Cookie
-    const cookies = useCookies(['sizelity_token']);
+    const [cookie, setCookie, removeCookie] = useCookies(['sizelity_token']);
 
     // Memo
     const accountModule = useMemo(() => {
@@ -45,14 +45,13 @@ const PersonalList = ({history}) => {
     }, [accountModule]);
     
     const event = {
-        logout : function() {
+        logout : async function() {
             if(window.confirm("로그아웃 하시겠습니까?")) {
                 try {
-                    console.log(localStorage.getItem('sizelity_token'))
-                    console.log(cookies[0]);
-                    
-                    localStorage.removeItem('sizelity_token');
-                    cookies[2]('sizelity_token');
+                    await (() => {
+                        localStorage.removeItem('sizelity_token');
+                        if(cookie) removeCookie('sizelity_token');
+                    })();
 
                     history.replace("/");
                     setUserInfo(null);
@@ -148,7 +147,7 @@ const PersonalList = ({history}) => {
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    {/* <div>
                         <h2>데이터 초기화</h2>
                         <ul>
                             <li>
@@ -162,7 +161,7 @@ const PersonalList = ({history}) => {
                                 </button>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                     <div>
                         <h2>계정 관리</h2>
                         <ul>

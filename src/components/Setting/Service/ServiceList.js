@@ -74,6 +74,18 @@ const ServiceList = ({history}) => {
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <h2>쇼핑몰 등록</h2>
+                    <ul>
+                        <li>
+                            <a href="https://official.sizelity.com/reservation" target="_blank" rel="noreferrer">
+                                <p>사이즈리티 홈페이지</p>
+                                <span className="material-icons">arrow_forward_ios</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
             </main>
         </section>
     )

@@ -1,4 +1,4 @@
-import { memo, useContext, useMemo } from "react";
+import { memo, useContext, useEffect, useMemo, useRef } from "react";
 import { priority, getSizeRateName } from '../../contents/js/ProductType';
 
 // SVG
@@ -7,9 +7,12 @@ import {ReactComponent as Female} from '../../contents/asset/female_24dp.svg';
 // Context
 import { LoginContext } from "../../App";
 
-const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
+const CompareGraphList = ({activeSize, myProductData, productSizeData, compareCounting}) => {
     // Context
     const { userInfo } = useContext(LoginContext);
+
+    // Ref
+    const compareCheck = useRef(false);
 
     // Memo
     const sizeData = useMemo( () => {
@@ -50,14 +53,32 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
         } catch(error) {
             return null;
         }
+
     }, [productSizeData]);
 
+    const isMatch = useMemo(() => {
+        if(!productSizeData || !myProductData) return false;
+        const __matchLength = Object.entries(productSizeData[0]).reduce((acc, element) => {
+            if(myProductData[element[0]]) acc++;
+            return acc;
+        }, 0)-1;
+        return __matchLength > 1;
+
+    }, [productSizeData, myProductData])
+
+    useEffect(() => {
+        if(!activeSize || compareCheck.current === true) return;
+        console.log("use Effect 패스")
+        if(isMatch) {   
+            compareCounting();
+            compareCheck.current = true;
+        }
+    }, [activeSize, myProductData, isMatch, compareCounting]);
     return (
         <ul className="compare-frame">
             {
                 priority.map((sn, index) => {
-                    if(!sizeData[sn]) return null;
-                    else if(!myProductData || !myProductData[sn]) return null;
+                    if(!sizeData[sn] || (!myProductData || !myProductData[sn])) return null;
                     return (
                         <li key={index} className="compare-element">
                                 <>
@@ -78,8 +99,7 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
             }
             {
                 priority.map((sn, index) => {
-                    if(!sizeData[sn]) return null;
-                    else if(myProductData && myProductData[sn]) return null;
+                    if(!sizeData[sn] || (myProductData && myProductData[sn])) return null;
                     return (
                         <li key={index} className="compare-element">
                                 <>
@@ -94,7 +114,6 @@ const CompareGraphList = ({activeSize, myProductData, productSizeData}) => {
                     )
                 })
             }
-            
         </ul>
     );
 }

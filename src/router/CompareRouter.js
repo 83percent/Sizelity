@@ -34,11 +34,11 @@ const Compare = ({history, location}) => {
                 const _ProductSearch = new ProductSearch(server);
                 let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
                 if(_useQuery.get("domain")) {
-                    console.log("url 전체를 활용하여 검색");
+                    //console.log("url 전체를 활용하여 검색");
                     // ?domain= 이 존재
                     _searchResult = await _ProductSearch.search({url : _useQuery.get("domain")});
                 } else {
-                    console.log("shop + code를 활용하여 검색");
+                    //console.log("shop + code를 활용하여 검색");
                     _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
                 }
                 try {

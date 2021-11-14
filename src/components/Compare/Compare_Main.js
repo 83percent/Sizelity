@@ -1,8 +1,9 @@
-import {useContext, useRef } from 'react';
+import {useContext, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import AfterProduct from '../../contents/js/AfterProduct';
 import UserProductModule from '../../contents/js/UserProduct';
+import CompareCountModule from '../../contents/js/count/CompareCount';
 
 // CSS
 import '../../contents/css/Compare/Compare_Main.css';
@@ -15,11 +16,8 @@ import Menu from './Compare_Menu';
 
 // Context
 import { MediaContext, LoginContext, ServerContext } from '../../App';
-import AD from '../AD/AD';
 
-
-const ViewCompare = ({history, productData}) => {
-
+const CompareIndex = ({history, productData}) => {
     // Cookie
     const [{ sizelity_myRecently }] = useCookies([]);
 
@@ -27,6 +25,11 @@ const ViewCompare = ({history, productData}) => {
     const media = useContext(MediaContext);
     const {userInfo} = useContext(LoginContext);
     const server = useContext(ServerContext);
+
+    // memo
+    const CompareCount = useMemo(() => {
+        return new CompareCountModule(server);
+    }, [server]);
 
     // Ref
     const menuWrapper = useRef(null);
@@ -224,9 +227,8 @@ const ViewCompare = ({history, productData}) => {
             <Compare
                 productData={productData} 
                 myProduct={sizelity_myRecently}
-                navToggle={alert.navToggle}/>
-            <AD />
+                CompareCount={CompareCount}/>
         </div> 
     );
 }
-export default ViewCompare;
+export default CompareIndex;
