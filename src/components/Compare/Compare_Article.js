@@ -1,7 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import ProductTypeModule from '../../contents/js/ProductType';
 
-
 // CSS
 import '../../contents/css/Compare/Compare_Article.css';
 
@@ -20,7 +19,7 @@ const Compare = ({productData, myProduct, CompareCount}) => {
     const compareCounting = useCallback(() => {
         const compareDomain = productData?.praw?.domain;
         const provideDomain = myProduct?.praw?.domain;
-
+        
         if(compareDomain) {
             // 같은 쇼핑몰일 경우 카운팅 X
             if(compareDomain !== provideDomain) CompareCount.done({compareDomain, provideDomain});
