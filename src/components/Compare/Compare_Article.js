@@ -22,7 +22,7 @@ const Compare = ({productData, myProduct, CompareCount}) => {
         
         if(compareDomain) {
             // 같은 쇼핑몰일 경우 카운팅 X
-            console.log(`카운팅 ${compareDomain} : ${provideDomain}`);
+            // console.log(`카운팅 ${compareDomain} : ${provideDomain}`);
             if(compareDomain !== provideDomain) CompareCount.done({compareDomain, provideDomain});
         }
     }, [productData, myProduct, CompareCount])

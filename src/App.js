@@ -22,7 +22,7 @@ import './contents/css/Error.css';
 export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
 export const ServerContext = createContext(null);
-export const ADContext = createContext(null);
+export const ProductContext = createContext(null);
 
 dotenv.config();
 
@@ -33,9 +33,7 @@ const App = () => {
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
     const [userInfo, setUserInfo] = useState(undefined);
-
-
-    const [ADCheck, setADCheck] = useState(0);
+    const [productData, setProductData] = useState(null);
 
     // Cookie
     const [cookie, setCookie, removeCookie] = useCookies(['sizelity_token']);
@@ -53,16 +51,16 @@ const App = () => {
                     return;
                 }
                 else {
-                    setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
-                    //setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
+                    //setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
+                    setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
                 }
             }
             const accountModule = new AccountModule(__server);
             const result = await accountModule.autoLogin();
             if(result?._id) {
                 localStorage.setItem("sizelity_token", sizelity_token);
-                setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
-                //setCookie('sizelity_user', result, {path: '/'})
+                //setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
+                setCookie('sizelity_user', result, {path: '/'})
                 setUserInfo(result);
             } else setUserInfo(null);
         } catch(error) {
@@ -91,7 +89,7 @@ const App = () => {
     } else {
         return (
             <CookiesProvider>
-                <ADContext.Provider value={{ADCheck, setADCheck}}>
+                <ProductContext.Provider value={{productData, setProductData}}>
                     <ServerContext.Provider value={__server}>
                         <LoginContext.Provider value={{userInfo, setUserInfo, loginTrigger: () => getUser}}>
                             <MediaContext.Provider value={media}>
@@ -101,7 +99,7 @@ const App = () => {
                             </MediaContext.Provider>
                         </LoginContext.Provider>
                     </ServerContext.Provider>
-                </ADContext.Provider>
+                </ProductContext.Provider>
             </CookiesProvider>
         );
     }

@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState ,useContext, useMemo} from 'react';
+import React, { useEffect, useState ,useContext, useMemo} from 'react';
 import ProductSearch from '../contents/js/ProductSearch';
 // CSS
 import '../contents/css/Compare/Compare_Router.css';
@@ -8,17 +8,27 @@ import Main from '../components/Compare/Compare_Main';
 import { Link, useLocation } from 'react-router-dom';
 
 // Context
-import {ServerContext} from '../App';
-export const ProductContext = createContext(null);
+import {ProductContext, ServerContext} from '../App';
 
-const Compare = ({history, location}) => {
-    // State
-    const [productData, setProductData] = useState(location?.state?.productData);
-    const [loader, setLoader] = useState(!productData);
-    const [status, setStatus] = useState(0);
-
+const Compare = ({history}) => {
     // Context 
     const server = useContext(ServerContext);
+    const {productData, setProductData} = useContext(ProductContext)
+
+    // Memo
+    const currentProductData = useMemo(() => {
+        if(productData === null) return null;
+        else {
+            return {
+                shop : productData?.praw?.domain,
+                no : productData?.praw?.code,
+            }
+        }
+    }, [productData]);
+
+    // State
+    const [loader, setLoader] = useState(!productData);
+    const [status, setStatus] = useState(0);
 
     // Location
     const search = useLocation().search;
@@ -29,7 +39,7 @@ const Compare = ({history, location}) => {
     }, [search]);
 
     useEffect(() => { 
-        if(!productData) {
+        if(_useQuery.get("shop") !== currentProductData?.shop || _useQuery.get("no") !== currentProductData?.no) {
             (async () => {
                 const _ProductSearch = new ProductSearch(server);
                 let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
@@ -38,8 +48,8 @@ const Compare = ({history, location}) => {
                     // ?domain= 이 존재
                     _searchResult = await _ProductSearch.search({url : _useQuery.get("domain")});
                 } else {
-                    //console.log("shop + code를 활용하여 검색");
                     _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
+                    //console.log("shop + code를 활용하여 검색");
                 }
                 try {
                     if(_searchResult.type === 'success') {
@@ -69,12 +79,10 @@ const Compare = ({history, location}) => {
             </section>
         ) : (
             productData ? (
-                <ProductContext.Provider value={productData}>
-                    <Main 
-                        history={history}
-                        productData={productData}
-                    />
-                </ProductContext.Provider>
+                <Main 
+                    history={history}
+                    productData={productData}
+                />
             ) : (
                 <section id="Compare">
                     {
