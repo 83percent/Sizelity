@@ -165,6 +165,7 @@ const CompareIndex = ({history, productData}) => {
         }, // async after.set(id)
     }
     return (
+        <>
         <div id="View">
             <div id="alert-wrapper" ref={afterAlertWrapper}>
                 <div>
@@ -228,7 +229,11 @@ const CompareIndex = ({history, productData}) => {
                 productData={productData} 
                 myProduct={sizelity_myRecently}
                 CompareCount={CompareCount}/>
-        </div> 
+        </div>
+        <div className="test">
+
+        </div>
+        </>
     );
 }
 export default CompareIndex;

@@ -28,11 +28,13 @@ const Auth = ({history}) => {
         if(valid) {
             try {
                 const {sizelity_token} = cookie;
-    
-                setCookie('sizelity_token', valid, {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
+//                setCookie('sizelity_token', valid, {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
+                setCookie('sizelity_token', valid, {path: '/'});
+
                 localStorage.setItem(TOKEN_NAME, valid);
                 const response = await accountModule.autoLogin();
-    
+                
+
                 if(response?._id) setUserInfo(response);
             } catch(error) {
                 console.log("Auth.js : getUser() try Error : ", error);

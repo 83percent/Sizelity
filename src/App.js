@@ -26,13 +26,15 @@ export const ProductContext = createContext(null);
 
 dotenv.config();
 
-const __server = process.env.REACT_APP_SERVER_URL;
+//const __server = process.env.REACT_APP_SERVER_URL;
+const __server = "http://192.168.11.2:3001";
 
 const App = () => {
     // State
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
     const [userInfo, setUserInfo] = useState(undefined);
+    //const [userInfo, setUserInfo] = useState({_id:"6182538212b54635c00387af",name:"JAE HOON LEE",gender:"male"});
     const [productData, setProductData] = useState(null);
 
     // Cookie
@@ -52,7 +54,7 @@ const App = () => {
                 }
                 else {
                     //setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
-                    setCookie('sizelity_token', token,  {path: '/',maxAge:(500 * 24 * 60 * 60)});
+                    setCookie('sizelity_token', token,  {path: '/', maxAge:(500 * 24 * 60 * 60)});
                 }
             }
             const accountModule = new AccountModule(__server);

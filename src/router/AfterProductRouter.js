@@ -5,7 +5,7 @@ import AfterProductModule from '../contents/js/AfterProduct';
 import '../contents/css/AfterProduct.css';
 
 // Context 
-import {ServerContext} from '../App';
+import {ProductContext, ServerContext} from '../App';
 
 const AfterProduct = ({history}) => {
     // State
@@ -14,7 +14,7 @@ const AfterProduct = ({history}) => {
 
     // Context
     const server = useContext(ServerContext);
-
+    const {setProductData} = useContext(ProductContext);
     // Memo
     const afterProductModule = useMemo(() => {
         return new AfterProductModule(server);
@@ -62,12 +62,13 @@ const AfterProduct = ({history}) => {
         moveCompare : function(element) {
             if(deleteOption) this.removeToggle();
             else {
-                history.push({
-                    pathname: "/view/compare",
-                    state : {
-                        productData : element
-                    }
-                });
+                if(!element?.praw?.domain || !element?.praw?.code) {
+                    window.alert("상품 데이터가 망가져 상품 정보를 불러올 수 없어요.");
+                } else {
+                    setProductData(element);
+                    history.push(`/compare?shop=${element?.praw?.domain}&no=${element?.praw?.code}`);
+                    
+                }
             }
         }
     }
