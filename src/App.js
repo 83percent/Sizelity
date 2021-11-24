@@ -1,8 +1,10 @@
 // Module
-import {createContext, useCallback, useEffect, useState } from 'react';
+import {createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { CookiesProvider, useCookies } from 'react-cookie';
 import {BrowserRouter} from 'react-router-dom';
 import AccountModule from './contents/js/Account';
-import { CookiesProvider, useCookies } from 'react-cookie';
+import ConfigModule from './contents/js/config/Config';
+
 
 // Font
 import './contents/fonts/Montserrat.css';
@@ -11,34 +13,45 @@ import './contents/fonts/AppleSDGothicNeo.css';
 
 // Component
 import MainRouter from './router/MainRouter';
+
 //import Test from './router/Test';
 
 import dotenv from 'dotenv';
 
 // CSS 
 import './contents/css/Error.css';
+import './contents/css/Manual/Manual.css';
 
 // Context
 export const MediaContext = createContext("Phone");
 export const LoginContext = createContext(null);
 export const ServerContext = createContext(null);
 export const ProductContext = createContext(null);
+export const ConfigContext = createContext(null);
 
 dotenv.config();
 
-//const __server = process.env.REACT_APP_SERVER_URL;
-const __server = "http://192.168.11.2:3001";
+const __server = process.env.REACT_APP_SERVER_URL;
+//const __server = "http://192.168.11.2:3001";
 
 const App = () => {
     // State
     const [loader, setLoader] = useState(true);
     const [media, setMedia] = useState("Phone");
     const [userInfo, setUserInfo] = useState(undefined);
-    //const [userInfo, setUserInfo] = useState({_id:"6182538212b54635c00387af",name:"JAE HOON LEE",gender:"male"});
     const [productData, setProductData] = useState(null);
 
     // Cookie
     const [cookie, setCookie, removeCookie] = useCookies(['sizelity_token']);
+
+
+    // useMemo
+    const config = useMemo(() => {
+        if(!userInfo?._id) return null;
+        else return new ConfigModule(userInfo?._id);
+    }, [userInfo]);
+
+
 
     // CallBack
     const getUser = useCallback( async () => {
@@ -53,16 +66,16 @@ const App = () => {
                     return;
                 }
                 else {
-                    //setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
-                    setCookie('sizelity_token', token,  {path: '/', maxAge:(500 * 24 * 60 * 60)});
+                    setCookie('sizelity_token', token,  {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
+                    //setCookie('sizelity_token', token,  {path: '/', maxAge:(500 * 24 * 60 * 60)});
                 }
             }
             const accountModule = new AccountModule(__server);
             const result = await accountModule.autoLogin();
             if(result?._id) {
                 localStorage.setItem("sizelity_token", sizelity_token);
-                //setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
-                setCookie('sizelity_user', result, {path: '/'})
+                setCookie('sizelity_user', result, {path: '/', domain: 'sizelity.com'});
+                //setCookie('sizelity_user', result, {path: '/'})
                 setUserInfo(result);
             } else setUserInfo(null);
         } catch(error) {
@@ -90,17 +103,20 @@ const App = () => {
         )
     } else {
         return (
+            
             <CookiesProvider>
                 <ProductContext.Provider value={{productData, setProductData}}>
-                    <ServerContext.Provider value={__server}>
-                        <LoginContext.Provider value={{userInfo, setUserInfo, loginTrigger: () => getUser}}>
-                            <MediaContext.Provider value={media}>
-                                <BrowserRouter>
-                                    <MainRouter />
-                                </BrowserRouter>
-                            </MediaContext.Provider>
-                        </LoginContext.Provider>
-                    </ServerContext.Provider>
+                <ServerContext.Provider value={__server}>
+                <LoginContext.Provider value={{userInfo, setUserInfo, loginTrigger: () => getUser}}>
+                <ConfigContext.Provider value={config}>
+                <MediaContext.Provider value={media}>
+                    <BrowserRouter>
+                        <MainRouter />
+                    </BrowserRouter>
+                </MediaContext.Provider>
+                </ConfigContext.Provider>
+                </LoginContext.Provider>
+                </ServerContext.Provider>
                 </ProductContext.Provider>
             </CookiesProvider>
         );

@@ -1,0 +1,172 @@
+/*
+    Pass Btn
+*/
+#UserProduct > #manual > .btn-frame {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    bottom: 1rem;
+    left: 0;
+}
+#UserProduct > #manual > .btn-frame > button {
+    all: unset;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+
+}
+#UserProduct > #manual > .btn-frame > button:last-of-type {
+    border-left: 2px solid #fff;
+}
+#UserProduct > #manual > *  {
+    color: #ffffff;
+}
+/*
+    #UserProduct > #manual
+    step 1
+*/
+#UserProduct > #manual > .step1 {
+    background-color: var(--manual-black-1);
+    text-align: center;
+}
+#UserProduct > #manual > .step1 > h1 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+#UserProduct > #manual > .step1 > p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    padding: 0 1rem;
+}
+/*
+    step2
+*/
+#UserProduct > #manual > .step2 {
+    justify-content: flex-start;
+}
+#UserProduct > #manual > .step2 > aside {
+    background-color: var(--manual-black-1);
+    width: 100%;
+    height: 11rem;
+}
+#UserProduct > #manual > .step2 > .focus-wrapper {
+    width: 100%;
+    height: 10rem;
+}
+#UserProduct > #manual > .step2 > .text {
+    background-color: var(--manual-black-1);
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#UserProduct > #manual > .step2 > .text > h1 {
+    margin-top: 4rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+#UserProduct > #manual > .step2 > .text > p {
+    margin-top: 0.3rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+/*
+    step3
+*/
+#UserProduct > #manual > .step3 > .text {
+    background-color: var(--manual-black-1);
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#UserProduct > #manual > .step3 > .text > h1 {
+    margin: 0 3%;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+#UserProduct > #manual > .step3 > .text > h1:first-of-type {
+    margin-top: 3rem;
+}
+#UserProduct > #manual > .step3 > .text > p {
+    margin-top: 0.3rem;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+#UserProduct > #manual > .step3 > .focus-wrapper {
+    width: 100%;
+    height: 7rem;
+}
+/*
+    step4
+*/
+#UserProduct > #manual > .step4 {
+    justify-content: flex-start;
+}
+#UserProduct > #manual > .step4 > .focus-wrapper {
+    position: relative;
+    width: 100%;
+    
+}
+#UserProduct > #manual > .step4 > .focus-wrapper > div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    right: 0;
+    margin: 1.6rem 3.5rem;
+}
+#UserProduct > #manual > .step4 > .focus-wrapper > div > a {
+    all: unset;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    box-shadow: 0 0 0 100rem var(--manual-black-1);
+    cursor: pointer;
+}
+#UserProduct > #manual > .step4 > .focus-wrapper > div > i {
+    font-size: 1.8rem;
+    margin: 0.5rem 0.6rem 0.5rem 0;
+}
+#UserProduct > #manual > .step4 > .focus-wrapper > div > p {
+    font-weight: 300;
+    font-size: 1.1rem;
+}
+#UserProduct > #manual > .step4 > .text {
+    height: 100%;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+}
+#UserProduct > #manual > .step4 > .text > h1 {
+    font-size: 1.9rem;
+}
+#UserProduct > #manual > .step4 > .text > button {
+    all: unset;
+    margin-top: 3rem;
+
+}
+/*
+    step5
+*/
+#UserProduct > #manual > .step5 {
+    background-color: var(--manual-black-1);
+}
+#UserProduct > #manual > .step5 > h1 {
+    font-size: 1.8rem;
+}
+#UserProduct > #manual > .step5 > button {
+    all: unset;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}

@@ -68,8 +68,7 @@ const Step2 = ({data, setData, setStep, alertToggle}) => {
         <>
             <header>
                 <h1>어떻게 표시할까요?</h1>
-                <p>이 옷을 구분할 수 있는 이름을 만들어주세요.</p>
-                <p>특징을 잘 잡아서 입력하면 편할거에요.</p>
+                <p>추가하려는 옷을 내가 알아보기 편한 이름으로 바꿔주세요.</p>
             </header>
             <main>
                 <div>

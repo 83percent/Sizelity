@@ -40,12 +40,12 @@ const SettingList = ({history}) => {
                 <div className="menu-wrapper">
                     <h2>지원</h2>
                     <ul>
-                        <li>
+                        {/* <li>
                             <Link to="/help">
                                 <i className="material-icons">help_outline</i>
                                 <p>고객센터</p>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link to="/setting/improvement">
                                 <i className="material-icons">history_edu</i>

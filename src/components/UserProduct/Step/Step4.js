@@ -73,7 +73,7 @@ const Step4 = ({data, setData, alertToggle, save}) => {
                     sizeObject.name = selfName;
                 } else return;
 
-                // 부위별 수치 값 가져오기
+                // 부위별 치수 값 가져오기
                 const activeFrames = rateWrapper.current.querySelectorAll('li.on');
                 if(activeFrames.length > 0) {
                     let pass = true;
@@ -81,7 +81,7 @@ const Step4 = ({data, setData, alertToggle, save}) => {
                         const frame = element.getElementsByTagName('input')[0];
                         const value = frame.value || 0;
                         if(value <= 0) {
-                            alertToggle(true, `'${getSizeRateName(frame.name)}'가 비었어요`, 'error')
+                            alertToggle(true, `'${getSizeRateName(frame.name)}' 치수가 비어있어요`, 'error')
                             pass = false;
                             break;
                         } else if(value > 400) {
@@ -143,7 +143,7 @@ const Step4 = ({data, setData, alertToggle, save}) => {
         <>
             <header>
                 <h1>사이즈 선택</h1>
-                <p>옷의 사이즈를 골라주세요.</p>
+                <p>사이즈를 골라주세요.</p>
                 <p>목록에 없다면 직접 적어주세요.</p>
             </header>
             <main>
@@ -184,7 +184,7 @@ const Step4 = ({data, setData, alertToggle, save}) => {
                             <h2>사이즈 입력</h2>
                             <i className="material-icons" onClick={(e) => event.sizeHelpToggle(e.target)}>help_outline</i>
                         </div>
-                        <p>수치를 알고 있는 부위를 선택해 입력해주세요.</p>
+                        <p>치수를 알고 있는 부위를 선택해 입력해주세요.</p>
                     </div>
                     <SizeHelp ptype={__data?.info?.ptype} on={sizeHelp}/>
                     <ul>

@@ -97,8 +97,8 @@ const Step3 = ({data, setData, setStep, alertToggle}) => {
                     <div className={`input-wrapper ${ptype ? "on" : ""}`} ref={subInputWrapper}>
                         <div className="title">
                             <h2>세부 종류 입력</h2>
-                            <p>내 옷의 크기를 짐작할 수 있는 옷의 세부 종류를 입력해주세요.</p>
-                            <p>예) 청바지(X), 긴바지(O) 또는 긴청바지(O)</p>
+                            <p>추가하려는 옷이 어떤 옷인가요?</p>
+                            <p>예) 바지(X), 긴바지(O) 또는 긴청바지(O)</p>
                         </div>
                         <div className="input-frame">
                             <input

@@ -34,7 +34,7 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
                 return;
             }
             try {
-                console.log(value);
+                //console.log(value);
                 const isURL = ((value) => {
                     return (/^(file|gopher|news|nntp|telnet|https?|ftps?|sftp):\/\/([a-z0-9-]+\.)+[a-z0-9]{2,4}.*$/).test(value);
                 })(value);
@@ -166,7 +166,7 @@ const Step1 = ({data, setData, setStep, alertToggle}) => {
                 <li>
                     <i className="material-icons">help_outline</i>
                     <div>
-                        <p>상품 구매 후, 바로 주소를 입력해 내 옷장에 추가해보세요</p>
+                        <p>원하는 치수의 옷을 가상으로 만들어 비교해보세요!</p>
                     </div>
                 </li>
             </ul>

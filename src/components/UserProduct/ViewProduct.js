@@ -14,6 +14,7 @@ import '../../contents/css/Nav/Alert.css';
 
 // Context
 import { MediaContext, LoginContext, ServerContext } from '../../App';
+import UserProductManual from './UserProduct_Manual';
 
 
 const UserProduct = ({history, location}) => {
@@ -160,6 +161,7 @@ const UserProduct = ({history, location}) => {
     }, [location, alert])
     return (
         <section id="UserProduct">
+            <UserProductManual productDataCount={productData?.length}/>
             <nav id="alert-wrapper" ref={alertWrapper}>
                 <div>
                     <p className="title"></p>

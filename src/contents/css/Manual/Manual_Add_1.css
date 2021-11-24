@@ -1,0 +1,15 @@
+article#manual.add_step1 > .step1 {
+    background-color: var(--manual-black-1);
+}
+article#manual.add_step1 > .step1  > h1 {
+    font-size: 1.9rem;
+    text-align: center;
+}
+article#manual.add_step1 > .step1 > button {
+    all: unset;
+    color: #fff;
+    padding: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+}

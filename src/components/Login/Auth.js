@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const TOKEN_NAME = 'sizelity_token';
 const Auth = ({history}) => {
-    const valid = new URLSearchParams(useLocation().search)?.get("valid");
+    const token = new URLSearchParams(useLocation().search)?.get("valid");
 
     // Cookie
     const [cookie, setCookie] = useCookies([TOKEN_NAME]);
@@ -24,18 +24,17 @@ const Auth = ({history}) => {
     }, [server]);
 
     // Callback
-    const getUser = useCallback(async (valid) => {
-        if(valid) {
+    const getUser = useCallback(async (token) => {
+        if(token) {
             try {
                 const {sizelity_token} = cookie;
-//                setCookie('sizelity_token', valid, {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
-                setCookie('sizelity_token', valid, {path: '/'});
+                setCookie('sizelity_token', token, {path: '/', domain: 'sizelity.com', maxAge:(500 * 24 * 60 * 60)});
+                //setCookie('sizelity_token', token, {path: '/'});
 
-                localStorage.setItem(TOKEN_NAME, valid);
-                const response = await accountModule.autoLogin();
-                
+                localStorage.setItem(TOKEN_NAME, token);
+                const result = await accountModule.autoLogin();
 
-                if(response?._id) setUserInfo(response);
+                if(result?._id) setUserInfo(result);
             } catch(error) {
                 console.log("Auth.js : getUser() try Error : ", error);
             }
@@ -44,8 +43,8 @@ const Auth = ({history}) => {
 
     useEffect(() => {
         if(userInfo) history.replace('/');
-        else getUser(valid)
-    }, [userInfo, history, valid, getUser])
+        else getUser(token)
+    }, [userInfo, history, token, getUser])
     
     return (
         <div style={{height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>

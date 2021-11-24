@@ -40,35 +40,37 @@ const Compare = ({history}) => {
         return new URLSearchParams(search);
     }, [search]);
     useEffect(() => { 
-        if(!_useQuery.get("shop") || !_useQuery.get("no") || _useQuery.get("shop") !== currentProductData?.shop || _useQuery.get("no") !== currentProductData?.no) {
             (async () => {
-                const _ProductSearch = new ProductSearch(server);
-                let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
-                if(_useQuery.get("domain")) {
-                    //console.log("url 전체를 활용하여 검색");
-                    // ?domain= 이 존재
-                    const analyze = new URLModule().get(_useQuery.get("domain"));
-                    if(!analyze?.shop || !analyze?.no) {
-                        return history.replace(`/compare?shop=${analyze.domain}&no=${analyze.code}`)
-                    } _ProductSearch.search({url : _useQuery.get("domain")});                    
-                } else {
-                    _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
-                    //console.log("shop + code를 활용하여 검색");
-                }
-                try {
-                    if(_searchResult.type === 'success') {
-                        // 검색 결과 오류
-                        setProductData(_searchResult.data);
+                if(!_useQuery.get("shop") || !_useQuery.get("no") || _useQuery.get("shop") !== currentProductData?.shop || _useQuery.get("no") !== currentProductData?.no) {
+                    const _ProductSearch = new ProductSearch(server);
+                    let _searchResult = null;      // 검색한 상품 정보 또는 결과 Status 를 보관할 변수
+                    if(_useQuery.get("domain")) {
+                        //console.log("url 전체를 활용하여 검색");
+                        // ?domain= 이 존재
+                        const analyze = new URLModule().get(_useQuery.get("domain"));
+                        if(!analyze?.shop || !analyze?.no) {
+                            return history.replace(`/compare?shop=${analyze.domain}&no=${analyze.code}`)
+                        } _ProductSearch.search({url : _useQuery.get("domain")});                    
                     } else {
-                        setStatus(_searchResult.status);
+                        _searchResult = await _ProductSearch.search({domain : _useQuery.get("shop"), code : _useQuery.get("no")});
+                        //console.log("shop + code를 활용하여 검색");
                     }
-                } catch(err) {
-                    setStatus(500);
-                } finally {
+                    try {
+                        if(_searchResult.type === 'success') {
+                            // 검색 결과 오류
+                            setProductData(_searchResult.data);
+                        } else {
+                            setStatus(_searchResult.status);
+                        }
+                    } catch(err) {
+                        setStatus(500);
+                    } finally {
+                        setLoader(false);
+                    }
+                } else {
                     setLoader(false);
                 }
             })();
-        }
     }, [productData, server, _useQuery]); // useEffect
 
     return (

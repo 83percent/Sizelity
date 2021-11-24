@@ -70,14 +70,14 @@ const getSizeRate = (name) => {
                 [ "sleeve","소매(팔길이, 팔)"],
                 [ "arm","암홀"],
                 [ "T_width", "팔통"],
-                [ "T_hem", "밑닽"],
+                [ "T_hem", "밑단(상의)"],
                 [ "T_length","총길이(상의)"],
                 [ "waist", "허리"],
                 [ "crotch", "밑위"],
                 [ "hips", "엉덩이"],
                 [ "thigh", "허벅지"],
                 [ "B_length","총길이(하의)"],
-                [ "hem", "밑단"],
+                [ "hem", "밑단(하의)"],
                 [ "calve", "종아리"]
             ];
         }
@@ -89,7 +89,7 @@ const getSizeRate = (name) => {
                 [ "sleeve","소매(팔길이, 팔)"],
                 [ "arm","암홀"],
                 [ "T_width", "팔통"],
-                [ "T_hem", "밑닽"],
+                [ "T_hem", "밑단"],
                 [ "T_length","총길이"]
             ];
         }

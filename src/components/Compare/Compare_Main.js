@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import AfterProduct from '../../contents/js/AfterProduct';
 import UserProductModule from '../../contents/js/UserProduct';
 import CompareCountModule from '../../contents/js/count/CompareCount';
+import CompareManual from './Compare_Manual';
 
 // CSS
 import '../../contents/css/Compare/Compare_Main.css';
@@ -165,8 +166,8 @@ const CompareIndex = ({history, productData}) => {
         }, // async after.set(id)
     }
     return (
-        <>
         <div id="View">
+            <CompareManual history={history} myProduct={sizelity_myRecently}/>
             <div id="alert-wrapper" ref={afterAlertWrapper}>
                 <div>
                     <p className="title"></p>
@@ -230,10 +231,6 @@ const CompareIndex = ({history, productData}) => {
                 myProduct={sizelity_myRecently}
                 CompareCount={CompareCount}/>
         </div>
-        <div className="test">
-
-        </div>
-        </>
     );
 }
 export default CompareIndex;

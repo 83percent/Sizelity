@@ -13,13 +13,13 @@ import Confirm from '../Nav/Confirm';
 
 // Context
 import { ServerContext, MediaContext} from '../../App';
+import StepManualRouter from './StepManual/Step_Manual_Router';
 
 
 const AddProduct = ({history, location}) => {
     // state
     const [data, setData] = useState((location.state?.data?._id) ? location.state.data : {info:{nick:undefined},size:{}});
     const [step, setStep] = useState(data?._id ? 2 : 1);
-
     
     // Context
     const server = useContext(ServerContext);
@@ -143,6 +143,7 @@ const AddProduct = ({history, location}) => {
     }
     return  (
         <section id="AddProduct">
+            <StepManualRouter step={step} />
             <article className="confirm" ref={cancelConfirmWrapper}>
                 <Confirm 
                     cate="종료"
