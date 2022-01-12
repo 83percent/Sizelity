@@ -30,3 +30,9 @@
 > SIZELITY React의 상태관리는 Global하게 사용되는 상태는 Context를 활용하여 제공되고 있으며, 이외의 상태들은 컴포넌트를 이용할 때 전달해주고 있습니다.
 > 하지만 이렇게 작성된 소스 코드는 유지보수 및 가독성을 낮추는 문제가 발생하였습니다.
 > 이후 버전부터, SIZELITY의 유지보수 및 가독성을 높이기 위해 Redux 와 Typescript가 적용됩니다.
+
+- - -
+## SIZELITY에 적용된 다른 Git
+> + Back-end      :   https://github.com/83percent/Sizelity-backend
+> + Admin Program :   https://github.com/83percent/Sizelity-Shop-Admin
+> + Official Web  :   https://github.com/83percent/Sizelity-Main
